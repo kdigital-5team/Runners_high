@@ -25,7 +25,7 @@ CREATE TABLE rh_user (
     user_title      NUMBER(10),
     running_dist    NUMBER(10, 1) DEFAULT 0,
     running_time    NUMBER(10) DEFAULT 0,
-    user_pic        VARCHAR2(20 BYTE)
+    user_pic        VARCHAR2(300 BYTE)
 );
 
 ALTER TABLE rh_user ADD CONSTRAINT user_pk PRIMARY KEY ( user_id );
@@ -79,9 +79,9 @@ CREATE TABLE feed_picture (
     feed_pic_id    NUMBER(10) NOT NULL,
     feed_id        NUMBER(20) NOT NULL,
     feed_pic_date  DATE NOT NULL,
-    feed_pic_title VARCHAR2(20 BYTE) NOT NULL,
-    feed_pic_path  VARCHAR2(50 BYTE) NOT NULL,
-    feed_pic_uuid  VARCHAR2(50 BYTE) NOT NULL
+    feed_pic_title VARCHAR2(100 BYTE) NOT NULL,
+    feed_pic_path  VARCHAR2(300 BYTE) NOT NULL,
+    feed_pic_uuid  VARCHAR2(300 BYTE) NOT NULL
 );
 
 ALTER TABLE feed_picture ADD CONSTRAINT feed_picture_pk PRIMARY KEY ( feed_pic_id );
@@ -103,7 +103,7 @@ CREATE TABLE challenge (
     chall_auth       NUMBER(3),
     chall_online     VARCHAR2(20 BYTE),
     chall_size       NUMBER(20),
-    chall_pic        VARCHAR2(20 BYTE)
+    chall_pic        VARCHAR2(300 BYTE)
 );
 
 ALTER TABLE challenge ADD CONSTRAINT challenge_pk PRIMARY KEY ( chall_id );
@@ -136,10 +136,10 @@ ALTER TABLE auth_comment ADD CONSTRAINT auth_comment_pk PRIMARY KEY ( auth_comme
 CREATE TABLE auth_picture (
     auth_pic_id    NUMBER(10) NOT NULL,
     auth_id        NUMBER(20) NOT NULL,
-    auth_pic_uuid  VARCHAR2(20 BYTE) NOT NULL,
+    auth_pic_uuid  VARCHAR2(300 BYTE) NOT NULL,
     auth_pic_date  DATE NOT NULL,
-    auth_pic_title VARCHAR2(20 BYTE) NOT NULL,
-    auth_pic_path  VARCHAR2(50 BYTE) NOT NULL
+    auth_pic_title VARCHAR2(100 BYTE) NOT NULL,
+    auth_pic_path  VARCHAR2(300 BYTE) NOT NULL
 );
 
 ALTER TABLE auth_picture ADD CONSTRAINT auth_picture_pk PRIMARY KEY ( auth_pic_id );
@@ -167,7 +167,7 @@ CREATE TABLE race (
     race_url      VARCHAR2(20 BYTE),
     race_category VARCHAR2(1) NOT NULL,
     race_dist     VARCHAR2(10 BYTE) NOT NULL,
-    race_pic      VARCHAR2(20 BYTE),
+    race_pic      VARCHAR2(300 BYTE),
     route_id      NUMBER(5)
 );
 
@@ -272,10 +272,3 @@ ALTER TABLE race
 ALTER TABLE race
     ADD CONSTRAINT race_route_fk FOREIGN KEY ( route_id )
         REFERENCES route ( route_id );
-
--- MongoDB
-use runners_high
-db.createCollection("user_location")
-
--- ttl을 사용할 경우 *105일 후 삭제
-db.user_location.createIndex({"loc_time": 1}, {expireAfterSeconds: 9072000})
