@@ -272,3 +272,10 @@ ALTER TABLE race
 ALTER TABLE race
     ADD CONSTRAINT race_route_fk FOREIGN KEY ( route_id )
         REFERENCES route ( route_id );
+
+-- MongoDB
+use runners_high
+db.createCollection("user_location")
+
+-- ttl을 사용할 경우 *105일 후 삭제
+db.user_location.createIndex({"loc_time": 1}, {expireAfterSeconds: 9072000})
