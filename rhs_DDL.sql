@@ -21,7 +21,7 @@ CREATE TABLE rh_user (
     pw_quest        VARCHAR2(30 BYTE) NOT NULL,
     pw_quest_answer VARCHAR2(30 BYTE) NOT NULL,
     nickname        VARCHAR2(10 BYTE) NOT NULL,
-    intro           VARCHAR2(30 BYTE),
+    intro           VARCHAR2(100 BYTE),
     user_title      NUMBER(10),
     running_dist    NUMBER(10, 1) DEFAULT 0,
     running_time    NUMBER(10) DEFAULT 0,
