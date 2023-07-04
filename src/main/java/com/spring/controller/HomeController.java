@@ -21,6 +21,7 @@ public class HomeController {
 	
 	@GetMapping("events")
 	public String events() {
+		System.out.println("test");
 		return "events";
 	}
 	
