@@ -23,7 +23,7 @@ public class UserService {
 	}
 
 	// 객체
-	public User getDeptByDeptno(int userid) throws Exception { 
+	public User getUserByUserId(int userid) throws Exception { 
 		User user = mapper.getUserByUserId(userid)
 							.orElseThrow(Exception::new);
 						
@@ -32,7 +32,7 @@ public class UserService {
 		return user; 
 	}
 	
-	public boolean insertDept(User user) throws SQLException, Exception {
+	public boolean insertUser(User user) throws SQLException, Exception {
 		boolean result = false;
 		
 		int res = mapper.insertUser(user);
@@ -40,7 +40,7 @@ public class UserService {
 		if(res != 0) {
 			result = true;
 		} else {
-			throw new Exception("유저 회원가 실패");
+			throw new Exception("유저 회원가입 실패");
 		}
 		
 		return result;
