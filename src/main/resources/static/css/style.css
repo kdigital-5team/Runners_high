@@ -243,7 +243,10 @@ a {
   padding-left: 50px;
   padding-right: 50px;
   border-bottom: none;
-  position: relative;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
   z-index: 99; }
   .site-navbar .site-logo {
     font-weight: 200; }
@@ -600,7 +603,7 @@ a {
 
 /* Blocks */
 .site-wrap {
-  max-width: 1200px;
+  max-width: auto;
   margin: 0 auto;
   background: #fff; }
 
