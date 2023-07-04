@@ -178,9 +178,9 @@ CREATE TABLE race (
     race_date     DATE NOT NULL,
     race_apply    DATE NOT NULL,
     race_deadline DATE NOT NULL,
-    race_url      VARCHAR2(20 BYTE),
+    race_url      VARCHAR2(300 BYTE),
     race_category VARCHAR2(1) NOT NULL,
-    race_dist     VARCHAR2(10 BYTE) NOT NULL,
+    race_dist     VARCHAR2(100 BYTE) NOT NULL,
     race_pic      VARCHAR2(300 BYTE),
     route_id      NUMBER(5)
 );
@@ -253,9 +253,9 @@ ALTER TABLE challenge
     ADD CONSTRAINT challenge_region_fk FOREIGN KEY ( region_id )
         REFERENCES region ( region_id );
 
-ALTER TABLE challenge
-    ADD CONSTRAINT challenge_route_fk FOREIGN KEY ( route_id )
-        REFERENCES route ( route_id );
+--ALTER TABLE challenge
+    --ADD CONSTRAINT challenge_route_fk FOREIGN KEY ( route_id )
+        --REFERENCES route ( route_id );
 
 ALTER TABLE challenge
     ADD CONSTRAINT challenge_user_fk FOREIGN KEY ( chall_reg_id )
