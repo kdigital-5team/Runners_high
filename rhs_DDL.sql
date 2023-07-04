@@ -13,6 +13,10 @@ DROP TABLE user_chall cascade constraint;
 DROP TABLE race cascade constraint;
 DROP TABLE region cascade constraint;
 DROP TABLE route cascade constraint;
+DROP SEQUENCE title_seq;
+DROP SEQUENCE region_seq;
+DROP SEQUENCE race_seq;
+DROP SEQUENCE challenge_req;
 
 -- 유저 테이블
 CREATE TABLE rh_user (
@@ -39,6 +43,11 @@ CREATE TABLE title (
     title_reg    NUMBER(5),
     title_likes  NUMBER(5)
 );
+
+CREATE SEQUENCE title_seq
+        INCREMENT BY 1
+        START WITH 1
+        MINVALUE 1;
 
 ALTER TABLE title ADD CONSTRAINT title_pk PRIMARY KEY ( title_id );
 
@@ -106,6 +115,11 @@ CREATE TABLE challenge (
     chall_pic        VARCHAR2(300 BYTE)
 );
 
+CREATE SEQUENCE challenge_req
+       INCREMENT BY 1
+       START WITH 1
+       MINVALUE 1;
+
 ALTER TABLE challenge ADD CONSTRAINT challenge_pk PRIMARY KEY ( chall_id );
 
 -- 인증 게시글 테이블
@@ -171,15 +185,25 @@ CREATE TABLE race (
     route_id      NUMBER(5)
 );
 
+CREATE SEQUENCE race_seq 
+    INCREMENT by 1
+    START WITH 1
+    MINVALUE 1; 
+
 ALTER TABLE race ADD CONSTRAINT race_pk PRIMARY KEY ( race_id );
 
 -- 지역 테이블
 CREATE TABLE region (
     region_id       NUMBER(5) NOT NULL,
-    region_state    VARCHAR2(10 BYTE),
-    region_city     VARCHAR2(10 BYTE),
-    region_district VARCHAR2(10 BYTE)
+    region_state    VARCHAR2(30 BYTE),
+    region_city     VARCHAR2(30 BYTE),
+    region_district VARCHAR2(30 BYTE)
 );
+
+CREATE SEQUENCE region_seq 
+    INCREMENT by 1
+    START WITH 1
+    MINVALUE 1; 
 
 ALTER TABLE region ADD CONSTRAINT region_pk PRIMARY KEY ( region_id );
 
