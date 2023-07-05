@@ -10,9 +10,7 @@ import com.spring.mapper.UserMapper;
 
 import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
 @Service
-
 public class UserService {
 	@Autowired
 	UserMapper mapper;
@@ -26,9 +24,6 @@ public class UserService {
 	public User getUserByUserId(int userid) throws Exception { 
 		User user = mapper.getUserByUserId(userid)
 							.orElseThrow(Exception::new);
-						
-
-		
 		return user; 
 	}
 	
@@ -44,5 +39,20 @@ public class UserService {
 		}
 		
 		return result;
+	}
+
+	// 로그인
+	public User getUserByUserIdAndUserPw(String userId, String userPw) throws Exception {
+		
+		User user = mapper.getUserByUserIdAndUserPw(userId, userPw);
+		
+		if(userId == null || userId == "") {
+			throw new Exception("없는 이용자입니다.");
+		}
+		if(userPw == null || userPw == "") {
+			throw new Exception("잘못된 비밀번호입니다.");
+		}
+		
+		return user;
 	}
 }

@@ -722,12 +722,10 @@ a {
       background: #FFDC3D; }
 
 .footer {
-  font-size: 14px;
-  background: #293A8E;
-  padding: 30px; }
-/* .footer .footer-inner {
+  font-size: 14px; }
+  .footer .footer-inner {
     background: #293A8E;
-    padding: 30px; } */
+    padding: 50px; }
 
 .widget h3 {
   font-size: 20px;
