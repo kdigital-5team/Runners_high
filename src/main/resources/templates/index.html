@@ -57,9 +57,12 @@
 							<li><a role="button" onclick="location.href='/gallery'">챌린지</a></li>
 							<li><a href="about.html">마이 페이지</a></li>
 							<li><a href="about.html">달리기</a></li>
-							<li th:if="${session.userId == null}"><a role="button" onclick="location.href='/login'">로그인</a></li>
-							<li th:if="${session.userId == null}"><a role="button" onclick="location.href=''"> 회원가입</a></li>
-							<li th:if="${session.userId != null}"><a role="button" onclick="location.href='/logout'">로그아웃</a></li>
+							<li th:if="${session.userId == null}"><a role="button"
+								onclick="location.href='/login'">로그인</a></li>
+							<li th:if="${session.userId == null}"><a role="button"
+								onclick="location.href=''"> 회원가입</a></li>
+							<li th:if="${session.userId != null}"><a role="button"
+								onclick="location.href='/logout'">로그아웃</a></li>
 						</ul>
 
 						<a href="#"
@@ -362,22 +365,18 @@
 			</div>
 		</div>
 
-
-		<!-- footer -->
-		<div class="footer">
-			<div class="container" style="text-align: center;">
-				<div class="row footer-inner">
-					<div class="widget mb-4" style="margin: 0 auto;">
-						<h3>About Us</h3>
-						<p>Runner’s High</p>
-						<p>K-Digital Training Project</p>
-						<p>contact us : Runners_high/github</p>
-					</div>
-				</div>
+	</div>
+	
+	<!-- footer -->
+	<div class="footer">
+		<div class="row footer-inner">
+			<div class="widget mb-4" style="margin: 0 auto;">
+				<h3>About Us</h3>
+				<p>Runner’s High</p>
+				<p>K-Digital Training Project</p>
+				<p>contact us : Runners_high/github</p>
 			</div>
 		</div>
-
-
 	</div>
 
 	<script src="../static/js/jquery.min.js"></script>

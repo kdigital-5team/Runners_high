@@ -8,9 +8,9 @@
 
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css?family=Nunito+Sans:200,300,400,700,900|Oswald:400,700">
-<link rel="stylesheet" href="../fonts/icomoon/style.css">
+<!--   <link rel="stylesheet" href="../fonts/icomoon/style.css">-->
 
-<link rel="stylesheet" href="../static/css/logo.css">
+<link rel="stylesheet" href="../static/css/loginForm.css">
 <link rel="stylesheet" href="../static/css/jquery.fancybox.min.css">
 <link rel="stylesheet" href="../static/css/jquery-ui.css">
 <link rel="stylesheet" href="../static/css/owl.carousel.min.css">
@@ -25,68 +25,44 @@
 
 	<div class="site-wrap">
 		<div class="container">
-
 			<div class="col-6 col-lg-2 site-logo">
-				<a href="index.html">Runner's High</a>
+				<a role="button"
+				   onclick="location.href='/main'">Runner's High</a>
 			</div>
-		</div>
-
-		<div class="container">
-			<h3>Login Form Test</h3>
 		</div>
 
 		<div class="site-section">
 			<div class="container">
-				<form action="login" method="POST">
+				<form action="login" method="POST" id="login-form">
 					<p align="center">
-						<b> <span style="font-size: 12pt;">ID &nbsp;&nbsp; 
-							<span style="font-size: 12pt;"> 
-								<input type="text" name="userId" size="30">
-							</span>
-							</span>
-						</b>
-					</p>
-					<b> </b>
-					<p align="center">
-						<b> <span style="font-size: 12pt;">PW &nbsp;&nbsp;
-							<span style="font-size: 12pt;"> 
-								<input type="text" name="userPw" size="30">
-							</span>
-							</span>
-						</b>
-					</p>
-					<p>
-						<b><span style="font-size: 12pt;">&nbsp;</span></b>
+								<input type="text" name="userId" size="30" placeholder="Id" style="border:0 solid black">
+								</br>
+								<input type="password" name="userPw" size="30" placeholder="Password" style="border:0 solid black">
 					</p>
 					<p align="center">
-						<span style="font-size: 12pt;"> 
-							<input type="submit" value="로그인">
+						<span style="font-size: 12pt;"> <input type="submit" value="Login" style="border:0 solid black">
 						</span>
 					</p>
-					<p align="center">
-						<span style="font-size: 12pt;"> 
-							<a href="">비밀번호 찾기</a>&nbsp;|&nbsp;
-							<a href="">회원가입</a>
-						</span>
-					</p>
+					<div id="sub-page">
+						<a href="" id="sub-page">비밀번호 찾기</a>
+						<span>|</span>
+						<a href="" id="sub-page">회원가입</a>
+					</div>
 				</form>
 			</div>
 		</div>
+	</div>
 
-		<!-- footer -->
-		<div class="footer">
-			<div class="container" style="text-align: center;">
-				<div class="row footer-inner">
-					<div class="widget mb-4" style="margin: 0 auto;">
-						<h3>About Us</h3>
-						<p>Runner’s High</p>
-						<p>K-Digital Training Project</p>
-						<p>contact us : Runners_high/github</p>
-					</div>
-				</div>
+	<!-- footer -->
+	<div class="footer">
+		<div class="row footer-inner">
+			<div class="widget mb-4" style="margin: 0 auto;">
+				<h3>About Us</h3>
+				<p>Runner’s High</p>
+				<p>K-Digital Training Project</p>
+				<p>contact us : Runners_high/github</p>
 			</div>
 		</div>
-
 	</div>
 
 	<script src="../static/js/jquery.min.js"></script>
