@@ -31,6 +31,8 @@ a {
 	transition: .3s all ease;
 }
 
+
+
 a:hover {
 	text-decoration: none;
 }
@@ -299,57 +301,6 @@ a:hover {
 		height: 500px !important;
 		margin-bottom: 15px;
 	}
-}
-
-.site-footer {
-	padding: 4em 0;
-	position: relative;
-	height: 800px;
-	transform: translateY(-100%);
-}
-
-@media ( min-width : 768px) {
-	.site-footer {
-		padding: 7em 0;
-	}
-}
-
-.site-footer p {
-	color: #737373;
-}
-
-.site-footer h2, .site-footer h3, .site-footer h4, .site-footer h5 {
-	color: #fff;
-}
-
-.site-footer a {
-	color: #999999;
-}
-
-.site-footer a:hover {
-	color: white;
-}
-
-.site-footer ul li {
-	margin-bottom: 10px;
-}
-
-.site-footer .footer-heading {
-	font-size: 1.3rem;
-	text-transform: uppercase;
-	letter-spacing: .1em;
-	color: #fff;
-	position: relative;
-	padding-bottom: 15px;
-}
-
-.site-footer .footer-heading:before {
-	content: "";
-	background: #293A8E;
-	width: 40px;
-	height: 2px;
-	position: absolute;
-	bottom: 0;
 }
 
 /* Navbar */
@@ -722,6 +673,11 @@ a:hover {
 	opacity: 1;
 }
 
+/* nav 로그인,회원가입,로그아웃 버튼 제외 정렬 0706 */
+a[class="change-button"]{
+	margin-left: 40px;
+}
+
 .site-mobile-menu {
 	width: 300px;
 	position: fixed;
@@ -912,13 +868,27 @@ a:hover {
 	padding-left: 60px;
 }
 
+/* layout 분리 footer 0707 */
+footer {
+	background: #293A8E;
+    padding: 30px;
+    text-align: center;
+    font-size: 14px;
+	position: relative;
+	transform: translateY(-100%);
+	width: 100%;
+	overflow: hidden;
+}
+
 /* Blocks */
+/* footer 간 거리 조절 0706, style.css에도 적용 */
 .site-wrap {
 	margin: 0 auto;
 	background: #fff;
 	height: auto;
 	min-height: 100%;
 	width: 100%;
+	margin-bottom: 100px;
 }
 
 .bg-section {
@@ -1074,20 +1044,6 @@ a:hover {
 
 .owl-4-slider .owl-dots .owl-dot.active {
 	background: #FFDC3D;
-}
-
-.footer {
-	font-size: 14px;
-	position: relative;
-	transform: translateY(-100%);
-	width: 100%;
-	overflow: hidden;
-}
-
-.footer .footer-inner {
-	background: #293A8E;
-	padding: 30px;
-	text-align: center;
 }
 
 .widget h3 {
