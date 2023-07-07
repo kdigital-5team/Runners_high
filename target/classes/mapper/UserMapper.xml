@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace="com.spring.mapper.UserMapper">
+ 	 	
+ 	<select id="getAllUsers" resultType="com.spring.dto.User">
+ 		SELECT user_id, user_pw, nickname, pw_quest FROM rh_user
+ 	</select>
+ 	
+ 	<select id="insertUser" resultType="com.spring.dto.User">
+ 		INSERT INTO rh_user (user_id, user_pw, pw_quest, pw_quest_answer, nickname ) VALUES (#{user_id}, #{user_pw}, #{pw_quest}, #{pw_quest_answer}, #{nickname})
+
+ 		SELECT user_id, user_pw, pw_quest, pw_quest_answer, nickname, intro, user_title, user_pic, running_dist, running_time 
+ 		FROM rh_user
+ 	</select>
+ 	
+ 	<select id="getUserByUserIdAndUserPw" resultType="com.spring.dto.User">
+ 		SELECT user_id, user_pw, pw_quest, pw_quest_answer, nickname, intro, user_title, user_pic, running_dist, running_time 
+ 		FROM rh_user
+ 		WHERE user_id = #{userId} AND user_pw = #{userPw}
+ 	</select>
+ 	
+ 	<select id="idCheck" parameterType="String" resultType="Integer">
+        SELECT count(*)
+        FROM rh_user
+        WHERE user_id = #{user_id}
+    </select>
+    
+    <select id="nickNameCheck" parameterType="String" resultType="Integer">
+        SELECT count(*)
+        FROM rh_user
+        WHERE nickname = #{nickname}
+    </select>
+    
+    <select id="findPw" parameterType="String" resultType="String">
+        SELECT user_pw
+        FROM rh_user
+        WHERE user_id = #{user_id} AND pw_quest = #{pw_quest} AND pw_quest_answer = #{pw_quest_answer}
+    </select>
+ 	
+ 	<update id="updatePw" parameterType="String">
+ 		UPDATE rh_user 
+ 		SET user_pw = #{new_pw}
+ 		WHERE user_id = #{user_id}
+ 	</update>
+ </mapper>
