@@ -11,6 +11,14 @@
  	
  	<select id="insertUser" resultType="com.spring.dto.User">
  		INSERT INTO rh_user (user_id, user_pw, pw_quest, pw_quest_answer, nickname ) VALUES (#{user_id}, #{user_pw}, #{pw_quest}, #{pw_quest_answer}, #{nickname})
+ 		SELECT user_id, user_pw, pw_quest, pw_quest_answer, nickname, intro, user_title, user_pic, running_dist, running_time 
+ 		FROM rh_user
+ 	</select>
+ 	
+ 	<select id="getUserByUserIdAndUserPw" resultType="com.spring.dto.User">
+ 		SELECT user_id, user_pw, pw_quest, pw_quest_answer, nickname, intro, user_title, user_pic, running_dist, running_time 
+ 		FROM rh_user
+ 		WHERE user_id = #{userId} AND user_pw = #{userPw}	
  	</select>
  	
  	<select id="idCheck" parameterType="String" resultType="Integer">
