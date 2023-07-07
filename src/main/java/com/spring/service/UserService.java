@@ -45,4 +45,23 @@ public class UserService {
 		
 		return result;
 	}
+
+	public int idCheck(String userId) throws Exception {
+        return mapper.idCheck(userId);
+    }
+
+
+
+	public int nickNameCheck(String nickName) throws Exception{
+		return mapper.nickNameCheck(nickName);
+	}
+
+
+	public String findPw(String user_id, String pw_quest, String pw_quest_answer) throws Exception{
+		return mapper.findPw(user_id, pw_quest, pw_quest_answer);
+	}
+	public boolean updatePw(String new_pw, String user_id) throws Exception{
+		return mapper.updatePw(new_pw, user_id);
+	}
+
 }

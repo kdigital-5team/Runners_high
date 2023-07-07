@@ -2,11 +2,21 @@ package com.spring.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.spring.dto.User;
 import com.spring.service.UserService;
@@ -18,7 +28,7 @@ public class UserController {
 	private UserService service;
 
 	
-	// http://localhost:8081/dept/10
+	// http://localhost:8081/user/all
 	@RequestMapping(value = "/user/all", method = RequestMethod.GET)
 	public String getDeptByDeptno(Model model) throws Exception {
 		List<User> user = service.getAllUsers();
@@ -28,4 +38,110 @@ public class UserController {
 		
 		return "home";
 	}
+	
+	// http://localhost:8081/regist
+	@RequestMapping(value = "/regist", method = RequestMethod.GET)
+	public String Regist() throws Exception {
+		return "regist";
+	}
+	
+	// http://localhost:8081/findPw
+	@RequestMapping(value = "/findPw", method = RequestMethod.GET)
+	public String findPw() throws Exception {
+		return "findPw";
+	}
+	// http://localhost:8081/findPw
+	@RequestMapping(value = "/updatePw", method = RequestMethod.GET)
+	public String updatePw() throws Exception {
+		return "findPw";
+	}
+	
+	// http://localhost:8081/regist
+	@RequestMapping(value = "/regist", method = RequestMethod.POST)
+	public String insertDept(@ModelAttribute User newUser,
+							 Model model) {
+		
+		System.out.println(newUser);
+		boolean userResult = false;
+
+	
+		try {
+			userResult = service.insertUser(newUser);
+			
+			if(userResult) {
+				return "home";
+			}
+			
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+			return "home";
+		}
+		return "home";
+		
+	}
+	
+	
+	// 아이디 체크 비동기
+	@ResponseBody
+    @RequestMapping(value="/idCheck", method=RequestMethod.POST)
+    public int idCheck(@RequestBody String userId) throws Exception {
+        
+        int count = 0;
+        count = service.idCheck(userId);
+ 
+        return count;    
+    }
+	
+	// 닉네임 체크 비동기
+	@ResponseBody
+    @RequestMapping(value="/nickNameCheck", method=RequestMethod.POST)
+    public int nickNameCheck(@RequestBody String nickName) throws Exception {
+        
+        int count = 0;
+        count = service.nickNameCheck(nickName);
+ 
+        return count;    
+    }
+	
+	// 비밀번호 찾기
+    @RequestMapping(value="/findPw", method=RequestMethod.POST)
+    public String findPw(@RequestParam String user_id, String pw_quest, String pw_quest_answer,
+    		HttpServletRequest request) throws Exception {
+    	HttpSession session = request.getSession(true);
+		String pw = service.findPw(user_id, pw_quest, pw_quest_answer);
+		try {
+			pw.isEmpty();
+		} catch(Exception e) {
+			
+			//db에서 조건에 맞는 값이 없어서 가져오지 못한 경우 발생
+			
+			System.out.println("Null Point!");
+			return "findPw"; 
+		}
+		// db에서 정상적으로 가져온 경우 세션을 만들어주고 다음 페이지로 이동
+		session.setAttribute("userId", user_id);
+		return "updatePw";
+
+	}
+    
+    // 비밀번호 변경
+    @RequestMapping(value="/updatePw", method=RequestMethod.POST)
+    public String updatePw(HttpServletRequest request) throws Exception {
+    	HttpSession session = request.getSession(true);
+    	String new_Pw = request.getParameter("new_Pw");
+    	String userId = session.getAttribute("userId").toString();
+    	
+    	boolean userResult = false;
+    	try {
+    			userResult = service.updatePw(new_Pw, userId);
+				
+    	} catch (Exception e) {
+			e.printStackTrace();
+			session.invalidate();
+			return "home";
+    	}
+    	session.invalidate();
+    	return "home";
+    }
 }

@@ -24,5 +24,13 @@ public interface UserMapper {
 
 	// delete - dept
 	public int deleteUserByUserId(int userid)throws SQLException;
+
+	public int idCheck(String userId) throws Exception;
+
+	public int nickNameCheck(String nickName) throws Exception;
+	
+	public String findPw(String user_id, String pw_quest, String pw_quest_answer) throws Exception;
+
+	public boolean updatePw(String new_pw, String user_id) throws Exception;
 }
 	
