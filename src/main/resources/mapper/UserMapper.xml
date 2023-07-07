@@ -6,8 +6,14 @@
  <mapper namespace="com.spring.mapper.UserMapper">
  	 	
  	<select id="getAllUsers" resultType="com.spring.dto.User">
- 		SELECT user_id, user_pw, nickname FROM rh_user
+ 		SELECT user_id, user_pw, pw_quest, pw_quest_answer, nickname, intro, user_title, user_pic, running_dist, running_time 
+ 		FROM rh_user
  	</select>
  	
+ 	<select id="getUserByUserIdAndUserPw" resultType="com.spring.dto.User">
+ 		SELECT user_id, user_pw, pw_quest, pw_quest_answer, nickname, intro, user_title, user_pic, running_dist, running_time 
+ 		FROM rh_user
+ 		WHERE user_id = #{userId} AND user_pw = #{userPw}	
+ 	</select>
  	
  </mapper>

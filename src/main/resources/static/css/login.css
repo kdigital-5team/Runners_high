@@ -31,8 +31,6 @@ a {
 	transition: .3s all ease;
 }
 
-
-
 a:hover {
 	text-decoration: none;
 }
@@ -671,11 +669,6 @@ a:hover {
 	margin-top: 0px;
 	visibility: visible;
 	opacity: 1;
-}
-
-/* nav 로그인,회원가입,로그아웃 버튼 제외 정렬 0706 */
-a[class="change-button"]{
-	margin-left: 40px;
 }
 
 .site-mobile-menu {

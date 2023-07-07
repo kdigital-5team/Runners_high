@@ -1,7 +1,10 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html>
 <head>
-<title>Sports Team &mdash; Colorlib Website Template</title>
+<title>Runner's High &mdash; Main</title>
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -24,57 +27,10 @@
 
 </head>
 <body>
-
-
+	<!-- header -->
+	<%@ include file="./inc/header.jsp"%>
 
 	<div class="site-wrap">
-
-
-		<div class="site-mobile-menu">
-			<div class="site-mobile-menu-header">
-				<div class="site-mobile-menu-close mt-3">
-					<span class="icon-close2 js-menu-toggle"></span>
-				</div>
-			</div>
-			<div class="site-mobile-menu-body"></div>
-		</div>
-		<!-- .site-mobile-menu -->
-
-		<div class="container">
-
-			<div class="row no-gutters site-navbar align-items-center py-3">
-
-				<div class="col-6 col-lg-2 site-logo">
-					<a role="button" onclick="location.href='/main'">Runner's High</a>
-				</div>
-				<div class="col-6 col-lg-10 text-right menu">
-					<nav class="site-navigation text-right text-md-right">
-
-						<ul class="site-menu js-clone-nav d-none d-lg-block">
-							<li class="active"><a role="button"
-								onclick="location.href='/main'">MAIN</a></li>
-							<li><a role="button" onclick="location.href='/events'">대회일정</a></li>
-							<li><a role="button" onclick="location.href='/gallery'">챌린지</a></li>
-							<li><a href="about.html">마이 페이지</a></li>
-							<li><a href="about.html">달리기</a></li>
-							<li th:if="${session.userId == null}"><a role="button"
-								onclick="location.href='/login'">로그인</a></li>
-							<li th:if="${session.userId == null}"><a role="button"
-								onclick="location.href=''"> 회원가입</a></li>
-							<li th:if="${session.userId != null}"><a role="button"
-								onclick="location.href='/logout'">로그아웃</a></li>
-						</ul>
-
-						<a href="#"
-							class="site-menu-toggle js-menu-toggle text-black d-inline-block d-lg-none"><span
-							class="icon-menu h3"></span></a>
-					</nav>
-				</div>
-			</div>
-
-		</div>
-
-
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12">
@@ -366,18 +322,9 @@
 		</div>
 
 	</div>
-	
+
 	<!-- footer -->
-	<div class="footer">
-		<div class="row footer-inner">
-			<div class="widget mb-4" style="margin: 0 auto;">
-				<h3>About Us</h3>
-				<p>Runner’s High</p>
-				<p>K-Digital Training Project</p>
-				<p>contact us : Runners_high/github</p>
-			</div>
-		</div>
-	</div>
+	<%@ include file="./inc/footer.jsp"%>
 
 	<script src="../static/js/jquery.min.js"></script>
 	<script src="../static/js/jquery-migrate-3.0.1.min.js"></script>
