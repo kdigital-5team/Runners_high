@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import com.spring.dto.User;
 
@@ -32,5 +33,9 @@ public interface UserMapper {
 	public String findPw(String user_id, String pw_quest, String pw_quest_answer) throws Exception;
 
 	public boolean updatePw(String new_pw, String user_id) throws Exception;
+
+	// user - id, pw
+	public User getUserByUserIdAndUserPw(@Param("userId")String userId, @Param("userPw")String userPw) throws SQLException;
+
 }
 	

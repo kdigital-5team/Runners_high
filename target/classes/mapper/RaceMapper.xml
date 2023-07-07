@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace="com.spring.mapper.RaceMapper">
+ 	 	
+ 	<select id="getRaceWithKeyword" 
+ 			parameterType="com.spring.dto.SearchKeyword"
+ 			resultType="com.spring.dto.Race">
+ 		SELECT race_id, region_id, race_org, race_name, race_date, race_apply, race_deadline, race_url, race_category, race_dist, race_pic 
+ 		FROM race
+ 		<trim prefix="WHERE" prefixOverrides="AND |OR">
+			 	AND race_name LIKE '%'||#{keyword, jdbcType=VARCHAR}||'%'
+		</trim>
+ 	</select>
+ 	
+ 	<select id="getAllState" resultType="string">
+ 		SELECT DISTINCT region_state
+ 		FROM region
+ 	</select>
+ 	
+ 	<select id="getAllRace" 
+ 			resultType="com.spring.dto.Race">
+ 		SELECT race_id, region_id, race_org, race_name, race_date, race_apply, race_deadline, race_url, race_category, race_dist, race_pic 
+ 		FROM race
+ 	</select>
+ 	
+ 	<select id="getRaceByOption" 
+ 		parameterType="java.util.List"
+		resultType="com.spring.dto.Race">
+ 		SELECT race_id, region_id, race_org, race_name, race_date, race_apply, race_deadline, race_url, race_category, race_dist, race_pic 
+ 		FROM race 
+ 		<trim prefix="WHERE" prefixOverrides="AND |OR">
+ 			<if test="!category.isEmpty()">
+			 race_category IN
+				 <foreach collection="category" item="value" index="idx" separator="," open="(" close=")">
+	 				#{value}
+	 			</foreach>
+ 			</if>
+ 			<if test="!dist.isEmpty()">
+ 				AND REGEXP_LIKE(race_dist, 
+ 				<foreach collection="dist" item="value" index="idx" separator="||">
+ 					#{value}
+ 				</foreach>
+ 				)
+ 			
+ 			</if>
+		</trim>
+ 	</select>
+ 	
+ </mapper>
