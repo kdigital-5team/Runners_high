@@ -29,8 +29,10 @@
 
 </head>
 <body>
-	<div class="site-wrap">
+	<!-- header -->
+	<%@ include file="./inc/header.jsp"%>
 
+	<div class="site-wrap">
 
 		<div class="site-mobile-menu">
 			<div class="site-mobile-menu-header">
@@ -258,26 +260,10 @@
 
 
 			</div>
-		</div>
 
-
-		<!-- footer -->
-		<div class="footer">
-			<div class="container" style="text-align: center;">
-				<div class="row footer-inner">
-					<div class="widget mb-4" style="margin: 0 auto;">
-						<h3>About Us</h3>
-						<p>Runner’s High</p>
-						<p>K-Digital Training Project</p>
-						<p>contact : ddfs@gmail.com</p>
-					</div>
-				</div>
-			</div>
-		</div>
-
-
-	</div>
-
+	<!-- footer -->
+	<%@ include file="./inc/footer.jsp"%>
+	
 	<script src="../static/js/jquery.min.js"></script>
 	<script src="../static/js/jquery-migrate-3.0.1.min.js"></script>
 	<script src="../static/js/jquery-ui.js"></script>

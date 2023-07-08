@@ -302,24 +302,10 @@
     </div>
   </div>
 
-
-  <!-- footer -->
-     <div class="footer">
-      <div class="container" style="text-align:center;">
-        <div class="row footer-inner" >
-            <div class="widget mb-4" style="margin: 0 auto;" >
-              <h3>About Us</h3>
-              <p>Runner’s High</p>
-              <p>K-Digital Training Project</p>
-              <p>contact : ddfs@gmail.com</p>
-            </div>
-        </div>
-      </div> 
-  </div>
-    
-
   </div>
 
+	<!-- footer -->
+	<%@ include file="./inc/footer.jsp"%>
   <script src="js/jquery.min.js"></script>
   <script src="js/jquery-migrate-3.0.1.min.js"></script>
   <script src="js/jquery-ui.js"></script>

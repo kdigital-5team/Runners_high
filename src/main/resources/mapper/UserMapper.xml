@@ -14,7 +14,7 @@
  	</insert>
  	
  	<select id="getUserByUserIdAndUserPw" resultType="com.spring.dto.User">
- 		SELECT user_id, user_pw, pw_quest, pw_quest_answer, nickname, intro, user_title, user_pic, running_dist, running_time 
+ 		SELECT user_id, user_pw, pw_quest, pw_quest_answer, nickname, intro, user_title, user_pic 
  		FROM rh_user
  		WHERE user_id = #{userId} AND user_pw = #{userPw}	
  	</select>
