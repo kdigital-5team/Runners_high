@@ -48,7 +48,7 @@
 						</span>
 					</p>
 					<div id="sub-page">
-						<a href="" id="sub-page">비밀번호 찾기</a> <span>|</span> <a href=""
+						<a href="/updatePw" id="sub-page">비밀번호 찾기</a> <span>|</span> <a href="/regist"
 							id="sub-page">회원가입</a>
 					</div>
 					<br>

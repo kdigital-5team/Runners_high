@@ -35,7 +35,7 @@
 											onclick="location.href='/login'"
 											style="font-size: 13px;">로그인</a></li>
 									<li><a role="button"
-										   onclick="location.href='/'"
+										   onclick="location.href='/regist'"
 										   style="font-size: 13px;">회원가입</a></li>
 								</c:if>
 								<c:if test="${not empty userId}">
