@@ -30,11 +30,11 @@ INSERT INTO title
 -- user
 INSERT INTO rh_user 
         (user_id, user_pw, pw_quest, pw_quest_answer, nickname, intro, user_pic) 
-    VALUES ('scott', 'tiger', '기억나는 장소는?', '뉴욕', 'SCOTT', 'Hi', '');
+    VALUES ('scott@gmail.com', 'tiger', '기억나는 장소는?', '뉴욕', 'SCOTT', 'Hi', '');
 INSERT INTO rh_user 
         (user_id, user_pw, pw_quest, pw_quest_answer, nickname, intro, user_pic) 
     VALUES 
-        ('dev', 'it', '어렸을 때 장래희망은?', '대통령', 'devops', 'dev', '');
+        ('dev@gmail.com', 'it', '어렸을 때 장래희망은?', '대통령', 'devops', 'dev', '');
 
 -- region
 INSERT INTO region 
@@ -72,8 +72,10 @@ INSERT INTO race
 
 -- challenge
 INSERT INTO challenge 
-        (chall_id, chall_reg_id, region_id, route_id, chall_name, chall_intro, chall_start_date, chall_end_date, chall_all_auth, chall_week_auth,
+        (chall_id, chall_reg_id, region_id, chall_name, chall_intro, chall_start_date, chall_end_date, chall_all_auth, chall_week_auth,
         chall_category, chall_sit, chall_auth, chall_online, chall_size, chall_pic) 
     VALUES 
-        (challenge_req.NEXTVAL, 'scott', 1, 1, '마라톤 챌린지', '실제로 42.195km를 주 1회 달립니다!', '20230701', '20230725', 4, 1, '대회용', '모집중', 40, '온라인', 
+        (challenge_req.NEXTVAL, 'scott@gmail.com', 1, '마라톤 챌린지', '실제로 42.195km를 주 1회 달립니다!', '20230701', '20230725', 4, 1, '대회용', '모집중', 40, '온라인', 
         5, 'https://image.ytn.co.kr/general/jpg/2020/1130/202011300700017010_d.jpg');
+        
+commit;
