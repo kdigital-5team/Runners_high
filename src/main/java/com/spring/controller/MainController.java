@@ -19,10 +19,5 @@ public class MainController {
 		return "index";
 	}
 	
-	@GetMapping("/events")
-	public String events() {
-		System.out.println("test");
-		return "events";
-	}
 	
 }
