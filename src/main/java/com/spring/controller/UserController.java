@@ -58,7 +58,7 @@ public class UserController {
 		return "findPw";
 	}
 	// http://localhost:8081/findPw
-	@RequestMapping(value = "/updatePw", method = RequestMethod.GET)
+	@RequestMapping(value = "/findPw/updatePw", method = RequestMethod.GET)
 	public String updatePw() throws Exception {
 		return "findPw";
 	}
@@ -133,7 +133,7 @@ public class UserController {
 	}
     
     // 비밀번호 변경
-    @RequestMapping(value="/updatePw", method=RequestMethod.POST)
+    @RequestMapping(value="/findPw/updatePw", method=RequestMethod.POST)
     public String updatePw(HttpServletRequest request) throws Exception {
     	HttpSession session = request.getSession(true);
     	String new_Pw = request.getParameter("new_Pw");
