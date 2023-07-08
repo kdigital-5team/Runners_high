@@ -173,13 +173,13 @@ CREATE TABLE user_chall (
 CREATE TABLE race (
     race_id       NUMBER(5) NOT NULL,
     region_id     NUMBER(5) NOT NULL,
-    race_org      VARCHAR2(20 BYTE),
-    race_name     VARCHAR2(20 BYTE) NOT NULL,
+    race_org      VARCHAR2(50 BYTE),
+    race_name     VARCHAR2(50 BYTE) NOT NULL,
     race_date     DATE NOT NULL,
     race_apply    DATE NOT NULL,
     race_deadline DATE NOT NULL,
     race_url      VARCHAR2(300 BYTE),
-    race_category VARCHAR2(1) NOT NULL,
+    race_category VARCHAR2(10) NOT NULL,
     race_dist     VARCHAR2(100 BYTE) NOT NULL,
     race_pic      VARCHAR2(300 BYTE),
     route_id      NUMBER(5)
