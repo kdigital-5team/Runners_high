@@ -62,8 +62,13 @@ INSERT INTO region
 INSERT INTO race
         (race_id, region_id, race_org, race_name, race_date, race_apply, race_deadline, race_url, race_category, race_dist, race_pic)
     VALUES
-        (race_seq.NEXTVAL, 1, '(주) 스포테인', '서울오픈 런', '2023.08.26', '2023.06.19', '2023.07.31', 'http://irunman.kr/sub1_1.php?uid=79', 'M', 'Half, 10km, 5km', 
+        (race_seq.NEXTVAL, 1, '(주) 스포테인', '서울오픈 런', '2023.08.26', '2023.06.19', '2023.07.31', 'http://irunman.kr/sub1_1.php?uid=79', '마라톤', 'Half, 10km, 5km', 
         'http://www.irunman.kr/admin/data/webedit/20220701132808_qxtfxhcd.jpg');
+        
+INSERT INTO race
+        (race_id, region_id, race_org, race_name, race_date, race_apply, race_deadline, race_url, race_category, race_dist)
+    VALUES
+        (race_seq.NEXTVAL, 1, '(사)한국산악마라톤연맹', '제4회안산.인왕산.북악산TrailRunning', '2023.07.16', '2023.01.03', '2023.07.10', 'http://koreatrail.net', '걷기', '10km');
 
 -- challenge
 INSERT INTO challenge 
