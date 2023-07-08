@@ -53,6 +53,6 @@ public class RaceController {
 		System.out.println(raceList);
 		System.out.println("전체");
 		model.addAttribute("raceList", raceList);
-		return "/events";
+		return "/eventsFilter";
 	}
 }
