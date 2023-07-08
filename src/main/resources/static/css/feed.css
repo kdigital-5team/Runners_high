@@ -1,0 +1,93 @@
+<!--  -->
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+ .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+.post {
+    border: 1px solid #ccc;
+    margin-bottom: 20px;
+    padding: 10px;
+}
+
+.post-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.post-header img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.post-header .username {
+    font-weight: bold;
+}
+
+.post-image {
+    max-width: 600px;
+    max-height: 600px;
+    margin-bottom: 10px;
+    object-fit: scale-down;
+    display: flex;
+    margin: auto;
+    display: block;
+}
+
+.post-description {
+    font-size: 14px;
+    margin-bottom: 30px;
+}
+
+.post-actions-right {
+    display: flex;
+    justify-content: space-right;
+}
+
+.post-actions-left {
+    display: flex;
+    justify-content: space-left;
+}
+  
+  .display-flex {
+display: flex;
+justify-content: flex-start;
+}
+
+.left-likes {		    
+    background-position: center;
+    background-size: cover;
+}
+
+.left-likes-num {		    
+    background-position: center;
+    background-size: cover;
+    margin-left: 5px;
+    margin-top: 2px;
+    font-size: 14px;
+}
+
+.right-edit {
+    margin-left: auto;
+    background-position: center;
+    background-size: cover;
+}
+
+.right-delete {		    
+	margin-left: 2px;
+    background-position: center;
+    background-size: cover;
+}
+
+.post .post-actions .likes {
+    font-weight: bold;
+}
