@@ -18,11 +18,4 @@ public class MainController {
 		System.out.println("main으로 이동");
 		return "index";
 	}
-	
-	@GetMapping("/events")
-	public String events() {
-		System.out.println("test");
-		return "events";
-	}
-	
 }
