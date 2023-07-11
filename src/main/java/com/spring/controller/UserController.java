@@ -1,30 +1,22 @@
 package com.spring.controller;
 
-import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.SessionAttribute;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.spring.dto.User;
 import com.spring.service.UserService;
@@ -164,23 +156,25 @@ public class UserController {
 	@PostMapping("/login")
 	public String login(@RequestParam("userId") String userId, @RequestParam("userPw") String userPw,
 			HttpSession session,
-			Model mv){
+			Model mv) throws Exception{
 		
-		try {
-			User user = service.getUserByUserIdAndUserPw(userId, userPw);
-			
-				session.setAttribute("userId", userId);
-				System.out.println("접속자 session : " + session.getAttribute("userId"));
-			
-		} catch (Exception e) {
-				mv.addAttribute("msg", e.getMessage());
-				System.out.println("mv : " + mv);
-//			e.printStackTrace();
-			
-			return "redirect:/login";
-		}
-		
-		return "redirect:/main";
+			boolean pwResult;
+				pwResult = BCrypt.checkpw(userPw, service.getUserByUserId(userId).getUser_pw());
+				
+				System.out.println(pwResult);
+				if(pwResult) {
+					session.setAttribute("userId", userId);
+					System.out.println("접속자 session : " + session.getAttribute("userId"));
+					// session 만료 시간 : 2주
+					session.setMaxInactiveInterval(1209600);
+					
+					return "redirect:/main";
+				} else {
+					mv.addAttribute("msg", "없는 이용자입니다.");
+					System.out.println("mv : " + mv);
+					
+					return "/login";
+				}
 	}
 
 	// 로그아웃

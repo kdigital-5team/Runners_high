@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
 </head>
@@ -50,7 +50,8 @@
 var id_chk = false, pw_chk = false, nickname_chk = false;
 $(function() {
 
-	const getIdCheck = RegExp(/^[a-zA-Z0-9]{4,20}$/);
+	// const getIdCheck = RegExp(/^[a-zA-Z0-9]{4,20}$/);
+	const getIdCheck = RegExp(/^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/);
   	const getPwCheck = RegExp(/^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{4,20}$/);
   	const getNickNameCheck = RegExp(/^[ㄱ-ㅎ가-힣a-zA-Z0-9]{2,10}$/);
 

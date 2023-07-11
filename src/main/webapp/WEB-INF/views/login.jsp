@@ -11,7 +11,6 @@
 
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css?family=Nunito+Sans:200,300,400,700,900|Oswald:400,700">
-<!--   <link rel="stylesheet" href="../fonts/icomoon/style.css">-->
 
 <link rel="stylesheet" href="../static/css/loginForm.css">
 <link rel="stylesheet" href="../static/css/jquery.fancybox.min.css">
@@ -37,14 +36,24 @@
 			<div class="container">
 				<form action="login" method="POST" id="login-form">
 					<p align="center">
-						<input type="text" name="userId" size="30" placeholder="Id"
-							style="border: 0 solid black"> </br> <input type="password"
-							name="userPw" size="30" placeholder="Password"
+						<input type="text" name="userId" size="30" placeholder="이메일" id="login_id"
+							style="border: 0 solid black"> 
+							</br> 
+						<label for="id_check"></label>
+							</br> 
+						<input type="password"
+							name="userPw" size="30" placeholder="비밀번호" id="login_pw"
 							style="border: 0 solid black">
+							</br>
+						<label for="pw_check"></label>
 					</p>
 					<p align="center">
-						<span style="font-size: 12pt;"> <input type="submit"
-							value="Login" style="border: 0 solid black">
+						<span style="font-size: 12pt;"> 
+						<input type="submit"
+							value="Login" 
+							id="login-btn"
+							style="border: 0 solid black"
+							onclick= "getAlert(${msg})">
 						</span>
 					</p>
 					<div id="sub-page">
@@ -63,21 +72,10 @@
 			</div>
 		</div>
 	</div>
-
+	
 	<!-- footer -->
 	<%@ include file="./inc/footer.jsp"%>
-
-	<!-- 
-<script>
-       	var message = "[[${msg}]]";
-        console.log("[[${msg}]]");
-        if (message != "") {
-            alert(message);
-            location.href='/login';
-        }
-</script>
- -->
-
+ 
 	<script src="../static/js/jquery.min.js"></script>
 	<script src="../static/js/jquery-migrate-3.0.1.min.js"></script>
 	<script src="../static/js/jquery-ui.js"></script>
@@ -90,4 +88,61 @@
 	<script src="../static/js/main.js"></script>
 
 </body>
+ 	<script src="https://code.jquery.com/jquery-3.4.1.js" ></script>
+ 	<script>
+ 	// 잘못된 id, pw 양식 검수
+	var id_chk = false, pw_chk = false; 
+ 	
+	$(function() {
+		const getIdCheck = RegExp(/^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/);
+  	
+  		$('#login_id').keyup(function () {
+  			
+  			var login_id = document.getElementById('login_id').value;
+  			
+  			// 빈 값 검수
+  			if($(event.target).val() === '') {
+  				$("label[for='id_check']").text("아이디를 입력해주시기 바랍니다.");
+  			
+  				id_chk=false;
+  			}
+  			
+  			// 양식에 맞지 않는 값 검수
+  			else if(!getIdCheck.test($(event.target).val())){
+  				$("label[for='id_check']").text("아이디는 영문/숫자 조합의 이메일만 가능합니다.");
+  			
+  				id_chk=false;
+  			} 
+  			
+  			else {
+  				$("label[for='id_check']").text("");
+  				id_chk=true;
+  			}
+  		})
+  	
+  		$('#login_pw').keyup(function () {
+  			// 빈 값 검수
+  			if($(event.target).val() === ''){
+  				$("label[for='pw_check']").text("비밀번호를 입력해주시기 바랍니다.");
+  			
+  				pw_chk=false;
+  			} else {
+  				$("label[for='pw_check']").text("");
+  				pw_chk=true;
+  			}
+  		})
+});
+	
+</script>
+
+<!-- 로그인 실패 alert -->
+<script type="text/javascript">
+	var msg = "<c:out value='${msg}'/>";
+
+	function getAlert(msg){
+		alert(msg);
+	}
+	
+</script>
+
 </html>

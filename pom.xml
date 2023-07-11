@@ -62,6 +62,12 @@
 			<artifactId>ojdbc8</artifactId>
 			<scope>runtime</scope>
 		</dependency>
+		<!-- sercurity.JBcrypt -->
+		<dependency>
+		  <groupId>org.mindrot</groupId>
+		  <artifactId>jbcrypt</artifactId>
+		  <version>0.4</version>
+		</dependency>
 	</dependencies>
 
 	<build>
