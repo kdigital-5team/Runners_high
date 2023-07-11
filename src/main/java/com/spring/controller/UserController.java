@@ -156,24 +156,35 @@ public class UserController {
 	@PostMapping("/login")
 	public String login(@RequestParam("userId") String userId, @RequestParam("userPw") String userPw,
 			HttpSession session,
-			Model mv) throws Exception{
+			Model model) {
 		
 			boolean pwResult;
-				pwResult = BCrypt.checkpw(userPw, service.getUserByUserId(userId).getUser_pw());
+				try {
+					pwResult = BCrypt.checkpw(userPw, service.getUserByUserId(userId).getUser_pw());
 				
-				System.out.println(pwResult);
-				if(pwResult) {
-					session.setAttribute("userId", userId);
-					System.out.println("접속자 session : " + session.getAttribute("userId"));
-					// session 만료 시간 : 2주
-					session.setMaxInactiveInterval(1209600);
+					System.out.println(pwResult);
+					if(pwResult == true) {
+						session.setAttribute("userId", userId);
+						System.out.println("접속자 session : " + session.getAttribute("userId"));
+						// session 만료 시간 : 2주
+						session.setMaxInactiveInterval(1209600);
+						
+						 System.out.println("model 1 : " + model.getAttribute("msg"));
+						
+						return "redirect:/main";
+						
+					} else {
+						model.addAttribute("msg", "아이디/비밀번호를 다시 확인해주십시오.");
+						System.out.println("model 2 : " + model.getAttribute("msg"));
+						
+						return "login";
+					}
+				
+				} catch (Exception e) {
+					model.addAttribute("msg", e.getMessage());
+					System.out.println("model 3 : " + model.getAttribute("msg"));
 					
-					return "redirect:/main";
-				} else {
-					mv.addAttribute("msg", "없는 이용자입니다.");
-					System.out.println("mv : " + mv);
-					
-					return "/login";
+					return "login";
 				}
 	}
 

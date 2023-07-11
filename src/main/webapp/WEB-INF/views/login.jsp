@@ -53,7 +53,7 @@
 							value="Login" 
 							id="login-btn"
 							style="border: 0 solid black"
-							onclick= "getAlert(${msg})">
+							onclick="getAlert()">
 						</span>
 					</p>
 					<div id="sub-page">
@@ -86,6 +86,20 @@
 	<script src="../static/js/jquery.fancybox.min.js"></script>
 	<script src="../static/js/aos.js"></script>
 	<script src="../static/js/main.js"></script>
+	
+	<!-- 로그인 실패 alert -->
+<script type="text/javascript">
+	//let msg = '<c:out value="${msg}"/>';
+	let msg = '${msg}';
+	console.log(msg);
+
+	function getAlert(){
+		if (msg != '') {
+		alert(msg);
+		}
+	}
+	
+</script>
 
 </body>
  	<script src="https://code.jquery.com/jquery-3.4.1.js" ></script>
@@ -135,14 +149,6 @@
 	
 </script>
 
-<!-- 로그인 실패 alert -->
-<script type="text/javascript">
-	var msg = "<c:out value='${msg}'/>";
 
-	function getAlert(msg){
-		alert(msg);
-	}
-	
-</script>
 
 </html>
