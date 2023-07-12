@@ -78,14 +78,19 @@ INSERT INTO challenge
         (challenge_req.NEXTVAL, 'scott@gmail.com', 1, '마라톤 챌린지', '실제로 42.195km를 주 1회 달립니다!', '20230701', '20230725', 4, 1, '대회용', '모집중', 40, '온라인', 
         5, 'https://image.ytn.co.kr/general/jpg/2020/1130/202011300700017010_d.jpg');
         
-commit;
-
-CREATE OR REPLACE PROCEDURE UPDATE_CON AS
+CREATE OR REPLACE PROCEDURE UPDATE_CON
+IS
 BEGIN
-    UPDATE RACE SET race_con
+    UPDATE RACE SET race_con =
                     case
                         when SYSDATE<race_apply THEN '접수예정'
                         when SYSDATE>race_deadline THEN '접수마감'
                         ELSE '접수중'
                         END;
 END UPDATE_CON;
+/
+EXEC UPDATE_CON;
+
+commit;
+
+
