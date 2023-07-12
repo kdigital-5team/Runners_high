@@ -79,3 +79,13 @@ INSERT INTO challenge
         5, 'https://image.ytn.co.kr/general/jpg/2020/1130/202011300700017010_d.jpg');
         
 commit;
+
+CREATE OR REPLACE PROCEDURE UPDATE_CON AS
+BEGIN
+    UPDATE RACE SET race_con
+                    case
+                        when SYSDATE<race_apply THEN '접수예정'
+                        when SYSDATE>race_deadline THEN '접수마감'
+                        ELSE '접수중'
+                        END;
+END UPDATE_CON;

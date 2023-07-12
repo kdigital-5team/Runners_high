@@ -189,7 +189,8 @@ CREATE TABLE race (
     race_url      VARCHAR2(300 BYTE),
     race_category VARCHAR2(10) NOT NULL,
     race_dist     VARCHAR2(100 BYTE) NOT NULL,
-    race_pic      VARCHAR2(300 BYTE)
+    race_pic      VARCHAR2(300 BYTE),
+    race_con      VARCHAR2(20 BYTE)
 );
 
 CREATE SEQUENCE race_seq 
