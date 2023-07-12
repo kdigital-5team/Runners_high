@@ -33,23 +33,21 @@
 			<div class="container">
 				<form action="profile" method="POST">
 					<div class="context">
-						<p> 아이디 </p>
-						<input type="text" name="userId" size="30" placeholder="${user.user_id}"
+							<p> 아이디 </p>
+							<input type="text" name="userId" size="30" placeholder="${user.user_id}"
 							   style="border: 0 solid black" readonly> 
-						
-						<p>
-						
-						<input type="text" name="userId" size="30" placeholder="이메일" id="login_id"
+							<p> 닉네임 </p>
+							<input type="text" name="userNickname" size="30" placeholder="${user.nickname}"
+							   style="border: 0 solid black"> 
+								<label for="nickname_check"></label>
+							<p> 프로필 사진 </p>
+							<input type="text" name="userPic" size="30" placeholder="${user.user_pic}"
 							style="border: 0 solid black"> 
-							</br> 
-						<label for="id_check"></label>
-							</br> 
-						<input type="password"
-							name="userPw" size="30" placeholder="비밀번호" id="login_pw"
-							style="border: 0 solid black">
-							</br>
-						<label for="pw_check"></label>
-						</div>
+							<p> 한줄 소개 </p>
+							<input type="text" name="userIntro" size="30" placeholder="${user.intro}"
+							style="border: 0 solid black"> 
+					</div>
+
 					<p align="center">
 						<span style="font-size: 12pt;"> 
 						<input type="submit"
