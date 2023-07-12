@@ -23,6 +23,4 @@ public class User {
 	private String intro;
 	private String user_title;
 	private String user_pic;
-	private int running_dist;
-	private int running_time;
 }

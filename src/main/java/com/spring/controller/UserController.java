@@ -1,32 +1,25 @@
 package com.spring.controller;
 
-import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.SessionAttribute;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.spring.dto.User;
+import com.spring.service.MailService;
 import com.spring.service.UserService;
 
 @Controller
@@ -58,7 +51,7 @@ public class UserController {
 		return "findPw";
 	}
 	// http://localhost:8081/findPw
-	@RequestMapping(value = "/updatePw", method = RequestMethod.GET)
+	@RequestMapping(value = "/findPw/updatePw", method = RequestMethod.GET)
 	public String updatePw() throws Exception {
 		return "findPw";
 	}
@@ -76,15 +69,15 @@ public class UserController {
 			userResult = service.insertUser(newUser);
 			
 			if(userResult) {
-				return "home";
+				return "index";
 			}
 			
 		} catch (Exception e) {
 			
 			e.printStackTrace();
-			return "home";
+			return "index";
 		}
-		return "home";
+		return "index";
 		
 	}
 	
@@ -133,7 +126,7 @@ public class UserController {
 	}
     
     // 비밀번호 변경
-    @RequestMapping(value="/updatePw", method=RequestMethod.POST)
+    @RequestMapping(value="/findPw/updatePw", method=RequestMethod.POST)
     public String updatePw(HttpServletRequest request) throws Exception {
     	HttpSession session = request.getSession(true);
     	String new_Pw = request.getParameter("new_Pw");
@@ -164,23 +157,36 @@ public class UserController {
 	@PostMapping("/login")
 	public String login(@RequestParam("userId") String userId, @RequestParam("userPw") String userPw,
 			HttpSession session,
-			Model mv){
+			Model model) {
 		
-		try {
-			User user = service.getUserByUserIdAndUserPw(userId, userPw);
-			
-				session.setAttribute("userId", userId);
-				System.out.println("접속자 session : " + session.getAttribute("userId"));
-			
-		} catch (Exception e) {
-				mv.addAttribute("msg", e.getMessage());
-				System.out.println("mv : " + mv);
-//			e.printStackTrace();
-			
-			return "redirect:/login";
-		}
-		
-		return "redirect:/main";
+			boolean pwResult;
+				try {
+					pwResult = BCrypt.checkpw(userPw, service.getUserByUserId(userId).getUser_pw());
+				
+					System.out.println(pwResult);
+					if(pwResult == true) {
+						session.setAttribute("userId", userId);
+						System.out.println("접속자 session : " + session.getAttribute("userId"));
+						// session 만료 시간 : 2주
+						session.setMaxInactiveInterval(1209600);
+						
+						 System.out.println("model 1 : " + model.getAttribute("msg"));
+						
+						return "redirect:/main";
+						
+					} else {
+						model.addAttribute("msg", "아이디/비밀번호를 다시 확인해주십시오.");
+						System.out.println("model 2 : " + model.getAttribute("msg"));
+						
+						return "login";
+					}
+				
+				} catch (Exception e) {
+					model.addAttribute("msg", e.getMessage());
+					System.out.println("model 3 : " + model.getAttribute("msg"));
+					
+					return "login";
+				}
 	}
 
 	// 로그아웃
@@ -192,6 +198,9 @@ public class UserController {
 		}
 		return "redirect:/main";
 	}
+	
+	
+	
 }
 	
 /* 0706 카카오 API 로그인

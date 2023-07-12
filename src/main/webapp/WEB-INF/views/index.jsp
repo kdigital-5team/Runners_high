@@ -30,6 +30,7 @@
 	<!-- header -->
 	<%@ include file="./inc/header.jsp"%>
 
+	<!-- Context -->
 	<div class="site-wrap">
 		<div class="container">
 			<div class="row">

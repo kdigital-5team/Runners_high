@@ -29,8 +29,10 @@
 
 </head>
 <body>
-	<div class="site-wrap">
+	<!-- header -->
+	<%@ include file="./inc/header.jsp"%>
 
+	<div class="site-wrap">
 
 		<div class="site-mobile-menu">
 			<div class="site-mobile-menu-header">
@@ -46,39 +48,39 @@
 
 			<div class="row no-gutters site-navbar align-items-center py-3">
 
-				<div class="col-6 col-lg-2 site-logo">
-					<a href="index.html">SportsTeam</a>
-				</div>
-				<div class="col-6 col-lg-10 text-right menu">
-					<nav class="site-navigation text-right text-md-right">
+        <div class="col-6 col-lg-2 site-logo">
+          <a role="button" onclick="location.href='/main'">Runner's High</a>
+        </div>
+        <div class="col-6 col-lg-10 text-right menu">
+          <nav class="site-navigation text-right text-md-right">
 
-						<ul class="site-menu js-clone-nav d-none d-lg-block">
-							<li><a href="index.html">Home</a></li>
-							<li><a href="gallery.html">Gallery</a></li>
-							<li class="has-children"><a href="players.html">Players</a>
-								<ul class="dropdown arrow-top">
-									<li><a href="#">Jakub Bates</a></li>
-									<li><a href="#">Russell Vance</a></li>
-									<li><a href="#">Carson Hodgson</a></li>
-									<li class="has-children"><a href="#">Sub Menu</a>
-										<ul class="dropdown">
-											<li><a href="#">Joshua Fugueroa</a></li>
-											<li><a href="#">Jakub Bates</a></li>
-											<li><a href="#">Russell Vance</a></li>
-											<li><a href="#">Carson Hodgson</a></li>
-										</ul></li>
-								</ul></li>
-							<li class="active"><a href="events">Events</a></li>
-							<li><a href="about.html">About</a></li>
-							<li><a href="contact.html">Contact</a></li>
-						</ul>
+              <ul class="site-menu js-clone-nav d-none d-lg-block">
+						<li><a role="button" onclick="location.href='/main'">MAIN</a></li>
+						<li class="active"><a role="button" onclick="location.href='/events'">대회일정</a></li>
+						<li><a role="button" onclick="location.href='/gallery'">챌린지</a></li>
+						<li><a role="button" onclick="location.href='/mypage_feed'">마이 페이지</a></li>
+						<li><a href="about.html">달리기</a></li>
+						<c:if test="${empty userId}">
+							 <li><a role="button"
+									class="change-button"
+									onclick="location.href='/login'"
+									style="font-size: 13px;">로그인</a></li>
+							<li><a role="button"
+								   onclick="location.href='/'"
+								   style="font-size: 13px;">회원가입</a></li>
+						</c:if>
+						<c:if test="${not empty userId}">
+							<li><a role="button"
+								   class="change-button"
+								   onclick="location.href='/logout'"
+								   style="font-size: 13px;">로그아웃</a></li> 
+						</c:if>
+					</ul>
 
-						<a href="#"
-							class="site-menu-toggle js-menu-toggle text-black d-inline-block d-lg-none"><span
-							class="icon-menu h3"></span></a>
-					</nav>
-				</div>
-			</div>
+              <a href="#" class="site-menu-toggle js-menu-toggle text-black d-inline-block d-lg-none"><span class="icon-menu h3"></span></a>
+            </nav>
+        </div>
+      </div>
 
 		</div>
 
@@ -238,10 +240,10 @@
 			    </div>
 			  </div>
 			</div>
-              
+              </c:forEach>
             </div>
           </div>
-					</c:forEach>
+					
 				</div>
 				<div id="show-dog-img">
 				
@@ -258,26 +260,10 @@
 
 
 			</div>
-		</div>
 
-
-		<!-- footer -->
-		<div class="footer">
-			<div class="container" style="text-align: center;">
-				<div class="row footer-inner">
-					<div class="widget mb-4" style="margin: 0 auto;">
-						<h3>About Us</h3>
-						<p>Runner’s High</p>
-						<p>K-Digital Training Project</p>
-						<p>contact : ddfs@gmail.com</p>
-					</div>
-				</div>
-			</div>
-		</div>
-
-
-	</div>
-
+	<!-- footer -->
+	<%@ include file="./inc/footer.jsp"%>
+	
 	<script src="../static/js/jquery.min.js"></script>
 	<script src="../static/js/jquery-migrate-3.0.1.min.js"></script>
 	<script src="../static/js/jquery-ui.js"></script>

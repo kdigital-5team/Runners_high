@@ -24,26 +24,25 @@
 					<nav class="site-navigation text-right text-md-right">
 
 						<ul class="site-menu js-clone-nav d-none d-lg-block">
-								<li class="active"><a role="button" onclick="location.href='/main'">MAIN</a></li>
-								<li><a role="button" onclick="location.href='/events'">대회일정</a></li>
-								<li><a role="button" onclick="location.href='/gallery'">챌린지</a></li>
-								<li><a role="button" onclick="location.href='/mypage_feed'">마이 페이지</a></li>
-								<li><a href="about.html">달리기</a></li>
-								<c:if test="${empty userId}">
-									 <li><a role="button"
+									<li class="active"><a role="button" onclick="location.href='/main'">MAIN</a></li>
+									<li><a role="button" onclick="location.href='/events'">대회일정</a></li>
+									<li><a role="button" onclick="location.href='/gallery'">챌린지</a></li>
+									<li><a role="button" onclick="location.href='/mypage_feed'">마이 페이지</a></li>
+									<c:if test="${empty userId}">
+									 	<li><a role="button"
 											class="change-button"
 											onclick="location.href='/login'"
 											style="font-size: 13px;">로그인</a></li>
-									<li><a role="button"
-										   onclick="location.href='/'"
+										<li><a role="button"
+										   onclick="location.href='/regist'"
 										   style="font-size: 13px;">회원가입</a></li>
-								</c:if>
-								<c:if test="${not empty userId}">
-									<li><a role="button"
+									</c:if>
+									<c:if test="${not empty userId}">
+										<li><a role="button"
 										   class="change-button"
 										   onclick="location.href='/logout'"
 										   style="font-size: 13px;">로그아웃</a></li> 
-								</c:if>
+									</c:if>
 						</ul>
 
 						<a href="#"

@@ -30,11 +30,11 @@ INSERT INTO title
 -- user
 INSERT INTO rh_user 
         (user_id, user_pw, pw_quest, pw_quest_answer, nickname, intro, user_pic) 
-    VALUES ('scott', 'tiger', '기억나는 장소는?', '뉴욕', 'SCOTT', 'Hi', '');
+    VALUES ('scott@gmail.com', 'tiger', '기억나는 장소는?', '뉴욕', 'SCOTT', 'Hi', '');
 INSERT INTO rh_user 
         (user_id, user_pw, pw_quest, pw_quest_answer, nickname, intro, user_pic) 
     VALUES 
-        ('dev', 'it', '어렸을 때 장래희망은?', '대통령', 'devops', 'dev', '');
+        ('dev@gmail.com', 'it', '어렸을 때 장래희망은?', '대통령', 'devops', 'dev', '');
 
 -- region
 INSERT INTO region 
@@ -62,13 +62,20 @@ INSERT INTO region
 INSERT INTO race
         (race_id, region_id, race_org, race_name, race_date, race_apply, race_deadline, race_url, race_category, race_dist, race_pic)
     VALUES
-        (race_seq.NEXTVAL, 1, '(주) 스포테인', '서울오픈 런', '2023.08.26', '2023.06.19', '2023.07.31', 'http://irunman.kr/sub1_1.php?uid=79', 'M', 'Half, 10km, 5km', 
+        (race_seq.NEXTVAL, 1, '(주) 스포테인', '서울오픈 런', '2023.08.26', '2023.06.19', '2023.07.31', 'http://irunman.kr/sub1_1.php?uid=79', '마라톤', 'Half, 10km, 5km', 
         'http://www.irunman.kr/admin/data/webedit/20220701132808_qxtfxhcd.jpg');
+        
+INSERT INTO race
+        (race_id, region_id, race_org, race_name, race_date, race_apply, race_deadline, race_url, race_category, race_dist)
+    VALUES
+        (race_seq.NEXTVAL, 1, '(사)한국산악마라톤연맹', '제4회안산.인왕산.북악산TrailRunning', '2023.07.16', '2023.01.03', '2023.07.10', 'http://koreatrail.net', '걷기', '10km');
 
 -- challenge
 INSERT INTO challenge 
-        (chall_id, chall_reg_id, region_id, route_id, chall_name, chall_intro, chall_start_date, chall_end_date, chall_all_auth, chall_week_auth,
+        (chall_id, chall_reg_id, region_id, chall_name, chall_intro, chall_start_date, chall_end_date, chall_all_auth, chall_week_auth,
         chall_category, chall_sit, chall_auth, chall_online, chall_size, chall_pic) 
     VALUES 
-        (challenge_req.NEXTVAL, 'scott', 1, 1, '마라톤 챌린지', '실제로 42.195km를 주 1회 달립니다!', '20230701', '20230725', 4, 1, '대회용', '모집중', 40, '온라인', 
+        (challenge_req.NEXTVAL, 'scott@gmail.com', 1, '마라톤 챌린지', '실제로 42.195km를 주 1회 달립니다!', '20230701', '20230725', 4, 1, '대회용', '모집중', 40, '온라인', 
         5, 'https://image.ytn.co.kr/general/jpg/2020/1130/202011300700017010_d.jpg');
+        
+commit;
