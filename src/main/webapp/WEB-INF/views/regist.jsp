@@ -12,9 +12,17 @@
     <div class="container">
         <h1>회원가입</h1>
         <div class="form-group">
-            <label for="inputID">userId</label>
+            <label for="inputID">아이디</label>
             <input type="text" class="form-control" id="user_id" name="user_id" placeholder="사용자 아이디">
             <label for="id_check"></label>
+        </div>
+        <div>
+        	<p>
+        		<label for="inputAddress">이메일 인증</label>
+            	<input type="text" class="form-control" id="auth_code" name="auth_code" placeholder="인증번호" style="width:100px;">
+            	<button type="button" class="btn btn-primary" id="checkEmail">이메일 인증</button>
+            	<label for="code_check"></label>
+            </p>
         </div>
         <div class="form-group">
             <label for="inputAddress">닉네임</label>
@@ -22,16 +30,16 @@
              <label for="nickname_check"></label>
         </div>
         <div class="form-group">
-            <label for="inputPassword">password</label>
+            <label for="inputPassword">비밀번호</label>
             <input type="password" class="form-control" id="user_pw" name="user_pw" placeholder="사용자 비밀번호">
         </div>
         <div class="form-group">
-            <label for="inputPasswordCheck">password check</label>
+            <label for="inputPasswordCheck">비밀번호 확인</label>
             <input type="password" class="form-control" id="user_pw_check" name="user_pw_check" placeholder="사용자 비밀번호 확인">
             <label for="pw_check"></label>
         </div>
         <div class="form-group">
-        	<label for="PasswordQuestion">password question</label>
+        	<label for="PasswordQuestion">비밀번호 질문</label>
        		<select id="pw_quest" name="pw_quest">
 				<option value ="어렸을 때 장래희망은?"> 어렸을 때 장래희망은? </option>
 				<option value ="다녔던 초등학교의 명칭은?"> 다녔던 초등학교의 명칭은? </option>
@@ -47,7 +55,7 @@
 </body>
 <script src="https://code.jquery.com/jquery-3.4.1.js" ></script> 
 <script> 
-var id_chk = false, pw_chk = false, nickname_chk = false;
+var id_chk = false, pw_chk = false, nickname_chk = false; code_chk=false;
 $(function() {
 
 	// const getIdCheck = RegExp(/^[a-zA-Z0-9]{4,20}$/);
@@ -59,7 +67,7 @@ $(function() {
 	$('#user_id').keyup(function() {
 		var user_id = document.getElementById('user_id').value; 
         if(!getIdCheck.test($(event.target).val())){
-        	 $("label[for='id_check']").text("아이디는 영어와 숫자 조합으로만 이루어지고 글자의 길이는 4글자 이상 20글자 이하로만 입력바랍니다.");
+        	 $("label[for='id_check']").text("아이디는 영어와 숫자 조합으로만 이루어지고 글자의 길이는 4글자 이상 20글자인 이메일 형태(@ .com)로만 입력바랍니다.");
         	 id_chk = false;
         } else if(user_id.trim().length != 0) {
             $.ajax({
@@ -142,11 +150,46 @@ $(function() {
 	
 });
 
+$('#checkEmail').click(function() {
+	if(id_chk == true){
+		var user_id = document.getElementById('user_id').value; 
+	 	$.ajax({
+		 async: false,
+         type : 'POST', 
+         data: user_id,
+         url: "/mailConfirm",
+         dataType: "json",
+         contentType: "application/json; charset=UTF-8",
+            success : function(data, status, xhr){
+                alert("해당 이메일로 인증번호 발송이 완료되었습니다. \n 확인부탁드립니다.")
+                console.log("data", data);
+                chkEmailConfirm(data);
+            },
+            error: function(xhr, status, e) {
+            	console.log("error", e);
+            }        
+        });
+	} else { alert("아이디를 형식에 맞게 입력했는지 확인해주세요.")
+}});
+
+function chkEmailConfirm(data){
+	$('#auth_code').keyup(function(){
+	if(data.code == document.getElementById('auth_code').value){
+           $("label[for='code_check']").text("인증되었습니다.");
+          	code_chk = true;
+	
+	} else{
+		console.log(document.getElementById('auth_code').value)
+           $("label[for='code_check']").text("인증번호가 올바르지 않습니다. 확인부탁드립니다.");
+			code_chk = false;
+	}
+})};
+
 function submit2(){
-	if(id_chk && pw_chk && nickname_chk == true){
+	if(id_chk && pw_chk && nickname_chk && code_chk == true){
 	document.regist_form.submit();
 	} else{
-	alert("아이디, 비밀번호, 닉네임 입력 값을 확인해주세요.");
+	alert("아이디, 이메일인증, 비밀번호, 닉네임 입력 값을 확인해주세요.");
 }};
 
 </script>
