@@ -31,8 +31,14 @@
 	<div class="site-wrap">
 		<div class="site-section">
 			<div class="container">
-				<form action="login" method="POST" id="login-form">
-					<p align="center">
+				<form action="profile" method="POST">
+					<div class="context">
+						<p> 아이디 </p>
+						<input type="text" name="userId" size="30" placeholder="${user.user_id}"
+							   style="border: 0 solid black" readonly> 
+						
+						<p>
+						
 						<input type="text" name="userId" size="30" placeholder="이메일" id="login_id"
 							style="border: 0 solid black"> 
 							</br> 
@@ -43,7 +49,7 @@
 							style="border: 0 solid black">
 							</br>
 						<label for="pw_check"></label>
-					</p>
+						</div>
 					<p align="center">
 						<span style="font-size: 12pt;"> 
 						<input type="submit"

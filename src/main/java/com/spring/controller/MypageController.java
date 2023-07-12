@@ -48,7 +48,7 @@ public class MypageController {
 		System.out.println(
 				"닉네임 : " + user.getNickname() + "\n아이디 : " + user.getUser_id() + "\n한줄 소개 : " + user.getIntro());
 
-		model.addAttribute("loginUser", user);
+		model.addAttribute("user", user);
 		
 		if(session == null || !request.isRequestedSessionIdValid()) {
 			model.addAttribute("msg", "로그인 후 이용 가능한 서비스입니다.");

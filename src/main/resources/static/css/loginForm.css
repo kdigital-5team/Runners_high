@@ -94,6 +94,7 @@ p {
 a[id="sub-page"]{
 	text-align: center;
 	padding: 0 25px;
+	color: #7f7f81
 }
 div[id="sub-page"]{
 	margin: 0 13px 0 0;
@@ -1401,6 +1402,11 @@ pre code {
 	.offset-md-11 {
 		margin-left: 91.66667%
 	}
+}
+
+/* 로고 위치 재조정 0712 */
+a[id="main-logo"] {
+	text-align: center;
 }
 
 @media ( min-width :992px) {
