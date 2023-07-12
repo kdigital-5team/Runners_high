@@ -30,26 +30,16 @@
  	
  	<select id="getUserByUserId" resultType="com.spring.dto.User">
  		SELECT user_id, 
- 			   user_pw
+ 			   user_pw,
+ 			   pw_quest,
+ 			   pw_quest_answer,
+ 			   nickname,
+ 			   intro,
+ 			   user_title,
+ 			   user_pic
  			FROM rh_user
  				WHERE user_id = #{userId} 
  	</select>
- 	
- 	<!--
- 	<select id="getUserByUserIdAndUserPw" resultType="com.spring.dto.User">
- 		SELECT user_id, 
- 			   user_pw, 
- 			   pw_quest, 
- 			   pw_quest_answer, 
- 			   nickname, 
- 			   intro, 
- 			   user_title, 
- 			   user_pic 
- 			FROM rh_user
- 				WHERE user_id = #{userId} 
- 					  AND user_pw = #{userPw}	
- 	</select>
- 	  -->
  	
  	<select id="idCheck" parameterType="String" resultType="Integer">
         SELECT count(*)

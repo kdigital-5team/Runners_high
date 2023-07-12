@@ -161,6 +161,8 @@ public class UserController {
 			boolean pwResult;
 				try {
 					pwResult = BCrypt.checkpw(userPw, service.getUserByUserId(userId).getUser_pw());
+					
+					
 				
 					System.out.println(pwResult);
 					if(pwResult == true) {
@@ -168,8 +170,6 @@ public class UserController {
 						System.out.println("접속자 session : " + session.getAttribute("userId"));
 						// session 만료 시간 : 2주
 						session.setMaxInactiveInterval(1209600);
-						
-						 System.out.println("model 1 : " + model.getAttribute("msg"));
 						
 						return "redirect:/main";
 						

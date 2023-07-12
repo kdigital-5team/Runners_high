@@ -89,7 +89,6 @@
 	
 	<!-- 로그인 실패 alert -->
 <script type="text/javascript">
-	//let msg = '<c:out value="${msg}"/>';
 	let msg = '${msg}';
 	console.log(msg);
 
