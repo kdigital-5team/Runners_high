@@ -5,7 +5,7 @@
 <html>
 <head>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-<title>대회 일정</title>
+<title>챌린지 목록</title>
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -48,11 +48,16 @@
 
 		</div>
 
-
 		<div class="row no-gutters site-subbar align-items-center py-3">
 			<div>
+			<form action="/events" class="contact-form" method="GET">
+					<label class="font-weight-bold" for="keyword">챌린지명 검색</label> <input
+						type="text" class="form-race" id="keyword" placeholder="대회명 입력"
+						name="keyword"> <input type="submit" class="form-race"
+						value="검색" />
+				</form>
 				<nav class="site-navigation text-left text-md-left"
-					style="float: left; display: inline-block;">
+					style="float: left;">
 
 					<ul class="site-menu js-clone-nav d-none d-lg-block">
 						<li class="has-children">대회
@@ -132,13 +137,6 @@
 
 
 				</nav>
-				<form action="/events" class="contact-form" style="display: inline-block; float: right;"
-					method="GET">
-					<label class="font-weight-bold" for="keyword">대회명 검색</label> <input
-						type="text" class="form-race" id="keyword" placeholder="대회명 입력"
-						name="keyword"> <input type="submit" class="form-race"
-						value="검색" />
-				</form>
 			</div>
 		</div>
 		<div>
@@ -153,54 +151,23 @@
 
 
 				<div class="row mb-5" id="list">
-					<c:forEach items="${raceList}" var="race">
+					<c:forEach items="${challList}" var="chall">
 						<div class="col-sm-6 col-md-4 col-lg-3 mb-5 mb-lg-5">
 							
 								<div class="custom-media d-block">
-									<div class="img-wrap mb-3">
-										<a href="${race.race_url}"><img src="${race.race_pic}"
-											alt="Image" class="img-fluid"></a>
+									<div class="img-wrap mb-3" style="display: inline-block;">
+										<img src="${chall.chall_pic}"
+											alt="Image" class="img-fluid">
 									</div>
-									<div>
-										<h5 style="display: inline-block; overflow:hidden; text-overflow: ellipsis; white-space: nowrap; width: 140px;"><a href="#" data-toggle="modal" data-target="#myModal">${race.race_name}</a></h5>
-										<div style="display: inline-block; float: right;">${race.race_con }</div>
-										<div>${race.region_id}</div>
-										<span class="caption" style="font-size: 10px">${race.race_date}</span>
+									<div style="display: inline-block;">
+										<h5 style="display: inline-block; overflow:hidden; text-overflow: ellipsis; white-space: nowrap; width: 140px;"><a href="#" data-toggle="modal" data-target="#myModal">${chall.chall_name}</a></h5>
+										<div style="display: inline-block; float: right;">${chall.chall_sit }</div>
+										<div>${chall.region_id}</div>
+										<span class="caption" style="font-size: 10px">${chall.chall_start_date}</span>
 									</div>
 								</div>
 							
 						</div>
-						<!-- Modal -->
-			<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-			  <div class="modal-dialog">
-			    <div class="modal-content">
-			      <div class="modal-header">
-			        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-			        
-			      </div>
-			      <div class="modal-body">
-			        <img src="${race.race_pic}"
-											alt="Image" class="img-fluid">
-			        <table>
-			        <tr><td>대회명 : ${race.race_name}</td></tr>
-			        <tr><td>주최 : ${race.race_org}</td></tr>
-			        <tr><td>종목 : ${race.race_dist}</td></tr>
-			        <tr><td>개최 지역 : <!-- region id? --> </td></tr>
-			        <tr><td>일시 : ${race.race_date}</td></tr>
-			        <tr><td>접수 기간 : ${race.race_apply}~${race.race_deadline}</td></tr>
-			        <tr><td>상세정보 : <a href="${race.race_url}">${race.race_url}</a></td></tr>
-			        </table>
-			        
-			        
-			      </div>
-			      
-			      <div class="modal-footer">
-			        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-			       
-			      </div>
-			    </div>
-			  </div>
-			</div>
               </c:forEach>
             </div>
           </div>
@@ -274,7 +241,7 @@
   		console.log();
   		$.ajax({
   			type : "GET",
-  			url : "/events/filter",
+  			url : "/challenge",
   			data : objParams
   		})
   			.success(function(result){
@@ -300,7 +267,7 @@
   		var objParams={"opt" : opt, "val" : val};
   		$.ajax({
   			type : "GET",
-  			url : "/events/filter",
+  			url : "/challenge",
   			data : objParams
   		})
   			.success(function(result){

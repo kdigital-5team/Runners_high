@@ -39,12 +39,33 @@
 	 			</foreach>
  			</if>
  			<if test="!dist.isEmpty()">
- 				AND REGEXP_LIKE(race_dist, 
- 				<foreach collection="dist" item="value" index="idx" separator="||">
- 					#{value}
- 				</foreach>
- 				)
- 			
+ 				AND REGEXP_LIKE(race_dist, #{dist})
+ 			</if>
+ 			<if test="!date.isEmpty()">
+			 AND extract (month from race_date) in
+				 <foreach collection="date" item="value" index="idx" separator="," open="(" close=")">
+	 				#{value}
+	 			</foreach>
+ 			</if>
+ 			<if test="!con.isEmpty()">
+			 AND race_con IN
+				 <foreach collection="con" item="value" index="idx" separator="," open="(" close=")">
+	 				#{value}
+	 			</foreach>
+ 			</if>
+ 			<if test="!state.isEmpty() and city.isEmpty()">
+			 AND region_id IN (select region_id from region where region_state IN
+				 <foreach collection="state" item="value" index="idx" separator="," open="(" close=")">
+	 				#{value}
+	 			</foreach>
+	 			)
+ 			</if>
+ 			<if test="!state.isEmpty() and !city.isEmpty()">
+			 AND region_id IN (select region_id from region where region_city in
+				 <foreach collection="city" item="value" index="idx" separator="," open="(" close=")">
+	 				#{value}
+	 			</foreach>
+	 			)
  			</if>
 		</trim>
  	</select>

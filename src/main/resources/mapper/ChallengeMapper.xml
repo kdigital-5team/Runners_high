@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace="com.spring.mapper.ChallengeMapper">
+ 	 	
+ 	<select id="getChallWithKeyword" 
+ 			parameterType="com.spring.dto.SearchKeyword"
+ 			resultType="com.spring.dto.Challenge">
+ 		SELECT chall_id, chall_reg_id, region_id, chall_name, chall_intro, chall_start_date, chall_end_date, chall_all_auth, chall_week_auth,chall_category, chall_sit, chall_auth, chall_online, chall_size, chall_pic
+ 		FROM challenge
+ 		<trim prefix="WHERE" prefixOverrides="AND |OR">
+			 	AND chall_name LIKE '%'||#{keyword, jdbcType=VARCHAR}||'%'
+		</trim>
+ 	</select>
+ </mapper>
