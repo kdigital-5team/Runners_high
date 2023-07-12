@@ -24,7 +24,7 @@ DROP SEQUENCE challenge_req;
 -- 유저 테이블
 CREATE TABLE rh_user (
     user_id         VARCHAR2(30 BYTE) NOT NULL,
-    user_pw         VARCHAR2(20 BYTE) NOT NULL,
+    user_pw         VARCHAR2(100 BYTE) NOT NULL,
     pw_quest        VARCHAR2(30 BYTE) NOT NULL,
     pw_quest_answer VARCHAR2(30 BYTE) NOT NULL,
     nickname        VARCHAR2(10 BYTE) NOT NULL,
@@ -323,4 +323,3 @@ ALTER TABLE race_route
 ALTER TABLE chall_route
     ADD CONSTRAINT chall_route_challenge_fk FOREIGN KEY ( chall_id )
         REFERENCES challenge ( chall_id );
-        

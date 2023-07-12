@@ -15,15 +15,15 @@ public interface UserMapper {
 	// List
 	public List<User> getAllUsers();
 
-	// 객체 - Dept
+	// 객체 - User
 	public Optional<User> getUserByUserId(int userid);
 	
 	public int insertUser(User user) throws SQLException;
 	
-	// update - Dept
+	// update - user
 	public int updateUserId(User user) throws SQLException; 
 
-	// delete - dept
+	// delete - user
 	public int deleteUserByUserId(int userid)throws SQLException;
 
 	public int idCheck(String userId) throws Exception;
@@ -33,7 +33,8 @@ public interface UserMapper {
 	public String findPw(String user_id, String pw_quest, String pw_quest_answer) throws Exception;
 
 	public boolean updatePw(String new_pw, String user_id) throws Exception;
-	// user - id, pw
-	public User getUserByUserIdAndUserPw(@Param("userId")String userId, @Param("userPw")String userPw) throws SQLException;
+	
+	// user - id
+	public User getUserByUserId(@Param("userId")String userId) throws SQLException;
 }
 	

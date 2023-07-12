@@ -1,27 +1,14 @@
 package com.spring.service;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.ProtocolException;
-import java.net.URL;
 import java.sql.SQLException;
-import java.util.HashMap;
 import java.util.List;
+
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import com.spring.dto.User;
 import com.spring.mapper.UserMapper;
-
-import lombok.extern.slf4j.Slf4j;
 
 @Service
 public class UserService {
@@ -33,15 +20,14 @@ public class UserService {
 		return mapper.getAllUsers();
 	}
 
-	// 객체
-	public User getUserByUserId(int userid) throws Exception { 
-		User user = mapper.getUserByUserId(userid)
-							.orElseThrow(Exception::new);
-		return user; 
-	}
-	
+	// 회원가입
 	public boolean insertUser(User user) throws SQLException, Exception {
 		boolean result = false;
+		
+		// 비밀번호 암호화
+//		System.out.println("암호화 전 : " + user.getUser_pw());
+		user.setUser_pw(BCrypt.hashpw(user.getUser_pw(), BCrypt.gensalt()));
+//		System.out.println("암호화 후 : " + user.getUser_pw());
 		
 		int res = mapper.insertUser(user);
 		
@@ -75,16 +61,16 @@ public class UserService {
 
 
 	// 로그인
-	public User getUserByUserIdAndUserPw(String userId, String userPw) throws Exception {
-		
-		User user = mapper.getUserByUserIdAndUserPw(userId, userPw);
+	public User getUserByUserId(String userId) throws Exception { 
+		User user = mapper.getUserByUserId(userId);
 		
 		if(user == null) {
-			throw new Exception("등록되지 않은 사용자 또는 비밀번호 오류입니다.");
+			throw new Exception("등록되지 않은 사용자 또는 아이디/비밀번호 오류입니다.");
 		}
-		
-		return user;
+		return user; 
 	}
+	
+	
 /* 0706 카카오 로그인 API
  * 9.0.1 문법 적용 : nullpointerException
  * Token으로 유저 정보 가지고 오기 : java.lang.IllegalArgumentException: invalid start or end
