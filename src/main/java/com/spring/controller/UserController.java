@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.spring.dto.User;
+import com.spring.service.MailService;
 import com.spring.service.UserService;
 
 @Controller
@@ -68,15 +69,15 @@ public class UserController {
 			userResult = service.insertUser(newUser);
 			
 			if(userResult) {
-				return "home";
+				return "index";
 			}
 			
 		} catch (Exception e) {
 			
 			e.printStackTrace();
-			return "home";
+			return "index";
 		}
-		return "home";
+		return "index";
 		
 	}
 	
@@ -197,6 +198,9 @@ public class UserController {
 		}
 		return "redirect:/main";
 	}
+	
+	
+	
 }
 	
 /* 0706 카카오 API 로그인
