@@ -66,11 +66,18 @@ INSERT INTO race
         'http://www.irunman.kr/admin/data/webedit/20220701132808_qxtfxhcd.jpg');
         
 INSERT INTO race
-        (race_id, region_id, race_org, race_name, race_date, race_apply, race_deadline, race_url, race_category, race_dist)
+        (race_id, region_id, race_org, race_name, race_date, race_apply, race_deadline, race_url, race_category, race_dist, race_pic)
     VALUES
-        (race_seq.NEXTVAL, 1, '(사)한국산악마라톤연맹', '제4회안산.인왕산.북악산TrailRunning', '2023.07.16', '2023.01.03', '2023.07.10', 'http://koreatrail.net', '걷기', '10km');
+        (race_seq.NEXTVAL, 4, '(사)한국산악마라톤연맹', '제4회안산.인왕산.북악산TrailRunning', '2023.07.16', '2023.01.03', '2023.07.10', 'http://koreatrail.net', '걷기', '10km', 'https://image.ytn.co.kr/general/jpg/2020/1130/202011300700017010_d.jpg');
 
 -- challenge
+INSERT INTO challenge 
+        (chall_id, chall_reg_id, region_id, chall_name, chall_intro, chall_start_date, chall_end_date, chall_all_auth, chall_week_auth,
+        chall_category, chall_sit, chall_auth, chall_online, chall_size, chall_pic) 
+    VALUES 
+        (challenge_req.NEXTVAL, 'scott@gmail.com', 1, '마라톤 챌린지', '실제로 42.195km를 주 1회 달립니다!', '20230701', '20230725', 4, 1, '대회용', '모집중', 40, '온라인', 
+        5, 'https://image.ytn.co.kr/general/jpg/2020/1130/202011300700017010_d.jpg');
+
 INSERT INTO challenge 
         (chall_id, chall_reg_id, region_id, chall_name, chall_intro, chall_start_date, chall_end_date, chall_all_auth, chall_week_auth,
         chall_category, chall_sit, chall_auth, chall_online, chall_size, chall_pic) 
@@ -92,5 +99,3 @@ END UPDATE_CON;
 EXEC UPDATE_CON;
 
 commit;
-
-

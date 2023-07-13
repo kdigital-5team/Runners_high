@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -50,9 +51,9 @@
 
 
 		<div class="row no-gutters site-subbar align-items-center py-3">
-			<div>
+			<div style="margin: auto;">
 				<nav class="site-navigation text-left text-md-left"
-					style="float: left; display: inline-block;">
+					style="float: left; width: 60%">
 
 					<ul class="site-menu js-clone-nav d-none d-lg-block">
 						<li class="has-children">대회
@@ -132,13 +133,11 @@
 
 
 				</nav>
-				<form action="/events" class="contact-form" style="display: inline-block; float: right;"
-					method="GET">
-					<label class="font-weight-bold" for="keyword">대회명 검색</label> <input
-						type="text" class="form-race" id="keyword" placeholder="대회명 입력"
-						name="keyword"> <input type="submit" class="form-race"
-						value="검색" />
-				</form>
+				<div class="contact-form" style="float: right; width: 40%">
+					<label class="font-weight-bold" for="keyword" style="float: left; width: 40%;">대회명 검색</label> 
+					<input type="text" class="form-race" id="keyword" placeholder="대회명 입력" style="float: left; width: 40%;" name="keyword"> 
+					<button type="button" style="float: left; width: 20%;" onclick="searchKeyword()">검색</button>
+				</div>
 			</div>
 		</div>
 		<div>
@@ -162,10 +161,10 @@
 											alt="Image" class="img-fluid"></a>
 									</div>
 									<div>
-										<h5 style="display: inline-block; overflow:hidden; text-overflow: ellipsis; white-space: nowrap; width: 140px;"><a href="#" data-toggle="modal" data-target="#myModal">${race.race_name}</a></h5>
-										<div style="display: inline-block; float: right;">${race.race_con }</div>
+										<h5 style="display: inline-block; overflow:hidden; text-overflow: ellipsis; white-space: nowrap; width: 70%;"><a href="#" data-toggle="modal" data-target="#myModal">${race.race_name}</a></h5>
+										<div style="display: inline-block; float: right; width: 30%">${race.race_con }</div>
 										<div>${race.region_id}</div>
-										<span class="caption" style="font-size: 10px">${race.race_date}</span>
+										<span class="caption" style="font-size: 10px"><fmt:formatDate pattern="yyyy-MM-dd" value="${race.race_date}"/></span>
 									</div>
 								</div>
 							
@@ -238,9 +237,12 @@
 
 </body>
 <script type="text/javascript">
+	let keyword=null;
+
   	function test(button_id, option){
   		const target = document.getElementById(button_id);
   		console.log(target);
+  		console.log(keyword);
   		target.disabled=true;
   		var option_list = $("#option_list");
   		option_list.append("<li style=\"display:inline-block\" name="+ option +"><button type=\"button\" onclick=\"removeBtn(this,this.innerText)\">" + target.innerText + "</button></li>");
@@ -264,24 +266,7 @@
 	  	}
   	  
   	  
-  		var opt=[];
-  		var val=[];
-  		$("#option_list li").each(function(index, element){
-  			opt.push(element.getAttribute("name").trim());
-  			val.push($(this).text());
-  		})
-  		var objParams={"opt" : opt, "val" : val};
-  		console.log();
-  		$.ajax({
-  			type : "GET",
-  			url : "/events/filter",
-  			data : objParams
-  		})
-  			.success(function(result){
-  				$('#list').html(result);
-  			})
-  		
-  		
+  		search();
   	}
   	
   	function removeBtn(ths, button_id){
@@ -289,15 +274,29 @@
   		const target = document.getElementById(button_id);
   		target.disabled=false;
   		ths.parents("li").remove();
-  		var option_list = $("#option_list");
+
+		search();
+  	}
+  	
+  	function searchKeyword(){
+  		const target = document.getElementById("keyword");
+  		keyword = target.value;
+  	
+  		target.value = null;
   		
+  		search();
+  		
+  		
+  	}
+  	
+  	function search(){
   		var opt=[];
   		var val=[];
   		$("#option_list li").each(function(index, element){
   			opt.push(element.getAttribute("name").trim());
   			val.push($(this).text());
   		})
-  		var objParams={"opt" : opt, "val" : val};
+  		var objParams={"opt" : opt, "val" : val, "keyword" : keyword};
   		$.ajax({
   			type : "GET",
   			url : "/events/filter",
@@ -305,12 +304,7 @@
   		})
   			.success(function(result){
   				$('#list').html(result);
-  			})
-  	}
-  	
-  	function btnDisabled()  {
-  	  const target = document.getElementById('target_btn');
-  	  target.disabled = true;
+  		})
   	}
 
   </script>

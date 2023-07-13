@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -50,22 +51,35 @@
 
 		<div class="row no-gutters site-subbar align-items-center py-3">
 			<div>
-			<form action="/events" class="contact-form" method="GET">
-					<label class="font-weight-bold" for="keyword">챌린지명 검색</label> <input
-						type="text" class="form-race" id="keyword" placeholder="대회명 입력"
-						name="keyword"> <input type="submit" class="form-race"
-						value="검색" />
+			<form action="/challenge" class="contact-form" method="GET">
+					<label class="font-weight-bold" for="keyword">챌린지 검색</label> 
+					<input type="text" class="form-race" id="keyword" placeholder="챌린지명 입력" name="keyword">
+					<input type="submit" class="form-race" value="검색" />
 				</form>
 				<nav class="site-navigation text-left text-md-left"
 					style="float: left;">
 
 					<ul class="site-menu js-clone-nav d-none d-lg-block">
-						<li class="has-children">대회
+						<li class="has-children">온라인
 							<ul class="dropdown arrow-top">
-								<li><button style="width: 70px" type="button" id="마라톤" name="race_category"
-										onclick="test(this.id, this.name)" class="option">마라톤</button></li>
-								<li><button style="width: 70px" type="button" id="걷기" name="race_category"
-										onclick="test(this.id, this.name)" class="option">걷기</button></li>
+								<li><button style="width: 100px" type="button" id="온라인" name="chall_online"
+										onclick="test(this.id, this.name)" class="option">온라인</button></li>
+								<li><button style="width: 100px" type="button" id="오프라인" name="chall_online"
+										onclick="test(this.id, this.name)" class="option">오프라인</button></li>
+							</ul>
+						</li>
+						<li class="has-children">도
+							<ul class="dropdown arrow-top">
+									<li><button style="width: 100px" type="button" id="경기도" name="region_state"
+										onclick="test(this.id, this.name)" class="option">경기도</button></li>
+									<li><button style="width: 100px" type="button" id="강원도" name="region_state"
+										onclick="test(this.id, this.name)" class="option">강원도</button></li>
+							</ul>
+						</li>
+						<li class="has-children">시/군
+							<ul class="dropdown arrow-top" id="region_list" style="overflow: auto; height: 150px;">
+								
+								
 							</ul>
 						</li>
 						<li class="has-children">종목
@@ -118,20 +132,6 @@
 								<li><button style="width: 100px" type="button" id="접수마감" name="race_con"
 										onclick="test(this.id, this.name)" class="option">접수마감</button></li>
 							</ul></li>
-						<li class="has-children">도
-							<ul class="dropdown arrow-top">
-									<li><button style="width: 100px" type="button" id="경기도" name="region_state"
-										onclick="test(this.id, this.name)" class="option">경기도</button></li>
-									<li><button style="width: 100px" type="button" id="강원도" name="region_state"
-										onclick="test(this.id, this.name)" class="option">강원도</button></li>
-							</ul>
-						</li>
-						<li class="has-children">시/군
-							<ul class="dropdown arrow-top" id="region_list" style="overflow: auto; height: 150px;">
-								
-								
-							</ul>
-						</li>
 					</ul>
 
 
@@ -152,18 +152,24 @@
 
 				<div class="row mb-5" id="list">
 					<c:forEach items="${challList}" var="chall">
-						<div class="col-sm-6 col-md-4 col-lg-3 mb-5 mb-lg-5">
+						<div style="width: 40%; float:left; border: 1px solid aqua; margin-right: 10%">
 							
-								<div class="custom-media d-block">
-									<div class="img-wrap mb-3" style="display: inline-block;">
+								<div>
+									<div style="float: left; width: 35%;">
 										<img src="${chall.chall_pic}"
-											alt="Image" class="img-fluid">
+											alt="Image" class="img-fluid" style="height: auto;">
 									</div>
-									<div style="display: inline-block;">
-										<h5 style="display: inline-block; overflow:hidden; text-overflow: ellipsis; white-space: nowrap; width: 140px;"><a href="#" data-toggle="modal" data-target="#myModal">${chall.chall_name}</a></h5>
-										<div style="display: inline-block; float: right;">${chall.chall_sit }</div>
-										<div>${chall.region_id}</div>
-										<span class="caption" style="font-size: 10px">${chall.chall_start_date}</span>
+									<div style="float: left; width: 65%;">
+										<div style="display: inline-block; float: left; border: 1px solid red;">${chall.chall_sit}</div>
+										<div style="border: 1px solid green; width: auto;">${chall.chall_category}</div>
+										<h5 style="overflow:hidden; text-overflow: ellipsis; white-space: nowrap; width: 140px;"><a href="#" data-toggle="modal" data-target="#myModal">${chall.chall_name}</a></h5>
+										<c:if test="${chall.chall_category ne null}">
+											<div style="font-size: 10px">대회명</div>
+										</c:if>
+										
+										<div style="font-size: 10px">${chall.region_id}</div>
+										<div class="caption" style="font-size: 10px"><fmt:formatDate pattern="yyyy-MM-dd" value="${chall.chall_start_date}"/> ~ <fmt:formatDate pattern="yyyy-MM-dd" value="${chall.chall_end_date}"/> / 인증 주 ${chall.chall_week_auth}회 / 최대 ${chall.chall_size}명</div>
+										<div class="caption" style="font-size: 10px"></div>
 									</div>
 								</div>
 							
