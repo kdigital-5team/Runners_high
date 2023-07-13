@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.spring.dto.Race;
+import com.spring.dto.RaceAndRegion;
 import com.spring.dto.SearchKeyword;
 import com.spring.service.RaceService;
 
@@ -22,13 +23,15 @@ import lombok.RequiredArgsConstructor;
 public class RaceController {
 	@Autowired
 	private RaceService service;
-
+	
 	@GetMapping("/events")
 	public String getAllRace(@ModelAttribute SearchKeyword keyword, Model model) {
 		List<Race> raceList = service.getRaceWithKeyword(keyword);
+		List<RaceAndRegion> myList = service.getAllRaces();
 		List<String> stateList = service.getAllState();
 		model.addAttribute("raceList", raceList);
 		model.addAttribute("stateList",stateList);
+		model.addAttribute("myList",myList);
 		System.out.println("test");
 		return "events";
 	}

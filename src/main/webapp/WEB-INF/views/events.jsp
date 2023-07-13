@@ -33,58 +33,6 @@
 	<%@ include file="./inc/header.jsp"%>
 
 	<div class="site-wrap">
-
-		<div class="site-mobile-menu">
-			<div class="site-mobile-menu-header">
-				<div class="site-mobile-menu-close mt-3">
-					<span class="icon-close2 js-menu-toggle"></span>
-				</div>
-			</div>
-			<div class="site-mobile-menu-body"></div>
-		</div>
-		<!-- .site-mobile-menu -->
-
-		<div class="container">
-
-			<div class="row no-gutters site-navbar align-items-center py-3">
-
-        <div class="col-6 col-lg-2 site-logo">
-          <a role="button" onclick="location.href='/main'">Runner's High</a>
-        </div>
-        <div class="col-6 col-lg-10 text-right menu">
-          <nav class="site-navigation text-right text-md-right">
-
-              <ul class="site-menu js-clone-nav d-none d-lg-block">
-						<li><a role="button" onclick="location.href='/main'">MAIN</a></li>
-						<li class="active"><a role="button" onclick="location.href='/events'">대회일정</a></li>
-						<li><a role="button" onclick="location.href='/gallery'">챌린지</a></li>
-						<li><a role="button" onclick="location.href='/mypage_feed'">마이 페이지</a></li>
-						<li><a href="about.html">달리기</a></li>
-						<c:if test="${empty userId}">
-							 <li><a role="button"
-									class="change-button"
-									onclick="location.href='/login'"
-									style="font-size: 13px;">로그인</a></li>
-							<li><a role="button"
-								   onclick="location.href='/'"
-								   style="font-size: 13px;">회원가입</a></li>
-						</c:if>
-						<c:if test="${not empty userId}">
-							<li><a role="button"
-								   class="change-button"
-								   onclick="location.href='/logout'"
-								   style="font-size: 13px;">로그아웃</a></li> 
-						</c:if>
-					</ul>
-
-              <a href="#" class="site-menu-toggle js-menu-toggle text-black d-inline-block d-lg-none"><span class="icon-menu h3"></span></a>
-            </nav>
-        </div>
-      </div>
-
-		</div>
-
-
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12">
@@ -192,7 +140,7 @@
 
 
 				<div class="row mb-5" id="list">
-					<c:forEach items="${raceList}" var="race">
+					<c:forEach items="${myList}" var="race" varStatus="vs">
 						<div class="col-sm-6 col-md-4 col-lg-3 mb-5 mb-lg-5">
 							
 								<div class="custom-media d-block">
@@ -201,16 +149,16 @@
 											alt="Image" class="img-fluid"></a>
 									</div>
 									<div>
-										<h3 style="display: inline-block;"><a href="#" data-toggle="modal" data-target="#myModal">${race.race_name}</a></h3>
+										<h3 style="display: inline-block;"><a href="#" data-toggle="modal" data-target="#myModal${vs.index}">${race.race_name}</a></h3>
 										<div style="display: inline-block;">마감</div>
-										<div>${race.region_id}</div>
+										<div>${race.region_city}</div>
 										<span class="caption" style="font-size: 10px">${race.race_date}</span>
 									</div>
 								</div>
 							
 						</div>
 						<!-- Modal -->
-			<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal fade" id="myModal${vs.index}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 			  <div class="modal-dialog">
 			    <div class="modal-content">
 			      <div class="modal-header">
@@ -224,7 +172,7 @@
 			        <tr><td>대회명 : ${race.race_name}</td></tr>
 			        <tr><td>주최 : ${race.race_org}</td></tr>
 			        <tr><td>종목 : ${race.race_dist}</td></tr>
-			        <tr><td>개최 지역 : <!-- region id? --> </td></tr>
+			        <tr><td>개최 지역 : ${race.region_city} </td></tr>
 			        <tr><td>일시 : ${race.race_date}</td></tr>
 			        <tr><td>접수 기간 : ${race.race_apply}~${race.race_deadline}</td></tr>
 			        <tr><td>상세정보 : <a href="${race.race_url}">${race.race_url}</a></td></tr>
@@ -302,5 +250,8 @@
   		
   		
   	}
+  
+  	
+  	
   </script>
 </html>
