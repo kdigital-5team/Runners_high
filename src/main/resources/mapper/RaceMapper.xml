@@ -8,7 +8,7 @@
  	<select id="getRaceWithKeyword" 
  			parameterType="com.spring.dto.SearchKeyword"
  			resultType="com.spring.dto.Race">
- 		SELECT race_id, region_id, race_org, race_name, race_date, race_apply, race_deadline, race_url, race_category, race_dist, race_pic, race_con
+ 		SELECT race_id, region_id, race_org, race_name, race_date, race_apply, race_deadline, race_url, race_category, race_dist, race_pic 
  		FROM race
  		<trim prefix="WHERE" prefixOverrides="AND |OR">
 			 	AND race_name LIKE '%'||#{keyword, jdbcType=VARCHAR}||'%'
@@ -22,14 +22,14 @@
  	
  	<select id="getAllRace" 
  			resultType="com.spring.dto.Race">
- 		SELECT race_id, region_id, race_org, race_name, race_date, race_apply, race_deadline, race_url, race_category, race_dist, race_pic, race_con 
+ 		SELECT race_id, region_id, race_org, race_name, race_date, race_apply, race_deadline, race_url, race_category, race_dist, race_pic 
  		FROM race
  	</select>
  	
  	<select id="getRaceByOption" 
  		parameterType="java.util.List"
 		resultType="com.spring.dto.Race">
- 		SELECT race_id, region_id, race_org, race_name, race_date, race_apply, race_deadline, race_url, race_category, race_dist, race_pic, race_con 
+ 		SELECT race_id, region_id, race_org, race_name, race_date, race_apply, race_deadline, race_url, race_category, race_dist, race_pic 
  		FROM race 
  		<trim prefix="WHERE" prefixOverrides="AND |OR">
  			<if test="!category.isEmpty()">
@@ -39,36 +39,12 @@
 	 			</foreach>
  			</if>
  			<if test="!dist.isEmpty()">
- 				AND REGEXP_LIKE(race_dist, #{dist})
- 			</if>
- 			<if test="!date.isEmpty()">
-			 AND extract (month from race_date) in
-				 <foreach collection="date" item="value" index="idx" separator="," open="(" close=")">
-	 				#{value}
-	 			</foreach>
- 			</if>
- 			<if test="!con.isEmpty()">
-			 AND race_con IN
-				 <foreach collection="con" item="value" index="idx" separator="," open="(" close=")">
-	 				#{value}
-	 			</foreach>
- 			</if>
- 			<if test="!state.isEmpty() and city.isEmpty()">
-			 AND region_id IN (select region_id from region where region_state IN
-				 <foreach collection="state" item="value" index="idx" separator="," open="(" close=")">
-	 				#{value}
-	 			</foreach>
-	 			)
- 			</if>
- 			<if test="!state.isEmpty() and !city.isEmpty()">
-			 AND region_id IN (select region_id from region where region_city in
-				 <foreach collection="city" item="value" index="idx" separator="," open="(" close=")">
-	 				#{value}
-	 			</foreach>
-	 			)
- 			</if>
- 			<if test="!keyword.isEmpty()">
-			 AND race_name LIKE '%'||#{keyword}||'%'
+ 				AND REGEXP_LIKE(race_dist, 
+ 				<foreach collection="dist" item="value" index="idx" separator="||">
+ 					#{value}
+ 				</foreach>
+ 				)
+ 			
  			</if>
 		</trim>
  	</select>

@@ -16,7 +16,7 @@ public interface RaceMapper {
 
 	public List<Race> getAllRace();
 
-	public List<Race> getRaceByOption(List<String> category, String dist, List<Integer> date, List<String> con, List<String> state, List<String> city, String keyword);
+	public List<Race> getRaceByOption(List<String> category, List<String> dist);
 
 	
 
