@@ -56,6 +56,7 @@ public class UserController {
 		return "findPw";
 	}
 	
+	// 회원가입
 	// http://localhost:8081/regist
 	@RequestMapping(value = "/regist", method = RequestMethod.POST)
 	public String insertDept(@ModelAttribute User newUser,
@@ -69,7 +70,7 @@ public class UserController {
 			userResult = service.insertUser(newUser);
 			
 			if(userResult) {
-				return "index";
+				return "login";
 			}
 			
 		} catch (Exception e) {
@@ -162,6 +163,8 @@ public class UserController {
 			boolean pwResult;
 				try {
 					pwResult = BCrypt.checkpw(userPw, service.getUserByUserId(userId).getUser_pw());
+					
+					
 				
 					System.out.println(pwResult);
 					if(pwResult == true) {
@@ -169,8 +172,6 @@ public class UserController {
 						System.out.println("접속자 session : " + session.getAttribute("userId"));
 						// session 만료 시간 : 2주
 						session.setMaxInactiveInterval(1209600);
-						
-						 System.out.println("model 1 : " + model.getAttribute("msg"));
 						
 						return "redirect:/main";
 						
