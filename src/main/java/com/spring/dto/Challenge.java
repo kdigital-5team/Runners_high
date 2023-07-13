@@ -17,6 +17,7 @@ public class Challenge {
     private int chall_id;
     private String chall_reg_id;
     private int region_id;
+    private String race_name;
     private String chall_name;
     private String chall_intro;
     private Date chall_start_date;

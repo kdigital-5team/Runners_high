@@ -105,6 +105,7 @@ CREATE TABLE challenge (
     chall_id         NUMBER(10) NOT NULL,
     chall_reg_id     VARCHAR2(20 BYTE) NOT NULL,
     region_id        NUMBER(5),
+    race_id          NUMBER(5),
     chall_name       VARCHAR2(20 BYTE) NOT NULL,
     chall_intro      VARCHAR2(500 BYTE) NOT NULL,
     chall_start_date DATE NOT NULL,
@@ -112,7 +113,7 @@ CREATE TABLE challenge (
     chall_all_auth   NUMBER(10) NOT NULL,
     chall_week_auth  NUMBER(10) NOT NULL,
     chall_category   VARCHAR2(20 BYTE),
-    chall_sit        VARCHAR2(10 BYTE),
+    chall_sit        VARCHAR2(20 BYTE),
     chall_auth       NUMBER(3),
     chall_online     VARCHAR2(20 BYTE),
     chall_size       NUMBER(20),
@@ -275,6 +276,10 @@ ALTER TABLE challenge
 ALTER TABLE challenge
     ADD CONSTRAINT challenge_user_fk FOREIGN KEY ( chall_reg_id )
         REFERENCES rh_user ( user_id );
+
+ALTER TABLE challenge
+    ADD CONSTRAINT challenge_race_fk FOREIGN KEY ( race_id )
+        REFERENCES race ( race_id );
 
 ALTER TABLE auth_post
     ADD CONSTRAINT auth_post_challenge_fk FOREIGN KEY ( chall_id )
