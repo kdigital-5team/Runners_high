@@ -192,5 +192,7 @@ function submit2(){
 	alert("아이디, 이메일인증, 비밀번호, 닉네임 입력 값을 확인해주세요.");
 }};
 
+
+
 </script>
 </html>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace="com.spring.mapper.RegionMapper">
+ 	 	
+ 	<select id="getAllState" resultType="string">
+ 		SELECT DISTINCT region_state
+ 			FROM region
+ 	</select>
+ 	
+ 	<select id="getCityByState" resultType="string">
+ 		SELECT DISTINCT region_city
+ 			FROM region
+ 				WHERE region_state = #{state}
+ 	</select>
+ 	
+ 	<select id="getDistrictByCity" resultType="string">
+ 		SELECT DISTINCT region_district
+ 			FROM region
+ 				WHERE region_city = #{city}
+ 	</select>
+
+ </mapper>

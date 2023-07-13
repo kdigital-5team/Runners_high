@@ -30,6 +30,5 @@ public class Race {
 	private String race_category;
 	private String race_dist;
 	private String race_pic;
-	private String race_con;
 
 }
