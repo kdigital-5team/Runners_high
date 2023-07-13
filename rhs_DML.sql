@@ -27,15 +27,6 @@ INSERT INTO title
     VALUES 
         (title_seq.NEXTVAL, '인플루언서', 30);
 
--- user
-INSERT INTO rh_user 
-        (user_id, user_pw, pw_quest, pw_quest_answer, nickname, intro, user_pic) 
-    VALUES ('scott@gmail.com', 'tiger', '기억나는 장소는?', '뉴욕', 'SCOTT', 'Hi', '');
-INSERT INTO rh_user 
-        (user_id, user_pw, pw_quest, pw_quest_answer, nickname, intro, user_pic) 
-    VALUES 
-        ('dev@gmail.com', 'it', '어렸을 때 장래희망은?', '대통령', 'devops', 'dev', '');
-
 -- region
 INSERT INTO region 
         (region_id, region_state, region_city, region_district)
@@ -66,16 +57,38 @@ INSERT INTO race
         'http://www.irunman.kr/admin/data/webedit/20220701132808_qxtfxhcd.jpg');
         
 INSERT INTO race
-        (race_id, region_id, race_org, race_name, race_date, race_apply, race_deadline, race_url, race_category, race_dist)
+        (race_id, region_id, race_org, race_name, race_date, race_apply, race_deadline, race_url, race_category, race_dist, race_pic)
     VALUES
-        (race_seq.NEXTVAL, 1, '(사)한국산악마라톤연맹', '제4회안산.인왕산.북악산TrailRunning', '2023.07.16', '2023.01.03', '2023.07.10', 'http://koreatrail.net', '걷기', '10km');
+        (race_seq.NEXTVAL, 4, '(사)한국산악마라톤연맹', '제4회안산.인왕산.북악산TrailRunning', '2023.07.16', '2023.01.03', '2023.07.10', 'http://koreatrail.net', '걷기', '10km', 'https://image.ytn.co.kr/general/jpg/2020/1130/202011300700017010_d.jpg');
 
 -- challenge
 INSERT INTO challenge 
-        (chall_id, chall_reg_id, region_id, chall_name, chall_intro, chall_start_date, chall_end_date, chall_all_auth, chall_week_auth,
+        (chall_id, chall_reg_id, region_id, race_id, chall_name, chall_intro, chall_start_date, chall_end_date, chall_all_auth, chall_week_auth,
         chall_category, chall_sit, chall_auth, chall_online, chall_size, chall_pic) 
     VALUES 
-        (challenge_req.NEXTVAL, 'scott@gmail.com', 1, '마라톤 챌린지', '실제로 42.195km를 주 1회 달립니다!', '20230701', '20230725', 4, 1, '대회용', '모집중', 40, '온라인', 
+        (challenge_req.NEXTVAL, 'fexis1594@gmail.com', 1, 1, '마라톤 챌린지', '실제로 42.195km를 주 1회 달립니다!', '20230701', '20230725', 4, 1, '대회용', '모집중', 40, '온라인', 
+        5, 'https://image.ytn.co.kr/general/jpg/2020/1130/202011300700017010_d.jpg');
+
+INSERT INTO challenge 
+        (chall_id, chall_reg_id, region_id, race_id, chall_name, chall_intro, chall_start_date, chall_end_date, chall_all_auth, chall_week_auth,
+        chall_category, chall_sit, chall_auth, chall_online, chall_size, chall_pic) 
+    VALUES 
+        (challenge_req.NEXTVAL, 'scott@gmail.com', 3, 2, '걷기 챌린지', '매일 3시간씩 걷습니다', '20230801', '20230825', 12, 3, '대회용', '모집예정', 70, '온라인', 
         5, 'https://image.ytn.co.kr/general/jpg/2020/1130/202011300700017010_d.jpg');
         
+CREATE OR REPLACE PROCEDURE UPDATE_CON
+IS
+BEGIN
+    UPDATE RACE SET race_con =
+                    case
+                        when SYSDATE<race_apply THEN '접수예정'
+                        when SYSDATE>race_deadline THEN '접수마감'
+                        ELSE '접수중'
+                        END;
+END UPDATE_CON;
+/
+EXEC UPDATE_CON;
+
+select * from rh_user;
+
 commit;
