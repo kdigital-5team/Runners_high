@@ -135,7 +135,7 @@
 				</nav>
 				<div class="contact-form" style="float: right; width: 40%">
 					<label class="font-weight-bold" for="keyword" style="float: left; width: 40%;">대회명 검색</label> 
-					<input type="text" class="form-race" id="keyword" placeholder="대회명 입력" style="float: left; width: 40%;" name="keyword"> 
+					<input type="text" class="form-race" id="keyword" placeholder="대회명 입력" style="float: left; width: 40%;" name="keyword" onkeypress="if(event.keyCode==13){searchKeyword();}"> 
 					<button type="button" style="float: left; width: 20%;" onclick="searchKeyword()">검색</button>
 				</div>
 			</div>
