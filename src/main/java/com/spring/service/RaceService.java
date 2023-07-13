@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.spring.dto.Race;
+import com.spring.dto.RaceAndRegion;
 import com.spring.dto.Region;
 import com.spring.dto.SearchKeyword;
 import com.spring.mapper.RaceMapper;
@@ -33,6 +34,10 @@ public class RaceService {
 
 	public List<Race> getRaceByOption(List<String> category, List<String> dist) {
 		return mapper.getRaceByOption(category, dist);
+	}
+
+	public List<RaceAndRegion> getAllRaces() {
+		return mapper.getAllRaces();
 	}
 
 	

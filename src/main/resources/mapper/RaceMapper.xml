@@ -20,10 +20,17 @@
  		FROM region
  	</select>
  	
- 	<select id="getAllRace" 
+ 	 <select id="getAllRace" 
  			resultType="com.spring.dto.Race">
  		SELECT race_id, region_id, race_org, race_name, race_date, race_apply, race_deadline, race_url, race_category, race_dist, race_pic 
  		FROM race
+ 	</select> 
+ 	
+ 	<select id="getAllRaces" 
+ 			resultType="com.spring.dto.RaceAndRegion"> <!-- 해시맵, or 별개의 dto,-->
+ 		SELECT race.race_id, region.region_city, race.race_org, race.race_name, race.race_date, race.race_apply, race.race_deadline, race.race_url, race.race_category, race.race_dist, race.race_pic 
+ 		FROM race, region
+ 		WHERE race.region_id = region.region_id
  	</select>
  	
  	<select id="getRaceByOption" 
