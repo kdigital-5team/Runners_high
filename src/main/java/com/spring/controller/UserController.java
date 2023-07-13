@@ -56,6 +56,7 @@ public class UserController {
 		return "findPw";
 	}
 	
+	// 회원가입
 	// http://localhost:8081/regist
 	@RequestMapping(value = "/regist", method = RequestMethod.POST)
 	public String insertDept(@ModelAttribute User newUser,
@@ -69,7 +70,7 @@ public class UserController {
 			userResult = service.insertUser(newUser);
 			
 			if(userResult) {
-				return "index";
+				return "login";
 			}
 			
 		} catch (Exception e) {

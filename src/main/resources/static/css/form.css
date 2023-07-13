@@ -65,8 +65,12 @@ body {
 	font-weight: 400;
 	line-height: 1.5;
 	color: #212529;
-	text-align: center;
 	background-color: #fff
+}
+
+/* form 중앙정렬 : 단, 상위 요소에 align이 없어야 적용 0712 */
+.site-section {
+	text-align : center;
 }
 
 [tabindex="-1"]:focus:not(:focus-visible) {
@@ -179,11 +183,6 @@ figure {
 	margin: 0 0 1rem
 }
 
-img {
-	vertical-align: middle;
-	border-style: none
-}
-
 svg {
 	overflow: hidden;
 	vertical-align: middle
@@ -233,6 +232,47 @@ button, input, optgroup, select, textarea {
     box-sizing: border-box;
 }
 
+/* photo class 설정 0712 */
+.profile-pic {
+	width: 200px;
+	height: 200px;
+	margin: auto;
+	position: relative;
+}
+.photo{
+	width: 100%;
+	height: 100%;
+	object-fit:cover;	
+	border-radius: 50%;
+	overflow: hidden;
+}
+.photo:hover{
+	filter: brightness(0.5);
+	cursor: pointer;
+}
+#upload-pic {
+	width: 100%;
+	height: 100%;
+	margin: auto;
+	position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border:none;
+    opacity: 0;
+    z-index: -1;
+}
+#userPic {
+	display: none;
+}
+
+/* input 기본 양식 0713 */
+input {
+	size=30px;
+	border: 0;
+}
+input:read-only {
+	outline: none;
+}
 /* inputbox 수정 0705 */
 input[type="submit"] {
     color: #fff;

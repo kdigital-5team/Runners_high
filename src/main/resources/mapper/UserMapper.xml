@@ -66,4 +66,30 @@
  			SET user_pw = #{new_pw}
  				WHERE user_id = #{user_id}
  	</update>
+ 	
+ 	<!-- 유저 프로필 전체 업데이트 -->
+	<update id="updateUserProfile" parameterType="com.spring.dto.User">
+		UPDATE rh_user
+		<trim prefix="SET" suffixOverrides=",">
+			<if test="nickname != null and nickname != ''">
+				nickname = #{nickname},
+			</if>
+			<if test="user_pic != null and user_pic != ''">
+				user_pic = #{user_pic},
+			</if>
+			<if test="intro != null and intro != ''">
+				intro = #{intro},
+			</if>
+			<if test="user_pw != null and user_pw != ''">
+				user_pw = #{user_pw},
+			</if>
+			<if test="pw_quest != null and pw_quest != ''">
+				pw_quest = #{pw_quest},
+			</if>
+			<if test="pw_quest_answer != null and pw_quest_answer != ''">
+				pw_quest_answer = #{pw_quest_answer},
+			</if>
+		</trim>
+			WHERE user_id = #{user_id}
+	</update>
  </mapper>

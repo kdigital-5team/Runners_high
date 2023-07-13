@@ -1,3 +1,4 @@
+-- DML
 ---------
 -- pw 질문 리스트
 --1. 어렸을 때 장래희망은?
@@ -9,11 +10,11 @@
 INSERT INTO title 
         (title_id, title_name) 
     VALUES 
-        (title_seq.NEXTVAL, '유망주');
+        (title_seq.NEXTVAL, '없음');
 INSERT INTO title 
-        (title_id, title_name, title_dist)
+        (title_id, title_name) 
     VALUES 
-        (title_seq.NEXTVAL, '마라토너', 42195);
+        (title_seq.NEXTVAL, '유망주');
 INSERT INTO title 
         (title_id, title_name, title_complt)
     VALUES 
@@ -28,13 +29,6 @@ INSERT INTO title
         (title_seq.NEXTVAL, '인플루언서', 30);
 
 -- user
-INSERT INTO rh_user 
-        (user_id, user_pw, pw_quest, pw_quest_answer, nickname, intro, user_pic) 
-    VALUES ('scott@gmail.com', 'tiger', '기억나는 장소는?', '뉴욕', 'SCOTT', 'Hi', '');
-INSERT INTO rh_user 
-        (user_id, user_pw, pw_quest, pw_quest_answer, nickname, intro, user_pic) 
-    VALUES 
-        ('dev@gmail.com', 'it', '어렸을 때 장래희망은?', '대통령', 'devops', 'dev', '');
 
 -- region
 INSERT INTO region 

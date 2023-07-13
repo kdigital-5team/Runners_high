@@ -870,26 +870,29 @@ a[class="change-button"]{
 }
 
 /* layout 분리 footer 0707 */
+/* footer 최하단으로 위치 자동 이동 0713 */
 footer {
 	background: #293A8E;
     padding: 30px;
     text-align: center;
     font-size: 14px;
 	position: relative;
-	transform: translateY(-100%);
+	transform: trnaslatY(-100%);
 	width: 100%;
 	overflow: hidden;
 }
 
 /* Blocks */
 /* footer 간 거리 조절 0706, style.css에도 적용 */
+/* site-wrap padding값 추가 0713*/
 .site-wrap {
+	padding-top: 30px;
 	margin: 0 auto;
 	background: #fff;
 	height: auto;
 	min-height: 100%;
 	width: 100%;
-	margin-bottom: 100px;
+	position: relative;
 }
 
 .bg-section {

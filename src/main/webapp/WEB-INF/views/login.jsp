@@ -32,7 +32,7 @@
 
 		<div class="site-section">
 			<div class="container">
-				<form action="login" method="POST" id="login-form">
+				<form action="/login" method="POST" id="login-form">
 					<p align="center">
 						<input type="text" name="userId" size="30" placeholder="이메일" id="login_id"
 							style="border: 0 solid black"> 
