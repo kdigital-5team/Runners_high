@@ -26,8 +26,13 @@
 						<ul class="site-menu js-clone-nav d-none d-lg-block">
 									<li class="active"><a role="button" onclick="location.href='/main'">MAIN</a></li>
 									<li><a role="button" onclick="location.href='/events'">대회일정</a></li>
+<<<<<<< HEAD
 									<li><a role="button" onclick="location.href='/challenge'">챌린지</a></li>
 									<li><a role="button" onclick="location.href='/mypage_feed'">마이 페이지</a></li>
+=======
+									<li><a role="button" onclick="location.href='/gallery'">챌린지</a></li>
+									<li><a role="button" onclick="location.href='/mypage/feed'">마이 페이지</a></li>
+>>>>>>> main
 									<c:if test="${empty userId}">
 									 	<li><a role="button"
 											class="change-button"
