@@ -69,30 +69,6 @@ public class UserService {
 		}
 		return user; 
 	}
-
-	// 프로필 수정
-	public boolean updateUserProfile(User user) throws Exception {
-		boolean result = false;
-		
-		System.out.println("nservice nickname : " + user.getNickname() +
-				   		   "\nservice intro : " + user.getIntro() +
-				   		   "\nservice input 비번 질문 : " + user.getPw_quest() +
-				   		   "\nservice input 비번 답변 : " + user.getPw_quest_answer());
-		
-		// 비밀번호 재암호화
-		user.setUser_pw(BCrypt.hashpw(user.getUser_pw(), BCrypt.gensalt()));
-		
-		int res = mapper.updateUserProfile(user);
-		System.out.println("res : " + res);
-		
-		if(res != 0) {
-			result = true;
-		} else {
-			throw new Exception("유저 프로필 업데이트 실패");
-		}
-		
-		return result;
-	}
 	
 	
 /* 0706 카카오 로그인 API
