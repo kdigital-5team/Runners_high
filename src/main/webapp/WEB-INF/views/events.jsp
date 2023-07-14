@@ -33,18 +33,34 @@
 	<%@ include file="./inc/header.jsp"%>
 
 	<div class="site-wrap">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="hero-wrap text-center"
+						style="background-image: url('../static/images/hero_2.jpg');"
+						data-stellar-background-ratio="0.5">
+						<div class="hero-contents">
+							<h2>대회 일정</h2>
+							<p>
+								<a href="index.html">Home</a> <span class="mx-2">/</span> <strong>Events</strong>
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 
 		<div class="row no-gutters site-subbar align-items-center py-3">
-			<div style="margin: auto;">
+			<div>
 				<nav class="site-navigation text-left text-md-left"
-					style="float: left; width: 60%">
+					style="float: left;">
 
 					<ul class="site-menu js-clone-nav d-none d-lg-block">
 						<li class="has-children">대회
 							<ul class="dropdown arrow-top">
-								<li><button style="width: 70px" type="button" id="마라톤" name="race_category"
+								<li><button style="width: 70px" type="button" id="M" name="race_category"
 										onclick="test(this.id, this.name)" class="option">마라톤</button></li>
-								<li><button style="width: 70px" type="button" id="걷기" name="race_category"
+								<li><button style="width: 70px" type="button" id="W" name="race_category"
 										onclick="test(this.id, this.name)" class="option">걷기</button></li>
 							</ul>
 						</li>
@@ -52,9 +68,9 @@
 							<ul class="dropdown arrow-top">
 								<li><button style="width: 70px" type="button" id="100km" name="race_dist"
 										onclick="test(this.id, this.name)" class="option">100km</button></li>
-								<li><button style="width: 70px" type="button" id="풀코스" name="race_dist"
+								<li><button style="width: 70px" type="button" id="full" name="race_dist"
 										onclick="test(this.id, this.name)" class="option">풀코스</button></li>
-								<li><button style="width: 70px" type="button" id="하프코스" name="race_dist"
+								<li><button style="width: 70px" type="button" id="Half" name="race_dist"
 										onclick="test(this.id, this.name)" class="option">하프코스</button></li>
 								<li><button style="width: 70px" type="button" id="10km" name="race_dist"
 										onclick="test(this.id, this.name)" class="option">10km</button></li>
@@ -62,66 +78,54 @@
 										onclick="test(this.id, this.name)" class="option">5km</button></li>
 							</ul>
 						</li>
-						<li class="has-children">월
+						<li class="has-children"><a href="#">월</a>
 							<ul class="dropdown arrow-top">
 								<li><button style="width: 70px" type="button" id="1월" name="race_date"
 										onclick="test(this.id, this.name)" class="option">1월</button></li>
 								<li><button style="width: 70px" type="button" id="2월" name="race_date"
 										onclick="test(this.id, this.name)" class="option">2월</button></li>
-								<li><button style="width: 70px" type="button" id="3월" name="race_date"
-										onclick="test(this.id, this.name)" class="option">3월</button></li>
-								<li><button style="width: 70px" type="button" id="4월" name="race_date"
-										onclick="test(this.id, this.name)" class="option">4월</button></li>
-								<li><button style="width: 70px" type="button" id="5월" name="race_date"
-										onclick="test(this.id, this.name)" class="option">5월</button></li>
-								<li><button style="width: 70px" type="button" id="6월" name="race_date"
-										onclick="test(this.id, this.name)" class="option">6월</button></li>
-								<li><button style="width: 70px" type="button" id="7월" name="race_date"
-										onclick="test(this.id, this.name)" class="option">7월</button></li>
-								<li><button style="width: 70px" type="button" id="8월" name="race_date"
-										onclick="test(this.id, this.name)" class="option">8월</button></li>
-								<li><button style="width: 70px" type="button" id="9월" name="race_date"
-										onclick="test(this.id, this.name)" class="option">9월</button></li>
-								<li><button style="width: 70px" type="button" id="10월" name="race_date"
-										onclick="test(this.id, this.name)" class="option">10월</button></li>
-								<li><button style="width: 70px" type="button" id=11월" name="race_date"
-										onclick="test(this.id, this.name)" class="option">11월</button></li>
-								<li><button style="width: 70px" type="button" id="12월" name="race_date"
-										onclick="test(this.id, this.name)" class="option">12월</button></li>
+								<li>3월</li>
+								<li>4월</li>
+								<li>5월</li>
+								<li>6월</li>
+								<li>7월</li>
+								<li>8월</li>
+								<li>9월</li>
+								<li>10월</li>
+								<li>11월</li>
+								<li>12월</li>
 							</ul></li>
-						<li class="has-children">상태
+						<li class="has-children"><a href="#">상태</a>
 							<ul class="dropdown arrow-top">
-								<li><button style="width: 100px" type="button" id="접수중" name="race_con"
-										onclick="test(this.id, this.name)" class="option">접수중</button></li>
-								<li><button style="width: 100px" type="button" id="접수예정" name="race_con"
-										onclick="test(this.id, this.name)" class="option">접수예정</button></li>
-								<li><button style="width: 100px" type="button" id="접수마감" name="race_con"
-										onclick="test(this.id, this.name)" class="option">접수마감</button></li>
+								<li>접수중</li>
+								<li>접수예정</li>
+								<li>접수마감</li>
 							</ul></li>
-						<li class="has-children">도
+						<li class="has-children"><a href="#">도</a>
 							<ul class="dropdown arrow-top">
-									<li><button style="width: 100px" type="button" id="경기도" name="region_state"
-										onclick="test(this.id, this.name)" class="option">경기도</button></li>
-									<li><button style="width: 100px" type="button" id="강원도" name="region_state"
-										onclick="test(this.id, this.name)" class="option">강원도</button></li>
-							</ul>
-						</li>
-						<li class="has-children">시/군
-							<ul class="dropdown arrow-top" id="region_list" style="overflow: auto; height: 150px;">
-								
-								
-							</ul>
-						</li>
+								<c:forEach items="${stateList}" var="state">
+									<li><button style="width: 70px" type="button"
+											id="${state}" onclick="test(this.id)">${state}</button></li>
+								</c:forEach>
+							</ul></li>
+						<li class="has-children"><a href="#">시/군</a>
+							<ul class="dropdown arrow-top">
+								<li>고양시</li>
+								<li>광주시</li>
+							</ul></li>
+
 					</ul>
 
 
 
 				</nav>
-				<div class="contact-form" style="float: right; width: 40%">
-					<label class="font-weight-bold" for="keyword" style="float: left; width: 40%;">대회명 검색</label> 
-					<input type="text" class="form-race" id="keyword" placeholder="대회명 입력" style="float: left; width: 40%;" name="keyword" onkeypress="if(event.keyCode==13){searchKeyword();}"> 
-					<button type="button" style="float: left; width: 20%;" onclick="searchKeyword()">검색</button>
-				</div>
+				<form action="/events" class="contact-form" style="float: right;"
+					method="GET">
+					<label class="font-weight-bold" for="keyword">대회명 검색</label> <input
+						type="text" class="form-race" id="keyword" placeholder="대회명 입력"
+						name="keyword"> <input type="submit" class="form-race"
+						value="검색" />
+				</form>
 			</div>
 		</div>
 		<div>
@@ -222,74 +226,32 @@
 
 </body>
 <script type="text/javascript">
-let keyword=null;
-
-	function test(button_id, option){
-		const target = document.getElementById(button_id);
-		console.log(target);
-		console.log(keyword);
-		target.disabled=true;
-		var option_list = $("#option_list");
-		option_list.append("<li style=\"display:inline-block\" name="+ option +"><button type=\"button\" onclick=\"removeBtn(this,this.innerText)\">" + target.innerText + "</button></li>");
-		
-		var region_list =$("#region_list");
-		const gangwon = ["강릉시","동해시","삼척시","속초시","원주시","춘천시","태백시","고성군","양구군","양양군","영월군","인제군","정선군","철원군","평창군","홍천군","화천군","횡성군"];
-	  	const gyeonggi = ["고양시","과천시","광명시","광주시","구리시","군포시","김포시","남양주시","동두천시","부천시","성남시","수원시","시흥시","안산시","안성시","안양시","양주시","오산시","용인시","의왕시","의정부시","이천시","파주시","평택시","포천시","하남시","화성시","가평군","양평군","여주군","연천군"];
-	  	
-	  	
-	  	if(button_id=="경기도"){
-	  		for(i=0; i<gyeonggi.length; i++){
-	  			region_list.append("<li><button style=\"width: 100px\" type=\"button\" id=\""+gyeonggi[i]+
-	  								"\" name=\"region_city\" onclick=\"test(this.id, this.name)\" class=\"option\">"+gyeonggi[i]+"</button></li>");
-	  		}
-	  	}
-	  	
-	  if(button_id=="강원도"){
-		for(i=0; i<gangwon.length; i++){
-  			region_list.append("<li>"+ gangwon[i] +"</li>");
-  		}
+  	function test(button_id, option){
+  		target = document.getElementById(button_id);
+  		target.disabled='disabled';
+  		var option_list = $("#option_list");
+  		option_list.append("<li style=\"display:inline-block\" name="+ option +"><button>" + target.innerText + "</button></li>");
+  		var opt=[];
+  		var val=[];
+  		$("#option_list li").each(function(index, element){
+  			opt.push(element.getAttribute("name").trim());
+  			val.push($(this).text());
+  		})
+  		var objParams={"opt" : opt, "val" : val};
+  		console.log();
+  		$.ajax({
+  			type : "GET",
+  			url : "/events/filter",
+  			data : objParams
+  		})
+  			.success(function(result){
+  				$('#list').html(result);
+  			})
+  		
+  		
   	}
-	  
-	  
-		search();
-	}
-	
-	function removeBtn(ths, button_id){
-		var ths = $(ths);
-		const target = document.getElementById(button_id);
-		target.disabled=false;
-		ths.parents("li").remove();
-
-	search();
-	}
-	
-	function searchKeyword(){
-		const target = document.getElementById("keyword");
-		keyword = target.value;
-	
-		target.value = null;
-		
-		search();
-		
-		
-	}
-	
-	function search(){
-		var opt=[];
-		var val=[];
-		$("#option_list li").each(function(index, element){
-			opt.push(element.getAttribute("name").trim());
-			val.push($(this).text());
-		})
-		var objParams={"opt" : opt, "val" : val, "keyword" : keyword};
-		$.ajax({
-			type : "GET",
-			url : "/events/filter",
-			data : objParams
-		})
-			.success(function(result){
-				$('#list').html(result);
-		})
-	}
+  
+  	
+  	
   </script>
 </html>

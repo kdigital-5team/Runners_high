@@ -15,20 +15,13 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class Race {
-	private int race_id;
-	private int region_id;
-	private String race_org;
-	private String race_name;
+
+public class PersonalFeed {
+	private int feed_id;
+	private String user_id;
+	private String feed_title;
+	private String feed_cont;
 	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private Date race_date;
-	
-	private Date race_apply;
-	private Date race_deadline;
-	private String race_url;
-	private String race_category;
-	private String race_dist;
-	private String race_pic;
-
+	private Date feed_writing_date;
 }

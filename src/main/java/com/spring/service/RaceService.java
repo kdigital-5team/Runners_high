@@ -32,8 +32,8 @@ public class RaceService {
 		return mapper.getAllRace();
 	}
 
-	public List<Race> getRaceByOption(List<String> category, String dist, List<Integer> date, List<String> con, List<String> state, List<String> city, String keyword) {
-		return mapper.getRaceByOption(category, dist, date, con, state, city, keyword);
+	public List<Race> getRaceByOption(List<String> category, List<String> dist) {
+		return mapper.getRaceByOption(category, dist);
 	}
 
 	public List<RaceAndRegion> getAllRaces() {
