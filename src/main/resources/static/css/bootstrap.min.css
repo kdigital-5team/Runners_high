@@ -105,7 +105,7 @@ address {
 }
 
 dl, ol, ul {
-	margin-top: 0;
+	/* margin-top: 0; */
 	margin-bottom: 1rem
 }
 
@@ -8967,17 +8967,18 @@ supports ((position:-webkit-sticky) or (position:sticky)) { .
 	padding: 1rem !important
 }
 
-.pt-3, .py-3 {
-	padding-top: 1rem !important
-}
-
 .pr-3, .px-3 {
 	padding-right: 1rem !important
 }
 
+/* 
 .pb-3, .py-3 {
 	padding-bottom: 1rem !important
 }
+.pt-3, .py-3 {
+	padding-top: 1rem !important
+}
+ */
 
 .pl-3, .px-3 {
 	padding-left: 1rem !important
