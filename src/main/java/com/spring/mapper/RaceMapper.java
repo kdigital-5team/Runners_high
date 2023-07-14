@@ -5,7 +5,6 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.spring.dto.Race;
-import com.spring.dto.RaceAndRegion;
 import com.spring.dto.SearchKeyword;
 
 @Mapper
@@ -18,8 +17,6 @@ public interface RaceMapper {
 	public List<Race> getAllRace();
 
 	public List<Race> getRaceByOption(List<String> category, List<String> dist);
-
-	public List<RaceAndRegion> getAllRaces();
 
 	
 
