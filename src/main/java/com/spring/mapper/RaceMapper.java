@@ -11,13 +11,8 @@ import com.spring.dto.SearchKeyword;
 @Mapper
 public interface RaceMapper {
 	
-	public List<Race> getRaceWithKeyword(SearchKeyword keyword);
-	
-	public List<String> getAllState();
 
-	public List<Race> getAllRace();
-
-	public List<Race> getRaceByOption(List<String> category, String dist, List<Integer> date, List<String> con, List<String> state, List<String> city, String keyword);
+	public List<RaceAndRegion> getRaceByOption(List<String> category, String dist, List<Integer> date, List<String> con, List<String> state, List<String> city, String keyword);
 
 	public List<RaceAndRegion> getAllRaces();
 
