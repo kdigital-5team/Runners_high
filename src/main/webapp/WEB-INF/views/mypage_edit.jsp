@@ -13,6 +13,7 @@
 	href="https://fonts.googleapis.com/css?family=Nunito+Sans:200,300,400,700,900|Oswald:400,700">
 
 <link rel="stylesheet" href="../static/css/form.css">
+<link rel="stylesheet" href="../static/css/bootstrap.min.css">
 <link rel="stylesheet" href="../static/css/jquery.fancybox.min.css">
 <link rel="stylesheet" href="../static/css/jquery-ui.css">
 <link rel="stylesheet" href="../static/css/owl.carousel.min.css">
