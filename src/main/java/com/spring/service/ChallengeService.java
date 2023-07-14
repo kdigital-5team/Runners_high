@@ -42,4 +42,8 @@ public class ChallengeService {
 		
 	}
 
+	public List<User> applicantByChallId(int chall_id) {
+		return mapper.applicantByChallId(chall_id);
+	}
+
 }

@@ -122,12 +122,15 @@ public class ChallengeController {
 	public String getChallByChallId(@PathVariable int chall_id, Model model, HttpSession session) {
 		Challenge challenge = challService.getChallByChallId(chall_id);
 		User host = challService.getHostByChallId(chall_id);
+		String userId = (String) session.getAttribute("userId");
 		List<UserChallenge> userList = challService.getUserByChallId(chall_id);
 		UserChallenge user=null;
-		for(UserChallenge uc :userList) {
-			if(uc.getUser_id()==(String) session.getAttribute("userId"))
-				user =uc;
+		for(int i=0; i<userList.size(); i++) {
+			if(userList.get(i).getUser_id().equals(userId)) {
+				user = userList.get(i);
+			}
 		}
+		System.out.println(user);
 		model.addAttribute("challenge", challenge);
 		model.addAttribute("user", user);
 		model.addAttribute("host", host);
@@ -146,5 +149,30 @@ public class ChallengeController {
 		challService.applyByChallId(userId, chall_id);
 		
 		return "redirect:/challenge/"+chall_id;
+	}
+	
+	// 챌린지 관리 페이지
+	@RequestMapping(value="/challenge/{chall_id}host", method=RequestMethod.GET)
+	public String challengeHost(@PathVariable int chall_id, Model model, HttpSession session) {
+		String userId = (String) session.getAttribute("userId");
+		User host = challService.getHostByChallId(chall_id);
+		if(!host.getUser_id().equals(userId))
+			return "redirect:/challenge/"+chall_id;
+		Challenge challenge = challService.getChallByChallId(chall_id);
+		List<UserChallenge> userList = challService.getUserByChallId(chall_id);
+		List<UserChallenge> appList = new ArrayList<UserChallenge>();
+		List<UserChallenge> parList = new ArrayList<UserChallenge>();
+		
+		for(int i=0; i<userList.size(); i++) {
+			if(userList.get(i).getChall_reg_status().equals("N")&&userList.get(i).getUser_reg_status().equals("Y"))
+				appList.add(userList.get(i));
+			else if(userList.get(i).getChall_reg_status().equals("Y")&&userList.get(i).getUser_reg_status().equals("Y"))
+				parList.add(userList.get(i));
+		}
+		model.addAttribute("host", host);
+		model.addAttribute("appList", appList);
+		model.addAttribute("parList", parList);
+		model.addAttribute("challenge", challenge);
+		return "/challengeHost";
 	}
 }
