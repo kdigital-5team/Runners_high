@@ -42,4 +42,9 @@ public class ChallengeService {
 		
 	}
 
+	public boolean insertChallenge(Challenge newChallenge) {
+		mapper.insertChallenge(newChallenge);
+		return false;
+	}
+
 }

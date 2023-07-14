@@ -1,6 +1,7 @@
 package com.spring.dto;
 
-import java.util.Date;
+
+import java.sql.Date;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -16,7 +17,7 @@ import lombok.ToString;
 public class Challenge {
     private int chall_id;
     private String chall_reg_id;
-    private int region_id;
+    private String region_id;
     private String race_name;
     private String chall_name;
     private String chall_intro;

@@ -22,4 +22,6 @@ public interface ChallengeMapper {
 	public List<UserChallenge> getUserByChallId(int chall_id);
 
 	public void applyByChallId(String userId, int chall_id);
+
+	public void insertChallenge(Challenge newChallenge);
 }
