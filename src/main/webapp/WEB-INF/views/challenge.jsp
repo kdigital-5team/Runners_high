@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-<title>대회 일정</title>
+<title>챌린지 목록</title>
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -34,70 +35,40 @@
 
 	<div class="site-wrap">
 
-		<div class="row no-gutters site-subbar align-items-center py-3">
-			<div style="margin: auto;">
+		<div class="site-mobile-menu">
+			<div class="site-mobile-menu-header">
+				<div class="site-mobile-menu-close mt-3">
+					<span class="icon-close2 js-menu-toggle"></span>
+				</div>
+			</div>
+			<div class="site-mobile-menu-body"></div>
+		</div>
+		<!-- .site-mobile-menu -->
+
+		<div class="container">
+
+		</div>
+
+		<div class="row no-gutters site-subbar align-items-center py-3" >
+			<div style="margin: auto;" >
+			<div class="contact-form" style="border: 1px solid red;">
+					<label class="font-weight-bold" for="keyword" style="border: 1px solid red; margin: auto;">챌린지 목록</label> <div></div>
+					<input type="text" class="form-race" id="keyword" placeholder="챌린지 검색" name="keyword" style="float: left; width:65%;" onkeypress="if(event.keyCode==13){searchKeyword();}"> 
+					<button type="button" onclick="searchKeyword()" style="margin-right: 5%; float: left; width: 20%">검색</button>
+					<button type="button" onclick="location.href='/events'" style="float: left; width: 10%">+</button>
+			</div>
 				<nav class="site-navigation text-left text-md-left"
-					style="float: left; width: 60%">
+					style="float: left;">
 
 					<ul class="site-menu js-clone-nav d-none d-lg-block">
-						<li class="has-children">대회
+						<li class="has-children">온라인
 							<ul class="dropdown arrow-top">
-								<li><button style="width: 70px" type="button" id="마라톤" name="race_category"
-										onclick="test(this.id, this.name)" class="option">마라톤</button></li>
-								<li><button style="width: 70px" type="button" id="걷기" name="race_category"
-										onclick="test(this.id, this.name)" class="option">걷기</button></li>
+								<li><button style="width: 100px" type="button" id="온라인" name="chall_online"
+										onclick="test(this.id, this.name)" class="option">온라인</button></li>
+								<li><button style="width: 100px" type="button" id="오프라인" name="chall_online"
+										onclick="test(this.id, this.name)" class="option">오프라인</button></li>
 							</ul>
 						</li>
-						<li class="has-children">종목
-							<ul class="dropdown arrow-top">
-								<li><button style="width: 70px" type="button" id="100km" name="race_dist"
-										onclick="test(this.id, this.name)" class="option">100km</button></li>
-								<li><button style="width: 70px" type="button" id="풀코스" name="race_dist"
-										onclick="test(this.id, this.name)" class="option">풀코스</button></li>
-								<li><button style="width: 70px" type="button" id="하프코스" name="race_dist"
-										onclick="test(this.id, this.name)" class="option">하프코스</button></li>
-								<li><button style="width: 70px" type="button" id="10km" name="race_dist"
-										onclick="test(this.id, this.name)" class="option">10km</button></li>
-								<li><button style="width: 70px" type="button" id="5km" name="race_dist"
-										onclick="test(this.id, this.name)" class="option">5km</button></li>
-							</ul>
-						</li>
-						<li class="has-children">월
-							<ul class="dropdown arrow-top">
-								<li><button style="width: 70px" type="button" id="1월" name="race_date"
-										onclick="test(this.id, this.name)" class="option">1월</button></li>
-								<li><button style="width: 70px" type="button" id="2월" name="race_date"
-										onclick="test(this.id, this.name)" class="option">2월</button></li>
-								<li><button style="width: 70px" type="button" id="3월" name="race_date"
-										onclick="test(this.id, this.name)" class="option">3월</button></li>
-								<li><button style="width: 70px" type="button" id="4월" name="race_date"
-										onclick="test(this.id, this.name)" class="option">4월</button></li>
-								<li><button style="width: 70px" type="button" id="5월" name="race_date"
-										onclick="test(this.id, this.name)" class="option">5월</button></li>
-								<li><button style="width: 70px" type="button" id="6월" name="race_date"
-										onclick="test(this.id, this.name)" class="option">6월</button></li>
-								<li><button style="width: 70px" type="button" id="7월" name="race_date"
-										onclick="test(this.id, this.name)" class="option">7월</button></li>
-								<li><button style="width: 70px" type="button" id="8월" name="race_date"
-										onclick="test(this.id, this.name)" class="option">8월</button></li>
-								<li><button style="width: 70px" type="button" id="9월" name="race_date"
-										onclick="test(this.id, this.name)" class="option">9월</button></li>
-								<li><button style="width: 70px" type="button" id="10월" name="race_date"
-										onclick="test(this.id, this.name)" class="option">10월</button></li>
-								<li><button style="width: 70px" type="button" id=11월" name="race_date"
-										onclick="test(this.id, this.name)" class="option">11월</button></li>
-								<li><button style="width: 70px" type="button" id="12월" name="race_date"
-										onclick="test(this.id, this.name)" class="option">12월</button></li>
-							</ul></li>
-						<li class="has-children">상태
-							<ul class="dropdown arrow-top">
-								<li><button style="width: 100px" type="button" id="접수중" name="race_con"
-										onclick="test(this.id, this.name)" class="option">접수중</button></li>
-								<li><button style="width: 100px" type="button" id="접수예정" name="race_con"
-										onclick="test(this.id, this.name)" class="option">접수예정</button></li>
-								<li><button style="width: 100px" type="button" id="접수마감" name="race_con"
-										onclick="test(this.id, this.name)" class="option">접수마감</button></li>
-							</ul></li>
 						<li class="has-children">도
 							<ul class="dropdown arrow-top">
 									<li><button style="width: 100px" type="button" id="경기도" name="region_state"
@@ -112,16 +83,56 @@
 								
 							</ul>
 						</li>
+						<li class="has-children">월
+							<ul class="dropdown arrow-top">
+								<li><button style="width: 70px" type="button" id="1월" name="chall_date"
+										onclick="test(this.id, this.name)" class="option">1월</button></li>
+								<li><button style="width: 70px" type="button" id="2월" name="chall_date"
+										onclick="test(this.id, this.name)" class="option">2월</button></li>
+								<li><button style="width: 70px" type="button" id="3월" name="chall_date"
+										onclick="test(this.id, this.name)" class="option">3월</button></li>
+								<li><button style="width: 70px" type="button" id="4월" name="chall_date"
+										onclick="test(this.id, this.name)" class="option">4월</button></li>
+								<li><button style="width: 70px" type="button" id="5월" name="chall_date"
+										onclick="test(this.id, this.name)" class="option">5월</button></li>
+								<li><button style="width: 70px" type="button" id="6월" name="chall_date"
+										onclick="test(this.id, this.name)" class="option">6월</button></li>
+								<li><button style="width: 70px" type="button" id="7월" name="chall_date"
+										onclick="test(this.id, this.name)" class="option">7월</button></li>
+								<li><button style="width: 70px" type="button" id="8월" name="chall_date"
+										onclick="test(this.id, this.name)" class="option">8월</button></li>
+								<li><button style="width: 70px" type="button" id="9월" name="chall_date"
+										onclick="test(this.id, this.name)" class="option">9월</button></li>
+								<li><button style="width: 70px" type="button" id="10월" name="chall_date"
+										onclick="test(this.id, this.name)" class="option">10월</button></li>
+								<li><button style="width: 70px" type="button" id=11월" name="chall_date"
+										onclick="test(this.id, this.name)" class="option">11월</button></li>
+								<li><button style="width: 70px" type="button" id="12월" name="chall_date"
+										onclick="test(this.id, this.name)" class="option">12월</button></li>
+							</ul></li>
+						<li class="has-children">목적
+							<ul class="dropdown arrow-top">
+								<li><button style="width: 100px" type="button" id="대회용" name="chall_cat"
+										onclick="test(this.id, this.name)" class="option">대회용</button></li>
+								<li><button style="width: 100px" type="button" id="일상용" name="chall_cat"
+										onclick="test(this.id, this.name)" class="option">일상용</button></li>
+							</ul>
+						</li>
+						<li class="has-children">상태
+							<ul class="dropdown arrow-top">
+								<li><button style="width: 100px" type="button" id="모집중" name="chall_con"
+										onclick="test(this.id, this.name)" class="option">모집중</button></li>
+								<li><button style="width: 100px" type="button" id="모집예정" name="chall_con"
+										onclick="test(this.id, this.name)" class="option">모집예정</button></li>
+								<li><button style="width: 100px" type="button" id="모집마감" name="chall_con"
+										onclick="test(this.id, this.name)" class="option">모집마감</button></li>
+							</ul>
+						</li>
 					</ul>
 
 
 
 				</nav>
-				<div class="contact-form" style="float: right; width: 40%">
-					<label class="font-weight-bold" for="keyword" style="float: left; width: 40%;">대회명 검색</label> 
-					<input type="text" class="form-race" id="keyword" placeholder="대회명 입력" style="float: left; width: 40%;" name="keyword" onkeypress="if(event.keyCode==13){searchKeyword();}"> 
-					<button type="button" style="float: left; width: 20%;" onclick="searchKeyword()">검색</button>
-				</div>
 			</div>
 		</div>
 		<div>
@@ -136,61 +147,35 @@
 
 
 				<div class="row mb-5" id="list">
-					<c:forEach items="${myList}" var="race" varStatus="vs">
-						<div class="col-sm-6 col-md-4 col-lg-3 mb-5 mb-lg-5">
+					<c:forEach items="${challList}" var="chall">
+						<div style="width: 40%; float:left; border: 1px solid aqua; margin-right: 10%">
 							
-								<div class="custom-media d-block">
-									<div class="img-wrap mb-3">
-										<a href="${race.race_url}"><img src="${race.race_pic}"
-											alt="Image" class="img-fluid"></a>
+								<div>
+									<div style="float: left; width: 35%;">
+										<img src="${chall.chall_pic}"
+											alt="Image" class="img-fluid" style="height: auto;">
 									</div>
-									<div>
-										<h3 style="display: inline-block;"><a href="#" data-toggle="modal" data-target="#myModal${vs.index}">${race.race_name}</a></h3>
-										<div style="display: inline-block;">마감</div>
-										<div>${race.region_city}</div>
-										<span class="caption" style="font-size: 10px">${race.race_date}</span>
+									<div style="float: left; width: 65%;">
+										<div style="display: inline-block; float: left; border: 1px solid red; width: 30%; text-align: center;">${chall.chall_sit}</div>
+										<div style="border: 1px solid green; float:left; width: 30%; margin-right: 40%; text-align: center;">${chall.chall_category}</div>
+										<h5 style="overflow:hidden; text-overflow: ellipsis; white-space: nowrap; width: 140px;"><a href="challenge/${chall.chall_id}">${chall.chall_name}</a></h5>
+										<c:if test="${chall.chall_category ne null}">
+											<div style="font-size: 10px">대회명</div>
+										</c:if>
+										
+										<div style="font-size: 10px">${chall.region_id}</div>
+										<div class="caption" style="font-size: 10px"><fmt:formatDate pattern="yyyy-MM-dd" value="${chall.chall_start_date}"/> ~ <fmt:formatDate pattern="yyyy-MM-dd" value="${chall.chall_end_date}"/> / 인증 주 ${chall.chall_week_auth}회 / 최대 ${chall.chall_size}명</div>
+										<div class="caption" style="font-size: 10px"></div>
 									</div>
 								</div>
 							
 						</div>
-						<!-- Modal -->
-			<div class="modal fade" id="myModal${vs.index}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-			  <div class="modal-dialog">
-			    <div class="modal-content">
-			      <div class="modal-header">
-			        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-			        
-			      </div>
-			      <div class="modal-body">
-			        <img src="${race.race_pic}"
-											alt="Image" class="img-fluid">
-			        <table>
-			        <tr><td>대회명 : ${race.race_name}</td></tr>
-			        <tr><td>주최 : ${race.race_org}</td></tr>
-			        <tr><td>종목 : ${race.race_dist}</td></tr>
-			        <tr><td>개최 지역 : ${race.region_city} </td></tr>
-			        <tr><td>일시 : ${race.race_date}</td></tr>
-			        <tr><td>접수 기간 : ${race.race_apply}~${race.race_deadline}</td></tr>
-			        <tr><td>상세정보 : <a href="${race.race_url}">${race.race_url}</a></td></tr>
-			        </table>
-			        
-			        
-			      </div>
-			      
-			      <div class="modal-footer">
-			        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-			       
-			      </div>
-			    </div>
-			  </div>
-			</div>
               </c:forEach>
             </div>
           </div>
 					
 				</div>
 				<div id="show-dog-img">
-				
 				</div>
 
 				<div class="row justify-content-center">
@@ -284,12 +269,13 @@ let keyword=null;
 		var objParams={"opt" : opt, "val" : val, "keyword" : keyword};
 		$.ajax({
 			type : "GET",
-			url : "/events/filter",
+			url : "/challenge/filter",
 			data : objParams
 		})
 			.success(function(result){
 				$('#list').html(result);
 		})
 	}
+
   </script>
 </html>
