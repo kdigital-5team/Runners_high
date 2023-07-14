@@ -56,6 +56,7 @@ public class UserController {
 		return "findPw";
 	}
 	
+	// 회원가입
 	// http://localhost:8081/regist
 	@RequestMapping(value = "/regist", method = RequestMethod.POST)
 	public String insertDept(@ModelAttribute User newUser,
@@ -69,7 +70,7 @@ public class UserController {
 			userResult = service.insertUser(newUser);
 			
 			if(userResult) {
-				return "index";
+				return "login";
 			}
 			
 		} catch (Exception e) {
@@ -80,7 +81,6 @@ public class UserController {
 		return "index";
 		
 	}
-	
 	
 	// 아이디 체크 비동기
 	@ResponseBody
@@ -122,7 +122,6 @@ public class UserController {
 		// db에서 정상적으로 가져온 경우 세션을 만들어주고 다음 페이지로 이동
 		session.setAttribute("userId", user_id);
 		return "updatePw";
-
 	}
     
     // 비밀번호 변경
