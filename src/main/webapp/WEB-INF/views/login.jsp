@@ -13,7 +13,6 @@
 	href="https://fonts.googleapis.com/css?family=Nunito+Sans:200,300,400,700,900|Oswald:400,700">
 
 <link rel="stylesheet" href="../static/css/loginForm.css">
-<link rel="stylesheet" href="../static/css/login.css">
 <link rel="stylesheet" href="../static/css/jquery.fancybox.min.css">
 <link rel="stylesheet" href="../static/css/jquery-ui.css">
 <link rel="stylesheet" href="../static/css/owl.carousel.min.css">
@@ -21,18 +20,21 @@
 <link rel="stylesheet" href="../static/css/animate.css">
 <link rel="stylesheet" href="../static/fonts/flaticon/font/flaticon.css">
 <link rel="stylesheet" href="../static/css/aos.css">
+<link rel="stylesheet" href="../static/css/login.css">
 
 </head>
 <body>
 
 	<div class="site-wrap">
-			<div class="col-6 col-lg-2 site-logo" id="main-logo">
-				<a role="button" onclick="location.href='/main'" id="main-logo">Runner's High</a>
+		<div class="container">
+			<div class="col-6 col-lg-2 site-logo">
+				<a role="button" onclick="location.href='/main'">Runner's High</a>
 			</div>
+		</div>
 
 		<div class="site-section">
 			<div class="container">
-				<form action="/login" method="POST" id="login-form">
+				<form action="login" method="POST" id="login-form">
 					<p align="center">
 						<input type="text" name="userId" size="30" placeholder="이메일" id="login_id"
 							style="border: 0 solid black"> 
@@ -87,6 +89,7 @@
 	
 	<!-- 로그인 실패 alert -->
 <script type="text/javascript">
+	//let msg = '<c:out value="${msg}"/>';
 	let msg = '${msg}';
 	console.log(msg);
 

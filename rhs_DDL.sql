@@ -25,10 +25,10 @@ DROP SEQUENCE challenge_req;
 CREATE TABLE rh_user (
     user_id         VARCHAR2(30 BYTE) NOT NULL,
     user_pw         VARCHAR2(100 BYTE) NOT NULL,
-    pw_quest        VARCHAR2(50 BYTE) NOT NULL,
-    pw_quest_answer VARCHAR2(50 BYTE) NOT NULL,
-    nickname        VARCHAR2(30 BYTE) NOT NULL,
-    intro           VARCHAR2(300 BYTE),
+    pw_quest        VARCHAR2(30 BYTE) NOT NULL,
+    pw_quest_answer VARCHAR2(30 BYTE) NOT NULL,
+    nickname        VARCHAR2(10 BYTE) NOT NULL,
+    intro           VARCHAR2(100 BYTE),
     user_title      NUMBER(10),
     user_pic        VARCHAR2(300 BYTE)
 );
@@ -38,7 +38,8 @@ ALTER TABLE rh_user ADD CONSTRAINT user_pk PRIMARY KEY ( user_id );
 -- 칭호 테이블
 CREATE TABLE title (
     title_id     NUMBER(3) NOT NULL,
-    title_name   VARCHAR2(30 BYTE) NOT NULL,
+    title_name   VARCHAR2(20 BYTE) NOT NULL,
+    title_dist   NUMBER(10),
     title_complt NUMBER(5),
     title_reg    NUMBER(5),
     title_likes  NUMBER(5)
@@ -55,7 +56,7 @@ ALTER TABLE title ADD CONSTRAINT title_pk PRIMARY KEY ( title_id );
 CREATE TABLE user_title (
     title_acq NUMBER(10) NOT NULL,
     user_id   VARCHAR2(30 BYTE) NOT NULL,
-    title_id  NUMBER(10) NOT NULL
+    title_id  NUMBER(3) NOT NULL
 );
 
 ALTER TABLE user_title ADD CONSTRAINT user_title_pk PRIMARY KEY ( title_acq );
@@ -102,7 +103,7 @@ ALTER TABLE feed_picture ADD CONSTRAINT feed_picture_pk PRIMARY KEY ( feed_pic_i
 -- 챌린지 테이블
 CREATE TABLE challenge (
     chall_id         NUMBER(10) NOT NULL,
-    chall_reg_id     VARCHAR2(30 BYTE) NOT NULL,
+    chall_reg_id     VARCHAR2(20 BYTE) NOT NULL,
     region_id        NUMBER(5),
     chall_name       VARCHAR2(20 BYTE) NOT NULL,
     chall_intro      VARCHAR2(500 BYTE) NOT NULL,
@@ -129,7 +130,7 @@ ALTER TABLE challenge ADD CONSTRAINT challenge_pk PRIMARY KEY ( chall_id );
 CREATE TABLE auth_post (
     auth_id    NUMBER(20) NOT NULL,
     chall_id   NUMBER(20) NOT NULL,
-    comment_id VARCHAR2(30 BYTE) NOT NULL,
+    comment_id VARCHAR2(20 BYTE) NOT NULL,
     auth_title VARCHAR2(20) NOT NULL,
     auth_cont  VARCHAR2(500 BYTE),
     auth_date  DATE

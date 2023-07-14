@@ -36,8 +36,5 @@ public interface UserMapper {
 	
 	// user - id
 	public User getUserByUserId(@Param("userId")String userId) throws SQLException;
-
-	// update - user
-	public int updateUserProfile(User user) throws SQLException;
 }
 	
