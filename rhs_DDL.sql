@@ -17,6 +17,7 @@ DROP TABLE region cascade constraint;
 DROP TABLE race_route cascade constraint;
 DROP TABLE chall_route cascade constraint;
 DROP SEQUENCE title_seq;
+DROP SEQUENCE personal_feed_seq;
 DROP SEQUENCE region_seq;
 DROP SEQUENCE race_seq;
 DROP SEQUENCE challenge_req;
@@ -69,6 +70,11 @@ CREATE TABLE personal_feed (
     feed_cont         VARCHAR2(500 BYTE),
     feed_writing_date DATE
 );
+
+CREATE SEQUENCE personal_feed_seq
+        INCREMENT BY 1
+        START WITH 1
+        MINVALUE 1;
 
 ALTER TABLE personal_feed ADD CONSTRAINT personal_feed_pk PRIMARY KEY ( feed_id );
 
