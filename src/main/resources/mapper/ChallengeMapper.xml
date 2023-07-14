@@ -34,11 +34,18 @@
 		WHERE chall_id = #{chall_id} 
 	</select>
 
-	<insert id="applyByChallId" 
+	<update id="applyByChallId" 
 			parameterType="com.spring.dto.UserChallenge">
-		INSERT INTO user_chall(user_id,chall_id,user_reg_status)
-		VALUES (#{userId},#{chall_id},'Y') 
-	</insert>
+		MERGE INTO user_chall
+		using dual
+		on (user_id=#{userId} and chall_id=#{chall_id})
+		WHEN MATCHED THEN
+			UPDATE
+				SET user_reg_status = 'Y'
+		WHEN NOT MATCHED THEN
+			INSERT (user_id,chall_id,user_reg_status)
+			VALUES (#{userId},#{chall_id},'Y') 
+	</update>
 
 	<select resultType="com.spring.dto.Challenge" 
 			id="getChallByOption" 

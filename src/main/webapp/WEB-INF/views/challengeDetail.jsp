@@ -53,7 +53,7 @@
 			</div>
 			<div style="float: left; width: 33%">
 				<span>${challenge.chall_sit}</span>
-				<c:if test="${userId ne challenge.chall_reg_id}"> 
+				<c:if test="${userId ne challenge.chall_reg_id && user.user_reg_status eq 'N'}">
 					<form action="/challenge/${challenge.chall_id}/apply" method="post">
 						<input type="submit" value="신청">
 					</form>
@@ -87,8 +87,11 @@
 			${challenge.chall_intro }
 		</div>
 		<div>
-			<c:forEach items="${userList }" var="user">
-				${user.user_id }
+			<c:forEach items="${userList }" var="apply_user">
+				<c:if test="${apply_user.chall_reg_status eq  'Y'}">
+					${apply_user.user_id }
+				</c:if>
+				
 			</c:forEach>
 		</div>
 
