@@ -26,20 +26,17 @@ public class RaceController {
 	
 	@GetMapping("/events")
 	public String getAllRace(Model model) {
-		List<Race> raceList = service.getAllRace();
-		List<RaceAndRegion> myList = service.getAllRaces();
+		List<RaceAndRegion> raceList = service.getAllRaces();
 		model.addAttribute("raceList", raceList);
-		model.addAttribute("myList",myList);
 		return "events";
 	}
 	
 	@RequestMapping("/events/filter")
 	public String raceListbyOption(@RequestParam(value="opt[]", required=false) List<String> opt, @RequestParam(value="val[]", required=false) List<String> val, @RequestParam(value="keyword") String keyword, Model model) {
-		List<Race> raceList = null;
+		List<RaceAndRegion> raceList = null;
 		if(opt==null && (keyword==null||keyword=="")) {
-			raceList=service.getAllRace();
+			raceList=service.getAllRaces();
 			model.addAttribute("raceList", raceList);
-			System.out.println(raceList);
 			return "/eventsFilter";
 		}
 		else {

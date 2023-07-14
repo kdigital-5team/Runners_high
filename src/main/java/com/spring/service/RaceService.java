@@ -20,19 +20,8 @@ public class RaceService {
 	@Autowired
 	RaceMapper mapper;
 	
-	public List<Race> getRaceWithKeyword(SearchKeyword keyword) {
-		return mapper. getRaceWithKeyword(keyword);
-	}
-	
-	public List<String> getAllState() {
-		return mapper.getAllState();
-	}
 
-	public List<Race> getAllRace() {
-		return mapper.getAllRace();
-	}
-
-	public List<Race> getRaceByOption(List<String> category, String dist, List<Integer> date, List<String> con, List<String> state, List<String> city, String keyword) {
+	public List<RaceAndRegion> getRaceByOption(List<String> category, String dist, List<Integer> date, List<String> con, List<String> state, List<String> city, String keyword) {
 		return mapper.getRaceByOption(category, dist, date, con, state, city, keyword);
 	}
 

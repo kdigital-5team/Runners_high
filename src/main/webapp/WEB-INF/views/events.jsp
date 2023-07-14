@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -136,7 +137,7 @@
 
 
 				<div class="row mb-5" id="list">
-					<c:forEach items="${myList}" var="race" varStatus="vs">
+					<c:forEach items="${raceList}" var="race" varStatus="vs">
 						<div class="col-sm-6 col-md-4 col-lg-3 mb-5 mb-lg-5">
 							
 								<div class="custom-media d-block">
@@ -145,10 +146,10 @@
 											alt="Image" class="img-fluid"></a>
 									</div>
 									<div>
-										<h3 style="display: inline-block;"><a href="#" data-toggle="modal" data-target="#myModal${vs.index}">${race.race_name}</a></h3>
-										<div style="display: inline-block;">마감</div>
-										<div>${race.region_city}</div>
-										<span class="caption" style="font-size: 10px">${race.race_date}</span>
+										<h5 style="display: inline-block; overflow:hidden; text-overflow: ellipsis; white-space: nowrap; width: 70%;"><a href="#" data-toggle="modal" data-target="#myModal${vs.index}">${race.race_name}</a></h5>
+										<div style="display: inline-block; float: right; width: 30%">${race.race_con}</div>
+										<div>${race.region_state} ${race.region_city}</div>
+										<span class="caption" style="font-size: 10px"><fmt:formatDate pattern="yyyy-MM-dd" value="${race.race_date}"/></span>
 									</div>
 								</div>
 							
@@ -170,7 +171,7 @@
 			        <tr><td>종목 : ${race.race_dist}</td></tr>
 			        <tr><td>개최 지역 : ${race.region_city} </td></tr>
 			        <tr><td>일시 : ${race.race_date}</td></tr>
-			        <tr><td>접수 기간 : ${race.race_apply}~${race.race_deadline}</td></tr>
+			        <tr><td>접수 기간 :<fmt:formatDate pattern="yyyy-MM-dd" value="${race.race_apply}"/> ~ <fmt:formatDate pattern="yyyy-MM-dd" value="${race.race_deadline}"/></td></tr>
 			        <tr><td>상세정보 : <a href="${race.race_url}">${race.race_url}</a></td></tr>
 			        </table>
 			        
@@ -185,6 +186,7 @@
 			  </div>
 			</div>
               </c:forEach>
+              
             </div>
           </div>
 					

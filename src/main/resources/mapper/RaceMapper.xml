@@ -4,79 +4,61 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
  <mapper namespace="com.spring.mapper.RaceMapper">
- 	 	
- 	<select id="getRaceWithKeyword" 
- 			parameterType="com.spring.dto.SearchKeyword"
- 			resultType="com.spring.dto.Race">
- 		SELECT race_id, region_id, race_org, race_name, race_date, race_apply, race_deadline, race_url, race_category, race_dist, race_pic 
- 		FROM race
- 		<trim prefix="WHERE" prefixOverrides="AND |OR">
-			 	AND race_name LIKE '%'||#{keyword, jdbcType=VARCHAR}||'%'
-		</trim>
- 	</select>
- 	
- 	<select id="getAllState" resultType="string">
- 		SELECT DISTINCT region_state
- 		FROM region
- 	</select>
- 	
- 	 <select id="getAllRace" 
- 			resultType="com.spring.dto.Race">
- 		SELECT race_id, region_id, race_org, race_name, race_date, race_apply, race_deadline, race_url, race_category, race_dist, race_pic 
- 		FROM race
- 	</select> 
+
  	
  	<select id="getAllRaces" 
  			resultType="com.spring.dto.RaceAndRegion"> <!-- 해시맵, or 별개의 dto,-->
- 		SELECT race.race_id, region.region_city, race.race_org, race.race_name, race.race_date, race.race_apply, race.race_deadline, race.race_url, race.race_category, race.race_dist, race.race_pic 
+ 		SELECT race.race_id, region.region_state, region.region_city, region.region_district, race.race_org, race.race_name, race.race_date, race.race_apply, race.race_deadline, race.race_url, race.race_category, race.race_dist, race.race_pic, race.race_con 
  		FROM race, region
  		WHERE race.region_id = region.region_id
  	</select>
  	
  	<select id="getRaceByOption" 
- 			resultType="com.spring.dto.Race" 
+ 			resultType="com.spring.dto.RaceAndRegion" 
  			parameterType="java.util.List" >
-		SELECT race_id, region_id, race_org, race_name, race_date, race_apply, race_deadline, race_url, race_category, race_dist, race_pic, race_con
-		FROM race 
+		SELECT race.race_id, region.region_state, region.region_city, region.region_district, race.race_org, race.race_name, race.race_date, race.race_apply, race.race_deadline, race.race_url, race.race_category, race.race_dist, race.race_pic, race.race_con 
+ 		FROM race, region
 		<trim prefixOverrides="AND |OR" prefix="WHERE">
+			race.region_id = region.region_id
+			
 			<if test="!category.isEmpty()">
-				race_category IN 
+				AND race.race_category IN 
 				<foreach close=")" open="(" separator="," index="idx" item="value" collection="category">
 					#{value} 
 				</foreach>
 
 			</if>
 			<if test="!dist.isEmpty()">
-				AND REGEXP_LIKE(race_dist, #{dist}) 
+				AND REGEXP_LIKE(race.race_dist, #{dist}) 
 			</if>
 			<if test="!date.isEmpty()">
-				AND extract (month from race_date) in 
+				AND extract (month from race.race_date) in 
 					<foreach close=")" open="(" separator="," index="idx" item="value" collection="date">
 						#{value} 
 					</foreach>
 			</if>
 			<if test="!con.isEmpty()">
-				AND race_con IN 
+				AND race.race_con IN 
 				<foreach close=")" open="(" separator="," index="idx" item="value" collection="con">
 					#{value} 
 				</foreach>
 			</if>
 			<if test="!state.isEmpty() and city.isEmpty()">
-				AND region_id IN (select region_id from region where region_state IN 
+				AND race.region_id IN (select region_id from region where region_state IN 
 				<foreach close=")" open="(" separator="," index="idx" item="value" collection="state">
 					#{value} 
 				</foreach>
 				) 
 			</if>
 			<if test="!state.isEmpty() and !city.isEmpty()">
-				AND region_id IN (select region_id from region where region_city in 
+				AND race.region_id IN (select region_id from region where region_city in 
 				<foreach close=")" open="(" separator="," index="idx" item="value" collection="city">
 					#{value} 
 				</foreach>
 				) 
 			</if>
 			<if test="!keyword.isEmpty()">
-				AND race_name LIKE '%'||#{keyword}||'%' 
+				AND race.race_name LIKE '%'||#{keyword}||'%' 
 			</if>
 		</trim>
 	</select>
