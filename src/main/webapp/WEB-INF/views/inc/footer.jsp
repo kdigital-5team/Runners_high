@@ -4,6 +4,7 @@
 <head>
 <link rel="stylesheet" href="../static/css/headerFooter.css">
 </head>
+
 <footer>
 	<div class="footer">
 		<div class="row footer-inner">
