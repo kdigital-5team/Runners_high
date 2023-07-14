@@ -12,22 +12,18 @@ import com.spring.interceptor.SessionInterceptor;
 //@EnableWebMvc
 public class WebConfig implements WebMvcConfigurer{
 	
-//	@Override
-//	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-//		registry.addResourceHandler("/static/**")
-//				.addResourceLocations("classpath:/static/");
-//	}
-	
 	/*마이페이지 main.js등등 js파일 No mapping for GET 경고 떠서 교체*/
 	
 	private static final String[] CLASSPATH_RESOURCE_LOCATIONS = {
             "classpath:/META-INF/resources/", "classpath:/resources/",
-            "classpath:/static/", "classpath:/public/" };
+            "classpath:/static/", "classpath:/public/", "file:///C:/images/"};
 	
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 	        registry.addResourceHandler("/**")
-	            .addResourceLocations(CLASSPATH_RESOURCE_LOCATIONS);
+	                .addResourceLocations(CLASSPATH_RESOURCE_LOCATIONS);
+	        registry.addResourceHandler("/images/**")
+            .addResourceLocations("file:///C:/images/");
 	}
 	
 	@Override
