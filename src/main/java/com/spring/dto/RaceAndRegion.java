@@ -21,7 +21,6 @@ public class RaceAndRegion {
 	private String race_org;
 	private String race_name;
 	
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date race_date;
 	
 	private Date race_apply;
@@ -30,6 +29,7 @@ public class RaceAndRegion {
 	private String race_category;
 	private String race_dist;
 	private String race_pic;
+	private String race_con;
 	
 	
 	private String region_state;
