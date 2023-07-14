@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>Test용 jsp</title>
 </head>
 <body>
@@ -15,8 +15,14 @@
 <p>비번 질문 : ${user.pw_quest}</p>
 <p>비번 답변 : ${user.pw_quest_answer}</p>
 <p>유저 프로필 사진 : </p> 
-<img id="preImage" onclick="onClickUpload()" src="../static/images/profileImages/${user.user_pic}" class="photo" 
-												 onerror='this.src="../static/images/profileImages/default_image.png"'><br>
+<img src="/images/${user.user_pic}" class="photo"><br>
 
+<script type="text/javascript">
+console.log('${user.user_pic}');
+
+window.addEventListener('DOMContentLoaded', (event) => {
+    console.log('${user.user_pic}');
+});
+</script>
 </body>
 </html>
