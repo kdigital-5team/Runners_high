@@ -42,13 +42,10 @@
 						data-stellar-background-ratio="0.5">
 						<div class="hero-contents">
 							<p>
-								<a href="mypage_feed">피드</a> <span class="mx-2">|</span> <a
-									href="mypage_chall"><strong>참여 챌린지</strong></a> <span
-									class="mx-2">|</span> <a href="mypage_title">칭호</a> <span
+								<a href="/mypage/feed">피드</a> <span class="mx-2">|</span> <a
+									href="/mypage/chall"><strong>참여 챌린지</strong></a> <span
+									class="mx-2">|</span> <a href="/mypage/title">칭호</a> <span
 									class="mx-2"></span>
-								<button style="float: right;">
-									<a href="#" onclick="location.href='/index'">추가</a>
-								</button>
 							</p>
 						</div>
 					</div>
