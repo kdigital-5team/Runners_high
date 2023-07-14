@@ -11,10 +11,6 @@ INSERT INTO title
     VALUES 
         (title_seq.NEXTVAL, '유망주');
 INSERT INTO title 
-        (title_id, title_name, title_dist)
-    VALUES 
-        (title_seq.NEXTVAL, '마라토너', 42195);
-INSERT INTO title 
         (title_id, title_name, title_complt)
     VALUES 
         (title_seq.NEXTVAL, '챌린지 초심자', 3);
