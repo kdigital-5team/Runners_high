@@ -1,9 +1,7 @@
 package com.spring.service;
 
-import java.sql.SQLException;
 import java.util.List;
 
-import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -44,20 +42,8 @@ public class ChallengeService {
 		
 	}
 
-	public boolean insertChallenge(Challenge newChallenge) throws SQLException, Exception {
-		boolean result = false;
-
-		int res = mapper.insertChallenge(newChallenge);
-		
-		if(res != 0) {
-			result = true;
-		} else {
-			throw new Exception("챌린지 추가 실패 ");
-		}
-		
-		return result;
+	public List<User> applicantByChallId(int chall_id) {
+		return mapper.applicantByChallId(chall_id);
 	}
-	
-
 
 }

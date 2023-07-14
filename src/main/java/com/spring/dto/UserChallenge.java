@@ -19,5 +19,10 @@ public class UserChallenge {
 	private String user_chall_status;
 	private String user_reg_status;
 	private int user_deny_num;
+	
+	private String nickname;
+	private String intro;
+	private String user_title;
+	private String user_pic;
 
 }

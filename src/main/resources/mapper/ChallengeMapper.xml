@@ -20,7 +20,7 @@
 
 	<select resultType="com.spring.dto.User" 
 			id="getHostByChallId">
-		SELECT user_id, nickname, intro, user_pic
+		SELECT user_id, nickname, user_title, user_pic
 		FROM rh_user
 		WHERE user_id = (SELECT chall_reg_id 
 						 FROM challenge 
@@ -29,9 +29,9 @@
 
 	<select resultType="com.spring.dto.UserChallenge" 
 			id="getUserByChallId">
-		SELECT user_id, chall_id, chall_auth_num, chall_reg_status, user_chall_status, user_reg_status, user_deny_num
-		FROM user_chall
-		WHERE chall_id = #{chall_id} 
+		SELECT rh_user.user_id, user_chall.chall_id, user_chall.chall_auth_num, user_chall.chall_reg_status, user_chall.user_chall_status, user_chall.user_reg_status, user_chall.user_deny_num, rh_user.nickname, rh_user.intro, rh_user.user_title, rh_user.user_pic
+		FROM user_chall, rh_user
+		WHERE user_chall.chall_id = #{chall_id} 
 	</select>
 
 	<insert id="applyByChallId" 
