@@ -23,5 +23,5 @@ public interface ChallengeMapper {
 
 	public void applyByChallId(String userId, int chall_id);
 
-	public void insertChallenge(Challenge newChallenge);
+	public int insertChallenge(Challenge newChallenge);
 }

@@ -43,7 +43,10 @@ INSERT INTO region
 INSERT INTO region 
         (region_id, region_state, region_city, region_district)
     VALUES 
-        (region_seq.NEXTVAL, '경기도', '과천시', '갈현동');
+        (region_seq.NEXTVAL, '경기도', '과천시', '갈현동'); 
+INSERT INTO region VALUES (6, '충청남도', '천안시', '불당동');
+INSERT INTO region VALUES (7, '충청남도', '아산시', '둔포면');
+INSERT INTO region VALUES (8, '충청남도', '천안시', '두정동');
 
 -- race
 INSERT INTO race

@@ -62,7 +62,7 @@
 <body>
 	<!-- header -->
 	<%@ include file="./inc/header.jsp"%>
-<form name= "regist_form" method="post" action="/registChall">
+<form name= "regist_form" id="regist_form" method="post" action="/registChall">
     <div class="container">
         <h1>챌린지 등록</h1>
         <div class="form-group">
@@ -191,6 +191,7 @@
 	<script src="../static/js/main.js"></script>
 <script src="https://code.jquery.com/jquery-3.4.1.js" ></script> 
 <script>
+var chall_path;
 
 
 $(function() {
@@ -342,6 +343,10 @@ function chageDistrict(){
 }
 
 function submit2(){
+	let form_data = $("#regist_form").serialize();
+    form_data += '&path='+ chall_path;
+    
+    console.log(form_data);
 	document.regist_form.submit();
 	};
 	
@@ -468,7 +473,8 @@ function submit2(){
    	    	 count=0;
    	    	 // 마우스 클릭으로 그린 선의 좌표 배열을 얻어옵니다
    	      var path = clickLine.getPath();
-   	    	 console.log(path);
+   	   	  chall_path = path;
+   	       console.log(chall_path);
    	      $.ajax({
               async : true, 
               type : 'POST', 
