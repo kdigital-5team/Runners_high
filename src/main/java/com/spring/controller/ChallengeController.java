@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -174,5 +175,13 @@ public class ChallengeController {
 		model.addAttribute("parList", parList);
 		model.addAttribute("challenge", challenge);
 		return "/challengeHost";
+	}
+	
+	@RequestMapping(value="/challenge/apply/{chall_id}", method=RequestMethod.PUT)
+	public String acceptUserById(@PathVariable int chall_id, Model model, HttpServletRequest request) {
+		System.out.println("확인");
+		String id = request.getParameter("acceptId");
+		System.out.println("dg"+id);
+		return "redirect:/challenge/"+chall_id;
 	}
 }

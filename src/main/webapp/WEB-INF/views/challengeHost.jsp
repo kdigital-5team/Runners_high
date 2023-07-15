@@ -68,7 +68,7 @@
 			</div>
 		</div>
 		
-		<div style="margin: auto; text-align: center;">
+		<div style="margin: auto; text-align: center; float: left; width: 90%">
 			<a href="/challenge/${challenge.chall_id}">소개</a><span class="mx-2">|</span> 
 			<a href="#">관리</a><span class="mx-2">|</span> 
 			<a href="mypage_chall">인증 게시판</a><span class="mx-2">|</span>
@@ -76,6 +76,9 @@
 			<spanclass="mx-2">
 				</span>
 		</div>
+		<form action="/challenge/${challenge.chall_id}modify" method="GET" id="detailForm" style="float: left; width: 10%;">
+						<input type="submit" value="수정">
+		</form>
 		<div style="width: 50%; margin: auto;">
 		<span>신청자</span>
 		<c:forEach items="${appList}" var="app">
@@ -91,7 +94,7 @@
 					<div>안녕</div>
 				</div>
 				<div style="display:inline-block; position:relative; top: 50%; buttom:50%;">
-					<button>수락</button>
+					<button onclick="acceptId('${app.user_id }','${challenge.chall_id}')">수락</button>
 					<button>거절</button>
 				</div>
 			</div>
@@ -123,6 +126,22 @@
 
 </body>
 <script type="text/javascript">
-
+	function acceptId(user_id, chall_id){
+		var new_form = document.createElement('form');
+		
+		new_form.name="chall_accept";
+		new_form.method='PUT';
+		new_form.action='/challenge/apply/'+chall_id;
+		
+		var chall_input = document.createElement('input');
+		chall_input.setAttribute("type","hidden");
+		chall_input.setAttribute("name","userId");
+		chall_input.setAttribute("value", user_id);
+		
+		new_form.appendChild(chall_input);
+		
+		document.body.appendChild(new_form);
+		new_form.submit();
+	}
   </script>
 </html>
