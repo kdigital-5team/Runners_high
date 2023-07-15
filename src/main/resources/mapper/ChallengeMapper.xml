@@ -89,4 +89,32 @@
 			</if>
 		</trim>
 	</select>
+	
+	<insert id="insertChallenge" parameterType="com.spring.dto.Challenge">
+ 		INSERT INTO challenge 
+ 				(chall_name,
+ 				chall_id,
+ 				chall_reg_id,
+ 				 chall_intro, 
+ 			 		chall_start_date, 
+ 						chall_end_date, 
+ 			 				chall_size,
+ 			 					chall_category,
+ 			 						region_id,
+ 			 							chall_sit,
+ 			 								chall_online,
+ 			 									chall_all_auth) 
+ 			 		VALUES (#{chall_name},
+ 			 		challenge_req.NEXTVAL,
+ 			 					#{chall_reg_id}, 
+ 			 					#{chall_intro},
+ 			 						#{chall_start_date},
+ 			 							#{chall_end_date}, 
+ 			 								#{chall_size}, 
+ 			 									#{chall_category},
+ 			 										#{region_id},
+ 			 											#{chall_sit},
+ 			 												#{chall_online},
+ 			 													#{chall_all_auth})
+ 	</insert>
 </mapper>

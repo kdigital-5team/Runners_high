@@ -13,5 +13,6 @@ public interface RegionMapper {
 	public List<String> getAllState();
 	public List<String> getCityByState(String state);
 	public List<String> getDistrictByCity(String city);
+	public String getIdByDistrict(String district);
 
 }

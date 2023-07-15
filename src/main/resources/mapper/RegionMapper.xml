@@ -21,5 +21,11 @@
  			FROM region
  				WHERE region_city = #{city}
  	</select>
+ 	
+ 	 	<select id="getIdByDistrict" resultType="string">
+ 		SELECT DISTINCT region_id
+ 			FROM region
+ 				WHERE region_district = #{district}
+ 	</select>
 
  </mapper>
