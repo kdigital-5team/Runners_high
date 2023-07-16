@@ -40,6 +40,15 @@
 		"Liberation Mono", "Courier New", monospace
 }
 
+/* 로고 0716 */
+#main-logo:not([href]) {
+    text-align: center;
+    margin: auto;
+    padding: 150px 18px 50px 0px;
+     font-size: xxx-large;
+    font-weight: bold;
+}
+
 *, :after, :before {
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box
@@ -200,9 +209,21 @@ th {
 	text-align: inherit
 }
 
+/* label 설정 0716 */
 label {
-	display: inline-block;
-	margin-bottom: 0.5rem
+	font-weight: bold;
+    font-size: 19px;
+    margin-top: 15px;
+}
+
+.notice-label {
+	font-size: 14px;
+    font-weight: normal;
+    margin-top: 3px;
+}
+
+#pw-only {
+	margin-top: 30px;
 }
 
 button {
@@ -214,8 +235,28 @@ button:focus {
 	outline: 5px auto -webkit-focus-ring-color
 }
 
+/* context-form 설정 0716 */
+.context-form {
+	padding: 15px 0;
+}
+
+#pw-check-div {
+	padding: 15px 0 0;
+}
+
+/* textarea 설정 0715 */
+textarea {
+	background-color: whitesmoke;
+	width: 32%;
+	padding: 10px 10px;
+    border-radius: 4px;
+    box-sizing: border-box;
+    border: none;
+    resize: none;
+    overflow: hidden;
+}
 /* inputbox 수정 0705 */
-button, input, optgroup, select, textarea {
+button, input, optgroup, select {
     background-color: whitesmoke;
     width: 32%;
     height: 48px;
@@ -257,6 +298,7 @@ button, input, optgroup, select, textarea {
     opacity: 0;
     z-index: -1;
 }
+
 #userPic {
 	display: none;
 }
@@ -269,12 +311,15 @@ input {
 input:read-only {
 	outline: none;
 }
+
 /* inputbox 수정 0705 */
 input[type="submit"] {
-    color: #fff;
+color: #fff;
     font-size: 16px;
     background-color: #FFDC3D;
-    margin-top: 20px;
+    margin-top: 80px;
+    inline-size: 134px;
+    border-radius: 30px;
 }
 
 button, input {
@@ -313,11 +358,6 @@ input[type=checkbox], input[type=radio] {
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
 	padding: 0
-}
-
-textarea {
-	overflow: auto;
-	resize: vertical
 }
 
 fieldset {
@@ -382,7 +422,7 @@ template {
 .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
 	margin-bottom: 0.5rem;
 	font-weight: 500;
-	line-height: 1.2
+	line-height: 1.2;
 }
 
 .h1, h1 {
@@ -391,6 +431,11 @@ template {
 
 .h2, h2 {
 	font-size: 2rem
+}
+
+/* form 전용 h2 설정 0716 */ 
+.form-h2 {
+	font-weight: bold;
 }
 
 .h3, h3 {
@@ -2340,10 +2385,6 @@ select.form-control[multiple], select.form-control[size] {
 	height: auto
 }
 
-textarea.form-control {
-	height: auto
-}
-
 .form-group {
 	margin-bottom: 1rem
 }
@@ -2451,7 +2492,7 @@ textarea.form-control {
 	box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25)
 }
 
-.was-validated textarea.form-control:valid, textarea.form-control.is-valid
+.was-validated
 	{
 	padding-right: calc(1.5em + 0.75rem);
 	background-position: top calc(0.375em + 0.1875rem) right
