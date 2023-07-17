@@ -21,7 +21,21 @@ public interface ChallengeMapper {
 
 	public List<UserChallenge> getUserByChallId(int chall_id);
 
+
 	public void applyByChallId(String userId, int chall_id);
 
 	public int insertChallenge(Challenge newChallenge);
+
+	public void applyByChallId(String applyId, int chall_id);
+
+	public List<User> applicantByChallId(int chall_id);
+	
+	public void acceptIdbyChallId(String acceptId, int chall_id);
+
+	public void declineIdbyChallId(String declineId, int chall_id);
+
+	public void withdrawByChallId(String applyId, int chall_id);
+
+	public void kickIdbyChallId(String kickId, int chall_id);
+
 }
