@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.spring.mapper.FeedPictureMapper">
+ 	
+  
+ 	<insert id="insertFeedPicture" parameterType = "com.spring.dto.FeedPicture">
+ 		INSERT INTO feed_picture
+ 		VALUES(	
+				feed_picture_no.NEXTVAL,
+				#{feed_id},
+				SYSDATE,
+				#{feed_pic_title},
+				#{feed_pic_path},
+				#{feed_pic_uuid}
+				)
+ 	</insert>
+ 	
+ 	<select id="getFeedPictureByfeedid" parameterType="_int" resultMap="feedpicture">
+ 		SELECT feed_pic_id,
+ 			feed_id,
+			feed_pic_date,
+			feed_pic_title,
+			feed_pic_path,
+			feed_pic_uuid
+ 		FROM feed_picture
+ 		WHERE feed_id = #{feed_id}
+ 	</select>
+ 	
+ 	<resultMap type="com.spring.dto.FeedPicture" id="feedpicture">
+ 		<result property="feed_pic_id" column="feed_pic_id"/>
+ 		<result property="feed_id" column="feed_id"/>
+ 		<result property="feed_pic_date" column="feed_pic_date"/>
+ 		<result property="feed_pic_title" column="feed_pic_title"/>
+ 		<result property="feed_pic_path" column="feed_pic_path"/>
+ 		<result property="feed_pic_uuid" column="feed_pic_uuid"/>
+
+ 	</resultMap>
+ 	
+ 	<select id="getFeedPictureFileByFileNo" parameterType="_int" resultMap="feedpicture">
+ 		SELECT 	feed_pic_id,
+ 				feed_id,
+ 				feed_pic_date,
+ 				feed_pic_title,
+ 				feed_pic_path,
+ 				feed_pic_uuid	
+ 		FROM feed_picture 
+ 		WHERE feed_pic_id = #{fileNo}
+ 		
+ 	</select>	
+ 	
+ </mapper>
