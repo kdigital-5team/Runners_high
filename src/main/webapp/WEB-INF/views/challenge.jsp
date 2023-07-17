@@ -55,7 +55,7 @@
 					<label class="font-weight-bold" for="keyword" style="border: 1px solid red; margin: auto;">챌린지 목록</label> <div></div>
 					<input type="text" class="form-race" id="keyword" placeholder="챌린지 검색" name="keyword" style="float: left; width:65%;" onkeypress="if(event.keyCode==13){searchKeyword();}"> 
 					<button type="button" onclick="searchKeyword()" style="margin-right: 5%; float: left; width: 20%">검색</button>
-					<button type="button" onclick="location.href='/events'" style="float: left; width: 10%">+</button>
+					<button type="button" onclick="loginCheck();" style="float: left; width: 10%">+</button>
 			</div>
 				<nav class="site-navigation text-left text-md-left"
 					style="float: left;">
@@ -237,6 +237,14 @@ let keyword=null;
 	  
 	  
 		search();
+	}
+	function loginCheck(){
+		var userId = '<%=(String)session.getAttribute("userId")%>';
+		if (userId == "null"){
+			alert("로그인이 필요한 서비스 입니다.");
+		} else {
+			location.href = "/registChall";
+		}
 	}
 	
 	function removeBtn(ths, button_id){

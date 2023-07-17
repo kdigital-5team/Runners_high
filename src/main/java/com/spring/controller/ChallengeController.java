@@ -57,20 +57,15 @@ public class ChallengeController {
 	@RequestMapping(value = "/registChall", method = RequestMethod.POST)
 	public String insertDept(@ModelAttribute Challenge newChallenge,
 							 Model model,
-							 @RequestParam String region_district, String path,
+							 @RequestParam String region_district,
 							 HttpSession session) throws Exception {
 		String userId = (String) session.getAttribute("userId");
+		
 		System.out.println(newChallenge);
 		System.out.println(region_district);
 		System.out.println(userId);
-		
-		System.out.println(path);
+
 		boolean challResult = false;
-		
-		
-		boolean routeResult = false;
-		int chall_id = newChallenge.getChall_id();
-		System.out.println(chall_id);
 		
 	
 		try {
@@ -80,63 +75,24 @@ public class ChallengeController {
 			challResult = challService.insertChallenge(newChallenge);
 			
 			if(challResult) {
-				//return "login";
+				System.out.println("등록완료");
+				
+				int challId = newChallenge.getChall_id();
+				System.out.println(challId);
+				session.setAttribute("challId", challId);
+				
+				return "registChallRoute";
 			}
 			
 		} catch (Exception e) {
 			
 			e.printStackTrace();
-			//return "index";
+			return "index";
 		}
-		
-		
-		   try {
-            JSONParser jsonParser = new JSONParser();
-            JSONObject jsonObj = (JSONObject) jsonParser.parse(path);
-            JSONArray coordsArray = (JSONArray) jsonObj.get("path");
-            
-            for(int i=0 ; i<coordsArray.size() ; i++){
-                    JSONObject tempObj = (JSONObject) coordsArray.get(i);
-                    routeResult = routeService.insertRoute(chall_id, tempObj.get("La").toString(), tempObj.get("Ma").toString());
-                   // 인설트-> DB
-                  //  System.out.println(tempObj.get("La"));
-                  //  System.out.println(tempObj.get("Ma"));
-                    }
-            System.out.println(coordsArray);
-
-            } catch (Exception e) {
-                    e.printStackTrace();
-            }
-		
-		
-		
 		return "index";
-		
 	}
 	
-	@RequestMapping(value="/getPath", method=RequestMethod.POST)
-	@ResponseBody
-	String getPath(@RequestBody String path) throws Exception {
-//		boolean routeResult = false;
-//		   try {
-//               JSONParser jsonParser = new JSONParser();
-//               JSONObject jsonObj = (JSONObject) jsonParser.parse(path);
-//               JSONArray coordsArray = (JSONArray) jsonObj.get("path");
-//               
-//               for(int i=0 ; i<coordsArray.size() ; i++){
-//                       JSONObject tempObj = (JSONObject) coordsArray.get(i);
-//                       routeResult = routeService.insertRoute(tempObj.get("La").toString(), tempObj.get("Ma").toString());
-//                      // 인설트-> DB
-//                     //  System.out.println(tempObj.get("La"));
-//                     //  System.out.println(tempObj.get("Ma"));
-//                       }
-//               System.out.println(coordsArray);
-//
-//               } catch (Exception e) {
-//                       e.printStackTrace();
-//               }
-		return path;
-	}
+
 	
 	@RequestMapping(value="/getCity", method=RequestMethod.POST)
 	@ResponseBody

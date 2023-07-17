@@ -16,11 +16,9 @@ import lombok.ToString;
 @Component
 //route_marker = null Yes
 public class Route {
-	private int route_id;
-	private int race_id;
 	private int chall_id;
 	private int route_lat;
-	private String route_marker;
-	private String route_marker_desc;
+	private int route_long;
+	
 
 }

@@ -116,5 +116,8 @@
  			 											#{chall_sit},
  			 												#{chall_online},
  			 													#{chall_all_auth})
+			<selectKey keyProperty="chall_id" resultType="int">
+				SELECT challenge_req.CURRVAL AS chall_id FROM DUAL
+			</selectKey>
  	</insert>
 </mapper>

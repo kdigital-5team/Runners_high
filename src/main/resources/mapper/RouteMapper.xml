@@ -7,9 +7,9 @@
  	 	
 
  	
- 	<insert id="insertRoute" parameterType="String">
+ 	<insert id="insertRoute" parameterType="com.spring.dto.Route">
  		INSERT INTO chall_route 
- 				(chall_id
+ 				(chall_id,
  					route_lat, 
  				 		route_long) 
  			 		VALUES (#{chall_id},

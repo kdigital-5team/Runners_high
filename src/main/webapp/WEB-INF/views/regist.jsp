@@ -5,9 +5,29 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <html>
 <head>
-    <meta charset="UTF-8">
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css?family=Nunito+Sans:200,300,400,700,900|Oswald:400,700">
+
+<link rel="stylesheet" href="../static/css/loginForm.css">
+<link rel="stylesheet" href="../static/css/login.css">
+<link rel="stylesheet" href="../static/css/jquery.fancybox.min.css">
+<link rel="stylesheet" href="../static/css/jquery-ui.css">
+<link rel="stylesheet" href="../static/css/owl.carousel.min.css">
+<link rel="stylesheet" href="../static/css/owl.theme.default.min.css">
+<link rel="stylesheet" href="../static/css/animate.css">
+<link rel="stylesheet" href="../static/fonts/flaticon/font/flaticon.css">
+<link rel="stylesheet" href="../static/css/aos.css">
+
 </head>
 <body>
+	<div class="site-wrap">
+			<div class="col-6 col-lg-2 site-logo" id="main-logo">
+				<a role="button" onclick="location.href='/main'" id="main-logo">Runner's High</a>
+	</div>
 <form name= "regist_form" method="post" action="/regist">
     <div class="container">
         <h1>회원가입</h1>
@@ -19,7 +39,7 @@
         <div>
         	<p>
         		<label for="inputAddress">이메일 인증</label>
-            	<input type="text" class="form-control" id="auth_code" name="auth_code" placeholder="인증번호" style="width:100px;">
+            	<input type="text" class="form-control" id="auth_code" name="auth_code" placeholder="인증번호">
             	<button type="button" class="btn btn-primary" id="checkEmail">이메일 인증</button>
             	<label for="code_check"></label>
             </p>
@@ -58,7 +78,6 @@
 var id_chk = false, pw_chk = false, nickname_chk = false; code_chk=false;
 $(function() {
 
-	// const getIdCheck = RegExp(/^[a-zA-Z0-9]{4,20}$/);
 	const getIdCheck = RegExp(/^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/);
   	const getPwCheck = RegExp(/^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{4,20}$/);
   	const getNickNameCheck = RegExp(/^[ㄱ-ㅎ가-힣a-zA-Z0-9]{2,10}$/);
@@ -107,14 +126,14 @@ $(function() {
 	} else if ($(event.target).val() === ''){
 		pw_chk = false;
 		
-	} if(user_pw == user_pw_check){
+	}else{ if(user_pw == user_pw_check){
         	$("label[for='pw_check']").text("비밀번호가 일치합니다.");
         	pw_chk = true;
         } else {
         	$("label[for='pw_check']").text("비밀번호가 일치하지않습니다.");
         	pw_chk = false;
         }
-	});
+	}});
 	
 
    		$('#nickname').keyup(function() {
@@ -188,6 +207,7 @@ function chkEmailConfirm(data){
 function submit2(){
 	if(id_chk && pw_chk && nickname_chk && code_chk == true){
 	document.regist_form.submit();
+	alert("가입이 완료되었습니다!");
 	} else{
 	alert("아이디, 이메일인증, 비밀번호, 닉네임 입력 값을 확인해주세요.");
 }};
