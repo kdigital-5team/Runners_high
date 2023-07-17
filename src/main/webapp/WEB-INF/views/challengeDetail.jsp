@@ -53,10 +53,16 @@
 			</div>
 			<div style="float: left; width: 33%">
 				<span>${challenge.chall_sit}</span>
-				<c:if test="${userId ne challenge.chall_reg_id && user.user_reg_status ne 'Y'}">
+				<c:if test="${userId ne challenge.chall_reg_id && userChall.user_reg_status ne 'Y' && userChall.user_deny_num lt 2}">
 					<form action="/challenge/${challenge.chall_id}/apply" method="post">
+						<input type="hidden" name="applyId" value="${userId}">
 						<input type="submit" value="신청">
-						
+					</form>
+				</c:if>
+				<c:if test="${userId ne challenge.chall_reg_id && userChall.user_reg_status eq 'Y'}">
+					<form action="/challenge/${challenge.chall_id}/withdraw" method="post">
+						<input type="hidden" name="applyId" value="${userId}">
+						<input type="submit" value="탈퇴">
 					</form>
 				</c:if>
 			</div>
@@ -87,10 +93,19 @@
 		<div style="margin: auto; width: 50%;" >
 			${challenge.chall_intro }
 		</div>
-		<div>
+		<div style="margin: auto; border: 1px solid aqua; width: 50%; height: 100px;">
 			<c:forEach items="${userList }" var="apply_user">
 				<c:if test="${apply_user.chall_reg_status eq  'Y'}">
-					${apply_user.user_id }
+					<div style="display: inline-block; width: 10%;">
+						<div style="width:100%; padding-top:100%; height:0; border-radius: 70%;  
+						background-image: url(../static/images/profileImages/default_image.png);
+						background-position:center;
+						background-size:cover;">
+						</div>
+						<div style="text-align: center;">
+							${apply_user.nickname }
+						</div>
+					</div>
 				</c:if>
 				
 			</c:forEach>
@@ -117,10 +132,8 @@
 
 </body>
 <script type="text/javascript">
-
-	function apply(){
-
-	}
+if(${userChall.user_deny_num}>=2)
+	alert("거절 5회로 신청 불가");
 
   </script>
 </html>
