@@ -31,50 +31,6 @@
 
 </head>
 <body>
-
-	<div class="site-wrap">
-			<div class="col-6 col-lg-2 site-logo" id="main-logo">
-				<a role="button" onclick="location.href='/main'" id="main-logo">Runner's High</a>
-	</div>
-<form name= "regist_form" method="post" action="/regist">
-    <div class="container">
-        <h1>회원가입</h1>
-        <div class="form-group">
-            <label for="inputID">아이디</label>
-            <input type="text" class="form-control" id="user_id" name="user_id" placeholder="사용자 아이디">
-            <label for="id_check"></label>
-        </div>
-        <div>
-        	<p>
-        		<label for="inputAddress">이메일 인증</label>
-            	<input type="text" class="form-control" id="auth_code" name="auth_code" placeholder="인증번호">
-            	<button type="button" class="btn btn-primary" id="checkEmail">이메일 인증</button>
-            	<label for="code_check"></label>
-            </p>
-        </div>
-        <div class="form-group">
-            <label for="inputAddress">닉네임</label>
-            <input type="text" class="form-control" id="nickname" name="nickname" placeholder="사용자 닉네임">
-             <label for="nickname_check"></label>
-        </div>
-        <div class="form-group">
-            <label for="inputPassword">비밀번호</label>
-            <input type="password" class="form-control" id="user_pw" name="user_pw" placeholder="사용자 비밀번호">
-        </div>
-        <div class="form-group">
-            <label for="inputPasswordCheck">비밀번호 확인</label>
-            <input type="password" class="form-control" id="user_pw_check" name="user_pw_check" placeholder="사용자 비밀번호 확인">
-            <label for="pw_check"></label>
-        </div>
-        <div class="form-group">
-        	<label for="PasswordQuestion">비밀번호 질문</label>
-       		<select id="pw_quest" name="pw_quest">
-				<option value ="어렸을 때 장래희망은?"> 어렸을 때 장래희망은? </option>
-				<option value ="다녔던 초등학교의 명칭은?"> 다녔던 초등학교의 명칭은? </option>
-				<option value ="기억나는 장소는?"> 기억나는 장소는? </option>
-			</select >
-
-
 	<div class="site-wrap">
 		<div class="col-6 col-lg-2 site-logo" id="main-logo">
 			<a role="button" onclick="location.href='/main'" id="main-logo">Runner's High</a>
@@ -130,7 +86,9 @@
 
 			</div>
 		</div>
+		<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 	</div>
+	
 
 	<!-- footer -->
 	<%@ include file="./inc/footer.jsp"%>
