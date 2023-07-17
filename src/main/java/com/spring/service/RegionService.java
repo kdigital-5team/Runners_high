@@ -29,6 +29,9 @@ public class RegionService {
 	public List<String> getDistrictByCity(String city) {
 		return mapper.getDistrictByCity(city);
 	}
+	public String getIdByDistrict(String district) {
+		return mapper.getIdByDistrict(district);
+	}
 
 
 }

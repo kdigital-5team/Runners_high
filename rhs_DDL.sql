@@ -116,9 +116,9 @@ CREATE TABLE challenge (
     chall_start_date DATE NOT NULL,
     chall_end_date   DATE NOT NULL,
     chall_all_auth   NUMBER(10) NOT NULL,
-    chall_week_auth  NUMBER(10) NOT NULL,
+    chall_week_auth  NUMBER(10)  NULL,
     chall_category   VARCHAR2(20 BYTE),
-    chall_sit        VARCHAR2(10 BYTE),
+    chall_sit        VARCHAR2(20 BYTE),
     chall_auth       NUMBER(3),
     chall_online     VARCHAR2(20 BYTE),
     chall_size       NUMBER(20),
@@ -236,6 +236,7 @@ CREATE TABLE chall_route (
     route_long        NUMBER(7, 3) NOT NULL,
     route_marker_desc VARCHAR2(500 BYTE)
 );
+
 
 -- 외래키
 ALTER TABLE rh_user

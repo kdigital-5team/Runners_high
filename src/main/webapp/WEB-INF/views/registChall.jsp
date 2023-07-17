@@ -9,7 +9,6 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css?family=Nunito+Sans:200,300,400,700,900|Oswald:400,700">
-<link rel="stylesheet" href="../fonts/icomoon/style.css">
 <link rel="stylesheet" href="../static/css/bootstrap.min.css">
 <link rel="stylesheet" href="../static/css/jquery.fancybox.min.css">
 <link rel="stylesheet" href="../static/css/jquery-ui.css">
@@ -19,7 +18,7 @@
 <link rel="stylesheet" href="../static/fonts/flaticon/font/flaticon.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="../static/css/aos.css">
-<link rel="stylesheet" href="../static/css/style3.css">
+<link rel="stylesheet" href="../static/css/longinForm.css">
     <style>
         td {
             width: 50px;
@@ -60,10 +59,10 @@
     
 </head>
 <body>
-	<!-- header -->
-	<%@ include file="./inc/header.jsp"%>
-<form name= "regist_form" method="post" action="/regist">
+
+<form name= "regist_form" id="regist_form" method="post" action="/registChall">
     <div class="container">
+    
         <h1>챌린지 등록</h1>
         <div class="form-group">
             <label for="inputChall">챌린지명</label>
@@ -77,8 +76,8 @@
         </div>
         <div class="form-group">
             <label for="inputDate">기간</label>
-            <label><input type="text" class="form-control" id="chall_start_date" name="chall_start_date" value=""  ></label>
-            <label><input type="text" class="form-control" id="chall_end_date" name="chall_end_date"value="" ></label>
+            <label><input type="text" class="form-control" id="chall_start_date" name="chall_start_date" value=""  readonly></label>
+            <label><input type="text" class="form-control" id="chall_end_date" name="chall_end_date"value="" readonly></label>
         	<table class="Calendar">
         	<thead>
            		<tr>
@@ -121,12 +120,9 @@
        		<input type="text" class="form-control" id="chall_size" name="chall_size" placeholder="인원 수">
 		</div>
         <div class="form-group">
-        	<label for="chall_route">챌린지 루트</label>
-        </div>
-        <div class="form-group">
         	<label for="chall_category">챌린지 목적</label>
         	<p></p>
-        	<select id="chall_category" name="chall_sit">
+        	<select id="chall_category" name="chall_category">
 				<option value ="대회용"> 대회용</option>
 				<option value ="일상용"> 일상용 </option>
 			</select >
@@ -144,7 +140,7 @@
         	<select id="region_city" name="region_city" onchange="chageCity();">
 			</select >
 			<label for="region_district">군/구</label>
-        	<select id="region_district" name="region_district">
+        	<select id="region_district" name="region_district" onchange="chageDistrict();">
 			</select >
 		</div>
 		<div class="form-group">
@@ -159,7 +155,7 @@
 		<div class="form-group">
         	<label for="chall_online">온라인/오프라인 여부</label>
         	<p></p>
-        	<select id="chall_online" name="chall_category">
+        	<select id="chall_online" name="chall_online">
 				<option value ="온라인"> 온라인 </option>
 				<option value ="오프라인"> 오프라인  </option>
 				<option value ="모두"> 모두 </option>
@@ -175,6 +171,8 @@
 <!-- footer -->
 <%@ include file="./inc/footer.jsp"%>
 </body>
+	<script type="text/javascript"
+	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a9fd4644a9a496749d0625dffe4286f8&libraries=services,clusterer,drawing"></script>
 	<script src="../static/js/jquery.min.js"></script>
 	<script src="../static/js/jquery-migrate-3.0.1.min.js"></script>
 	<script src="../static/js/jquery-ui.js"></script>
@@ -186,15 +184,16 @@
 	<script src="../static/js/aos.js"></script>
 	<script src="../static/js/main.js"></script>
 <script src="https://code.jquery.com/jquery-3.4.1.js" ></script> 
-<script> 
-$(function() {
-});
+<script>
+
+var chall_path;
+
+
 window.onload = function () { buildCalendar(); }    // 웹 페이지가 로드되면 buildCalendar 실행
 
 let nowMonth = new Date();  // 현재 달을 페이지를 로드한 날의 달로 초기화
 let today = new Date();     // 페이지를 로드한 날짜를 저장
 today.setHours(0,0,0,0);    // 비교 편의를 위해 today의 시간을 초기화
-
 // 달력 생성 : 해당 달에 맞춰 테이블을 만들고, 날짜를 채워 넣는다.
 function buildCalendar() {
 
@@ -254,11 +253,12 @@ function choiceDate(nowColumn) {
     
     nowColumn.classList.add("choiceDay");           // 선택된 날짜에 "choiceDay" class 추가
 	if (document.getElementsByClassName("choiceDay")[0] && document.getElementsByClassName("choiceDay")[1]) {
-		$('input[name=chall_end_date]').attr('value', document.getElementsByClassName("choiceDay")[1].innerText);
+		$('input[name=chall_end_date]').attr('value',nowMonth.getFullYear() + "-" + leftPad(nowMonth.getMonth() + 1) + "-" + document.getElementsByClassName("choiceDay")[1].innerText );
 		console.log(document.getElementsByClassName("choiceDay")[1].innerText);
+
 	} else {
 		$('chall_start_date').val(document.getElementsByClassName("choiceDay")[0].innerText);
-		$('input[name=chall_start_date]').attr('value', document.getElementsByClassName("choiceDay")[0].innerText);
+		$('input[name=chall_start_date]').attr('value',nowMonth.getFullYear() + "-" + leftPad(nowMonth.getMonth() + 1) + "-" + document.getElementsByClassName("choiceDay")[0].innerText);
 	}
 }
 
@@ -283,7 +283,6 @@ function leftPad(value) {
 }
 
 
-	
 function chageState(){
     var state = document.getElementById("region_state").value;
     console.log(state)
@@ -327,17 +326,26 @@ function chageCity(){
               },
               error: function(error) {
                   alert("시를 입력해주세요!");
-              }        
+              } 
           });
-     
+
+}
+
+function chageDistrict(){
+    console.log("선택된"+$("select[name=region_district] option:selected").text());  
 }
 
 function submit2(){
-	if(id_chk && pw_chk && nickname_chk && code_chk == true){
-	document.regist_form.submit();
-	} else{
-	alert("아이디, 이메일인증, 비밀번호, 닉네임 입력 값을 확인해주세요.");
-}};
+	Form=document.regist_form;  
+	if(Form.chall_start_date.value=="" || Form.chall_end_date.value=="" || Form.chall_all_auth.value=="" || Form.region_district.value==""){
+	        alert("필수 입력란이 비었습니다. 확인해 주세요.");
+	    }else{
+	    	
+	       document.regist_form.submit();
+	    }
+	};
+	
 
+		
 </script>
 </html>
