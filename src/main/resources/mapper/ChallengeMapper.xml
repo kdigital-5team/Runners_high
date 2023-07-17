@@ -31,14 +31,50 @@
 			id="getUserByChallId">
 		SELECT rh_user.user_id, user_chall.chall_id, user_chall.chall_auth_num, user_chall.chall_reg_status, user_chall.user_chall_status, user_chall.user_reg_status, user_chall.user_deny_num, rh_user.nickname, rh_user.intro, rh_user.user_title, rh_user.user_pic
 		FROM user_chall, rh_user
-		WHERE user_chall.chall_id = #{chall_id} 
+		WHERE user_chall.chall_id = #{chall_id} and rh_user.user_id = user_chall.user_id
 	</select>
 
-	<insert id="applyByChallId" 
+	<update id="applyByChallId" 
 			parameterType="com.spring.dto.UserChallenge">
-		INSERT INTO user_chall(user_id,chall_id,user_reg_status)
-		VALUES (#{userId},#{chall_id},'Y') 
-	</insert>
+		MERGE INTO user_chall
+		using dual
+		on (user_id=#{applyId} and chall_id=#{chall_id})
+		WHEN MATCHED THEN
+			UPDATE
+				SET user_reg_status = 'Y'
+		WHEN NOT MATCHED THEN
+			INSERT (user_id,chall_id,user_reg_status)
+			VALUES (#{applyId},#{chall_id},'Y') 
+	</update>
+	
+	<delete id="withdrawByChallId" 
+			parameterType="com.spring.dto.UserChallenge">
+			delete 
+			from user_chall 
+			where user_id = #{applyId} and chall_id=#{chall_id}
+	
+	</delete>
+	
+	<update id="acceptIdbyChallId"
+			parameterType="com.spring.dto.UserChallenge">
+			UPDATE user_chall
+			SET chall_reg_status = 'Y'
+			WHERE user_id=#{acceptId} and chall_id=#{chall_id}
+	</update>
+	
+	<update id="declineIdbyChallId"
+			parameterType="com.spring.dto.UserChallenge">
+			UPDATE user_chall
+			SET user_reg_status = 'N', user_deny_num =  user_deny_num+1
+			WHERE user_id=#{declineId} and chall_id=#{chall_id}
+	</update>
+	
+	<update id="kickIdbyChallId"
+			parameterType="com.spring.dto.UserChallenge">
+			UPDATE user_chall
+			SET user_reg_status = 'N', user_deny_num =  user_deny_num+1, chall_reg_status = 'N'
+			WHERE user_id=#{kickId} and chall_id=#{chall_id}
+	</update>
 
 	<select resultType="com.spring.dto.Challenge" 
 			id="getChallByOption" 
@@ -89,35 +125,4 @@
 			</if>
 		</trim>
 	</select>
-	
-	<insert id="insertChallenge" parameterType="com.spring.dto.Challenge">
- 		INSERT INTO challenge 
- 				(chall_name,
- 				chall_id,
- 				chall_reg_id,
- 				 chall_intro, 
- 			 		chall_start_date, 
- 						chall_end_date, 
- 			 				chall_size,
- 			 					chall_category,
- 			 						region_id,
- 			 							chall_sit,
- 			 								chall_online,
- 			 									chall_all_auth) 
- 			 		VALUES (#{chall_name},
- 			 		challenge_req.NEXTVAL,
- 			 					#{chall_reg_id}, 
- 			 					#{chall_intro},
- 			 						#{chall_start_date},
- 			 							#{chall_end_date}, 
- 			 								#{chall_size}, 
- 			 									#{chall_category},
- 			 										#{region_id},
- 			 											#{chall_sit},
- 			 												#{chall_online},
- 			 													#{chall_all_auth})
-			<selectKey keyProperty="chall_id" resultType="int">
-				SELECT challenge_req.CURRVAL AS chall_id FROM DUAL
-			</selectKey>
- 	</insert>
 </mapper>
