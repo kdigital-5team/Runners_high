@@ -37,8 +37,32 @@ public class ChallengeService {
 		return mapper.getUserByChallId(chall_id);
 	}
 
-	public void applyByChallId(String userId, int chall_id) {
-		mapper.applyByChallId(userId, chall_id);
+	public void applyByChallId(String applyId, int chall_id) {
+		mapper.applyByChallId(applyId, chall_id);
+		
+	}
+
+	public List<User> applicantByChallId(int chall_id) {
+		return mapper.applicantByChallId(chall_id);
+	}
+
+	public void acceptIdbyChallId(String acceptId, int chall_id) {
+		mapper.acceptIdbyChallId(acceptId, chall_id);
+		
+	}
+
+	public void declineIdbyChallId(String declineId, int chall_id) {
+		mapper.declineIdbyChallId(declineId, chall_id);
+		
+	}
+
+	public void withdrawByChallId(String applyId, int chall_id) {
+		mapper.withdrawByChallId(applyId, chall_id);
+		
+	}
+
+	public void kickIdbyChallId(String kickId, int chall_id) {
+		mapper.kickIdbyChallId(kickId, chall_id);
 		
 	}
 
