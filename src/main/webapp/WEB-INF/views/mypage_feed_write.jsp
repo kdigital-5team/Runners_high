@@ -77,7 +77,7 @@
 					<div class="form-group">
 						<div style="height: 150px; width: 200px; vertical-align: middle;">	
 							<label>이미지 파일 첨부</label> 
-				            <input type="file" name="imgFile" onchange="readURL(this);"/>
+				            <input type="file" name="file" onchange="readURL(this);"/>
 							<img id="preview" src="#" width=250 height=150 alt="선택된 이미지가 없습니다" style="align-content: flex-end; ">
 						</div>
 					</div>
@@ -122,7 +122,5 @@
 
 	<script src="js/main.js"></script>
 
-</body>
-</html>
 </body>
 </html>
