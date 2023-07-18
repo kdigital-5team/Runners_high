@@ -127,7 +127,10 @@
 
 <!-- 아이디/닉네임/비밀번호/이메일 검증  -->
 <script type="text/javascript">
-var id_chk = false, pw_chk = false, nickname_chk = false; code_chk=false;
+var id_chk = false;
+var pw_chk = false; 
+var nickname_chk = false; 
+var code_chk=false;
 $(function() {
 
 	const getIdCheck = RegExp(/^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/);
@@ -243,7 +246,8 @@ $(function() {
 
 	$('#checkEmail').click(function() {
 		if(id_chk == true){
-			var user_id = document.getElementById('user_id').value; 
+			var user_id = $('user_id').val(); 
+			
 		 	$.ajax({
 		 	async: false,
 	         type : 'POST', 
