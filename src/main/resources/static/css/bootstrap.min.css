@@ -238,16 +238,97 @@ button, input {
 	overflow: visible
 }
 
+/* selection Å×µÎ¸® ¾ø¾Ú 0717 */
 button, select {
-	text-transform: none
+	text-transform: none;
+	border-style: none;
+}
+
+select {
+	outline: 0;
+	word-wrap: normal
+}
+
+select:focus {
+	background: #e0eaf5;
+}
+
+/* select Ä¿½ºÅÒ 0717 */
+.selectBox * {
+  box-sizing: border-box;
+}
+
+.selectBox {
+  margin: auto;
+  position: relative;
+  width: 32%;
+  height: 48px;
+  border-radius: 4px;
+  border: none;
+  background: url('https://i.ibb.co/JtT43fX/pngegg.png') calc(100% - 21px) center no-repeat;
+  z-index: 20;
+  background-size: 12px;
+  cursor: pointer;
+  background-color: whitesmoke;
+}
+
+.selectBox .label {
+  border: 0 none;
+  outline: 0 none;
+  background: transparent;
+  cursor: pointer;
+  color: #767676;
+  width: 100%;
+  border-radius: 4px;
+}
+
+.optionList {
+  position: absolute;
+  top: 28px;
+  width: 100%;
+  background: #ededed;
+  list-style-type: none;
+  padding: 0;
+  border-radius: 6px;
+  transition: .3s ease-in;
+  z-index : 1;
+  display: none;
+  box-shadow: 11px 9px 16px 3px rgb(0 0 0 / 10%);
+}
+
+.optionList .optionItem {
+  padding: 10px 15px;
+  transition: .1s;
+  cursor: pointer;
+}
+
+.optionList .optionItem:hover {
+  background: #d8e0e9;
+}
+
+.selectBox .optionItem:last-child {
+  border-bottom: 0 none;
+}
+
+.selectBox .optionList::-webkit-scrollbar {
+  width: 6px;
+}
+
+.selectBox .optionList::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.selectBox .optionList::-webkit-scrollbar-thumb {
+  background: #303030;
+  border-radius: 45px;
+}
+
+.selectBox .optionList::-webkit-scrollbar-thumb:hover {
+  background: #303030;
 }
 
 [role=button] {
 	cursor: pointer
-}
-
-select {
-	word-wrap: normal
 }
 
 [type=button], [type=reset], [type=submit], button {
@@ -1433,7 +1514,6 @@ pre code {
 		-webkit-box-flex: 0;
 		-ms-flex: 0 0 16.66667%;
 		flex: 0 0 16.66667%;
-		max-width: 16.66667%
 	}
 	.col-lg-3 {
 		-webkit-box-flex: 0;
@@ -2339,7 +2419,7 @@ textarea.form-control {
 }
 
 .form-check-input:disabled ~.form-check-label, .form-check-input[disabled]
-	~.form-check-label {
+	 ~.form-check-label {
 	color: #6c757d
 }
 
@@ -2389,7 +2469,7 @@ textarea.form-control {
 }
 
 .is-valid ~.valid-feedback, .is-valid ~.valid-tooltip, .was-validated :valid
-	~.valid-feedback, .was-validated :valid ~.valid-tooltip {
+	 ~.valid-feedback, .was-validated :valid ~.valid-tooltip {
 	display: block
 }
 
@@ -2435,18 +2515,18 @@ textarea.form-control {
 }
 
 .form-check-input.is-valid ~.form-check-label, .was-validated .form-check-input:valid
-	~.form-check-label {
+	 ~.form-check-label {
 	color: #28a745
 }
 
 .form-check-input.is-valid ~.valid-feedback, .form-check-input.is-valid
-	~.valid-tooltip, .was-validated .form-check-input:valid ~.valid-feedback,
+	 ~.valid-tooltip, .was-validated .form-check-input:valid ~.valid-feedback,
 	.was-validated .form-check-input:valid ~.valid-tooltip {
 	display: block
 }
 
 .custom-control-input.is-valid ~.custom-control-label, .was-validated .custom-control-input:valid
-	~.custom-control-label {
+	 ~.custom-control-label {
 	color: #28a745
 }
 
@@ -2477,12 +2557,12 @@ textarea.form-control {
 }
 
 .custom-file-input.is-valid ~.custom-file-label, .was-validated .custom-file-input:valid
-	~.custom-file-label {
+	 ~.custom-file-label {
 	border-color: #28a745
 }
 
 .custom-file-input.is-valid:focus ~.custom-file-label, .was-validated .custom-file-input:valid:focus
-	~.custom-file-label {
+	 ~.custom-file-label {
 	border-color: #28a745;
 	-webkit-box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
 	box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25)
@@ -2560,18 +2640,18 @@ textarea.form-control {
 }
 
 .form-check-input.is-invalid ~.form-check-label, .was-validated .form-check-input:invalid
-	~.form-check-label {
+	 ~.form-check-label {
 	color: #dc3545
 }
 
 .form-check-input.is-invalid ~.invalid-feedback, .form-check-input.is-invalid
-	~.invalid-tooltip, .was-validated .form-check-input:invalid ~.invalid-feedback,
+	 ~.invalid-tooltip, .was-validated .form-check-input:invalid ~.invalid-feedback,
 	.was-validated .form-check-input:invalid ~.invalid-tooltip {
 	display: block
 }
 
 .custom-control-input.is-invalid ~.custom-control-label, .was-validated .custom-control-input:invalid
-	~.custom-control-label {
+	 ~.custom-control-label {
 	color: #dc3545
 }
 
@@ -2602,12 +2682,12 @@ textarea.form-control {
 }
 
 .custom-file-input.is-invalid ~.custom-file-label, .was-validated .custom-file-input:invalid
-	~.custom-file-label {
+	 ~.custom-file-label {
 	border-color: #dc3545
 }
 
 .custom-file-input.is-invalid:focus ~.custom-file-label, .was-validated .custom-file-input:invalid:focus
-	~.custom-file-label {
+	 ~.custom-file-label {
 	border-color: #dc3545;
 	-webkit-box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
 	box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25)
@@ -4294,7 +4374,7 @@ input[type=button].btn-block, input[type=reset].btn-block, input[type=submit].bt
 }
 
 .custom-file-input:disabled ~.custom-file-label, .custom-file-input[disabled]
-	~.custom-file-label {
+	 ~.custom-file-label {
 	background-color: #e9ecef
 }
 
@@ -7181,17 +7261,39 @@ keyframes spinner-border {
 }
 
 50
+
+
 %
 {
 opacity
+
+
 :
-1;
+
+
+1
+;
+
+
 -webkit-transform
+
+
 :
-none;
-transform
-:
+
+
 none
+;
+
+
+transform
+
+
+:
+
+
+none
+
+
 }
 }
 @
@@ -7201,17 +7303,39 @@ keyframes spinner-grow { 0%{
 }
 
 50
+
+
 %
 {
 opacity
+
+
 :
-1;
+
+
+1
+;
+
+
 -webkit-transform
+
+
 :
-none;
-transform
-:
+
+
 none
+;
+
+
+transform
+
+
+:
+
+
+none
+
+
 }
 }
 .spinner-grow {
@@ -8974,7 +9098,6 @@ supports ((position:-webkit-sticky) or (position:sticky)) { .
 	padding-top: 1rem !important
 }
  */
-
 .pl-3, .px-3 {
 	padding-left: 1rem !important
 }
