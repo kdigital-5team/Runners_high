@@ -25,7 +25,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.spring.dto.Challenge;
+
+import com.spring.dto.ChallengePost;
+
 import com.spring.dto.ChallengeRegion;
+
 import com.spring.dto.User;
 import com.spring.dto.UserChallenge;
 import com.spring.service.ChallengeService;
@@ -259,6 +263,41 @@ public class ChallengeController {
 			return "redirect:/challenge/"+chall_id+"host";
 		}
 		
+
+	//인증게시판 리스트
+		@RequestMapping(value="challenge/{chall_id}challengePost")
+		public String challengePost(@PathVariable int chall_id, Model model) {
+			Challenge challenge = challService.getChallByChallId(chall_id);
+			User host = challService.getHostByChallId(chall_id);
+//			String userId = (String) session.getAttribute("userId");
+			List<UserChallenge> userList = challService.getUserByChallId(chall_id);
+			UserChallenge userChall=new UserChallenge();
+			List<ChallengePost> postList = challService.getAllPost();
+			model.addAttribute("postList", postList);
+			
+			model.addAttribute("challenge", challenge);
+			model.addAttribute("userChall", userChall);
+			model.addAttribute("host", host);
+			model.addAttribute("userList", userList);
+			return "challengePost";
+		}
+
+		@RequestMapping(value = "/challenge/{chall_id}challPostDetail", method = RequestMethod.GET)
+		public String getPostByAuthId(@RequestParam("auth_id") int auth_id, Model model) {
+			ChallengePost post = challService.getPostByAuthId(auth_id);
+			model.addAttribute(auth_id);
+			
+			return "challengePostDetail";
+		}
+		
+		@RequestMapping(value="/challengePost/insertChallPost", method=RequestMethod.GET)
+		public String insertPost(@ModelAttribute ChallengePost newPost, Model model) {
+			
+			challService.insertChallPost(newPost);
+			return "insertChallPost";
+		}
+		
+
 	// 챌린지 수정폼
 		@RequestMapping(value="/challenge/{chall_id}modify")
 		public String updateByChallId(@PathVariable int chall_id, Model model, HttpSession session) {
@@ -305,4 +344,5 @@ public class ChallengeController {
 			}
 			return "index";
 		}
+
 }

@@ -5,7 +5,11 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.spring.dto.Challenge;
+
+import com.spring.dto.ChallengePost;
+
 import com.spring.dto.ChallengeRegion;
+
 import com.spring.dto.SearchKeyword;
 import com.spring.dto.User;
 import com.spring.dto.UserChallenge;
@@ -37,6 +41,15 @@ public interface ChallengeMapper {
 	public void withdrawByChallId(String applyId, int chall_id);
 
 	public void kickIdbyChallId(String kickId, int chall_id);
+
+
+	
+	//인증게시판
+	public List<ChallengePost> getAllPost();
+
+	public void insertChallPost(ChallengePost newPost);
+
+	public ChallengePost getPostByAuthId(int auth_id);
 
 	public boolean updateChallenge(Challenge updateChallenge);
 

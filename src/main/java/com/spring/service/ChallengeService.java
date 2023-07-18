@@ -8,7 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.spring.dto.Challenge;
+
+import com.spring.dto.ChallengePost;
+
 import com.spring.dto.ChallengeRegion;
+
 import com.spring.dto.SearchKeyword;
 import com.spring.dto.User;
 import com.spring.dto.UserChallenge;
@@ -83,12 +87,29 @@ public class ChallengeService {
 		return result;
 	}
 
+
+	//인증 게시판
+	public List<ChallengePost> getAllPost() {
+		
+		return mapper.getAllPost();
+	}
+
+	public void insertChallPost(ChallengePost newPost) {
+	return mapper.insertChallPost(newPost);
+		
+	}
+
+	public ChallengePost getPostByAuthId(int auth_id) {
+		
+		return mapper.getPostByAuthId(auth_id);
+
 	public boolean updateChallenge(Challenge updateChallenge) {
 		return mapper.updateChallenge(updateChallenge);
 	}
 
 	public List<ChallengeRegion> getAllChallR() {
 		return mapper.getAllChallR();
+
 	}
 	
 
