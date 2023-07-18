@@ -74,10 +74,13 @@ public class UserService {
 	public boolean updateUserProfile(User user) throws Exception {
 		boolean result = false;
 		
+		System.out.println("nservice nickname : " + user.getNickname() +
+				   		   "\nservice intro : " + user.getIntro() +
+				   		   "\nservice input 비번 질문 : " + user.getPw_quest() +
+				   		   "\nservice input 비번 답변 : " + user.getPw_quest_answer());
+		
 		// 비밀번호 재암호화
-		if(user.getUser_pw() != null && user.getUser_pw() != "") {
 		user.setUser_pw(BCrypt.hashpw(user.getUser_pw(), BCrypt.gensalt()));
-		}
 		
 		int res = mapper.updateUserProfile(user);
 		System.out.println("res : " + res);

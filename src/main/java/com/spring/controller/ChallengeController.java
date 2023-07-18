@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONArray;
@@ -24,7 +23,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.spring.dto.Challenge;
-import com.spring.dto.ChallengePost;
 import com.spring.dto.User;
 import com.spring.dto.UserChallenge;
 import com.spring.service.ChallengeService;
@@ -110,7 +108,6 @@ public class ChallengeController {
 		return districtList;
 	}
 
-	// 전체 챌린지 리스트
 	@GetMapping("/challenge")
 	public String getAllChall(Model model) {
 		List<Challenge> challList = challService.getAllChall();
@@ -118,7 +115,6 @@ public class ChallengeController {
 		return "challenge";
 	}
 	
-	// 검색필터를 통해 보여지는 챌린지 리스트
 	@GetMapping("/challenge/filter")
 	public String getChallByOption(@RequestParam(value="opt[]", required=false) List<String> opt, @RequestParam(value="val[]", required=false) List<String> val, @RequestParam(value="keyword") String keyword, Model model) {
 		List<Challenge> challList = null;
@@ -169,125 +165,27 @@ public class ChallengeController {
 		
 	}
 	
-	// 챌린지 상세 페이지
 	@RequestMapping(value = "/challenge/{chall_id}", method = RequestMethod.GET)
-	public String getChallByChallId(@PathVariable int chall_id, Model model, HttpSession session) {
+	public String getChallByChallId(@PathVariable int chall_id, Model model) {
 		Challenge challenge = challService.getChallByChallId(chall_id);
 		User host = challService.getHostByChallId(chall_id);
-		String userId = (String) session.getAttribute("userId");
 		List<UserChallenge> userList = challService.getUserByChallId(chall_id);
-		UserChallenge userChall=new UserChallenge();
-		System.out.println(userList);
-		for(UserChallenge uc:userList) {
-			if(uc.getUser_id().equals(userId))
-				userChall = uc;
-		}
-		
 		model.addAttribute("challenge", challenge);
-		model.addAttribute("userChall", userChall);
 		model.addAttribute("host", host);
 		model.addAttribute("userList", userList);
 		return "/challengeDetail";
 	}
 	
-	// 챌린지 신청
 	@RequestMapping(value="/challenge/{chall_id}/apply", method = RequestMethod.POST)
-	public String applyByChallId(@PathVariable int chall_id, Model model, HttpSession session, @RequestParam("applyId") String applyId) {
-		if(applyId==null || applyId=="") {
+	public String applyByChallId(@PathVariable int chall_id, Model model, HttpSession session) {
+		String userId = (String) session.getAttribute("userId");
+		
+		if(userId==null||userId=="") {
 			return "redirect:/login";
 		}
 		
-		challService.applyByChallId(applyId, chall_id);
-		System.out.println(applyId);
+		challService.applyByChallId(userId, chall_id);
+		
 		return "redirect:/challenge/"+chall_id;
 	}
-	
-	// 챌린지 탈퇴
-		@RequestMapping(value="/challenge/{chall_id}/withdraw", method = RequestMethod.POST)
-		public String withdrawByChallId(@PathVariable int chall_id, Model model, HttpSession session, @RequestParam("applyId") String applyId) {
-			System.out.println(applyId);
-			
-			challService.withdrawByChallId(applyId, chall_id);
-			return "redirect:/challenge/"+chall_id;
-		}
-		
-	// 챌린지 관리 페이지
-	@RequestMapping(value="/challenge/{chall_id}host", method=RequestMethod.GET)
-	public String challengeHost(@PathVariable int chall_id, Model model, HttpSession session) {
-		String userId = (String) session.getAttribute("userId");
-		User host = challService.getHostByChallId(chall_id);
-		if(!host.getUser_id().equals(userId))
-			return "redirect:/challenge/"+chall_id;
-		Challenge challenge = challService.getChallByChallId(chall_id);
-		List<UserChallenge> userList = challService.getUserByChallId(chall_id);
-		List<UserChallenge> appList = new ArrayList<UserChallenge>();
-		List<UserChallenge> parList = new ArrayList<UserChallenge>();
-		
-		for(UserChallenge uc : userList) {
-			if(uc.getChall_reg_status().equals("N") && uc.getUser_reg_status().equals("Y"))
-				appList.add(uc);
-			else if(uc.getChall_reg_status().equals("Y") && uc.getUser_reg_status().equals("Y"))
-				parList.add(uc);
-		}
-		model.addAttribute("host", host);
-		model.addAttribute("appList", appList);
-		model.addAttribute("parList", parList);
-		model.addAttribute("challenge", challenge);
-		return "/challengeHost";
-	}
-	
-	// 챌린지 참가 수락
-	@RequestMapping(value="/challenge/accept/{chall_id}")
-	public String acceptUserById(@PathVariable int chall_id, @RequestParam("acceptId") String acceptId, Model model) {
-		challService.acceptIdbyChallId(acceptId, chall_id);
-		return "redirect:/challenge/"+chall_id+"host";
-	}
-	
-	// 챌린지 참가 거절
-	@RequestMapping(value="/challenge/decline/{chall_id}")
-	public String declineUserById(@PathVariable int chall_id, @RequestParam("declineId") String declineId, Model model) {
-		challService.declineIdbyChallId(declineId, chall_id);
-		return "redirect:/challenge/"+chall_id+"host";
-	}
-	
-	// 챌린지 추방
-		@RequestMapping(value="/challenge/kick/{chall_id}")
-		public String kickUserById(@PathVariable int chall_id, @RequestParam("kickId") String kickId, Model model) {
-			challService.kickIdbyChallId(kickId, chall_id);
-			return "redirect:/challenge/"+chall_id+"host";
-		}
-		
-	//인증게시판 리스트
-		@RequestMapping(value="challenge/{chall_id}challengePost")
-		public String challengePost(@PathVariable int chall_id, Model model) {
-			Challenge challenge = challService.getChallByChallId(chall_id);
-			User host = challService.getHostByChallId(chall_id);
-//			String userId = (String) session.getAttribute("userId");
-			List<UserChallenge> userList = challService.getUserByChallId(chall_id);
-			UserChallenge userChall=new UserChallenge();
-			List<ChallengePost> postList = challService.getAllPost();
-			model.addAttribute("postList", postList);
-			
-			model.addAttribute("challenge", challenge);
-			model.addAttribute("userChall", userChall);
-			model.addAttribute("host", host);
-			model.addAttribute("userList", userList);
-			return "challengePost";
-		}
-
-		@RequestMapping(value = "/challenge/{chall_id}challPostDetail", method = RequestMethod.GET)
-		public String getPostByAuthId(@RequestParam("auth_id") int auth_id, Model model) {
-			ChallengePost post = challService.getPostByAuthId(auth_id);
-			model.addAttribute(auth_id);
-			
-			return "challengePostDetail";
-		}
-		
-		@RequestMapping(value="/challengePost/insertChallPost", method=RequestMethod.GET)
-		public String insertPost(@ModelAttribute ChallengePost newPost, Model model) {
-			
-			challService.insertChallPost(newPost);
-			return "insertChallPost";
-		}
-		
 }
