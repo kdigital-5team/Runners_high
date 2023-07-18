@@ -60,11 +60,13 @@ public class UserController {
 	// http://localhost:8081/regist
 	@RequestMapping(value = "/regist", method = RequestMethod.POST)
 	public String insertDept(@ModelAttribute User newUser,
+							 @RequestParam("pw_quest_input") String pwQuestInput,
 							 Model model) {
+		boolean userResult = false;
+		
+		newUser.setPw_quest(pwQuestInput);
 		
 		System.out.println(newUser);
-		boolean userResult = false;
-
 	
 		try {
 			userResult = service.insertUser(newUser);
@@ -76,9 +78,9 @@ public class UserController {
 		} catch (Exception e) {
 			
 			e.printStackTrace();
-			return "index";
+			return "regist";
 		}
-		return "index";
+		return "regist";
 		
 	}
 	
