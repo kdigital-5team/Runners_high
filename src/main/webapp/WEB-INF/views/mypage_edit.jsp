@@ -97,11 +97,12 @@
 						  <label for="PasswordQuestion">비밀번호 질문</label><br> 
 						  <div class="selectBox">
 						    <button class="label" id="pw_quest" name="pw_quest">질문 리스트</button>
-						    <ul class="optionList">
-						      <li class="optionItem" value="어렸을 때 장래희망은?">어렸을 때 장래희망은?</li>
-						      <li class="optionItem" value="다녔던 초등학교의 명칭은?">다녔던 초등학교의 명칭은?</li>
-						      <li class="optionItem" value="기억나는 장소는?">기억나는 장소는?</li>
-						    </ul>
+						     	<input type="hidden" id="pw_quest_input" name="pw_quest_input" value="${pw_quest_input}">
+								    <ul class="optionList">
+								      <li class="optionItem" value="어렸을 때 장래희망은?">어렸을 때 장래희망은?</li>
+								      <li class="optionItem" value="다녔던 초등학교의 명칭은?">다녔던 초등학교의 명칭은?</li>
+								      <li class="optionItem" value="기억나는 장소는?">기억나는 장소는?</li>
+								    </ul>
 						  </div>
 						</div>
 						<div class="context-form">
@@ -142,6 +143,9 @@
 	const handleSelect = (function(item) {
 	  label.innerHTML = item.textContent;
 	  optionList.style.display='none';
+	  
+	  // 선택한 값 업데이트
+	  document.getElementById('pw_quest_input').value = item.getAttribute('value');
 	});
 	
 	// 옵션 클릭시 클릭한 옵션을 넘김
@@ -322,6 +326,19 @@ $(function() {
 <script type="text/javascript">
 	$("form").submit(function(event) {
 	    event.preventDefault();
+	    
+		  var selectedOption = document.querySelector('.optionItem.selected');
+		  var pwQuestInput = document.getElementById('pw_quest_input');
+		  var pwQuestAnswer = document.getElementById('pw_quest_answer');
+		  var pwQuestValue = '';
+
+		  if (selectedOption) {
+		    pwQuestValue = selectedOption.getAttribute('value');
+		  } else {
+		    pwQuestValue = document.getElementById('pw_quest_input').value;
+		  }
+
+		  pwQuestInput.value = pwQuestValue;
 	    
 	    $.ajax({
 	        url: $(this).attr("action"),

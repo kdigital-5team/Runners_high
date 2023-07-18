@@ -70,11 +70,12 @@
 					  <label for="PasswordQuestion">비밀번호 질문</label><br> 
 					  <div class="selectBox">
 					    <button class="label" id="pw_quest" name="pw_quest">질문 리스트</button>
-					    <ul class="optionList">
-					      <li class="optionItem" value="어렸을 때 장래희망은?">어렸을 때 장래희망은?</li>
-					      <li class="optionItem" value="다녔던 초등학교의 명칭은?">다녔던 초등학교의 명칭은?</li>
-					      <li class="optionItem" value="기억나는 장소는?">기억나는 장소는?</li>
-					    </ul>
+					     	<input type="hidden" id="pw_quest_input" name="pw_quest_input" value="${pw_quest_input}">
+							    <ul class="optionList">
+							      <li class="optionItem" value="어렸을 때 장래희망은?">어렸을 때 장래희망은?</li>
+							      <li class="optionItem" value="다녔던 초등학교의 명칭은?">다녔던 초등학교의 명칭은?</li>
+							      <li class="optionItem" value="기억나는 장소는?">기억나는 장소는?</li>
+							    </ul>
 					  </div>
 					</div>
 					<div class="context-form">
@@ -91,7 +92,7 @@
 	<%@ include file="./inc/footer.jsp"%>
 	
 	<!-- 드롭다운 -->
-	<script>
+	<script type="text/javascript">
 	const label = document.querySelector('.label');
 	const options = document.querySelectorAll('.optionItem');
 	const optionList = document.querySelector('.optionList');
@@ -101,6 +102,9 @@
 	const handleSelect = (function(item) {
 	  label.innerHTML = item.textContent;
 	  optionList.style.display='none';
+	  
+	  // 선택한 값 업데이트
+	  document.getElementById('pw_quest_input').value = item.getAttribute('value');
 	});
 	
 	// 옵션 클릭시 클릭한 옵션을 넘김
@@ -139,7 +143,7 @@ $(function() {
 
 
 	$('#user_id').keyup(function() {
-		var user_id = $('user_id').val(); 
+		var user_id = $('#user_id').val(); 
         if(!getIdCheck.test($(event.target).val())){
         	 $("label[for='id_check']").text("아이디는 영어와 숫자 조합으로 20자 이하의 이메일(@ .com)만 가능합니다.");
         	    $("label[for='id_check']").css({
@@ -199,6 +203,7 @@ $(function() {
 			
 		    if (user_pw === user_pw_check) {
 		      $("label[for='user_pw_check']").text("비밀번호가 일치합니다.");
+		      $("label[for='user_pw_check']").css("color", "");
 		    } else if (user_pw === '' || user_pw_check === '') {
 		      $("label[for='user_pw_check']").text("");
 		    } else {
@@ -209,7 +214,7 @@ $(function() {
 	
 
    		$('#nickname').keyup(function() {
-   			var nickname = document.getElementById('nickname').value; 
+   			var nickname = $('#nickname').val(); 
    	        if(!getNickNameCheck.test($(event.target).val())){
    	        	 $("label[for='nickname_check']").text("닉네임은 한글, 영어, 숫자 조합 2글자 이상 10글자 이하만 가능합니다.");
    	        	 $("label[for='nickname_check']").css("color", "#e35c5c");
@@ -246,7 +251,7 @@ $(function() {
 
 	$('#checkEmail').click(function() {
 		if(id_chk == true){
-			var user_id = $('user_id').val(); 
+			var user_id = $('#user_id').val(); 
 			
 		 	$.ajax({
 		 	async: false,
@@ -272,7 +277,7 @@ $(function() {
 	
 	function chkEmailConfirm(data){
 		$('#auth_code').keyup(function(){
-		if(data.code == document.getElementById('auth_code').value){
+		if(data.code == $('#auth_code').val()){
 	           $("label[for='code_check']").text("인증되었습니다.");
 	           $("label[for='code_check']").css("color", "");
 	          	code_chk = true;
@@ -286,13 +291,28 @@ $(function() {
 		
 	})};
 
-function submit2(){
-	if(id_chk && pw_chk && nickname_chk && code_chk == true){
-	document.regist_form.submit();
-	alert("가입이 완료되었습니다!");
-	} else{
-	alert("아이디, 이메일인증, 비밀번호, 닉네임 입력 값을 확인해주세요.");
-}};
+	// 제출
+	function submit2() {
+	  var selectedOption = document.querySelector('.optionItem.selected');
+	  var pwQuestInput = document.getElementById('pw_quest_input');
+	  var pwQuestAnswer = document.getElementById('pw_quest_answer').value;
+	  var pwQuestValue = '';
+
+	  if (selectedOption) {
+	    pwQuestValue = selectedOption.getAttribute('value');
+	  } else {
+	    pwQuestValue = document.getElementById('pw_quest_input').value;
+	  }
+
+	  pwQuestInput.value = pwQuestValue;
+
+	  if (pwQuestValue !== '' && pwQuestAnswer !== '' && id_chk && pw_chk && nickname_chk && code_chk) {
+	    document.forms.regist_form.submit();
+	    alert("가입이 완료되었습니다!");
+	  } else {
+	    alert("가입 정보를 다시 확인해주시기 바랍니다.");
+	  }
+	}
 
 </script>
 </html>
