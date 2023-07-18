@@ -1,5 +1,9 @@
 package com.spring.controller;
 
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +30,14 @@ public class FeedController {
 	@Autowired
 	private FeedPictureService pictureservice;
 	
+	// 전체 피드 리스트
+		 @GetMapping("/mypage/feed")
+		 public String getAllFeeds(Model model) {
+			 List<PersonalFeed> feedList = feedservice.getAllFeeds();
+			 model.addAttribute("feedList", feedList);
+			 return "mypage_feed";
+		 }
+	
 	// 피드 작성 get
 	 @GetMapping("/mypage/write")
 	 public String getWrite() throws Exception {
@@ -37,7 +49,7 @@ public class FeedController {
 	 @PostMapping("/mypage/write")
 	 public String feedWrite(@ModelAttribute PersonalFeed pf,
 			 					@RequestParam("file") MultipartFile file,
-			 					Model model) throws Exception {
+			 					Model model, HttpSession session) throws Exception {
 	  logger.info("feed write");
 	  
 	  String view = "error";
@@ -53,6 +65,7 @@ public class FeedController {
 		  fileResult = pictureservice.insertFeedPicture(file, pfeed);
 		  
 		  if(feedResult && fileResult) {
+			  session.setAttribute("pfeed", pfeed);
 			  view = "redirect:/main";
 			  return view;
 		  }
@@ -62,5 +75,6 @@ public class FeedController {
 	  	}	  
 	  
 	  return view;
-	}
+	} 
+	 
 }
