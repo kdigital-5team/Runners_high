@@ -70,11 +70,12 @@ public class MypageController {
 	public String myPageEdit(HttpServletRequest request, @ModelAttribute("userId") String userId,
 			@ModelAttribute("userNickname") String userNickname, @RequestParam("userPic") MultipartFile userPicFile,
 			@ModelAttribute("userIntro") String userIntro, @ModelAttribute("userPw") String userPw,
-			@ModelAttribute("userPwQ") String userPwQ, @ModelAttribute("userPwA") String userPwA,
+			@RequestParam("pw_quest_input") String userPwQ, @ModelAttribute("userPwA") String userPwA,
 			RedirectAttributes rttr) throws Exception {
 
 		HttpSession session = request.getSession(false);
 		boolean result = false;
+		
 		User user = service.getUserByUserId(session.getAttribute("userId").toString());
 
 		updateProfile(user, userNickname, userPicFile, userIntro, userPw, userPwQ, userPwA);
