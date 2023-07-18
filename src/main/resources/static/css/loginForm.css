@@ -167,19 +167,19 @@ a {
 }
 
 a:hover {
-	color: #223385;
+	color: #1b319d;
 	text-decoration: underline
 }
 
 a:not([href]) {
-	color: inherit;
+	color: #1b319d;
 	text-decoration: none;
 	font-size: xxx-large;
 	font-weight: bold;
 }
 
 a:not([href]):hover {
-	color: inherit;
+	color: #202e70;
 	text-decoration: none
 }
 
@@ -612,15 +612,6 @@ pre code {
 	}
 }
 
-.row {
-	display: -webkit-box;
-	display: -ms-flexbox;
-	display: flex;
-	-ms-flex-wrap: wrap;
-	flex-wrap: wrap;
-	margin-right: -15px;
-	margin-left: -15px
-}
 
 .no-gutters {
 	margin-right: 0;
@@ -4686,21 +4677,6 @@ input[type=button].btn-block, input[type=reset].btn-block, input[type=submit].bt
 	display: block
 }
 
-.navbar {
-	position: relative;
-	display: -webkit-box;
-	display: -ms-flexbox;
-	display: flex;
-	-ms-flex-wrap: wrap;
-	flex-wrap: wrap;
-	-webkit-box-align: center;
-	-ms-flex-align: center;
-	align-items: center;
-	-webkit-box-pack: justify;
-	-ms-flex-pack: justify;
-	justify-content: space-between;
-	padding: 0.5rem 1rem
-}
 
 .navbar .container, .navbar .container-fluid, .navbar .container-lg,
 	.navbar .container-md, .navbar .container-sm, .navbar .container-xl {
@@ -5225,12 +5201,6 @@ input[type=button].btn-block, input[type=reset].btn-block, input[type=submit].bt
 
 .card-header+.list-group .list-group-item:first-child {
 	border-top: 0
-}
-
-.card-footer {
-	padding: 0.75rem 1.25rem;
-	background-color: rgba(0, 0, 0, 0.03);
-	border-top: 1px solid rgba(0, 0, 0, 0.125)
 }
 
 .card-footer:last-child {

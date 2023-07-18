@@ -861,29 +861,6 @@ a:hover {
 	padding-left: 60px;
 }
 
-/* layout 분리 footer 0707 */
-footer {
-	background: #293A8E;
-    padding: 30px;
-    text-align: center;
-    font-size: 14px;
-	position: relative;
-	transform: translateY(-100%);
-	width: 100%;
-	overflow: hidden;
-}
-
-/* Blocks */
-/* footer 간 거리 조절 0706, style.css에도 적용 */
-.site-wrap {
-	margin: 0 auto;
-	background: #fff;
-	height: auto;
-	min-height: 100%;
-	width: 100%;
-	margin-bottom: 100px;
-}
-
 .bg-section {
 	background: #293A8E;
 	padding-left: 50px;

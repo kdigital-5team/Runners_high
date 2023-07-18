@@ -36,7 +36,7 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="hero-wrap"
-						style="background-image: url('../static/images/hero_1.jpg');"
+						style="background-image: url('../static/images/running_1s.jpg');"
 						data-stellar-background-ratio="0.5"></div>
 				</div>
 			</div>
