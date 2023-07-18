@@ -61,4 +61,6 @@ public interface ChallengeMapper {
 
 	public boolean deleteRoutebyChallId(int challId);
 
+	public void deleteApplyUserbyChallId(int chall_id);
+
 }

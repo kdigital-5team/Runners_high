@@ -7,14 +7,45 @@
 
 	<select resultType="com.spring.dto.Challenge" 
 			id="getAllChall">
-		SELECT chall_id, chall_reg_id, region_id, chall_name, chall_intro, chall_start_date, chall_end_date, chall_all_auth, chall_week_auth,chall_category, chall_sit, chall_auth, chall_online, chall_size, chall_pic
+		SELECT chall_id, 
+				chall_reg_id, 
+				region_id, 
+				chall_name, 
+				chall_intro, 
+				chall_start_date, 
+				chall_end_date, 
+				chall_all_auth, 
+				chall_week_auth,
+				chall_category, 
+				chall_sit, 
+				chall_auth, 
+				chall_online, 
+				chall_size, 
+				chall_pic
 		FROM challenge 
 		ORDER BY chall_id DESC
 	</select>
 	
 	<select resultType="com.spring.dto.ChallengeRegion" 
 			id="getAllChallR">
-		SELECT challenge.chall_id, challenge.chall_reg_id, challenge.chall_name, challenge.chall_intro, challenge.chall_start_date, challenge.chall_end_date, challenge.chall_all_auth, challenge.chall_week_auth, challenge.chall_category, challenge.chall_sit, challenge.chall_auth, challenge.chall_online, challenge.chall_size, challenge.chall_pic, region.region_state, region.region_city, region.region_district
+		SELECT challenge.chall_id, 
+				challenge.chall_reg_id, 
+				challenge.chall_name, 
+				challenge.chall_intro, 
+				challenge.chall_start_date, 
+				challenge.chall_end_date, 
+				challenge.chall_all_auth, 
+				challenge.chall_week_auth, 
+				challenge.chall_category, 
+				challenge.chall_sit, 
+				challenge.chall_auth, 
+				challenge.chall_online, 
+				challenge.chall_size, 
+				challenge.chall_pic, 
+				region.region_state, 
+				region.region_city, 
+				region.region_district, 
+				(select race.race_name from race, challenge where race.race_id = challenge.race_id) as race_name
 		FROM challenge, region
 		WHERE challenge.region_id = region.region_id
 		ORDER BY chall_id DESC
@@ -105,11 +136,35 @@
 			from challenge
 			where chall_id=#{challId}
 	</delete>
+	
+	<delete id="deleteApplyUserbyChallId" 
+			parameterType="com.spring.dto.UserChallenge">
+			delete 
+			from user_chall
+			where chall_id=#{chall_Id} and chall_reg_status='N'
+	</delete>
 
 	<select resultType="com.spring.dto.ChallengeRegion" 
 			id="getChallByOption" 
 			parameterType="java.util.List">
-		SELECT challenge.chall_id, challenge.chall_reg_id, challenge.chall_name, challenge.chall_intro, challenge.chall_start_date, challenge.chall_end_date, challenge.chall_all_auth, challenge.chall_week_auth, challenge.chall_category, challenge.chall_sit, challenge.chall_auth, challenge.chall_online, challenge.chall_size, challenge.chall_pic, region.region_state, region.region_city, region.region_district
+		SELECT challenge.chall_id, 
+				challenge.chall_reg_id, 
+				challenge.chall_name, 
+				challenge.chall_intro, 
+				challenge.chall_start_date, 
+				challenge.chall_end_date, 
+				challenge.chall_all_auth, 
+				challenge.chall_week_auth, 
+				challenge.chall_category, 
+				challenge.chall_sit, 
+				challenge.chall_auth, 
+				challenge.chall_online, 
+				challenge.chall_size, 
+				challenge.chall_pic, 
+				region.region_state, 
+				region.region_city, 
+				region.region_district,
+				(select race.race_name from race, challenge where race.race_id = challenge.race_id) as race_name
 		FROM challenge, region
 		<trim prefixOverrides="AND |OR" prefix="WHERE">
 			challenge.region_id = region.region_id
@@ -155,6 +210,7 @@
 				AND challenge.chall_name LIKE '%'||#{keyword}||'%' 
 			</if>
 		</trim>
+		ORDER BY chall_id DESC
 	</select>
 	
 	<insert id="insertChallenge" parameterType="com.spring.dto.Challenge">

@@ -124,6 +124,11 @@ public class ChallengeService {
 	public boolean deleteRoutebyChallId(int challId) {
 		return mapper.deleteRoutebyChallId(challId);
 	}
+
+	public void deleteApplyUserbyChallId(int chall_id) {
+		mapper.deleteApplyUserbyChallId(chall_id);
+		
+	}
 	
 
 

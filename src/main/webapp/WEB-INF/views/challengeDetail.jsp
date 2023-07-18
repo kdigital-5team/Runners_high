@@ -80,14 +80,14 @@
 		</div>
 		
 		<div style="margin: auto; text-align: center;">
-			<a href="mypage_feed">소개</a><span class="mx-2">|</span> 
+			<a href="#">소개</a><span class="mx-2">|</span> 
 			<c:if test="${userId eq challenge.chall_reg_id }">
 				<a href="/challenge/${challenge.chall_id}host">관리</a><span class="mx-2">|</span> 
 			</c:if>
-			<a href="${chall_id}challengePost">인증 게시판</a><span class="mx-2">|</span>
+			<c:if test="${challenge.chall_sit eq '모집종료' }">
+				<a href="${chall_id}challengePost">인증 게시판</a><span class="mx-2">|</span>
+			</c:if>
 			<a href="mypage_title">캘린더</a>
-			<spanclass="mx-2">
-				</span>
 		</div>
 
 		<div style="margin: auto; width: 50%;">챌린지 소개</div>
@@ -97,7 +97,6 @@
 		<div style="margin: auto; width: 50%; margin-top: 10px">참가자</div>
 		<div style="margin: auto; background-color: #F0F0F0; width: 50%; height: 100px; margin-bottom: 10px;">
 			<c:forEach items="${userList }" var="apply_user">
-				<c:if test="${apply_user.chall_reg_status eq  'Y'}">
 					<div style="display: inline-block; width: 10%;">
 						<div style="width:100%; padding-top:100%; height:0; border-radius: 70%;  
 						background-image: url(../static/images/profileImages/default_image.png);
@@ -108,8 +107,6 @@
 							${apply_user.nickname }
 						</div>
 					</div>
-				</c:if>
-				
 			</c:forEach>
 		</div>
 

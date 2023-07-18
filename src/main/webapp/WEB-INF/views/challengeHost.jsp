@@ -66,18 +66,20 @@
 			</div>
 		</div>
 		
-		<div style="margin: auto; text-align: center; float: left; width: 80%">
-			<a href="/challenge/${challenge.chall_id}">소개</a><span class="mx-2">|</span> 
-			<a href="#">관리</a><span class="mx-2">|</span> 
-			<a href="mypage_chall">인증 게시판</a><span class="mx-2">|</span>
+		<div style="margin: auto; text-align: center; float: left; width: 40%; margin-left: 28%; margin-top: 10px">
+			<a href="/challenge/${challenge.chall_id }">소개</a><span class="mx-2">|</span> 
+			<c:if test="${userId eq challenge.chall_reg_id }">
+				<a href="#">관리</a><span class="mx-2">|</span> 
+			</c:if>
+			<c:if test="${challenge.chall_sit eq '모집종료' }">
+				<a href="${chall_id}challengePost">인증 게시판</a><span class="mx-2">|</span>
+			</c:if>
 			<a href="mypage_title">캘린더</a>
-			<spanclass="mx-2">
-				</span>
 		</div>
-		<div style="float: left; width: 20%;">
+		<div style="float: left; width: 32%; margin-top: 10px">
 			<c:if test="${challenge.chall_sit ne '모집종료'}">
 				<form action="/challenge/${challenge.chall_id}modify" method="GET" id="detailForm" style="display: inline-block;">
-								<input type="submit" value="수정">	
+								<input type="submit" class="btn btn-secondary" value="수정">	
 				</form>
 				<button class="btn btn-danger" onclick="deleteChall('${challenge.chall_id}')" style="display: inline-block;">삭제</button>
 			</c:if>
@@ -85,7 +87,7 @@
 		<div style="width: 50%; margin: auto;">
 		<span class="mx-2">신청자</span>
 		<c:forEach items="${appList}" var="app">
-			<div style="border: 1px solid aqua; vertical-align: center;">
+			<div style="background-color: #F0F0F0; vertical-align: center;">
 				<div style="display:inline-block; width:20%; padding-top:20%; height:0; border-radius: 70%;  
 					background-image: url(${challenge.chall_pic});
 					background-position:center;
@@ -96,7 +98,7 @@
 					<div>${app.nickname }</div>
 					<div>안녕</div>
 				</div>
-				<div style="display:inline-block; position:relative; top: 50%; buttom:50%;">
+				<div style="display:inline-block; position:relative; margin-buttom:50%;">
 					<button class="btn btn-primary" onclick="acceptId('${app.user_id }','${challenge.chall_id}')">수락</button>
 					<button class="btn btn-danger" onclick="declinetId('${app.user_id }','${challenge.chall_id}')">거절</button>
 				</div>
@@ -106,11 +108,11 @@
 		<div style="width: 50%; margin: auto;">
 			<span>맴버별 인증율</span>
 		<c:forEach items="${parList}" var="par">
-			<div style="vertical-align: center;">
-				<div style="display: inline-block; width: 15%; float: left;">
-						<button style="background-color: red;" onclick="kickId('${par.user_id}','${challenge.chall_id}')">추방</button>
+			<div>
+				<div style="width: 15%; float: left; height: 150px;">
+						<button class="btn btn-danger" style="margin: auto; margin-top: 50%; display: block;" onclick="kickId('${par.user_id}','${challenge.chall_id}')">추방</button>
 					</div>
-				<div style="display: inline-block; width: 15%; float: left;">
+				<div style="width: 15%; float: left; height: 150px;">
 					<div style="width:100%; padding-top:100%; height:0; border-radius: 70%;  
 							background-image: url(../static/images/profileImages/default_image.png);
 							background-position:center;
@@ -120,9 +122,9 @@
 						${par.nickname }
 					</div>
 				</div>
-				<div style="display: inline-block; text-align: center; width: 70%; height: 100%; float: right;">
+				<div style="text-align: center; width: 70%; float: right; height: 150px;">
 					${par.chall_auth_num/challenge.chall_all_auth*100}%
-					<div style="text-align: center; width: 100%; background-color: #BDFFAD; height: 25px; position: relative;">
+					<div style="width: 75%; background-color: #BDFFAD; height: 25px; position: relative; margin: auto;">
 						<div style="width: ${par.chall_auth_num/challenge.chall_all_auth*100}%; background-color: #32FF00; height: 25px; position: relative;">
 					</div>
 					</div>
