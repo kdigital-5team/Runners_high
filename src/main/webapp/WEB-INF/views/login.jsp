@@ -89,7 +89,7 @@
 <script type="text/javascript">
 	let msg = '${msg}';
 	console.log(msg);
-
+	
 	function getAlert(){
 		if (msg != '') {
 		alert(msg);
