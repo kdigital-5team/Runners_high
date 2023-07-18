@@ -35,7 +35,30 @@
 
 		<!-- header -->
 		<%@ include file="./inc/header.jsp"%>
-		
+
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-10">
+						<div class="display-flex">
+							<div class="post" style="border:none; margin-top:10%; margin-left:35%">
+								<div class="post-header2">
+									<img src="/static/images/test.jpg" alt="Profile Picture">									
+								</div>
+							</div>
+							<form action="/mypage/feed" enctype="multipart/form-data" method="POST">					
+								<div class="post" style="border:none; margin-top:60%;">
+									<div class="username">${feedList[0].user_id}</div>
+									<div class="username">33333333333333</div>
+								</div>
+							</form>	
+							<div onclick="location.href='#'" style="border:none; margin-top:14%; margin-left:2%; margin-right:15%">
+								<button>프로필 수정</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
 		<!-- 피드 / 챌린지 / 칭호 탭 -->
 		<div class="container">
 			<div class="row">
@@ -75,7 +98,7 @@
 									<div class="post">
 										<div class="post-header">
 											<img src="/static/images/test.jpg" alt="Profile Picture">
-											<div class="username">${feed.user_id }</div>
+											<div class="username">${feed.user_id}</div>
 										</div>
 										<hr>
 										<div class="display-flex">
@@ -113,6 +136,7 @@
 				
 			</div>
 		</div>
+	</div>
 	<!-- 피드 상세보기 레이어 팝업 js문 -->
 	<script>
             const layer_button = document.getElementById("layer_button");
