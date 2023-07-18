@@ -92,7 +92,7 @@
 
 		<div style="margin: auto; width: 50%;">챌린지 소개</div>
 		<div style="margin: auto; width: 50%; height: 300px; background-color: #F0F0F0;" >
-			<span style="margin: 3%;">${challenge.chall_intro }</span>
+			<span style="margin: 2%; font-size: 15px"><b>${challenge.chall_intro }</b></span>
 		</div>
 		<div style="margin: auto; width: 50%; margin-top: 10px">참가자</div>
 		<div style="margin: auto; background-color: #F0F0F0; width: 50%; height: 100px; margin-bottom: 10px;">

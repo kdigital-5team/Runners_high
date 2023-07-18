@@ -344,5 +344,21 @@ public class ChallengeController {
 			}
 			return "index";
 		}
+		
+		@RequestMapping(value = "/challenge/delete/{chall_id}", method = RequestMethod.GET)
+		String deleteChallbyChallId(@PathVariable int chall_id) throws Exception {
+			boolean deleteChall = false;
+			
+			
+				challService.deleteUserchallbyChallId(chall_id);
+				challService.deleteRoutebyChallId(chall_id);
+				deleteChall = challService.deleteChallbyChallId(chall_id);
+				
+				if(deleteChall) {
+					System.out.println("삭제");
+					return "redirect:/main";
+				}
+			return "index";
+		}
 
 }

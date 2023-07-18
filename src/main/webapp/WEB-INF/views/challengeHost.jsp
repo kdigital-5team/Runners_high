@@ -218,15 +218,7 @@
 			
 			new_form.name="chall_delete";
 			new_form.method='DELETE';
-			new_form.action='/challenge/delete/';
-			
-			var chall_input = document.createElement('input');
-			chall_input.setAttribute("type","hidden");
-			chall_input.setAttribute("name","challId");
-			chall_input.setAttribute("value", chall_id);
-			
-			new_form.appendChild(chall_input);
-			
+			new_form.action='/challenge/delete/'+chall_id;
 			
 			document.body.appendChild(new_form);
 			new_form.submit();

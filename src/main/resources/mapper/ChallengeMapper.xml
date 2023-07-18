@@ -84,6 +84,27 @@
 			SET user_reg_status = 'N', user_deny_num =  user_deny_num+1, chall_reg_status = 'N'
 			WHERE user_id=#{kickId} and chall_id=#{chall_id}
 	</update>
+	
+	<delete id="deleteUserchallbyChallId" 
+			parameterType="com.spring.dto.UserChallenge">
+			delete 
+			from user_chall 
+			where chall_id=#{challId}
+	</delete>
+	
+	<delete id="deleteRoutebyChallId" 
+			parameterType="com.spring.dto.Route">
+			delete 
+			from chall_route
+			where chall_id=#{challId}
+	</delete>
+	
+	<delete id="deleteChallbyChallId" 
+			parameterType="com.spring.dto.Challenge">
+			delete 
+			from challenge
+			where chall_id=#{challId}
+	</delete>
 
 	<select resultType="com.spring.dto.ChallengeRegion" 
 			id="getChallByOption" 

@@ -55,4 +55,10 @@ public interface ChallengeMapper {
 
 	public List<ChallengeRegion> getAllChallR();
 
+	public boolean deleteUserchallbyChallId(int challId);
+
+	public boolean deleteChallbyChallId(int challId);
+
+	public boolean deleteRoutebyChallId(int challId);
+
 }
