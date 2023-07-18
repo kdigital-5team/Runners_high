@@ -265,7 +265,7 @@ select:focus {
   height: 48px;
   border-radius: 4px;
   border: none;
-  background: url('https://i.ibb.co/JtT43fX/pngegg.png') calc(100% - 21px) center no-repeat;
+  background: url('../images/arrow.png') calc(100% - 21px) center no-repeat;
   z-index: 20;
   background-size: 12px;
   cursor: pointer;

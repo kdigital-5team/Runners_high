@@ -22,29 +22,21 @@
 <link rel="stylesheet" href="../static/fonts/flaticon/font/flaticon.css">
 <link rel="stylesheet" href="../static/css/aos.css">
 
-<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-<script>
-	$(function () {
-		$('#userPic').on('change', function(){
-			readURL(this);	
-			console.log('userpic 변경 감지');
-		});
-	});
-	function readURL(input) {
-		if (input.files && input.files[0]) {
-			console.log('썸네일 파일 변경');
-			var reader = new FileReader();
-			reader.onload = function (e) {
-				$('#preImage').attr('src', e.target.result);
-			}
-			reader.readAsDataURL(input.files[0]);
-		}
-	}
-</script>
 </head>
 <body>
-<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-
+	<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+	<script src="../static/js/jquery.min.js"></script>
+	<script src="../static/js/jquery-migrate-3.0.1.min.js"></script>
+	<script src="../static/js/jquery-ui.js"></script>
+	<script src="../static/js/popper.min.js"></script>
+	<script src="../static/js/bootstrap.min.js"></script>
+	<script src="../static/js/owl.carousel.min.js"></script>
+	<script src="../static/js/jquery.stellar.min.js"></script>
+	<script src="../static/js/jquery.fancybox.min.js"></script>
+	<script src="../static/js/aos.js"></script>
+	<script src="../static/js/main.js"></script>
+	
+	
 	<!-- header -->
 	<%@ include file="./inc/header.jsp"%>
 
@@ -53,8 +45,7 @@
 		<div class="site-section"></div>
 		<div class="site-section">
 			<div class="container">
-				<form action="/mypage/edit" enctype="multipart/form-data"
-					method="POST">
+				<form action="/mypage/edit" enctype="multipart/form-data" method="POST" id="mypageEdit">
 					<input type="hidden" name="_method" value="PUT" />
 					<div>
 						<div class="context-form">
@@ -96,22 +87,23 @@
 						<div class="context-form">
 						  <label for="PasswordQuestion">비밀번호 질문</label><br> 
 						  <div class="selectBox">
-						    <button class="label" id="pw_quest" name="pw_quest">질문 리스트</button>
-						    <ul class="optionList">
-						      <li class="optionItem" value="어렸을 때 장래희망은?">어렸을 때 장래희망은?</li>
-						      <li class="optionItem" value="다녔던 초등학교의 명칭은?">다녔던 초등학교의 명칭은?</li>
-						      <li class="optionItem" value="기억나는 장소는?">기억나는 장소는?</li>
-						    </ul>
+						    <button class="label" id="pw_quest" name="pw_quest">${user.pw_quest}</button>
+						     	<input type="hidden" id="pw_quest_input" name="pw_quest_input" value="${pw_quest_input}">
+								    <ul class="optionList">
+								      <li class="optionItem" value="어렸을 때 장래희망은?">어렸을 때 장래희망은?</li>
+								      <li class="optionItem" value="다녔던 초등학교의 명칭은?">다녔던 초등학교의 명칭은?</li>
+								      <li class="optionItem" value="기억나는 장소는?">기억나는 장소는?</li>
+								    </ul>
 						  </div>
 						</div>
 						<div class="context-form">
-							<label> 비밀번호 확인 답변 </label><br> <input type="text"
-								name="userPwA" placeholder="${user.pw_quest_answer}">
+							<label> 비밀번호 확인 답변 </label><br> 
+							<input type="text" name="userPwA" placeholder="${user.pw_quest_answer}">
 						</div>
 					</div>
 
 					<p align="center">
-							<input type="submit"value="저장" />
+							<input type="submit" value="저장" />
 					</p>
 					<br> <br>
 				</form>
@@ -119,20 +111,37 @@
 		</div>
 	</div>
 
+
+	<!-- footer -->
+	<%@ include file="./inc/footer.jsp"%>
+
 	<!-- 프로필 사진 수정 -->
 	<script type="text/javascript">
 		function onClickUpload(){
 			let pic_upload = document.getElementById('userPic');
 			pic_upload.click();
 		}
-	</script>
 
-	<!-- footer -->
-	<%@ include file="./inc/footer.jsp"%>
-
+		
+	$(function () {
+		$('#userPic').on('change', function(){
+			readURL(this);	
+			console.log('userpic 변경 감지');
+		});
+	});
+	
+	function readURL(input) {
+		if (input.files && input.files[0]) {
+			console.log('썸네일 파일 변경');
+			var reader = new FileReader();
+			reader.onload = function (e) {
+				$('#preImage').attr('src', e.target.result);
+			}
+			reader.readAsDataURL(input.files[0]);
+		}
+	}
 
 	<!-- 드롭다운 -->
-	<script>
 	const label = document.querySelector('.label');
 	const options = document.querySelectorAll('.optionItem');
 	const optionList = document.querySelector('.optionList');
@@ -142,6 +151,9 @@
 	const handleSelect = (function(item) {
 	  label.innerHTML = item.textContent;
 	  optionList.style.display='none';
+	  
+	  // 선택한 값 업데이트
+	  document.getElementById('pw_quest_input').value = item.getAttribute('value');
 	});
 	
 	// 옵션 클릭시 클릭한 옵션을 넘김
@@ -161,21 +173,8 @@
 		    optionList.style.display = 'block';
 		  }
 		});
-	</script>
-	
-	<script src="../static/js/jquery.min.js"></script>
-	<script src="../static/js/jquery-migrate-3.0.1.min.js"></script>
-	<script src="../static/js/jquery-ui.js"></script>
-	<script src="../static/js/popper.min.js"></script>
-	<script src="../static/js/bootstrap.min.js"></script>
-	<script src="../static/js/owl.carousel.min.js"></script>
-	<script src="../static/js/jquery.stellar.min.js"></script>
-	<script src="../static/js/jquery.fancybox.min.js"></script>
-	<script src="../static/js/aos.js"></script>
-	<script src="../static/js/main.js"></script>
 
 	<!-- 동적으로 intro크기 변경 -->
-	<script type="text/javascript">
 	    window.onload = function() {
 	    	console.log("onload JS");
 	        
@@ -197,10 +196,8 @@
 	        // 이전 한줄소개에 맞춰 기본 sieze 세팅
 	        resize();
 	    }
-	</script>
 
 	<!-- 동적으로 introByte 체크 -->
-	<script type="text/javascript">
 		function fn_checkByte(obj){
 			console.log("byte체크 실행");
 			
@@ -240,12 +237,9 @@
 		    document.getElementById("currByte").style.color = "#293A8E";
 		    }
 		}
-	</script>
 
-</body>
 
 <!-- 닉네임/비밀번호 검증 -->
-<script type="text/javascript"> 
 var pw_chk = false; 
 var nickname_chk = false;
 $(function() {
@@ -255,7 +249,7 @@ $(function() {
 	  $('#user_pw').keyup(function() {
 		    var user_pw = $('#user_pw').val();
 			var user_pw_check = $('#user_pw_check').val();
-		    
+			
 		    if (user_pw === '') {
 		      $("label[for='user_pw']").text("");
 		    } else if (!getPwCheck.test(user_pw)) {
@@ -263,7 +257,6 @@ $(function() {
 	          $("label[for='user_pw']").css("color", "#e35c5c");
 		    } else {
 		      $("label[for='user_pw']").text("");
-		      pw_chk = true;
 		    }
 	  });
 
@@ -275,20 +268,26 @@ $(function() {
 			
 		    if (user_pw === user_pw_check) {
 		      $("label[for='user_pw_check']").text("비밀번호가 일치합니다.");
+		      $("label[for='user_pw_check']").css("color", "");
+		      pw_chk = true;
 		    } else if (user_pw === '' || user_pw_check === '') {
 		      $("label[for='user_pw_check']").text("");
+		      pw_chk = false;
 		    } else {
 		      $("label[for='user_pw_check']").text("비밀번호가 일치하지 않습니다.");
 		      $("label[for='user_pw_check']").css("color", "#e35c5c");
+		      pw_chk = false;
 		    }
 		  });
 	  
 	$('#nickname').keyup(function() {
 		var nickname = document.getElementById('nickname').value; 
+		
 		if (!getNickNameCheck.test($(event.target).val())) {
 			$("label[for='nickname_check']").text("닉네임은 한글, 영어, 숫자 조합 2글자 이상 10글자 이하만 가능합니다.");
 			$("label[for='nickname_check']").css("color", "#e35c5c");
 			nickname_chk = false;
+			return false;
 		} else if (nickname.trim().length != 0) {
 			$.ajax({
 				async: true,
@@ -316,17 +315,44 @@ $(function() {
 	});
 	
 });
-</script>
 
 <!-- 제출 완료 alert -->
-<script type="text/javascript">
-	$("form").submit(function(event) {
-	    event.preventDefault();
+$('#mypageEdit').on("submit", function () {
+	   
+	event.preventDefault();
+	
+	// 비밀번호 수정이 있을 경우 비밀번호 확인 반드시 작성
+	var user_pw = $('#user_pw').val();
+	var user_pw_check = $('#user_pw_check').val();
+	
+	if (user_pw !== '') {
+		if(!pw_chk || user_pw_check === '') {
+			alert("비밀번호 확인 후 진행해주세요.");
+			return;
+		}
+	}
+	    var form = event.target;
+	    var formData = new FormData(form);
 	    
+	    // 비밀번호 질문 넣기
+		  var selectedOption = document.querySelector('.optionItem.selected');
+		  var pwQuestInput = document.getElementById('pw_quest_input');
+		  var pwQuestAnswer = document.getElementById('pw_quest_answer');
+		  var pwQuestValue = '';
+
+		  if (selectedOption) {
+		    pwQuestValue = selectedOption.getAttribute('value');
+		  } else {
+		    pwQuestValue = document.getElementById('pw_quest_input').value;
+		  }
+
+		  pwQuestInput.value = pwQuestValue;
+	    
+		// 최종 폼 전송
 	    $.ajax({
-	        url: $(this).attr("action"),
-	        type: $(this).attr("method"),
-	        data: new FormData(this),
+	        url: form.action,
+	        type: form.method,
+	        data: formData,
 	        processData: false,
 	        contentType: false,
 	        success: function(response) {
@@ -334,10 +360,11 @@ $(function() {
 	            window.location.href = "/test";
 	        },
 	        error: function(error) {
-	            alert("프로필 수정에 실패했습니다. 다시 확인해주세요." + error);
+	            alert("프로필 수정에 실패했습니다. 양식에 맞춰 작성해주십시오.");
+	            location.href="/mypage/edit";
 	        }
 	    });
-	});
+})
 </script>
-
+</body>
 </html>
