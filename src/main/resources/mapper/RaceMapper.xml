@@ -13,6 +13,7 @@
  		WHERE race.region_id = region.region_id
  	</select>
  	
+ 	
  	<select id="getRaceByOption" 
  			resultType="com.spring.dto.RaceAndRegion" 
  			parameterType="java.util.List" >

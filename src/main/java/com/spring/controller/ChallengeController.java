@@ -24,16 +24,20 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.spring.dto.Challenge;
-import com.spring.dto.ChallengePost;
+import com.spring.dto.Race;
+import com.spring.dto.RaceAndRegion;
 import com.spring.dto.User;
 import com.spring.dto.UserChallenge;
 import com.spring.service.ChallengeService;
+import com.spring.service.RaceService;
 import com.spring.service.RegionService;
 import com.spring.service.RouteService;
 
 @Controller
 // http://localhost:8081/regist
 public class ChallengeController {
+	private static final String String = null;
+
 	@Autowired
 	private RegionService service;
 	
@@ -42,6 +46,9 @@ public class ChallengeController {
 	
 	@Autowired
 	private RouteService routeService;
+	
+	@Autowired
+	private RaceService raceService;
 	
 	@RequestMapping(value = "/registChall", method = RequestMethod.GET)
 	public String registChall(Model model) throws Exception {
@@ -62,17 +69,26 @@ public class ChallengeController {
 							 @RequestParam String region_district,
 							 HttpSession session) throws Exception {
 		String userId = (String) session.getAttribute("userId");
+		String raceId = (String)session.getAttribute("raceId");
 		
 		System.out.println(newChallenge);
 		System.out.println(region_district);
 		System.out.println(userId);
+		
+		if (raceId==null && newChallenge.getChall_category().equals("대회용")) {
+			return "registChall";
 
+		}
+		System.out.println(raceId);
 		boolean challResult = false;
 		
 	
 		try {
 			newChallenge.setChall_reg_id(userId);
 			newChallenge.setRegion_id(service.getIdByDistrict(region_district));
+			System.out.println(newChallenge);
+			
+			newChallenge.setRace_id(raceId);
 			System.out.println(newChallenge);
 			challResult = challService.insertChallenge(newChallenge);
 			
@@ -82,7 +98,7 @@ public class ChallengeController {
 				int challId = newChallenge.getChall_id();
 				System.out.println(challId);
 				session.setAttribute("challId", challId);
-				
+				session.removeAttribute(raceId);
 				return "registChallRoute";
 			}
 			
@@ -94,6 +110,22 @@ public class ChallengeController {
 		return "index";
 	}
 	
+	@RequestMapping(value = "/registChall/selectChallRace" , method = RequestMethod.GET)
+	public String selectRace(Model model) {
+		List<RaceAndRegion> raceList = raceService.getAllRaces();
+		model.addAttribute("raceList", raceList);
+		return "selectChallRace";
+	}
+	
+	@RequestMapping(value="/getRaceId",  method=RequestMethod.POST)
+	@ResponseBody
+	String getRace(@RequestBody String raceId,HttpSession session) throws Exception {
+        JSONParser jsonParser = new JSONParser();
+        JSONObject jsonObj = (JSONObject) jsonParser.parse(raceId);
+		session.setAttribute("raceId", Long.toString((long) jsonObj.get("raceId")));
+		System.out.println(jsonObj.get("raceId"));
+		return raceId;
+	}
 
 	
 	@RequestMapping(value="/getCity", method=RequestMethod.POST)
@@ -256,38 +288,4 @@ public class ChallengeController {
 			challService.kickIdbyChallId(kickId, chall_id);
 			return "redirect:/challenge/"+chall_id+"host";
 		}
-		
-	//인증게시판 리스트
-		@RequestMapping(value="challenge/{chall_id}challengePost")
-		public String challengePost(@PathVariable int chall_id, Model model) {
-			Challenge challenge = challService.getChallByChallId(chall_id);
-			User host = challService.getHostByChallId(chall_id);
-//			String userId = (String) session.getAttribute("userId");
-			List<UserChallenge> userList = challService.getUserByChallId(chall_id);
-			UserChallenge userChall=new UserChallenge();
-			List<ChallengePost> postList = challService.getAllPost();
-			model.addAttribute("postList", postList);
-			
-			model.addAttribute("challenge", challenge);
-			model.addAttribute("userChall", userChall);
-			model.addAttribute("host", host);
-			model.addAttribute("userList", userList);
-			return "challengePost";
-		}
-
-		@RequestMapping(value = "/challenge/{chall_id}challPostDetail", method = RequestMethod.GET)
-		public String getPostByAuthId(@RequestParam("auth_id") int auth_id, Model model) {
-			ChallengePost post = challService.getPostByAuthId(auth_id);
-			model.addAttribute(auth_id);
-			
-			return "challengePostDetail";
-		}
-		
-		@RequestMapping(value="/challengePost/insertChallPost", method=RequestMethod.GET)
-		public String insertPost(@ModelAttribute ChallengePost newPost, Model model) {
-			
-			challService.insertChallPost(newPost);
-			return "insertChallPost";
-		}
-		
 }
