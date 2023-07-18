@@ -5,6 +5,7 @@ import java.util.Date;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -21,7 +22,9 @@ public class PersonalFeed {
 	private String user_id;
 	private String feed_title;
 	private String feed_cont;
+
 	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private Date feed_writing_date;
+	private Date feed_writing_date;	
+
 }

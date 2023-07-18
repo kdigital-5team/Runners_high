@@ -31,13 +31,6 @@ public class MypageController {
 	@Autowired
 	UserService service;
 
-	// 커밋
-	@GetMapping("/mypage/feed")
-	public String mypage_feed() {
-		System.out.println("feed");
-		return "mypage_feed";
-	}
-
 	@GetMapping("/mypage/chall")
 	public String mypage_chall() {
 		System.out.println("chall");
