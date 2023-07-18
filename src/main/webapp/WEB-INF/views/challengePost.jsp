@@ -53,16 +53,9 @@
 			</div>
 			<div style="float: left; width: 33%">
 				<span>${challenge.chall_sit}</span>
-				<c:if test="${userId ne challenge.chall_reg_id && userChall.user_reg_status ne 'Y' && userChall.user_deny_num lt 2}">
+				<c:if test="${userId ne challenge.chall_reg_id}"> 
 					<form action="/challenge/${challenge.chall_id}/apply" method="post">
-						<input type="hidden" name="applyId" value="${userId}">
 						<input type="submit" value="신청">
-					</form>
-				</c:if>
-				<c:if test="${userId ne challenge.chall_reg_id && userChall.user_reg_status eq 'Y'}">
-					<form action="/challenge/${challenge.chall_id}/withdraw" method="post">
-						<input type="hidden" name="applyId" value="${userId}">
-						<input type="submit" value="탈퇴">
 					</form>
 				</c:if>
 			</div>
@@ -81,35 +74,79 @@
 		
 		<div style="margin: auto; text-align: center;">
 			<a href="mypage_feed">소개</a><span class="mx-2">|</span> 
-			<c:if test="${userId eq challenge.chall_reg_id }">
-				<a href="/challenge/${challenge.chall_id}host">관리</a><span class="mx-2">|</span> 
-			</c:if>
-			<a href="mypage_chall">인증 게시판</a><span class="mx-2">|</span>
+			<a href="challengePost">인증 게시판</a><span class="mx-2">|</span>
 			<a href="mypage_title">캘린더</a>
 			<spanclass="mx-2">
 				</span>
 		</div>
 
-		<div style="margin: auto; width: 50%;" >
-			${challenge.chall_intro }
-		</div>
-		<div style="margin: auto; border: 1px solid aqua; width: 50%; height: 100px;">
-			<c:forEach items="${userList }" var="apply_user">
-				<c:if test="${apply_user.chall_reg_status eq  'Y'}">
-					<div style="display: inline-block; width: 10%;">
-						<div style="width:100%; padding-top:100%; height:0; border-radius: 70%;  
-						background-image: url(../static/images/profileImages/default_image.png);
-						background-position:center;
-						background-size:cover;">
-						</div>
-						<div style="text-align: center;">
-							${apply_user.nickname }
-						</div>
-					</div>
-				</c:if>
-				
+		<%-- <div>
+		<table>
+		<c:forEach items="${postList}" var="post">
+		
+			        <tr><td colspan='3'>제목: ${post.auth_title}</td><td colspan='3'>내용: ${post.auth_cont}</td></tr>
+			        
+			        <tr><td>♥ ${post.auth_like}</td><td>작성자:${post.nickname}</td><td>작성날짜:${post.auth_date}</td></tr>
+			        <tr><td>작성자:${post.nickname}</td><td>댓글:${post.auth_comment_cont}</td><td>작성날짜:${post.auth_comment_date}</td></tr>
+			        </c:forEach></table>
+		</div> --%>
+		
+		<table class="table table-hover table-striped">
+					<thead>
+						<tr>
+							
+							<th>제목</th>
+							<th>작성자</th>
+							<th>작성일</th>
+						</tr>
+					</thead>
+						<c:forEach items="${postList}" var="post">
+					<tbody>
+							<tr>
+								
+								<td><a href="#" data-toggle="modal" data-target="#myModal2${vs.index}">${post.auth_title}</a></td>
+								<td>${post.user_id}</td>
+								<td>${post.auth_date}</td>
+							</tr>
+							
+									
+						
+						
+					</tbody>
+					
+							</table>
+						<!-- Modal -->
+						
+			<div class="modal fade" id="myModal2${vs.index}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			  <div class="modal-dialog">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			        
+			      </div>
+			      <div class="modal-body">
+			     
+			        <table>
+			        
+			        <tr><td>${post.auth_title}</td></tr>
+			        <tr><td><img src="${post.auth_pic_path}"
+											alt="Image" class="img-fluid"></td></tr>
+			        <tr><td>${post.auth_cont}</td></tr>
+			        
+			        </table>
+			        
+			        
+			      </div>
+			      
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			       
+			      </div>
+			    </div>
+			  </div>
+			</div>
+						
 			</c:forEach>
-		</div>
 
 		
 	</div>
@@ -117,23 +154,25 @@
 	<!-- footer -->
 	<%@ include file="./inc/footer.jsp"%>
 
-	<script src="../js/jquery.min.js"></script>
-	<script src="../js/jquery-migrate-3.0.1.min.js"></script>
-	<script src="../js/jquery-ui.js"></script>
-	<script src="../js/popper.min.js"></script>
-	<script src="../js/bootstrap.min.js"></script>
-	<script src="../js/owl.carousel.min.js"></script>
-	<script src="../js/jquery.stellar.min.js"></script>
-	<script src="../js/jquery.magnific-popup.min.js"></script>
-	<script src="../js/aos.js"></script>
+	<script src="js/jquery.min.js"></script>
+	<script src="js/jquery-migrate-3.0.1.min.js"></script>
+	<script src="js/jquery-ui.js"></script>
+	<script src="js/popper.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/owl.carousel.min.js"></script>
+	<script src="js/jquery.stellar.min.js"></script>
+	<script src="js/jquery.magnific-popup.min.js"></script>
+	<script src="js/aos.js"></script>
 
-	<script src="../js/main.js"></script>
+	<script src="js/main.js"></script>
 	
 
 </body>
 <script type="text/javascript">
-if(${userChall.user_deny_num}>=2)
-	alert("거절 5회로 신청 불가");
+
+	function apply(){
+
+	}
 
   </script>
 </html>

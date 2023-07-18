@@ -46,75 +46,78 @@
 
 	<!-- header -->
 	<%@ include file="./inc/header.jsp"%>
-	
+
 	<!-- 피드 정보 수정 -->
 	<div class="site-wrap">
 		<div class="site-section"></div>
 		<div class="site-section">
 			<div class="container">
-				<form action="/mypage/edit" enctype="multipart/form-data" method="POST">
-					<input type="hidden" name="_method" value="PUT"/>
-					<div class="context">
+				<form action="/mypage/edit" enctype="multipart/form-data"
+					method="POST">
+					<input type="hidden" name="_method" value="PUT" />
+					<div>
 						<div class="context-form">
-						<h2>  프로필 수정 </h2>
-							<label> 아이디 </label><br>
-							<input type="text" name="userId" placeholder="${user.user_id}" readonly> 
+							<h2 class="form-h2">프로필 수정</h2>
+							<label> 아이디 </label><br> 
+							<input type="text" name="userId" placeholder="${user.user_id}" readonly>
 						</div>
 						<div class="context-form">
-							<label> 닉네임 </label><br>
-								<input type="text" id="nickname" name="userNickname" placeholder="${user.nickname}"> 
-									<label for="nickname_check"></label>
+							<label> 닉네임 </label><br> 
+							<input type="text" id="nickname" name="userNickname" placeholder="${user.nickname}"><br>
+							<label class="notice-label" for="nickname_check"></label>
 						</div>
 						<div class="context-form">
 							<label> 프로필 사진 </label><br>
-								<div class="profile-pic">
-											<img id="preImage" onclick="onClickUpload()" src="../static/images/profileImages/${user.user_pic}" class="photo" 
-												 onerror='this.src="../static/images/profileImages/default_image.png"'><br>
-								</div>
-										<input type="file" name="userPic" accept=".jpg, .png, .jpeg" id="userPic"> 
+							<div class="profile-pic">
+								<img id="preImage" onclick="onClickUpload()"
+									src="/images/${user.user_pic}" class="photo"
+									onerror='this.src="../static/images/profileImages/default_image.png"'><br>
+							</div>
+							<input type="file" name="userPic" accept=".jpg, .png, .jpeg" id="userPic">
 						</div>
-						<div class="context-form">
-							<!-- 텍스트 길이에 맞춰 늘어나도록 변경 or 글자수 제한(byte 표기) -->
+						<div class="context-form" id="virtualInput">
 							<label> 한줄 소개 </label><br>
-								<input type="text" name="userIntro" placeholder="${user.intro}"> 
+							<textarea id="textArea" name="userIntro" rows="1" maxlength="300"
+									  placeholder="${user.intro}" wrap="hard"
+									  onkeyup="fn_checkByte(this)"></textarea><br>
+							 <sup><span id="currByte">0</span>/300bytes</sup><br>
 						</div>
-						<br><hr>
-						<h2> 계정 수정 </h2>
-						<div class="context-form">
-            				<label> 비밀번호</label><br>
-           						<input type="password" name="userPw" id="user_pw" placeholder="사용자 비밀번호">
-        				</div>
-       					 <div class="context-form">
-				            <label for="inputPasswordCheck">비밀번호 확인</label>
-				            	<input type="password" name="userPwCheck" id="user_pw_check" placeholder="사용자 비밀번호 확인">
-				            		<label for="pw_check"></label>
-				        </div>
-						<div class="context-form"><br>
-							<label> 비밀번호 확인 질문 </label><br>
-					       		<select id="pw_quest" name="userPwQ">
-									<option value ="어렸을 때 장래희망은?"> 어렸을 때 장래희망은? </option>
-									<option value ="다녔던 초등학교의 명칭은?"> 다녔던 초등학교의 명칭은? </option>
-									<option value ="기억나는 장소는?"> 기억나는 장소는? </option>
-								</select >
+						<br>
+						<hr>
+						<h2 class="form-h2">계정 수정</h2>
+						<div class="context-form" id="pw-check-div">
+							<label> 비밀번호</label><br> 
+							<input type="password" name="userPw" id="user_pw" placeholder="사용자 비밀번호"><br>
+								<label for="user_pw_check" class="notice-label"></label><br> 
+							<label for="inputPasswordCheck" id=pw-only>비밀번호 확인</label><br> 
+								<input type="password" name="userPwCheck" id="user_pw_check" placeholder="사용자 비밀번호 확인"><br> 
+									<label for="pw_check" class="notice-label"></label>
 						</div>
 						<div class="context-form">
-							<label> 비밀번호 확인 답변 </label><br>
-								<input type="text" name="userPwA" placeholder="${user.pw_quest_answer}"> 
+							<label> 비밀번호 확인 질문 </label><br> <select id="pw_quest"
+								name="userPwQ">
+								<option value="어렸을 때 장래희망은?">어렸을 때 장래희망은?</option>
+								<option value="다녔던 초등학교의 명칭은?">다녔던 초등학교의 명칭은?</option>
+								<option value="기억나는 장소는?">기억나는 장소는?</option>
+							</select>
+						</div>
+						<div class="context-form">
+							<label> 비밀번호 확인 답변 </label><br> <input type="text"
+								name="userPwA" placeholder="${user.pw_quest_answer}">
 						</div>
 					</div>
 
 					<p align="center">
-						<span style="font-size: 12pt;"> 
-							<input type="submit" value="저장">
+						<span style="font-size: 12pt;"> <input type="submit"
+							value="저장">
 						</span>
 					</p>
-					<br>
-					<br>
+					<br> <br>
 				</form>
 			</div>
 		</div>
 	</div>
-	
+
 	<!-- 프로필 사진 수정 -->
 	<script type="text/javascript">
 		function onClickUpload(){
@@ -122,10 +125,10 @@
 			pic_upload.click();
 		}
 	</script>
-	
+
 	<!-- footer -->
 	<%@ include file="./inc/footer.jsp"%>
- 
+
 	<script src="../static/js/jquery.min.js"></script>
 	<script src="../static/js/jquery-migrate-3.0.1.min.js"></script>
 	<script src="../static/js/jquery-ui.js"></script>
@@ -136,8 +139,77 @@
 	<script src="../static/js/jquery.fancybox.min.js"></script>
 	<script src="../static/js/aos.js"></script>
 	<script src="../static/js/main.js"></script>
+
+	<!-- 동적으로 intro크기 변경 -->
+	<script type="text/javascript">
+	    window.onload = function() {
+	    	console.log("onload JS");
+	        
+	    	function resize() {
+	            let textarea = document.getElementById("textArea");
+	            textarea.style.height = "0px";
+	            
+	            let scrollHeight = textarea.scrollHeight;
+	            let style = window.getComputedStyle(textarea);
+	            let borderTop = parseInt(style.borderTop);
+	            let borderBottom = parseInt(style.borderBottom);
+	            
+	            textarea.style.height = (scrollHeight + borderTop + borderBottom) + "px";
+	        }
+	        
+	        let textarea = document.getElementById("textArea");
+	        textarea.addEventListener("input", resize);
+	        
+	        // 이전 한줄소개에 맞춰 기본 sieze 세팅
+	        resize();
+	    }
+	</script>
+
+	<!-- 동적으로 introByte 체크 -->
+	<script type="text/javascript">
+		function fn_checkByte(obj){
+			console.log("byte체크 실행");
+			
+			const str = obj.value;
+			const str_len = str.length;
+			
+			const maxByte = 300;
+			let rbyte = 0;
+			let rlen = 0;
+			let one_char = "";
+			let str2 = "";
+			
+		    for(let i = 0; i < str_len; i++){
+
+		    	one_char = str.charAt(i);
+		    	
+		        if(escape(one_char).length > 4){
+		        	rbyte += 3;
+		        }else{
+		        	rbyte++;
+		        }
+		        if (rbyte <= maxByte) {
+		        	rlen = i+1;
+		        }
+		    }
+		        if(rbyte > maxByte){
+		        	alert('한줄소개는 최대 300Byte까지만 입력 가능합니다.');
+		            document.getElementById("currByte").innerText = rbyte;
+		            document.getElementById("currByte").style.color = "red";
+		            
+		         // 초과된 부분 제거
+				str2= str.substr(0, rlen);
+		         obj.value = str2;
+		         fn_checkByte(obj);
+		        } else {
+		    document.getElementById("currByte").innerText = rbyte;
+		    document.getElementById("currByte").style.color = "green";
+		    }
+		}
+	</script>
+
 </body>
-<script src="https://code.jquery.com/jquery-3.4.1.js" ></script> 
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script> 
 var pw_chk = false, nickname_chk = false; code_chk=false;
 $(function() {
@@ -150,20 +222,45 @@ $(function() {
 	var user_pw_check = document.getElementById('user_pw_check').value; 
 	
 	if(!getPwCheck.test($(event.target).val())){
-   		$("label[for='pw_check']").text("비밀번호는 영어, 숫자, 특수기호 조합으로만 이루어지고 글자의 길이는 4글자 이상 20글자 이하로만 입력바랍니다.");
-   		pw_chk = false;
-   	 
-	} else if ($(event.target).val() === ''){
-		pw_chk = false;
-		
-	} if(user_pw == user_pw_check){
-        	$("label[for='pw_check']").text("비밀번호가 일치합니다.");
-        	pw_chk = true;
-        } else {
-        	$("label[for='pw_check']").text("비밀번호가 일치하지않습니다.");
-        	pw_chk = false;
-        }
-	});
+        $("label[for='pw_check']").text("비밀번호는 영어, 숫자, 특수기호 조합으로만 이루어지고 글자의 길이는 4글자 이상 20글자 이하로만 입력바랍니다.");
+        pw_chk = false;
+
+ } else if ($(event.target).val() === ''){
+     pw_chk = false;
+
+ }else{ if(user_pw == user_pw_check){
+         $("label[for='pw_check']").text("비밀번호가 일치합니다.");
+         pw_chk = true;
+     } else {
+         $("label[for='pw_check']").text("비밀번호가 일치하지않습니다.");
+         pw_chk = false;
+     }
+ }});
+	
+ $('#user_pw').keyup(function() {
+     if(!getPwCheck.test($(event.target).val())){
+         $("label[for='user_pw_check']").text("비밀번호는 영어, 숫자, 특수기호 조합 4글자 이상, 20글자 이하로 입력바랍니다.");
+
+            pw_chk = false;
+     }
+ });
+
+
+ $('#user_pw').blur(function() {
+     if(!getPwCheck.test($(event.target).val())){
+         $("label[for='user_pw_check']").text("");
+
+            pw_chk = false;
+     }
+     
+  $('#user_pw_check').blur(function() {
+      if(!getPwCheck.test($(event.target).val())){
+          $("label[for='user_pw_check']").text("");
+
+             pw_chk = false;
+   } 
+
+ });
 	
 
    		$('#nickname').keyup(function() {

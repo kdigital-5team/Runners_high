@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONArray;
@@ -23,15 +24,20 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.spring.dto.Challenge;
+import com.spring.dto.Race;
+import com.spring.dto.RaceAndRegion;
 import com.spring.dto.User;
 import com.spring.dto.UserChallenge;
 import com.spring.service.ChallengeService;
+import com.spring.service.RaceService;
 import com.spring.service.RegionService;
 import com.spring.service.RouteService;
 
 @Controller
 // http://localhost:8081/regist
 public class ChallengeController {
+	private static final String String = null;
+
 	@Autowired
 	private RegionService service;
 	
@@ -40,6 +46,9 @@ public class ChallengeController {
 	
 	@Autowired
 	private RouteService routeService;
+	
+	@Autowired
+	private RaceService raceService;
 	
 	@RequestMapping(value = "/registChall", method = RequestMethod.GET)
 	public String registChall(Model model) throws Exception {
@@ -60,17 +69,26 @@ public class ChallengeController {
 							 @RequestParam String region_district,
 							 HttpSession session) throws Exception {
 		String userId = (String) session.getAttribute("userId");
+		String raceId = (String)session.getAttribute("raceId");
 		
 		System.out.println(newChallenge);
 		System.out.println(region_district);
 		System.out.println(userId);
+		
+		if (raceId==null && newChallenge.getChall_category().equals("대회용")) {
+			return "registChall";
 
+		}
+		System.out.println(raceId);
 		boolean challResult = false;
 		
 	
 		try {
 			newChallenge.setChall_reg_id(userId);
 			newChallenge.setRegion_id(service.getIdByDistrict(region_district));
+			System.out.println(newChallenge);
+			
+			newChallenge.setRace_id(raceId);
 			System.out.println(newChallenge);
 			challResult = challService.insertChallenge(newChallenge);
 			
@@ -80,7 +98,7 @@ public class ChallengeController {
 				int challId = newChallenge.getChall_id();
 				System.out.println(challId);
 				session.setAttribute("challId", challId);
-				
+				session.removeAttribute(raceId);
 				return "registChallRoute";
 			}
 			
@@ -92,6 +110,22 @@ public class ChallengeController {
 		return "index";
 	}
 	
+	@RequestMapping(value = "/registChall/selectChallRace" , method = RequestMethod.GET)
+	public String selectRace(Model model) {
+		List<RaceAndRegion> raceList = raceService.getAllRaces();
+		model.addAttribute("raceList", raceList);
+		return "selectChallRace";
+	}
+	
+	@RequestMapping(value="/getRaceId",  method=RequestMethod.POST)
+	@ResponseBody
+	String getRace(@RequestBody String raceId,HttpSession session) throws Exception {
+        JSONParser jsonParser = new JSONParser();
+        JSONObject jsonObj = (JSONObject) jsonParser.parse(raceId);
+		session.setAttribute("raceId", Long.toString((long) jsonObj.get("raceId")));
+		System.out.println(jsonObj.get("raceId"));
+		return raceId;
+	}
 
 	
 	@RequestMapping(value="/getCity", method=RequestMethod.POST)
@@ -108,6 +142,7 @@ public class ChallengeController {
 		return districtList;
 	}
 
+	// 전체 챌린지 리스트
 	@GetMapping("/challenge")
 	public String getAllChall(Model model) {
 		List<Challenge> challList = challService.getAllChall();
@@ -115,6 +150,7 @@ public class ChallengeController {
 		return "challenge";
 	}
 	
+	// 검색필터를 통해 보여지는 챌린지 리스트
 	@GetMapping("/challenge/filter")
 	public String getChallByOption(@RequestParam(value="opt[]", required=false) List<String> opt, @RequestParam(value="val[]", required=false) List<String> val, @RequestParam(value="keyword") String keyword, Model model) {
 		List<Challenge> challList = null;
@@ -165,27 +201,91 @@ public class ChallengeController {
 		
 	}
 	
+	// 챌린지 상세 페이지
 	@RequestMapping(value = "/challenge/{chall_id}", method = RequestMethod.GET)
-	public String getChallByChallId(@PathVariable int chall_id, Model model) {
+	public String getChallByChallId(@PathVariable int chall_id, Model model, HttpSession session) {
 		Challenge challenge = challService.getChallByChallId(chall_id);
 		User host = challService.getHostByChallId(chall_id);
+		String userId = (String) session.getAttribute("userId");
 		List<UserChallenge> userList = challService.getUserByChallId(chall_id);
+		UserChallenge userChall=new UserChallenge();
+		System.out.println(userList);
+		for(UserChallenge uc:userList) {
+			if(uc.getUser_id().equals(userId))
+				userChall = uc;
+		}
+		
 		model.addAttribute("challenge", challenge);
+		model.addAttribute("userChall", userChall);
 		model.addAttribute("host", host);
 		model.addAttribute("userList", userList);
 		return "/challengeDetail";
 	}
 	
+	// 챌린지 신청
 	@RequestMapping(value="/challenge/{chall_id}/apply", method = RequestMethod.POST)
-	public String applyByChallId(@PathVariable int chall_id, Model model, HttpSession session) {
-		String userId = (String) session.getAttribute("userId");
-		
-		if(userId==null||userId=="") {
+	public String applyByChallId(@PathVariable int chall_id, Model model, HttpSession session, @RequestParam("applyId") String applyId) {
+		if(applyId==null || applyId=="") {
 			return "redirect:/login";
 		}
 		
-		challService.applyByChallId(userId, chall_id);
-		
+		challService.applyByChallId(applyId, chall_id);
+		System.out.println(applyId);
 		return "redirect:/challenge/"+chall_id;
 	}
+	
+	// 챌린지 탈퇴
+		@RequestMapping(value="/challenge/{chall_id}/withdraw", method = RequestMethod.POST)
+		public String withdrawByChallId(@PathVariable int chall_id, Model model, HttpSession session, @RequestParam("applyId") String applyId) {
+			System.out.println(applyId);
+			
+			challService.withdrawByChallId(applyId, chall_id);
+			return "redirect:/challenge/"+chall_id;
+		}
+		
+	// 챌린지 관리 페이지
+	@RequestMapping(value="/challenge/{chall_id}host", method=RequestMethod.GET)
+	public String challengeHost(@PathVariable int chall_id, Model model, HttpSession session) {
+		String userId = (String) session.getAttribute("userId");
+		User host = challService.getHostByChallId(chall_id);
+		if(!host.getUser_id().equals(userId))
+			return "redirect:/challenge/"+chall_id;
+		Challenge challenge = challService.getChallByChallId(chall_id);
+		List<UserChallenge> userList = challService.getUserByChallId(chall_id);
+		List<UserChallenge> appList = new ArrayList<UserChallenge>();
+		List<UserChallenge> parList = new ArrayList<UserChallenge>();
+		
+		for(UserChallenge uc : userList) {
+			if(uc.getChall_reg_status().equals("N") && uc.getUser_reg_status().equals("Y"))
+				appList.add(uc);
+			else if(uc.getChall_reg_status().equals("Y") && uc.getUser_reg_status().equals("Y"))
+				parList.add(uc);
+		}
+		model.addAttribute("host", host);
+		model.addAttribute("appList", appList);
+		model.addAttribute("parList", parList);
+		model.addAttribute("challenge", challenge);
+		return "/challengeHost";
+	}
+	
+	// 챌린지 참가 수락
+	@RequestMapping(value="/challenge/accept/{chall_id}")
+	public String acceptUserById(@PathVariable int chall_id, @RequestParam("acceptId") String acceptId, Model model) {
+		challService.acceptIdbyChallId(acceptId, chall_id);
+		return "redirect:/challenge/"+chall_id+"host";
+	}
+	
+	// 챌린지 참가 거절
+	@RequestMapping(value="/challenge/decline/{chall_id}")
+	public String declineUserById(@PathVariable int chall_id, @RequestParam("declineId") String declineId, Model model) {
+		challService.declineIdbyChallId(declineId, chall_id);
+		return "redirect:/challenge/"+chall_id+"host";
+	}
+	
+	// 챌린지 추방
+		@RequestMapping(value="/challenge/kick/{chall_id}")
+		public String kickUserById(@PathVariable int chall_id, @RequestParam("kickId") String kickId, Model model) {
+			challService.kickIdbyChallId(kickId, chall_id);
+			return "redirect:/challenge/"+chall_id+"host";
+		}
 }

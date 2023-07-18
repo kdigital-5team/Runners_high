@@ -180,7 +180,7 @@ CREATE TABLE user_chall (
     chall_reg_status  VARCHAR2(1 BYTE) DEFAULT 'N',
     user_chall_status VARCHAR2(1 BYTE) DEFAULT 'N',
     user_reg_status   VARCHAR2(1 BYTE) DEFAULT 'N',
-    user_deny_num     NUMBER(1)
+    user_deny_num     NUMBER(1) DEFAULT 0
 );
 
 -- 대회 테이블
