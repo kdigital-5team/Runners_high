@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <title>Runner's High &mdash; my page</title>
 <meta charset="utf-8">
@@ -43,6 +43,7 @@
 </script>
 </head>
 <body>
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 
 	<!-- header -->
 	<%@ include file="./inc/header.jsp"%>
@@ -82,24 +83,26 @@
 									  onkeyup="fn_checkByte(this)"></textarea><br>
 							 <sup><span id="currByte">0</span>/300bytes</sup><br>
 						</div>
-						<br>
-						<hr>
+						<br><hr><br>
 						<h2 class="form-h2">계정 수정</h2>
 						<div class="context-form" id="pw-check-div">
 							<label> 비밀번호</label><br> 
 							<input type="password" name="userPw" id="user_pw" placeholder="사용자 비밀번호"><br>
-								<label for="user_pw_check" class="notice-label"></label><br> 
-							<label for="inputPasswordCheck" id=pw-only>비밀번호 확인</label><br> 
+								<label for="user_pw" class="notice-label"></label><br> 
+							<label id=pw-only>비밀번호 확인</label><br> 
 								<input type="password" name="userPwCheck" id="user_pw_check" placeholder="사용자 비밀번호 확인"><br> 
-									<label for="pw_check" class="notice-label"></label>
+									<label for="user_pw_check" class="notice-label"></label>
 						</div>
 						<div class="context-form">
-							<label> 비밀번호 확인 질문 </label><br> <select id="pw_quest"
-								name="userPwQ">
-								<option value="어렸을 때 장래희망은?">어렸을 때 장래희망은?</option>
-								<option value="다녔던 초등학교의 명칭은?">다녔던 초등학교의 명칭은?</option>
-								<option value="기억나는 장소는?">기억나는 장소는?</option>
-							</select>
+						  <label for="PasswordQuestion">비밀번호 질문</label><br> 
+						  <div class="selectBox">
+						    <button class="label" id="pw_quest" name="pw_quest">질문 리스트</button>
+						    <ul class="optionList">
+						      <li class="optionItem" value="어렸을 때 장래희망은?">어렸을 때 장래희망은?</li>
+						      <li class="optionItem" value="다녔던 초등학교의 명칭은?">다녔던 초등학교의 명칭은?</li>
+						      <li class="optionItem" value="기억나는 장소는?">기억나는 장소는?</li>
+						    </ul>
+						  </div>
 						</div>
 						<div class="context-form">
 							<label> 비밀번호 확인 답변 </label><br> <input type="text"
@@ -108,9 +111,7 @@
 					</div>
 
 					<p align="center">
-						<span style="font-size: 12pt;"> <input type="submit"
-							value="저장">
-						</span>
+							<input type="submit"value="저장" />
 					</p>
 					<br> <br>
 				</form>
@@ -129,6 +130,39 @@
 	<!-- footer -->
 	<%@ include file="./inc/footer.jsp"%>
 
+
+	<!-- 드롭다운 -->
+	<script>
+	const label = document.querySelector('.label');
+	const options = document.querySelectorAll('.optionItem');
+	const optionList = document.querySelector('.optionList');
+	const selectBox = document.querySelector('.selectBox');
+	
+	// 클릭한 옵션의 텍스트를 라벨 안에 넣음
+	const handleSelect = (function(item) {
+	  label.innerHTML = item.textContent;
+	  optionList.style.display='none';
+	});
+	
+	// 옵션 클릭시 클릭한 옵션을 넘김
+	options.forEach(function(option){
+	  option.addEventListener('click', function(){
+		  handleSelect(option)
+		  selectBox.style.backgroundColor = '#E8F0FE';
+		  })
+	});
+	
+	// 라벨을 클릭시 옵션 목록이 열림/닫힘
+	label.addEventListener('click', function(event){
+	  event.preventDefault();
+	  if(optionList.style.display === 'block') {
+		    optionList.style.display = 'none';
+		  } else {
+		    optionList.style.display = 'block';
+		  }
+		});
+	</script>
+	
 	<script src="../static/js/jquery.min.js"></script>
 	<script src="../static/js/jquery-migrate-3.0.1.min.js"></script>
 	<script src="../static/js/jquery-ui.js"></script>
@@ -195,7 +229,7 @@
 		        if(rbyte > maxByte){
 		        	alert('한줄소개는 최대 300Byte까지만 입력 가능합니다.');
 		            document.getElementById("currByte").innerText = rbyte;
-		            document.getElementById("currByte").style.color = "red";
+		            document.getElementById("currByte").style.color = "#e35c5c";
 		            
 		         // 초과된 부분 제거
 				str2= str.substr(0, rlen);
@@ -203,95 +237,107 @@
 		         fn_checkByte(obj);
 		        } else {
 		    document.getElementById("currByte").innerText = rbyte;
-		    document.getElementById("currByte").style.color = "green";
+		    document.getElementById("currByte").style.color = "#293A8E";
 		    }
 		}
 	</script>
 
 </body>
-<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-<script> 
-var pw_chk = false, nickname_chk = false; code_chk=false;
+
+<!-- 닉네임/비밀번호 검증 -->
+<script type="text/javascript"> 
+var pw_chk = false; 
+var nickname_chk = false;
 $(function() {
-	
-  	const getPwCheck = RegExp(/^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{4,20}$/);
-  	const getNickNameCheck = RegExp(/^[ㄱ-ㅎ가-힣a-zA-Z0-9]{2,10}$/);
-  	
-	$('#user_pw_check').keyup(function() {
-	var user_pw = document.getElementById('user_pw').value; 
-	var user_pw_check = document.getElementById('user_pw_check').value; 
-	
-	if(!getPwCheck.test($(event.target).val())){
-        $("label[for='pw_check']").text("비밀번호는 영어, 숫자, 특수기호 조합으로만 이루어지고 글자의 길이는 4글자 이상 20글자 이하로만 입력바랍니다.");
-        pw_chk = false;
+	  const getPwCheck = RegExp(/^(?=.*[0-9a-zA-Z])(?=.*[!@#$%^*+=-]).{4,20}$/i);
+	  const getNickNameCheck = RegExp(/^[ㄱ-ㅎ가-힣a-zA-Z0-9]{2,10}$/);
 
- } else if ($(event.target).val() === ''){
-     pw_chk = false;
+	  $('#user_pw').keyup(function() {
+		    var user_pw = $('#user_pw').val();
+			var user_pw_check = $('#user_pw_check').val();
+		    
+		    if (user_pw === '') {
+		      $("label[for='user_pw']").text("");
+		    } else if (!getPwCheck.test(user_pw)) {
+		      $("label[for='user_pw']").text("비밀번호는 영어/숫자, 특수기호 조합으로 4~20자 이하만 가능합니다.");
+	          $("label[for='user_pw']").css("color", "#e35c5c");
+		    } else {
+		      $("label[for='user_pw']").text("");
+		      pw_chk = true;
+		    }
+	  });
 
- }else{ if(user_pw == user_pw_check){
-         $("label[for='pw_check']").text("비밀번호가 일치합니다.");
-         pw_chk = true;
-     } else {
-         $("label[for='pw_check']").text("비밀번호가 일치하지않습니다.");
-         pw_chk = false;
-     }
- }});
-	
- $('#user_pw').keyup(function() {
-     if(!getPwCheck.test($(event.target).val())){
-         $("label[for='user_pw_check']").text("비밀번호는 영어, 숫자, 특수기호 조합 4글자 이상, 20글자 이하로 입력바랍니다.");
-
-            pw_chk = false;
-     }
- });
-
-
- $('#user_pw').blur(function() {
-     if(!getPwCheck.test($(event.target).val())){
-         $("label[for='user_pw_check']").text("");
-
-            pw_chk = false;
-     }
-     
-  $('#user_pw_check').blur(function() {
-      if(!getPwCheck.test($(event.target).val())){
-          $("label[for='user_pw_check']").text("");
-
-             pw_chk = false;
-   } 
-
- });
-	
-
-   		$('#nickname').keyup(function() {
-   			var nickname = document.getElementById('nickname').value; 
-   	        if(!getNickNameCheck.test($(event.target).val())){
-   	        	 $("label[for='nickname_check']").text("닉네임은 한글, 영어, 숫자 조합으로만 이루어지고 글자의 길이는 2글자 이상 10글자 이하로만 입력바랍니다. ");
-   	        	 nickname_chk = false;
-   	        } else if(nickname.trim().length != 0) {
-   	            $.ajax({
-   	                async : true, 
-   	                type : 'POST', 
-   	                data: nickname,
-   	                url: "/nickNameCheck",
-   	                dataType: "json",
-   	                contentType: "application/json; charset=UTF-8",
-   	                success: function(count) {    
-   	                    if(count > 0) { 
-   	                        $("label[for='nickname_check']").text("해당 닉네임이 존재합니다.");
-   	                    	nickname_chk = false;
-   	                    } else {
-   	                    	 $("label[for='nickname_check']").text("사용 가능한 닉네임입니다.");
-   	                    	 nickname_chk = true;
-   	                    }            
-   	                }
-   	            });
-   	        } else {
-   	         	$("label[for='nickname_check']").empty();
-   	       		nickname_chk = false;
-   	        }   
-   		});
+		    
+		$('#user_pw_check').keyup(function() {
+		    var user_pw = $('#user_pw').val();
+			var user_pw_check = $('#user_pw_check').val(); 
+			console.log(user_pw_check);
+			
+		    if (user_pw === user_pw_check) {
+		      $("label[for='user_pw_check']").text("비밀번호가 일치합니다.");
+		    } else if (user_pw === '' || user_pw_check === '') {
+		      $("label[for='user_pw_check']").text("");
+		    } else {
+		      $("label[for='user_pw_check']").text("비밀번호가 일치하지 않습니다.");
+		      $("label[for='user_pw_check']").css("color", "#e35c5c");
+		    }
+		  });
+	  
+	$('#nickname').keyup(function() {
+		var nickname = document.getElementById('nickname').value; 
+		if (!getNickNameCheck.test($(event.target).val())) {
+			$("label[for='nickname_check']").text("닉네임은 한글, 영어, 숫자 조합 2글자 이상 10글자 이하만 가능합니다.");
+			$("label[for='nickname_check']").css("color", "#e35c5c");
+			nickname_chk = false;
+		} else if (nickname.trim().length != 0) {
+			$.ajax({
+				async: true,
+				type: 'POST',
+				data: nickname,
+				url: "/nickNameCheck",
+				dataType: "json",
+				contentType: "application/json; charset=UTF-8",
+				success: function(count) {
+					if (count > 0) {
+						$("label[for='nickname_check']").text("해당 닉네임이 존재합니다.");
+						$("label[for='nickname_check']").css("color", "#e35c5c");
+						nickname_chk = false;
+					} else {
+						$("label[for='nickname_check']").text("사용 가능한 닉네임입니다.");
+						$("label[for='nickname_check']").css("color", "");
+						nickname_chk = true;
+					}
+				}
+			});
+		} else {
+			$("label[for='nickname_check']").empty();
+			nickname_chk = false;
+		}
+	});
 	
 });
 </script>
+
+<!-- 제출 완료 alert -->
+<script type="text/javascript">
+	$("form").submit(function(event) {
+	    event.preventDefault();
+	    
+	    $.ajax({
+	        url: $(this).attr("action"),
+	        type: $(this).attr("method"),
+	        data: new FormData(this),
+	        processData: false,
+	        contentType: false,
+	        success: function(response) {
+	            alert("프로필 수정을 완료했습니다.");
+	            window.location.href = "/test";
+	        },
+	        error: function(error) {
+	            alert("프로필 수정에 실패했습니다. 다시 확인해주세요." + error);
+	        }
+	    });
+	});
+</script>
+
 </html>

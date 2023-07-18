@@ -44,11 +44,20 @@
 #main-logo:not([href]) {
     text-align: center;
     margin: auto;
-    padding: 150px 18px 50px 0px;
-     font-size: xxx-large;
+   	padding: 110px 18px 10px 0px;
+    font-size: xxx-large;
     font-weight: bold;
+    color: #1b319d;
 }
 
+/* sub 헤드라인 */
+.sub-title {
+	font-weight: normal;
+	text-align: center;
+	margin-top: -10px;
+	margin-bottom: -0.5rem;
+	padding: 0 8px 0 0; 
+}
 *, :after, :before {
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box
@@ -269,6 +278,10 @@ button, input, optgroup, select {
     box-sizing: border-box;
 }
 
+#auth_code {
+	width: 20%;
+}
+
 /* photo class 설정 0712 */
 .profile-pic {
 	width: 200px;
@@ -315,11 +328,29 @@ input:read-only {
 /* inputbox 수정 0705 */
 input[type="submit"] {
 color: #fff;
-    font-size: 16px;
+    font-size: 15px;
     background-color: #FFDC3D;
     margin-top: 80px;
     inline-size: 134px;
     border-radius: 30px;
+}
+
+input[type="submit"]:hover{
+	background-color:#f9d010;
+}
+
+/* 이메일 인증 수정 0717 */
+#checkEmail {
+	font-size: 15px;
+	inline-size: 120px;
+	border-radius: 30px;
+	margin-bottom: 6px;
+}
+
+
+
+#auth_code {
+	
 }
 
 button, input {
@@ -436,6 +467,7 @@ template {
 /* form 전용 h2 설정 0716 */ 
 .form-h2 {
 	font-weight: bold;
+	margin-bottom: 30px;
 }
 
 .h3, h3 {
