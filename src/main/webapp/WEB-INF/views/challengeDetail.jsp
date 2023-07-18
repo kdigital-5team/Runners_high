@@ -84,7 +84,7 @@
 			<c:if test="${userId eq challenge.chall_reg_id }">
 				<a href="/challenge/${challenge.chall_id}host">관리</a><span class="mx-2">|</span> 
 			</c:if>
-			<a href="mypage_chall">인증 게시판</a><span class="mx-2">|</span>
+			<a href="${chall_id}challengePost">인증 게시판</a><span class="mx-2">|</span>
 			<a href="mypage_title">캘린더</a>
 			<spanclass="mx-2">
 				</span>
