@@ -136,11 +136,17 @@ ALTER TABLE challenge ADD CONSTRAINT challenge_pk PRIMARY KEY ( chall_id );
 CREATE TABLE auth_post (
     auth_id    NUMBER(20) NOT NULL,
     chall_id   NUMBER(20) NOT NULL,
-    comment_id VARCHAR2(30 BYTE) NOT NULL,
+    comment_id VARCHAR2(30 BYTE),
     auth_title VARCHAR2(20) NOT NULL,
     auth_cont  VARCHAR2(500 BYTE),
     auth_date  DATE
 );
+
+--시퀀스 추가
+CREATE SEQUENCE post_seq 
+    INCREMENT by 1
+    START WITH 1
+    MINVALUE 1;
 
 ALTER TABLE auth_post ADD CONSTRAINT auth_post_pk PRIMARY KEY ( auth_id );
 

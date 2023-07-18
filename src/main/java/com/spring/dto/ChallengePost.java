@@ -23,7 +23,7 @@ public class ChallengePost {
 	private String auth_cont;
 	private Date auth_date;
 	
-	private String user_id;
-	private String nickname;
-	private String auth_pic_path;
+//	private String user_id;
+//	private String nickname;
+//	private String auth_pic_path;
 }
