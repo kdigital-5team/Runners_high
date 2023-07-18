@@ -77,26 +77,18 @@
 			<a href="challengePost">인증 게시판</a><span class="mx-2">|</span>
 			<a href="mypage_title">캘린더</a>
 			<spanclass="mx-2">
+			   
 				</span>
 		</div>
 
-		<%-- <div>
-		<table>
-		<c:forEach items="${postList}" var="post">
+		<div style="margin:30px"></div>
 		
-			        <tr><td colspan='3'>제목: ${post.auth_title}</td><td colspan='3'>내용: ${post.auth_cont}</td></tr>
-			        
-			        <tr><td>♥ ${post.auth_like}</td><td>작성자:${post.nickname}</td><td>작성날짜:${post.auth_date}</td></tr>
-			        <tr><td>작성자:${post.nickname}</td><td>댓글:${post.auth_comment_cont}</td><td>작성날짜:${post.auth_comment_date}</td></tr>
-			        </c:forEach></table>
-		</div> --%>
-		
-		<table class="table table-hover table-striped">
+		<table class="table table-hover table-striped" style="width:78%; margin:auto; text-align:center">
 					<thead>
 						<tr>
 							
+						<th>글번호</th>
 							<th>제목</th>
-							<th>작성자</th>
 							<th>작성일</th>
 						</tr>
 					</thead>
@@ -104,20 +96,17 @@
 					<tbody>
 							<tr>
 								
-								<td><a href="#" data-toggle="modal" data-target="#myModal2${vs.index}">${post.auth_title}</a></td>
-								<td>${post.user_id}</td>
+								<td>${post.auth_id}</td>
+								<td><a href="?auth_id=${auth_id}">${post.auth_title}</a></td>
 								<td>${post.auth_date}</td>
 							</tr>
-							
-									
-						
-						
 					</tbody>
-					
+					</c:forEach>
+
 							</table>
 						<!-- Modal -->
 						
-			<div class="modal fade" id="myModal2${vs.index}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<%-- <div class="modal fade" id="myModal2${vs.index}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 			  <div class="modal-dialog">
 			    <div class="modal-content">
 			      <div class="modal-header">
@@ -144,10 +133,9 @@
 			      </div>
 			    </div>
 			  </div>
-			</div>
+			</div> --%>
 						
-			</c:forEach>
-
+			<button><a href="insertChallPost">글쓰기</a></button>
 		
 	</div>
 

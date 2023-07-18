@@ -5,7 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.spring.dto.Challenge;
-import com.spring.dto.ChallengeRegion;
+import com.spring.dto.ChallengePost;
 import com.spring.dto.SearchKeyword;
 import com.spring.dto.User;
 import com.spring.dto.UserChallenge;
@@ -14,7 +14,7 @@ import com.spring.dto.UserChallenge;
 public interface ChallengeMapper {
 	public List<Challenge> getAllChall();
 
-	public List<ChallengeRegion> getChallByOption(List<String> online, List<String> state, List<String> city, List<Integer> date, List<String> cat, List<String> con, String keyword);
+	public List<Challenge> getChallByOption(List<String> online, List<String> state, List<String> city, List<Integer> date, List<String> cat, List<String> con, String keyword);
 
 	public Challenge getChallByChallId(int chall_id);
 
@@ -38,8 +38,12 @@ public interface ChallengeMapper {
 
 	public void kickIdbyChallId(String kickId, int chall_id);
 
-	public boolean updateChallenge(Challenge updateChallenge);
+	
+	//인증게시판
+	public List<ChallengePost> getAllPost();
 
-	public List<ChallengeRegion> getAllChallR();
+	public void insertChallPost(ChallengePost newPost);
+
+	public ChallengePost getPostByAuthId(int auth_id);
 
 }

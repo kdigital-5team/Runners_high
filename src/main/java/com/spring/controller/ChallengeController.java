@@ -8,11 +8,14 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,11 +24,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.spring.dto.Challenge;
-import com.spring.dto.ChallengeRegion;
+import com.spring.dto.ChallengePost;
 import com.spring.dto.User;
 import com.spring.dto.UserChallenge;
 import com.spring.service.ChallengeService;
 import com.spring.service.RegionService;
+import com.spring.service.RouteService;
 
 @Controller
 // http://localhost:8081/regist
@@ -35,6 +39,9 @@ public class ChallengeController {
 	
 	@Autowired
 	private ChallengeService challService;
+	
+	@Autowired
+	private RouteService routeService;
 	
 	@RequestMapping(value = "/registChall", method = RequestMethod.GET)
 	public String registChall(Model model) throws Exception {
@@ -46,6 +53,48 @@ public class ChallengeController {
 		//model.addAttribute("districtList",districtList);
 		return "/registChall";
 	}
+	
+	// 회원가입
+	// http://localhost:8081/regist
+	@RequestMapping(value = "/registChall", method = RequestMethod.POST)
+	public String insertDept(@ModelAttribute Challenge newChallenge,
+							 Model model,
+							 @RequestParam String region_district,
+							 HttpSession session) throws Exception {
+		String userId = (String) session.getAttribute("userId");
+		
+		System.out.println(newChallenge);
+		System.out.println(region_district);
+		System.out.println(userId);
+
+		boolean challResult = false;
+		
+	
+		try {
+			newChallenge.setChall_reg_id(userId);
+			newChallenge.setRegion_id(service.getIdByDistrict(region_district));
+			System.out.println(newChallenge);
+			challResult = challService.insertChallenge(newChallenge);
+			
+			if(challResult) {
+				System.out.println("등록완료");
+				
+				int challId = newChallenge.getChall_id();
+				System.out.println(challId);
+				session.setAttribute("challId", challId);
+				
+				return "registChallRoute";
+			}
+			
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+			return "index";
+		}
+		return "index";
+	}
+	
+
 	
 	@RequestMapping(value="/getCity", method=RequestMethod.POST)
 	@ResponseBody
@@ -64,7 +113,7 @@ public class ChallengeController {
 	// 전체 챌린지 리스트
 	@GetMapping("/challenge")
 	public String getAllChall(Model model) {
-		List<ChallengeRegion> challList = challService.getAllChallR();
+		List<Challenge> challList = challService.getAllChall();
 		model.addAttribute("challList", challList);
 		return "challenge";
 	}
@@ -72,12 +121,9 @@ public class ChallengeController {
 	// 검색필터를 통해 보여지는 챌린지 리스트
 	@GetMapping("/challenge/filter")
 	public String getChallByOption(@RequestParam(value="opt[]", required=false) List<String> opt, @RequestParam(value="val[]", required=false) List<String> val, @RequestParam(value="keyword") String keyword, Model model) {
-		List<ChallengeRegion> challList = new ArrayList<ChallengeRegion>();
+		List<Challenge> challList = null;
 		if(opt==null && (keyword==null||keyword=="")) {
-			challList=challService.getAllChallR();
-			for(ChallengeRegion cr : challList) {
-				System.out.println(cr);
-			}
+			challList=challService.getAllChall();
 			model.addAttribute("challList", challList);
 			return "/challFilter";
 		}
@@ -116,6 +162,7 @@ public class ChallengeController {
 				}
 			}
 			challList=challService.getChallByOption(online, state, city, date, category, con,  keyword);
+			System.out.println(challList);
 			model.addAttribute("challList", challList);
 			return "/challengeFilter";
 		}
@@ -130,11 +177,12 @@ public class ChallengeController {
 		String userId = (String) session.getAttribute("userId");
 		List<UserChallenge> userList = challService.getUserByChallId(chall_id);
 		UserChallenge userChall=new UserChallenge();
+		System.out.println(userList);
 		for(UserChallenge uc:userList) {
 			if(uc.getUser_id().equals(userId))
 				userChall = uc;
 		}
-		System.out.println(challenge.getChall_week_auth());
+		
 		model.addAttribute("challenge", challenge);
 		model.addAttribute("userChall", userChall);
 		model.addAttribute("host", host);
@@ -209,50 +257,37 @@ public class ChallengeController {
 			return "redirect:/challenge/"+chall_id+"host";
 		}
 		
-	// 챌린지 수정폼
-		@RequestMapping(value="/challenge/{chall_id}modify")
-		public String updateByChallId(@PathVariable int chall_id, Model model, HttpSession session) {
-			String userId = (String) session.getAttribute("userId");
+	//인증게시판 리스트
+		@RequestMapping(value="challenge/{chall_id}challengePost")
+		public String challengePost(@PathVariable int chall_id, Model model) {
+			Challenge challenge = challService.getChallByChallId(chall_id);
 			User host = challService.getHostByChallId(chall_id);
-			if(!host.getUser_id().equals(userId))
-				return "redirect:/challenge/"+chall_id;
+//			String userId = (String) session.getAttribute("userId");
+			List<UserChallenge> userList = challService.getUserByChallId(chall_id);
+			UserChallenge userChall=new UserChallenge();
+			List<ChallengePost> postList = challService.getAllPost();
+			model.addAttribute("postList", postList);
 			
-			Challenge chall = challService.getChallByChallId(chall_id);
-			List<String> stateList = service.getAllState();
-			
-			model.addAttribute("stateList",stateList);
-			model.addAttribute("chall", chall);
-			
-			return "updateChall";
+			model.addAttribute("challenge", challenge);
+			model.addAttribute("userChall", userChall);
+			model.addAttribute("host", host);
+			model.addAttribute("userList", userList);
+			return "challengePost";
 		}
-		
-		// 챌린지 수정
-		@RequestMapping(value = "/challenge/updateChall{chall_id}", method = RequestMethod.POST)
-		public String updateChall(@ModelAttribute Challenge updateChallenge,
-								 Model model,
-								 @RequestParam String region_district,
-								 @PathVariable int chall_id,
-								 HttpSession session) throws Exception {
-			String userId = (String) session.getAttribute("userId");
 
-			boolean challResult = false;
+		@RequestMapping(value = "/challenge/{chall_id}challPostDetail", method = RequestMethod.GET)
+		public String getPostByAuthId(@RequestParam("auth_id") int auth_id, Model model) {
+			ChallengePost post = challService.getPostByAuthId(auth_id);
+			model.addAttribute(auth_id);
 			
-		
-			try {
-				updateChallenge.setChall_id(chall_id);
-				updateChallenge.setRegion_id(service.getIdByDistrict(region_district));
-				challResult = challService.updateChallenge(updateChallenge);
-				
-				if(challResult) {
-					
-					return "redirect:/challenge/"+updateChallenge.getChall_id();
-				}
-				
-			} catch (Exception e) {
-				
-				e.printStackTrace();
-				return "index";
-			}
-			return "index";
+			return "challengePostDetail";
 		}
+		
+		@RequestMapping(value="/challengePost/insertChallPost", method=RequestMethod.GET)
+		public String insertPost(@ModelAttribute ChallengePost newPost, Model model) {
+			
+			challService.insertChallPost(newPost);
+			return "insertChallPost";
+		}
+		
 }

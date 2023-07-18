@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.spring.dto.Challenge;
-import com.spring.dto.ChallengeRegion;
+import com.spring.dto.ChallengePost;
 import com.spring.dto.SearchKeyword;
 import com.spring.dto.User;
 import com.spring.dto.UserChallenge;
@@ -23,7 +23,7 @@ public class ChallengeService {
 		return mapper.getAllChall();
 	}
 
-	public List<ChallengeRegion> getChallByOption(List<String> online, List<String> state, List<String> city, List<Integer> date, List<String> cat, List<String> con, String keyword) {
+	public List<Challenge> getChallByOption(List<String> online, List<String> state, List<String> city, List<Integer> date, List<String> cat, List<String> con, String keyword) {
 		return mapper.getChallByOption(online, state, city, date, cat, con, keyword);
 	}
 
@@ -83,12 +83,20 @@ public class ChallengeService {
 		return result;
 	}
 
-	public boolean updateChallenge(Challenge updateChallenge) {
-		return mapper.updateChallenge(updateChallenge);
+	//인증 게시판
+	public List<ChallengePost> getAllPost() {
+		
+		return mapper.getAllPost();
 	}
 
-	public List<ChallengeRegion> getAllChallR() {
-		return mapper.getAllChallR();
+	public void insertChallPost(ChallengePost newPost) {
+		mapper.insertChallPost(newPost);
+		
+	}
+
+	public ChallengePost getPostByAuthId(int auth_id) {
+		
+		return mapper.getPostByAuthId(auth_id);
 	}
 	
 
