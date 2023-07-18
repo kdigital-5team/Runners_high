@@ -55,4 +55,6 @@ public interface ChallengeMapper {
 
 	public List<ChallengeRegion> getAllChallR();
 
+	public int insertPost(ChallengePost newPost);
+
 }

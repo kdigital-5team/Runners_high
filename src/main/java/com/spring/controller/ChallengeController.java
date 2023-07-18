@@ -291,11 +291,20 @@ public class ChallengeController {
 		}
 		
 		@RequestMapping(value="/challengePost/insertChallPost", method=RequestMethod.GET)
-		public String insertPost(@ModelAttribute ChallengePost newPost, Model model) {
+		public String insertChallPostForm() {
 			
-			challService.insertChallPost(newPost);
 			return "insertChallPost";
 		}
+		
+//		@RequestMapping(value="/challengePost/insertChallPost", method=RequestMethod.GET)
+//		public String insertChallPost(ChallengePost newPost) {
+//			challService.insertChallPost(newPost);
+//			
+//			String view = "error";
+//			view = "redirect:/challenge/{chall_id}challPostDetail";
+//			return view;
+//		}
+//		
 		
 
 	// 챌린지 수정폼

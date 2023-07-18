@@ -111,6 +111,20 @@ public class ChallengeService {
 		return mapper.getAllChallR();
 
 	}
+
+	public boolean insertPost(ChallengePost newPost) throws Exception {
+boolean result = false;
+		
+		int res = mapper.insertPost(newPost);
+		
+		if(res != 0) {
+			result = true;
+		} else {
+			throw new Exception("게시글 등록 실패");
+		}
+		
+		return result;
+	}
 	
 
 

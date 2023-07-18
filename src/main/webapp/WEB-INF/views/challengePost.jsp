@@ -74,7 +74,7 @@
 		
 		<div style="margin: auto; text-align: center;">
 			<a href="mypage_feed">소개</a><span class="mx-2">|</span> 
-			<a href="challengePost">인증 게시판</a><span class="mx-2">|</span>
+			<a href="${chall_id}challengePost">인증 게시판</a><span class="mx-2">|</span>
 			<a href="mypage_title">캘린더</a>
 			<spanclass="mx-2">
 			   
@@ -104,38 +104,9 @@
 					</c:forEach>
 
 							</table>
-						<!-- Modal -->
-						
-			<%-- <div class="modal fade" id="myModal2${vs.index}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-			  <div class="modal-dialog">
-			    <div class="modal-content">
-			      <div class="modal-header">
-			        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-			        
-			      </div>
-			      <div class="modal-body">
-			     
-			        <table>
-			        
-			        <tr><td>${post.auth_title}</td></tr>
-			        <tr><td><img src="${post.auth_pic_path}"
-											alt="Image" class="img-fluid"></td></tr>
-			        <tr><td>${post.auth_cont}</td></tr>
-			        
-			        </table>
-			        
-			        
-			      </div>
-			      
-			      <div class="modal-footer">
-			        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-			       
-			      </div>
-			    </div>
-			  </div>
-			</div> --%>
-						
-			<button><a href="insertChallPost">글쓰기</a></button>
+				
+				<div style="text-align:center; margin:10px;">		
+			<button><a href="/challengePost/insertChallPost">글쓰기</a></button></div>
 		
 	</div>
 
