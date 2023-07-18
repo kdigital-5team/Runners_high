@@ -1,11 +1,14 @@
 package com.spring.service;
 
+import java.sql.SQLException;
 import java.util.List;
 
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.spring.dto.Challenge;
+import com.spring.dto.ChallengeRegion;
 import com.spring.dto.SearchKeyword;
 import com.spring.dto.User;
 import com.spring.dto.UserChallenge;
@@ -20,7 +23,7 @@ public class ChallengeService {
 		return mapper.getAllChall();
 	}
 
-	public List<Challenge> getChallByOption(List<String> online, List<String> state, List<String> city, List<Integer> date, List<String> cat, List<String> con, String keyword) {
+	public List<ChallengeRegion> getChallByOption(List<String> online, List<String> state, List<String> city, List<Integer> date, List<String> cat, List<String> con, String keyword) {
 		return mapper.getChallByOption(online, state, city, date, cat, con, keyword);
 	}
 
@@ -65,5 +68,29 @@ public class ChallengeService {
 		mapper.kickIdbyChallId(kickId, chall_id);
 		
 	}
+
+	public boolean insertChallenge(Challenge newChallenge) throws SQLException, Exception {
+		boolean result = false;
+
+		int res = mapper.insertChallenge(newChallenge);
+		
+		if(res != 0) {
+			result = true;
+		} else {
+			throw new Exception("챌린지 추가 실패 ");
+		}
+		
+		return result;
+	}
+
+	public boolean updateChallenge(Challenge updateChallenge) {
+		return mapper.updateChallenge(updateChallenge);
+	}
+
+	public List<ChallengeRegion> getAllChallR() {
+		return mapper.getAllChallR();
+	}
+	
+
 
 }

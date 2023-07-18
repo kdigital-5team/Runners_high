@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.spring.dto.Challenge;
+import com.spring.dto.ChallengeRegion;
 import com.spring.dto.User;
 import com.spring.dto.UserChallenge;
 import com.spring.service.ChallengeService;
@@ -62,7 +64,7 @@ public class ChallengeController {
 	// 전체 챌린지 리스트
 	@GetMapping("/challenge")
 	public String getAllChall(Model model) {
-		List<Challenge> challList = challService.getAllChall();
+		List<ChallengeRegion> challList = challService.getAllChallR();
 		model.addAttribute("challList", challList);
 		return "challenge";
 	}
@@ -70,9 +72,12 @@ public class ChallengeController {
 	// 검색필터를 통해 보여지는 챌린지 리스트
 	@GetMapping("/challenge/filter")
 	public String getChallByOption(@RequestParam(value="opt[]", required=false) List<String> opt, @RequestParam(value="val[]", required=false) List<String> val, @RequestParam(value="keyword") String keyword, Model model) {
-		List<Challenge> challList = null;
+		List<ChallengeRegion> challList = new ArrayList<ChallengeRegion>();
 		if(opt==null && (keyword==null||keyword=="")) {
-			challList=challService.getAllChall();
+			challList=challService.getAllChallR();
+			for(ChallengeRegion cr : challList) {
+				System.out.println(cr);
+			}
 			model.addAttribute("challList", challList);
 			return "/challFilter";
 		}
@@ -111,7 +116,6 @@ public class ChallengeController {
 				}
 			}
 			challList=challService.getChallByOption(online, state, city, date, category, con,  keyword);
-			System.out.println(challList);
 			model.addAttribute("challList", challList);
 			return "/challengeFilter";
 		}
@@ -126,12 +130,11 @@ public class ChallengeController {
 		String userId = (String) session.getAttribute("userId");
 		List<UserChallenge> userList = challService.getUserByChallId(chall_id);
 		UserChallenge userChall=new UserChallenge();
-		System.out.println(userList);
 		for(UserChallenge uc:userList) {
 			if(uc.getUser_id().equals(userId))
 				userChall = uc;
 		}
-		
+		System.out.println(challenge.getChall_week_auth());
 		model.addAttribute("challenge", challenge);
 		model.addAttribute("userChall", userChall);
 		model.addAttribute("host", host);
@@ -204,5 +207,52 @@ public class ChallengeController {
 		public String kickUserById(@PathVariable int chall_id, @RequestParam("kickId") String kickId, Model model) {
 			challService.kickIdbyChallId(kickId, chall_id);
 			return "redirect:/challenge/"+chall_id+"host";
+		}
+		
+	// 챌린지 수정폼
+		@RequestMapping(value="/challenge/{chall_id}modify")
+		public String updateByChallId(@PathVariable int chall_id, Model model, HttpSession session) {
+			String userId = (String) session.getAttribute("userId");
+			User host = challService.getHostByChallId(chall_id);
+			if(!host.getUser_id().equals(userId))
+				return "redirect:/challenge/"+chall_id;
+			
+			Challenge chall = challService.getChallByChallId(chall_id);
+			List<String> stateList = service.getAllState();
+			
+			model.addAttribute("stateList",stateList);
+			model.addAttribute("chall", chall);
+			
+			return "updateChall";
+		}
+		
+		// 챌린지 수정
+		@RequestMapping(value = "/challenge/updateChall{chall_id}", method = RequestMethod.POST)
+		public String updateChall(@ModelAttribute Challenge updateChallenge,
+								 Model model,
+								 @RequestParam String region_district,
+								 @PathVariable int chall_id,
+								 HttpSession session) throws Exception {
+			String userId = (String) session.getAttribute("userId");
+
+			boolean challResult = false;
+			
+		
+			try {
+				updateChallenge.setChall_id(chall_id);
+				updateChallenge.setRegion_id(service.getIdByDistrict(region_district));
+				challResult = challService.updateChallenge(updateChallenge);
+				
+				if(challResult) {
+					
+					return "redirect:/challenge/"+updateChallenge.getChall_id();
+				}
+				
+			} catch (Exception e) {
+				
+				e.printStackTrace();
+				return "index";
+			}
+			return "index";
 		}
 }
