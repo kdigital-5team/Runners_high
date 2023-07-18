@@ -55,7 +55,7 @@
 					<label class="font-weight-bold" for="keyword" style="text-align: center;">챌린지 목록</label> <div></div>
 					<input type="text" class="form-control" id="keyword" placeholder="챌린지 검색" name="keyword" style="float: left; width:65%; height: 40px;" onkeypress="if(event.keyCode==13){searchKeyword();}"> 
 					<button type="button" onclick="searchKeyword()" style="margin-right: 5%; float: left; width: 20%" class="btn btn-dark">검색</button>
-
+					
 					<button type="button" onclick="loginCheck();" style="float: left; width: 10%" class="btn btn-dark">+</button>
 
 			</div>
@@ -149,15 +149,15 @@
 
 
 				<div class="row mb-5" id="list">
-					<c:forEach items="${challList}" var="chall">
+					<c:forEach items="${challList}" var="chall" varStatus="status">
+					<c:set var="ListEnd" value="${status.count}" />
 						<div style="width: 45%; float:left; height:200px; background-color:#F0F0F0; margin:2%; margin-bottom:20px; border-radius: 5px;  cursor: pointer;" onclick="location.href='challenge/${chall.chall_id}'">
 							
 								<div>
-									<div style="float: left; width: 35%; padding-top:35%; height:0;margin: 2%; border-radius: 5px;
-										background-image: url('${chall.chall_pic}');
+									<div id="map${status.count}" style="float: left; width: 35%; padding-top:35%; height:0;margin: 2%; border-radius: 5px;
 										background-position:center;
 										background-size:cover;">
-									</div>
+										</div>
 									<div style="float: left; width: 59%; margin-left:2px;" >
 										<c:if test="${chall.chall_sit eq '모집중'}">
 										<div style="float: left; background-color:#FFCECE; width: 30%; text-align: center; margin-top: 4%; margin-bottom: 4%; border-radius: 5px;"><b>${chall.chall_sit}</b></div>
@@ -177,9 +177,9 @@
 										<div style="font-size: 15px">${chall.region_state} ${chall.region_city}</div>
 										<div class="caption" style="font-size: 15px"><fmt:formatDate pattern="yyyy-MM-dd" value="${chall.chall_start_date}"/> ~ <fmt:formatDate pattern="yyyy-MM-dd" value="${chall.chall_end_date}"/></div>
 										<div>인증 주 ${chall.chall_week_auth}회 / 최대 ${chall.chall_size}명</div>
+										<div id="${status.count}">${chall.chall_id}</div>
 									</div>
 								</div>
-							
 						</div>
               </c:forEach>
             </div>
@@ -194,7 +194,8 @@
 
 	<!-- footer -->
 	<%@ include file="./inc/footer.jsp"%>
-	
+	<script type="text/javascript"
+	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a9fd4644a9a496749d0625dffe4286f8&libraries=services,clusterer,drawing"></script>
 	<script src="../static/js/jquery.min.js"></script>
 	<script src="../static/js/jquery-migrate-3.0.1.min.js"></script>
 	<script src="../static/js/jquery-ui.js"></script>
@@ -209,8 +210,57 @@
 
 </body>
 <script type="text/javascript">
-let keyword=null;
+	$(document).ready(function (){
+   		navigator.geolocation.getCurrentPosition(success, fail);
+   		
+   		function success(pos) { // 위치 정보를 가져오는데 성공했을 때 호출되는 콜백 함수 (pos : 위치 정보 객체)
 
+   		 	for (var i=1; i<='<c:out value="${ListEnd}"/>'; i++){
+   		 	var container = document.getElementById('map'+i); //지도를 담을 영역의 DOM 레퍼런스
+
+   		 	var chall_id = document.getElementById(i).innerText;
+   		 	console.log(chall_id);
+   		   	$.ajax({
+   		        async : true, 
+   		        type : 'POST', 
+   		        data: JSON.stringify({chall_id}),
+   		        url: "/getLatLongById",
+   		        dataType: "text",
+   		        contentType: "application/json; charset=UTF-8",
+   		        success: function(data) {  
+   		        if(data == "main"){
+   		        	
+   		      	//alert('등록완료 하였습니다.');
+   		      	
+   		        	} else {
+   		        		//alert('등록하지 못했습니다!');
+   		        	}
+   		      	},
+   		      	error: function(error) {
+   		      		//alert('등록하지 못했습니다!');
+   		          } 
+   		        })
+   		        var lat = pos.coords.latitude;
+   	   		    var lng = pos.coords.longitude;
+   	   		    var Clat = ${Route};
+   	   		    console.log(Clat);
+      			 var options = { //지도를 생성할 때 필요한 기본 옵션
+         	   			center: new kakao.maps.LatLng(lat, lng), //지도의 중심좌표.
+         	   			level: 6 //지도의 레벨(확대, 축소 정도)
+         	   		};
+   			var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
+   			
+   			
+   		 	}
+   	   		
+   	   		
+
+   		}
+   		function fail(err) { // 위치 정보를 가져오는데 실패했을 때 호출되는 콜백 함수
+   		    alert('현위치를 찾을 수 없습니다.');
+   		}
+	});
+	let keyword=null;
 	function test(button_id, option){
 		const target = document.getElementById(button_id);
 		console.log(target);
@@ -284,7 +334,10 @@ let keyword=null;
 		})
 			.success(function(result){
 				$('#list').html(result);
+				
 		})
+		
+		
 	}
 
   </script>

@@ -18,7 +18,7 @@
 <link rel="stylesheet" href="../static/fonts/flaticon/font/flaticon.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="../static/css/aos.css">
-<link rel="stylesheet" href="../static/css/style3.css">
+<link rel="stylesheet" href="../static/css/style.css">
 
     
 </head>
@@ -26,13 +26,14 @@
 
 		<div class="row no-gutters site-subbar align-items-center py-3" >
 			<div style="margin: auto;" >
-				<div class="contact-form" style="float: right; width: 40%">
-					<label class="font-weight-bold" for="keyword" style="float: left; width: 40%;">대회명 검색</label> 
-					<input type="text" class="form-race" id="keyword" placeholder="대회명 입력" style="float: left; width: 40%;" name="keyword" onkeypress="if(event.keyCode==13){searchKeyword();}"> 
-					<button type="button" onclick="searchKeyword()">검색</button>
+				<div class="contact-form" style="float: right; width: 40%; margin-top: 25px">
+					<label class="font-weight-bold" for="keyword" style="display: inline-block;">대회명 검색</label> 
+					<input type="text" class="form-control" id="keyword" placeholder="대회명 입력" style="display: inline-block; width: 50%; height: 40px;" name="keyword" onkeypress="if(event.keyCode==13){searchKeyword();}"> 
+					<button type="button" style="display: inline-block;" onclick="searchKeyword()" class="btn btn-dark">검색</button>
 				</div>
 			</div>
 		</div>
+
 		
 		
 		<div class="site-section">
@@ -130,7 +131,7 @@ function search(){
 	var objParams={"opt" : opt, "val" : val, "keyword" : keyword};
 	$.ajax({
 		type : "GET",
-		url : "/events/filter",
+		url : "/events/filter2",
 		data : objParams
 	})
 		.success(function(result){

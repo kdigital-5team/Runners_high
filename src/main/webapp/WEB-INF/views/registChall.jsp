@@ -342,10 +342,8 @@ function challRacePopup(){
     	var popOption = "width = 500, height = 500, top = 50, left = 50, location = no";
     	var openUrl ='/registChall/selectChallRace';
     	popup = window.open(openUrl, 'pop', popOption);
-    	popup.onbeforeunload = function() {
-    		document.getElementById("chall_size").value = '팝업창 닫힘';
-    		}};
-         
+
+    }
 }
 
 function chageState(){

@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.spring.dto.Route;
+import com.spring.dto.User;
 import com.spring.service.ChallengeService;
 import com.spring.service.RouteService;
 
@@ -31,7 +33,24 @@ public class RouteController {
 	@RequestMapping(value = "/registChallRoute", method = RequestMethod.GET)
 	public String registChall(Model model) throws Exception {
 
-		return "/registChall";
+		return "/registChall";	
+	}
+	
+	@RequestMapping(value = "/getLatLongById", method = RequestMethod.POST)
+	public String getLatLongById(@RequestBody String challId, Model model) throws Exception {
+		 try {
+             JSONParser jsonParser = new JSONParser();
+             JSONObject jsonObj = (JSONObject) jsonParser.parse(challId);
+             System.out.println(jsonObj.get("chall_id").toString());
+             List<Route> route = routeService.getlatLongById(Integer.parseInt(jsonObj.get("chall_id").toString()));
+             System.out.println(route);
+             model.addAttribute("Route", route);
+		 }
+             catch (Exception e) {
+                 e.printStackTrace();
+                 return "index";
+         }
+		return "/challenge";
 	}
 	
 

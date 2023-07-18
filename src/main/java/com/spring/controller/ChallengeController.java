@@ -29,10 +29,11 @@ import com.spring.dto.Challenge;
 import com.spring.dto.ChallengePost;
 
 import com.spring.dto.ChallengeRegion;
-
+import com.spring.dto.RaceAndRegion;
 import com.spring.dto.User;
 import com.spring.dto.UserChallenge;
 import com.spring.service.ChallengeService;
+import com.spring.service.RaceService;
 import com.spring.service.RegionService;
 import com.spring.service.RouteService;
 
@@ -48,6 +49,9 @@ public class ChallengeController {
 	@Autowired
 	private RouteService routeService;
 	
+	@Autowired
+	private RaceService raceService;
+	
 	@RequestMapping(value = "/registChall", method = RequestMethod.GET)
 	public String registChall(Model model) throws Exception {
 		List<String> stateList = service.getAllState();
@@ -60,46 +64,74 @@ public class ChallengeController {
 	}
 	
 	// 회원가입
-	// http://localhost:8081/regist
-	@RequestMapping(value = "/registChall", method = RequestMethod.POST)
-	public String insertDept(@ModelAttribute Challenge newChallenge,
-							 Model model,
-							 @RequestParam String region_district,
-							 HttpSession session) throws Exception {
-		String userId = (String) session.getAttribute("userId");
-		
-		System.out.println(newChallenge);
-		System.out.println(region_district);
-		System.out.println(userId);
-
-		boolean challResult = false;
-		
-	
-		try {
-			newChallenge.setChall_reg_id(userId);
-			newChallenge.setRegion_id(service.getIdByDistrict(region_district));
+	// http://localhost:8081/regist\
+		@RequestMapping(value = "/registChall", method = RequestMethod.POST)
+		public String insertDept(@ModelAttribute Challenge newChallenge,
+								 Model model,
+								 @RequestParam String region_district,
+								 HttpSession session) throws Exception {
+			String userId = (String) session.getAttribute("userId");
+			String raceId = (String)session.getAttribute("raceId");
 			System.out.println(newChallenge);
-			challResult = challService.insertChallenge(newChallenge);
+			System.out.println(region_district);
+			System.out.println(userId);
 			
-			if(challResult) {
-				System.out.println("등록완료");
-				
-				int challId = newChallenge.getChall_id();
-				System.out.println(challId);
-				session.setAttribute("challId", challId);
-				
-				return "registChallRoute";
+			if (raceId==null && newChallenge.getChall_category().equals("대회용")) {
+				session.setAttribute("msg", "대회 선택을 다시 해주세요!");
+				session.setAttribute("url", "/registChall");
+				return "alert";
+
+			} else if (newChallenge.getChall_category().equals("일상용")) {
+				session.removeAttribute(raceId);
+				raceId=null;
 			}
+			System.out.println(raceId);
+			boolean challResult = false;
 			
-		} catch (Exception e) {
-			
-			e.printStackTrace();
+		
+			try {
+				newChallenge.setChall_reg_id(userId);
+				newChallenge.setRegion_id(service.getIdByDistrict(region_district));
+				System.out.println(newChallenge);
+				
+				newChallenge.setRace_id(raceId);
+				System.out.println(newChallenge);
+				challResult = challService.insertChallenge(newChallenge);
+				
+				if(challResult) {
+					System.out.println("등록완료");
+					
+					int challId = newChallenge.getChall_id();
+					System.out.println(challId);
+					session.setAttribute("challId", challId);
+					session.removeAttribute(raceId);
+					return "registChallRoute";
+				}
+				
+			} catch (Exception e) {
+				
+				e.printStackTrace();
+				return "index";
+			}
 			return "index";
 		}
-		return "index";
+	
+	@RequestMapping(value = "/registChall/selectChallRace" , method = RequestMethod.GET)
+	public String selectRace(Model model) {
+		List<RaceAndRegion> raceList = raceService.getAllRaces();
+		model.addAttribute("raceList", raceList);
+		return "selectChallRace";
 	}
 	
-
+	@RequestMapping(value="/getRaceId",  method=RequestMethod.POST)
+	@ResponseBody
+	String getRace(@RequestBody String raceId,HttpSession session) throws Exception {
+        JSONParser jsonParser = new JSONParser();
+        JSONObject jsonObj = (JSONObject) jsonParser.parse(raceId);
+		session.setAttribute("raceId", Long.toString((long) jsonObj.get("raceId")));
+		System.out.println(jsonObj.get("raceId"));
+		return raceId;
+	}
 	
 	@RequestMapping(value="/getCity", method=RequestMethod.POST)
 	@ResponseBody
