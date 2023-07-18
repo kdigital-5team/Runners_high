@@ -36,7 +36,7 @@
 	<div class="site-wrap">
 
 		<div class="row no-gutters site-subbar align-items-center py-3">
-			<div style="margin: auto;">
+			<div style="margin: auto; width: 60%;">
 				<nav class="site-navigation text-left text-md-left"
 					style="float: left; width: 60%">
 
@@ -118,14 +118,14 @@
 
 
 				</nav>
-				<div class="contact-form" style="float: right; width: 40%">
-					<label class="font-weight-bold" for="keyword" style="float: left; width: 40%;">대회명 검색</label> 
-					<input type="text" class="form-race" id="keyword" placeholder="대회명 입력" style="float: left; width: 40%;" name="keyword" onkeypress="if(event.keyCode==13){searchKeyword();}"> 
-					<button type="button" style="float: left; width: 20%;" onclick="searchKeyword()">검색</button>
+				<div class="contact-form" style="float: right; width: 40%; margin-top: 25px">
+					<label class="font-weight-bold" for="keyword" style="display: inline-block;">대회명 검색</label> 
+					<input type="text" class="form-control" id="keyword" placeholder="대회명 입력" style="display: inline-block; width: 50%; height: 40px;" name="keyword" onkeypress="if(event.keyCode==13){searchKeyword();}"> 
+					<button type="button" style="display: inline-block;" onclick="searchKeyword()" class="btn btn-dark">검색</button>
 				</div>
 			</div>
 		</div>
-		<div>
+		<div style="width: 60%; margin: auto;">
 			<ul id="option_list" style="padding: 5px">
 
 			</ul>
@@ -195,14 +195,7 @@
 				
 				</div>
 
-				<div class="row justify-content-center">
-					<div class="col-lg-7">
-						<div class="custom-pagination">
-							<a href="#">1</a> <span>2</span> <a href="#">3</a> <a href="#">4</a>
-							<a href="#">5</a>
-						</div>
-					</div>
-				</div>
+
 
 
 			</div>

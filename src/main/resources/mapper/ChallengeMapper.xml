@@ -9,6 +9,15 @@
 			id="getAllChall">
 		SELECT chall_id, chall_reg_id, region_id, chall_name, chall_intro, chall_start_date, chall_end_date, chall_all_auth, chall_week_auth,chall_category, chall_sit, chall_auth, chall_online, chall_size, chall_pic
 		FROM challenge 
+		ORDER BY chall_id DESC
+	</select>
+	
+	<select resultType="com.spring.dto.ChallengeRegion" 
+			id="getAllChallR">
+		SELECT challenge.chall_id, challenge.chall_reg_id, challenge.chall_name, challenge.chall_intro, challenge.chall_start_date, challenge.chall_end_date, challenge.chall_all_auth, challenge.chall_week_auth, challenge.chall_category, challenge.chall_sit, challenge.chall_auth, challenge.chall_online, challenge.chall_size, challenge.chall_pic, region.region_state, region.region_city, region.region_district
+		FROM challenge, region
+		WHERE challenge.region_id = region.region_id
+		ORDER BY chall_id DESC
 	</select>
 
 	<select resultType="com.spring.dto.Challenge" 
@@ -76,52 +85,53 @@
 			WHERE user_id=#{kickId} and chall_id=#{chall_id}
 	</update>
 
-	<select resultType="com.spring.dto.Challenge" 
+	<select resultType="com.spring.dto.ChallengeRegion" 
 			id="getChallByOption" 
 			parameterType="java.util.List">
-		SELECT chall_id, chall_reg_id, region_id, chall_name, chall_intro, chall_start_date, chall_end_date, chall_all_auth, chall_week_auth,chall_category, chall_sit, chall_auth, chall_online, chall_size, chall_pic
-		FROM challenge 
+		SELECT challenge.chall_id, challenge.chall_reg_id, challenge.chall_name, challenge.chall_intro, challenge.chall_start_date, challenge.chall_end_date, challenge.chall_all_auth, challenge.chall_week_auth, challenge.chall_category, challenge.chall_sit, challenge.chall_auth, challenge.chall_online, challenge.chall_size, challenge.chall_pic, region.region_state, region.region_city, region.region_district
+		FROM challenge, region
 		<trim prefixOverrides="AND |OR" prefix="WHERE">
+			challenge.region_id = region.region_id
 			<if test="!online.isEmpty()">
-				chall_online IN 
+				and challenge.chall_online IN 
 				<foreach close=")" open="(" separator="," index="idx" item="value" collection="online">
 					#{value} 
 				</foreach>
 			</if>
 			<if test="!date.isEmpty()">
-				AND extract (month from chall_start_date) in 
+				AND extract (month from challenge.chall_start_date) in 
 				<foreach close=")" open="(" separator="," index="idx" item="value" collection="date">
 					#{value} 
 				</foreach>
 			</if>
 			<if test="!cat.isEmpty()">
-				AND chall_category IN 
+				AND challenge.chall_category IN 
 				<foreach close=")" open="(" separator="," index="idx" item="value" collection="cat">
 					#{value} 
 				</foreach>
 			</if>
 			<if test="!con.isEmpty()">
-				AND chall_sit IN 
+				AND challenge.chall_sit IN 
 				<foreach close=")" open="(" separator="," index="idx" item="value" collection="con">
 					#{value} 
 				</foreach>
 			</if>
 			<if test="!state.isEmpty() and city.isEmpty()">
-				AND region_id IN (select region_id from region where region_state IN 
+				AND challenge.region_id IN (select region_id from region where region_state IN 
 				<foreach close=")" open="(" separator="," index="idx" item="value" collection="state">
 					#{value} 
 				</foreach>
 				) 
 			</if>
 			<if test="!state.isEmpty() and !city.isEmpty()">
-				AND region_id IN (select region_id from region where region_city in 
+				AND challenge.region_id IN (select region_id from region where region_city in 
 				<foreach close=")" open="(" separator="," index="idx" item="value" collection="city">
 					#{value} 
 				</foreach>
 				) 
 			</if>
 			<if test="!keyword.isEmpty()">
-				AND chall_name LIKE '%'||#{keyword}||'%' 
+				AND challenge.chall_name LIKE '%'||#{keyword}||'%' 
 			</if>
 		</trim>
 	</select>
@@ -139,7 +149,8 @@
  			 						region_id,
  			 							chall_sit,
  			 								chall_online,
- 			 									chall_all_auth) 
+ 			 									chall_all_auth,
+ 			 									chall_week_auth) 
  			 		VALUES (#{chall_name},
  			 		challenge_req.NEXTVAL,
  			 					#{chall_reg_id}, 
@@ -151,12 +162,14 @@
  			 										#{region_id},
  			 											#{chall_sit},
  			 												#{chall_online},
- 			 													#{chall_all_auth})
+ 			 													#{chall_all_auth},
+ 			 													#{chall_week_auth})
 			<selectKey keyProperty="chall_id" resultType="int">
 				SELECT challenge_req.CURRVAL AS chall_id FROM DUAL
 			</selectKey>
  	</insert>
  	
+
  	<!-- 인증게시판 -->
  	
  	<select id="getAllPost" resultType="com.spring.dto.ChallengePost" >
@@ -168,4 +181,23 @@
 	INSERT INTO auth_post (auth_id, chall_id, comment_id, auth_title, auth_cont, auth_date)
 	VALUES (POST_SEQ.nextval, 2, 'judyk344@gmail.com', #{auth_title}, #{auth_cont}, '20230717')
 	</insert>
+
+ 	<update id="updateChallenge" 
+			parameterType="com.spring.dto.Challenge">
+			UPDATE challenge
+			SET chall_name = #{chall_name},
+				chall_intro =#{chall_intro},
+				chall_start_date = #{chall_start_date},
+				chall_end_date = #{chall_end_date},
+				chall_size = #{chall_size},
+				chall_category = #{chall_category},
+				region_id = #{region_id},
+				chall_sit = #{chall_sit},
+				chall_online = #{chall_online},
+				chall_all_auth = #{chall_all_auth},
+				chall_week_auth = #{chall_week_auth}
+				
+			WHERE chall_id=#{chall_id}
+	</update>
+
 </mapper>
