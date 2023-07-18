@@ -160,7 +160,7 @@
  	<!-- 인증게시판 -->
  	
  	<select id="getAllPost" resultType="com.spring.dto.ChallengePost" >
-		SELECT auth_title, auth_date
+		SELECT auth_id, auth_title, auth_date
 		FROM auth_post
 	</select>
 	
