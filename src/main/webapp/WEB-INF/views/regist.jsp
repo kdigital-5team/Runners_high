@@ -139,7 +139,10 @@ $(function() {
 		var user_id = $('user_id').val(); 
         if(!getIdCheck.test($(event.target).val())){
         	 $("label[for='id_check']").text("아이디는 영어와 숫자 조합으로 20자 이하의 이메일(@ .com)만 가능합니다.");
-        	 $("label[for='id_check']").css("color", "#e35c5c");
+        	    $("label[for='id_check']").css({
+        	        "color": "#e35c5c",
+        	        "display": "inline-block"
+        	   		 });
         	 id_chk = false;
         } else if(user_id.trim().length != 0) {
             $.ajax({
