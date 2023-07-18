@@ -43,27 +43,6 @@ public class FeedController {
 			 model.addAttribute("feedList", feedList);
 			 return "mypage_feed";
 		 }
-	// 프로필 수정으로 이동
-//		@GetMapping("/mypage/feed")
-//		public String myPageEditForm(HttpServletRequest request, Model model) throws Exception {
-//
-//			HttpSession session = request.getSession(false);
-//			System.out.println("접속 계정 : " + session.getAttribute("userId"));
-//
-//			User user = service.getUserByUserId(session.getAttribute("userId").toString());
-//
-//			System.out.println(
-//					"닉네임 : " + user.getNickname() + "\n아이디 : " + user.getUser_id() + "\n한줄 소개 : " + user.getIntro());
-//
-//			model.addAttribute("user", user);
-//
-//			if (session == null || !request.isRequestedSessionIdValid()) {
-//				model.addAttribute("msg", "로그인 후 이용 가능한 서비스입니다.");
-//				return "login";
-//			}
-//
-//			return "mypage_feed";
-//		}
 	
 	// 피드 작성 get
 	 @GetMapping("/mypage/write")
