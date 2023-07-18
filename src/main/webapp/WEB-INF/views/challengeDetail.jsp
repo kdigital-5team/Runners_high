@@ -53,16 +53,16 @@
 			</div>
 			<div style="float: left; width: 33%">
 				<span>${challenge.chall_sit}</span>
-				<c:if test="${userId ne challenge.chall_reg_id && userChall.user_reg_status ne 'Y' && userChall.user_deny_num lt 2}">
+				<c:if test="${userId ne challenge.chall_reg_id && userChall.user_reg_status ne 'Y' && userChall.user_deny_num lt 2 && challenge.chall_sit eq '모집중'}">
 					<form action="/challenge/${challenge.chall_id}/apply" method="post">
 						<input type="hidden" name="applyId" value="${userId}">
-						<input type="submit" value="신청">
+						<input type="submit" class="btn btn-primary" value="신청">
 					</form>
 				</c:if>
 				<c:if test="${userId ne challenge.chall_reg_id && userChall.user_reg_status eq 'Y'}">
 					<form action="/challenge/${challenge.chall_id}/withdraw" method="post">
 						<input type="hidden" name="applyId" value="${userId}">
-						<input type="submit" value="탈퇴">
+						<input type="submit" class="btn btn-danger" value="탈퇴">
 					</form>
 				</c:if>
 			</div>
@@ -90,10 +90,12 @@
 				</span>
 		</div>
 
-		<div style="margin: auto; width: 50%;" >
-			${challenge.chall_intro }
+		<div style="margin: auto; width: 50%;">챌린지 소개</div>
+		<div style="margin: auto; width: 50%; height: 300px; background-color: #F0F0F0;" >
+			<span style="margin: 3%;">${challenge.chall_intro }</span>
 		</div>
-		<div style="margin: auto; border: 1px solid aqua; width: 50%; height: 100px;">
+		<div style="margin: auto; width: 50%; margin-top: 10px">참가자</div>
+		<div style="margin: auto; background-color: #F0F0F0; width: 50%; height: 100px; margin-bottom: 10px;">
 			<c:forEach items="${userList }" var="apply_user">
 				<c:if test="${apply_user.chall_reg_status eq  'Y'}">
 					<div style="display: inline-block; width: 10%;">
