@@ -7,7 +7,11 @@
  <mapper namespace="com.spring.mapper.FeedMapper">
  	
  	<select id="getAllFeeds" resultType="com.spring.dto.PersonalFeed">
- 		SELECT 	*		
+ 		SELECT 	feed_id,
+ 				user_id,
+ 				feed_title,
+ 				feed_cont,
+ 				feed_writing_date  				
  		FROM personal_feed
  	</select>
  	
@@ -19,25 +23,10 @@
 	  								feed_cont,	
 	  								feed_writing_date) 
 		VALUES (feed_seq.nextval, 
-				'akqkrdl1227@gmail.com', 
+				'scott@gmail.com', 
 				#{feed_title}, 
 				#{feed_cont}, 
-				SYSDATE)
-
-		<selectKey keyProperty="feed_id" resultType="int">
-			SELECT personal_feed_seq.NEXTVAL AS feed_id FROM DUAL
-		</selectKey>
+				SYSDATE )
 	</insert>
-	
-	<select id="selectFeed" parameterType="com.spring.dto.PersonalFeed">
- 		SELECT 	feed_id,
-				user_id,
-				feed_title,
-				feed_cont,	
-				feed_writing_date
- 		FROM personal_feed 
- 		WHERE user_id = 'akqkrdl1227@gmail.com'
- 		
- 	</select>	
  	
  </mapper>

@@ -60,59 +60,113 @@
 		<!-- 피드 목록-->
 		<div class="site-section">
 			<div class="container">
-				
 				<div class="row">
-					<c:forEach items="${feedList}" var="feed" varStatus="vs">
-						
-							<div class="col-6 col-sm-6 col-md-4 col-lg-3" style="margin-bottom:30px">
-								<div class="img-wrapper">
-									<a id="layer_button" target="_self" role=button><img
-										src="../static/images/test.jpg" alt="Image" class="img-block"></a>
+					<div class="col-6 col-sm-6 col-md-4 col-lg-3">
+						<div class="img-wrapper">
+							<a id="layer_button" target="_self" role=button><img
+								src="../static/images/test.jpg" alt="Image" class="img-block"></a>
+						</div>
+					</div>
+					<div class="layer" id="layer">
+						<div class="layer_content">
+							<div class="post">
+								<div class="post-header">
+									<img src="/static/images/test.jpg" alt="Profile Picture">
+									<div class="username">john_doe</div>
 								</div>
-							</div>
-							 <div class="layer" id="layer">
-								<div class="layer_content">
-									<div class="post">
-										<div class="post-header">
-											<img src="/static/images/test.jpg" alt="Profile Picture">
-											<div class="username">${feed.user_id }</div>
-										</div>
-										<hr>
-										<div class="display-flex">
-											<img class="post-image" src="../static/images/test.jpg"
-												alt="Post Image">
-										</div>
-										<hr>
-										<div class="display-flex">
-											<div class="left-likes">
-												<button>Like</button>
-											</div>
-											<div class="left-likes-num">42</div>
-											<div class="right-edit">
-												<button>수정</button>
-											</div>
-											<div class="right-delete">
-												<button>삭제</button>
-											</div>
-										</div>
-										<!-- 피드 제목 -->
-										<div class="post-description" style="font-size:20px;">
-											${feed.feed_title}
-										</div>
-										
-										<!-- 피드 내용 -->
-										<div class="post-description">
-											${feed.feed_cont}
-										</div>
+								<hr>
+								<div class="display-flex">
+									<img class="post-image" src="../static/images/test.jpg"
+										alt="Post Image">
+								</div>
+								<hr>
+								<div class="display-flex">
+									<div class="left-likes">
+										<button>Like</button>
+									</div>
+									<div class="left-likes-num">42</div>
+									<div class="right-edit">
+										<button>수정</button>
+									</div>
+									<div class="right-delete">
+										<button>삭제</button>
 									</div>
 								</div>
+								<!-- 피드 내용 -->
+								<div class="post-description">
+									TEST 테스트</br> TEST 테스트</br> TEST 테스트</br> TEST 테스트</br>
+								</div>
 							</div>
+						</div>
+					</div>
 
-					</c:forEach>
+
+
+					<div class="col-6 col-sm-6 col-md-4 col-lg-3">
+						<div class="img-wrapper">
+							<button
+								onclick="window.open('feed2.html','window_name','width=800px,height=1000px,location=no, status=no, scrollbars=no');">
+								<img src="../static/images/test2.jpg" alt="Image"
+									class="img-block">
+							</button>
+							<div class="p-4"></div>
+						</div>
+					</div>
+					<div class="col-6 col-sm-6 col-md-4 col-lg-3">
+						<div class="img-wrapper">
+							<a href="#"><img src="../static/images/test3.jpg" alt="Image"
+								class="img-fluid"></a>
+							<div class="p-4"></div>
+						</div>
+					</div>
+					<div class="col-6 col-sm-6 col-md-4 col-lg-3">
+						<div class="img-wrapper">
+							<a href="#"><img src="../static/images/test4.jpg" alt="Image"
+								class="img-fluid"></a>
+							<div class="p-4"></div>
+						</div>
+					</div>
 				</div>
-				
 			</div>
 		</div>
+
+		<div class="site-section">
+			<div class="container">
+				<div class="row">
+					<div class="col-6 col-sm-6 col-md-4 col-lg-3">
+						<div class="img-wrapper">
+							<a href="#"><img src="../static/images/test.jpg" alt="Image"
+								class="img-fluid"></a>
+
+						</div>
+					</div>
+					<div class="col-6 col-sm-6 col-md-4 col-lg-3">
+						<div class="img-wrapper">
+							<a href="#"><img src="../static/images/test2.jpg" alt="Image"
+								class="img-fluid"></a>
+							<div class="p-4"></div>
+						</div>
+					</div>
+					<div class="col-6 col-sm-6 col-md-4 col-lg-3">
+						<div class="img-wrapper">
+							<a href="#"><img src="../static/images/test3.jpg" alt="Image"
+								class="img-fluid"></a>
+							<div class="p-4"></div>
+						</div>
+					</div>
+					<div class="col-6 col-sm-6 col-md-4 col-lg-3">
+						<div class="img-wrapper">
+							<a href="#"><img src="../static/images/test4.jpg" alt="Image"
+								class="img-fluid"></a>
+							<div class="p-4"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
 	<!-- 피드 상세보기 레이어 팝업 js문 -->
 	<script>
             const layer_button = document.getElementById("layer_button");

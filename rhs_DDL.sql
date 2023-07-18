@@ -18,7 +18,6 @@ DROP TABLE race_route cascade constraint;
 DROP TABLE chall_route cascade constraint;
 DROP SEQUENCE title_seq;
 DROP SEQUENCE personal_feed_seq;
-DROP SEQUENCE feed_picture_seq;
 DROP SEQUENCE region_seq;
 DROP SEQUENCE race_seq;
 DROP SEQUENCE challenge_req;
@@ -98,11 +97,6 @@ CREATE TABLE feed_picture (
     feed_pic_path  VARCHAR2(300 BYTE) NOT NULL,
     feed_pic_uuid  VARCHAR2(300 BYTE) NOT NULL
 );
-
-CREATE SEQUENCE feed_picture_seq
-        INCREMENT BY 1
-        START WITH 1
-        MINVALUE 1;
 
 CREATE TABLE feed_like(
     feed_id        NUMBER(20) NOT NULL,
@@ -186,7 +180,7 @@ CREATE TABLE user_chall (
     chall_reg_status  VARCHAR2(1 BYTE) DEFAULT 'N',
     user_chall_status VARCHAR2(1 BYTE) DEFAULT 'N',
     user_reg_status   VARCHAR2(1 BYTE) DEFAULT 'N',
-    user_deny_num     NUMBER(1) DEFAULT 0
+    user_deny_num     NUMBER(1)
 );
 
 -- 대회 테이블

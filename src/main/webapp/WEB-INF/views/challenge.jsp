@@ -51,13 +51,11 @@
 
 		<div class="row no-gutters site-subbar align-items-center py-3" >
 			<div style="margin: auto;" >
-			<div class="contact-form">
-					<label class="font-weight-bold" for="keyword" style="text-align: center;">챌린지 목록</label> <div></div>
-					<input type="text" class="form-control" id="keyword" placeholder="챌린지 검색" name="keyword" style="float: left; width:65%; height: 40px;" onkeypress="if(event.keyCode==13){searchKeyword();}"> 
-					<button type="button" onclick="searchKeyword()" style="margin-right: 5%; float: left; width: 20%" class="btn btn-dark">검색</button>
-
-					<button type="button" onclick="loginCheck();" style="float: left; width: 10%" class="btn btn-dark">+</button>
-
+			<div class="contact-form" style="border: 1px solid red;">
+					<label class="font-weight-bold" for="keyword" style="border: 1px solid red; margin: auto;">챌린지 목록</label> <div></div>
+					<input type="text" class="form-race" id="keyword" placeholder="챌린지 검색" name="keyword" style="float: left; width:65%;" onkeypress="if(event.keyCode==13){searchKeyword();}"> 
+					<button type="button" onclick="searchKeyword()" style="margin-right: 5%; float: left; width: 20%">검색</button>
+					<button type="button" onclick="loginCheck();" style="float: left; width: 10%">+</button>
 			</div>
 				<nav class="site-navigation text-left text-md-left"
 					style="float: left;">
@@ -126,8 +124,8 @@
 										onclick="test(this.id, this.name)" class="option">모집중</button></li>
 								<li><button style="width: 100px" type="button" id="모집예정" name="chall_con"
 										onclick="test(this.id, this.name)" class="option">모집예정</button></li>
-								<li><button style="width: 100px" type="button" id="모집종료" name="chall_con"
-										onclick="test(this.id, this.name)" class="option">모집종료</button></li>
+								<li><button style="width: 100px" type="button" id="모집마감" name="chall_con"
+										onclick="test(this.id, this.name)" class="option">모집마감</button></li>
 							</ul>
 						</li>
 					</ul>
@@ -137,7 +135,7 @@
 				</nav>
 			</div>
 		</div>
-		<div style="width: 60%; margin: auto;">
+		<div>
 			<ul id="option_list" style="padding: 5px">
 
 			</ul>
@@ -150,33 +148,24 @@
 
 				<div class="row mb-5" id="list">
 					<c:forEach items="${challList}" var="chall">
-						<div style="width: 45%; float:left; height:200px; background-color:#F0F0F0; margin:2%; margin-bottom:20px; border-radius: 5px;  cursor: pointer;" onclick="location.href='challenge/${chall.chall_id}'">
+						<div style="width: 40%; float:left; border: 1px solid aqua; margin-right: 10%">
 							
 								<div>
-									<div style="float: left; width: 35%; padding-top:35%; height:0;margin: 2%; border-radius: 5px;
-										background-image: url('${chall.chall_pic}');
-										background-position:center;
-										background-size:cover;">
+									<div style="float: left; width: 35%;">
+										<img src="${chall.chall_pic}"
+											alt="Image" class="img-fluid" style="height: auto;">
 									</div>
-									<div style="float: left; width: 59%; margin-left:2px;" >
-										<c:if test="${chall.chall_sit eq '모집중'}">
-										<div style="float: left; background-color:#FFCECE; width: 30%; text-align: center; margin-top: 4%; margin-bottom: 4%; border-radius: 5px;"><b>${chall.chall_sit}</b></div>
-										</c:if>
-										<c:if test="${chall.chall_sit eq '모집예정'}">
-										<div style="float: left; background-color:#FFCECE; width: 30%; text-align: center; margin-top: 4%; margin-bottom: 4%; border-radius: 5px;"><b>${chall.chall_sit}</b></div>
-										</c:if>
-										<c:if test="${chall.chall_sit eq '모집종료'}">
-										<div style="float: left; background-color:#FF9999; width: 30%; text-align: center; margin-top: 4%; margin-bottom: 4%; border-radius: 5px;"><b>${chall.chall_sit}</b></div>
-										</c:if>
-										<div style="float:left; width: 30%; margin-right: 40%; text-align: center; margin-top: 4%; border-radius: 5px; background-color: #FFCC99" ><b>${chall.chall_category}</b></div>
-										<h3 style="overflow:hidden; text-overflow: ellipsis; white-space: nowrap; width: 100%; margin-right: 5%;"><a href="challenge/${chall.chall_id}">${chall.chall_name}</a></h3>
-										<c:if test="${chall.chall_category eq '대회용'}">
-											<div style="font-size: 15px">대회명</div>
+									<div style="float: left; width: 65%;">
+										<div style="display: inline-block; float: left; border: 1px solid red; width: 30%; text-align: center;">${chall.chall_sit}</div>
+										<div style="border: 1px solid green; float:left; width: 30%; margin-right: 40%; text-align: center;">${chall.chall_category}</div>
+										<h5 style="overflow:hidden; text-overflow: ellipsis; white-space: nowrap; width: 140px;"><a href="challenge/${chall.chall_id}">${chall.chall_name}</a></h5>
+										<c:if test="${chall.chall_category ne null}">
+											<div style="font-size: 10px">대회명</div>
 										</c:if>
 										
-										<div style="font-size: 15px">${chall.region_state} ${chall.region_city}</div>
-										<div class="caption" style="font-size: 15px"><fmt:formatDate pattern="yyyy-MM-dd" value="${chall.chall_start_date}"/> ~ <fmt:formatDate pattern="yyyy-MM-dd" value="${chall.chall_end_date}"/></div>
-										<div>인증 주 ${chall.chall_week_auth}회 / 최대 ${chall.chall_size}명</div>
+										<div style="font-size: 10px">${chall.region_id}</div>
+										<div class="caption" style="font-size: 10px"><fmt:formatDate pattern="yyyy-MM-dd" value="${chall.chall_start_date}"/> ~ <fmt:formatDate pattern="yyyy-MM-dd" value="${chall.chall_end_date}"/> / 인증 주 ${chall.chall_week_auth}회 / 최대 ${chall.chall_size}명</div>
+										<div class="caption" style="font-size: 10px"></div>
 									</div>
 								</div>
 							
@@ -187,6 +176,15 @@
 					
 				</div>
 				<div id="show-dog-img">
+				</div>
+
+				<div class="row justify-content-center">
+					<div class="col-lg-7">
+						<div class="custom-pagination">
+							<a href="#">1</a> <span>2</span> <a href="#">3</a> <a href="#">4</a>
+							<a href="#">5</a>
+						</div>
+					</div>
 				</div>
 
 
@@ -255,7 +253,7 @@ let keyword=null;
 		target.disabled=false;
 		ths.parents("li").remove();
 
-		search();
+	search();
 	}
 	
 	function searchKeyword(){

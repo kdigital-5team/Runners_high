@@ -53,16 +53,9 @@
 			</div>
 			<div style="float: left; width: 33%">
 				<span>${challenge.chall_sit}</span>
-				<c:if test="${userId ne challenge.chall_reg_id && userChall.user_reg_status ne 'Y' && userChall.user_deny_num lt 2 && challenge.chall_sit eq '모집중'}">
+				<c:if test="${userId ne challenge.chall_reg_id}"> 
 					<form action="/challenge/${challenge.chall_id}/apply" method="post">
-						<input type="hidden" name="applyId" value="${userId}">
-						<input type="submit" class="btn btn-primary" value="신청">
-					</form>
-				</c:if>
-				<c:if test="${userId ne challenge.chall_reg_id && userChall.user_reg_status eq 'Y'}">
-					<form action="/challenge/${challenge.chall_id}/withdraw" method="post">
-						<input type="hidden" name="applyId" value="${userId}">
-						<input type="submit" class="btn btn-danger" value="탈퇴">
+						<input type="submit" value="신청">
 					</form>
 				</c:if>
 			</div>
@@ -82,7 +75,7 @@
 		<div style="margin: auto; text-align: center;">
 			<a href="mypage_feed">소개</a><span class="mx-2">|</span> 
 			<c:if test="${userId eq challenge.chall_reg_id }">
-				<a href="/challenge/${challenge.chall_id}host">관리</a><span class="mx-2">|</span> 
+				<a href="mypage_feed">관리</a><span class="mx-2">|</span> 
 			</c:if>
 			<a href="mypage_chall">인증 게시판</a><span class="mx-2">|</span>
 			<a href="mypage_title">캘린더</a>
@@ -90,26 +83,12 @@
 				</span>
 		</div>
 
-		<div style="margin: auto; width: 50%;">챌린지 소개</div>
-		<div style="margin: auto; width: 50%; height: 300px; background-color: #F0F0F0;" >
-			<span style="margin: 3%;">${challenge.chall_intro }</span>
+		<div style="margin: auto; width: 50%;" >
+			${challenge.chall_intro }
 		</div>
-		<div style="margin: auto; width: 50%; margin-top: 10px">참가자</div>
-		<div style="margin: auto; background-color: #F0F0F0; width: 50%; height: 100px; margin-bottom: 10px;">
-			<c:forEach items="${userList }" var="apply_user">
-				<c:if test="${apply_user.chall_reg_status eq  'Y'}">
-					<div style="display: inline-block; width: 10%;">
-						<div style="width:100%; padding-top:100%; height:0; border-radius: 70%;  
-						background-image: url(../static/images/profileImages/default_image.png);
-						background-position:center;
-						background-size:cover;">
-						</div>
-						<div style="text-align: center;">
-							${apply_user.nickname }
-						</div>
-					</div>
-				</c:if>
-				
+		<div>
+			<c:forEach items="${userList }" var="user">
+				${user.user_id }
 			</c:forEach>
 		</div>
 
@@ -119,23 +98,25 @@
 	<!-- footer -->
 	<%@ include file="./inc/footer.jsp"%>
 
-	<script src="../js/jquery.min.js"></script>
-	<script src="../js/jquery-migrate-3.0.1.min.js"></script>
-	<script src="../js/jquery-ui.js"></script>
-	<script src="../js/popper.min.js"></script>
-	<script src="../js/bootstrap.min.js"></script>
-	<script src="../js/owl.carousel.min.js"></script>
-	<script src="../js/jquery.stellar.min.js"></script>
-	<script src="../js/jquery.magnific-popup.min.js"></script>
-	<script src="../js/aos.js"></script>
+	<script src="js/jquery.min.js"></script>
+	<script src="js/jquery-migrate-3.0.1.min.js"></script>
+	<script src="js/jquery-ui.js"></script>
+	<script src="js/popper.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/owl.carousel.min.js"></script>
+	<script src="js/jquery.stellar.min.js"></script>
+	<script src="js/jquery.magnific-popup.min.js"></script>
+	<script src="js/aos.js"></script>
 
-	<script src="../js/main.js"></script>
+	<script src="js/main.js"></script>
 	
 
 </body>
 <script type="text/javascript">
-if(${userChall.user_deny_num}>=2)
-	alert("거절 5회로 신청 불가");
+
+	function apply(){
+
+	}
 
   </script>
 </html>

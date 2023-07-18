@@ -271,6 +271,11 @@ input[type=checkbox], input[type=radio] {
 	padding: 0
 }
 
+textarea {
+	overflow: auto;
+	resize: vertical
+}
+
 fieldset {
 	min-width: 0;
 	padding: 0;
