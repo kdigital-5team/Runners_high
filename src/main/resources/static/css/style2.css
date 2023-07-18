@@ -225,7 +225,7 @@ a {
 .hero-wrap {
   background-position: top center;
   height: 20vh;
-  min-height: 670px;
+  min-height: 300px;
   position: relative; }
   .hero-wrap .hero-contents {
     position: absolute;

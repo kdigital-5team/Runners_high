@@ -35,7 +35,7 @@
 
 		<!-- header -->
 		<%@ include file="./inc/header.jsp"%>
-
+		
 		<!-- 피드 / 챌린지 / 칭호 탭 -->
 		<div class="container">
 			<div class="row">
