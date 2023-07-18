@@ -66,7 +66,7 @@
 			</div>
 		</div>
 		
-		<div style="margin: auto; text-align: center; float: left; width: 90%">
+		<div style="margin: auto; text-align: center; float: left; width: 80%">
 			<a href="/challenge/${challenge.chall_id}">소개</a><span class="mx-2">|</span> 
 			<a href="#">관리</a><span class="mx-2">|</span> 
 			<a href="mypage_chall">인증 게시판</a><span class="mx-2">|</span>
@@ -74,11 +74,16 @@
 			<spanclass="mx-2">
 				</span>
 		</div>
-		<form action="/challenge/${challenge.chall_id}modify" method="GET" id="detailForm" style="float: left; width: 10%;">
-						<input type="submit" value="수정">
-		</form>
+		<div style="float: left; width: 20%;">
+			<c:if test="${challenge.chall_sit ne '모집종료'}">
+				<form action="/challenge/${challenge.chall_id}modify" method="GET" id="detailForm" style="display: inline-block;">
+								<input type="submit" value="수정">	
+				</form>
+				<button class="btn btn-danger" onclick="deleteChall('${challenge.chall_id}')" style="display: inline-block;">삭제</button>
+			</c:if>
+		</div>
 		<div style="width: 50%; margin: auto;">
-		<span>신청자</span>
+		<span class="mx-2">신청자</span>
 		<c:forEach items="${appList}" var="app">
 			<div style="border: 1px solid aqua; vertical-align: center;">
 				<div style="display:inline-block; width:20%; padding-top:20%; height:0; border-radius: 70%;  
@@ -86,14 +91,14 @@
 					background-position:center;
 					background-size:cover;">
 				</div>
-				<div style="display:inline-block; width: 50%; position:relative; height: 100%">
+				<div style="display:inline-block; width: 50%; position:relative;">
 					<div>칭호</div>
 					<div>${app.nickname }</div>
 					<div>안녕</div>
 				</div>
 				<div style="display:inline-block; position:relative; top: 50%; buttom:50%;">
-					<button onclick="acceptId('${app.user_id }','${challenge.chall_id}')">수락</button>
-					<button onclick="declinetId('${app.user_id }','${challenge.chall_id}')">거절</button>
+					<button class="btn btn-primary" onclick="acceptId('${app.user_id }','${challenge.chall_id}')">수락</button>
+					<button class="btn btn-danger" onclick="declinetId('${app.user_id }','${challenge.chall_id}')">거절</button>
 				</div>
 			</div>
 		</c:forEach>
@@ -205,6 +210,27 @@
 		
 		document.body.appendChild(new_form);
 		new_form.submit();
+	}
+	
+	function deleteChall(chall_id){
+		if(confirm("챌린지를 삭제하시겠습니까?")){
+			var new_form = document.createElement('form');
+			
+			new_form.name="chall_delete";
+			new_form.method='DELETE';
+			new_form.action='/challenge/delete/';
+			
+			var chall_input = document.createElement('input');
+			chall_input.setAttribute("type","hidden");
+			chall_input.setAttribute("name","challId");
+			chall_input.setAttribute("value", chall_id);
+			
+			new_form.appendChild(chall_input);
+			
+			
+			document.body.appendChild(new_form);
+			new_form.submit();
+		}
 	}
   </script>
 
