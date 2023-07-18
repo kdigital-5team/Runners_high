@@ -118,13 +118,14 @@
         <div class="form-group">
         	<label for="chall_size">인원</label>
        		<input type="text" class="form-control" id="chall_size" name="chall_size" placeholder="인원 수">
+       		<label for="size_check"></label>
 		</div>
         <div class="form-group">
         	<label for="chall_category">챌린지 목적</label>
         	<p></p>
-        	<select id="chall_category" name="chall_category">
-				<option value ="대회용"> 대회용</option>
-				<option value ="일상용"> 일상용 </option>
+        	<select id="chall_category" name="chall_category" onchange=challRacePopup();>
+				<option value ="일상용" > 일상용</option>
+				<option value ="대회용" > 대회용 </option>
 			</select >
 		</div>
 		<div class="form-group">
@@ -164,6 +165,7 @@
 		<div class="form-group">
         	<label for="chall_all_auth">챌린지 최소 인증률</label>
        		<input type="text" class="form-control" id="chall_all_auth" name="chall_all_auth" placeholder="최소 40% 이상 숫자로만 입력해주세요!">
+       		<label for="all_auth_check"></label>
 		</div>
         <button type="button" class="btn btn-primary" onclick="submit2();">등록하기</button>
     </div>
@@ -185,18 +187,69 @@
 	<script src="../static/js/main.js"></script>
 <script src="https://code.jquery.com/jquery-3.4.1.js" ></script> 
 <script>
-
+var popup;
 var chall_path;
+var race_id = '<%=(String)session.getAttribute("raceId")%>';
+var all_auth_chk = false;
+var size_chk = false;
+const allAuthCheck = RegExp(/^[0-9]+$/);
+const allSizeCheck = RegExp(/^[0-9]+$/);	
+	
+	$('#chall_all_auth').keyup(function() {
+		var chall_all_auth = document.getElementById('chall_all_auth').value; 
+        if(!allAuthCheck.test($(event.target).val())){
+        	 $("label[for='all_auth_check']").text("챌린지 최소 인증률은 숫자로만 입력해주세요");
+        	 console.log($(event.target).val() );
+        	 all_auth_chk = false;
+        } 
+        else if (chall_all_auth < 40 || chall_all_auth > 100){
+        	$("label[for='all_auth_check']").text("챌린지 최소 인증률은 40이상 100이하로만 입력해주세요");
+       	 	console.log($(event.target).val() );
+    		all_auth_chk = false;
+        }
+        else{
+        console.log("성공");
+        all_auth_chk = true;
+        $("label[for='all_auth_check']").text("정확히 입력하셨습니다.");
+        }
+	});
+
+	
+	
+	
+	$('#chall_size').keyup(function() {
+		var chall_size= document.getElementById('chall_size').value; 
+        if(!allAuthCheck.test($(event.target).val())){
+        	 $("label[for='size_check']").text("챌린지 인원수는 숫자로만 입력해주세요");
+        	 console.log($(event.target).val() );
+        	 size_chk = false;
+        } 
+        else if (chall_size < 3 || chall_size > 100){
+        	$("label[for='size_check']").text("챌린지 인원수는 3이상 100이하로만 입력해주세요");
+       	 	console.log($(event.target).val() );
+    		size_chk = false;
+        }
+        else{
+        console.log("성공");
+       	size_chk = true;
+        $("label[for='size_check']").text("정확히 입력하셨습니다.");
+        }
+	});
+
+
+
+
+
+
 
 
 window.onload = function () { buildCalendar(); }    // 웹 페이지가 로드되면 buildCalendar 실행
-
 let nowMonth = new Date();  // 현재 달을 페이지를 로드한 날의 달로 초기화
 let today = new Date();     // 페이지를 로드한 날짜를 저장
 today.setHours(0,0,0,0);    // 비교 편의를 위해 today의 시간을 초기화
 // 달력 생성 : 해당 달에 맞춰 테이블을 만들고, 날짜를 채워 넣는다.
 function buildCalendar() {
-
+	<% session.removeAttribute("raceId");%>
     let firstDate = new Date(nowMonth.getFullYear(), nowMonth.getMonth(), 1);     // 이번달 1일
     let lastDate = new Date(nowMonth.getFullYear(), nowMonth.getMonth() + 1, 0);  // 이번달 마지막날
 
@@ -282,6 +335,18 @@ function leftPad(value) {
     return value;
 }
 
+function challRacePopup(){
+    var category = document.getElementById("chall_category").value;
+    console.log(category);
+    if (category == "대회용"){
+    	var popOption = "width = 500, height = 500, top = 50, left = 50, location = no";
+    	var openUrl ='/registChall/selectChallRace';
+    	popup = window.open(openUrl, 'pop', popOption);
+    	popup.onbeforeunload = function() {
+    		document.getElementById("chall_size").value = '팝업창 닫힘';
+    		}};
+         
+}
 
 function chageState(){
     var state = document.getElementById("region_state").value;
@@ -335,17 +400,22 @@ function chageDistrict(){
     console.log("선택된"+$("select[name=region_district] option:selected").text());  
 }
 
+
 function submit2(){
-	Form=document.regist_form;  
-	if(Form.chall_start_date.value=="" || Form.chall_end_date.value=="" || Form.chall_all_auth.value=="" || Form.region_district.value==""){
-	        alert("필수 입력란이 비었습니다. 확인해 주세요.");
-	    }else{
-	    	
+	Form=document.regist_form;
+	if(Form.chall_start_date.value=="" || Form.chall_end_date.value=="" || Form.chall_all_auth.value=="" || Form.region_district.value==""  || !all_auth_chk || !size_chk){
+		
+	        alert("필수 입력란이 비었거나 입력 조건에 부합하지않습니다. 다시 확인해 주세요.");
+
+	        
+	        
+	} else {
 	       document.regist_form.submit();
+
+        
 	    }
 	};
 	
-
 		
 </script>
 </html>
