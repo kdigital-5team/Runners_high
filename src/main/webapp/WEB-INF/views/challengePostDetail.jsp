@@ -74,16 +74,14 @@
 		
 		<div style="margin: auto; text-align: center;">
 			<a href="mypage_feed">소개</a><span class="mx-2">|</span> 
-			<a href="${chall_id}challengePost">인증 게시판</a><span class="mx-2">|</span>
+			<a href="/challengePost/${chall_id}">인증 게시판</a><span class="mx-2">|</span>
 			<a href="mypage_title">캘린더</a>
 			<spanclass="mx-2">
-			   
 				</span>
 		</div>
 
-		<div style="margin:30px"></div>
 		
-		<table class="table table-hover table-striped" style="width:78%; margin:auto; text-align:center">
+		<%-- <table class="table table-hover table-striped">
 					<thead>
 						<tr>
 							
@@ -97,17 +95,20 @@
 							<tr>
 								
 								<td>${post.auth_id}</td>
-								<td><a href="/challenge/${chall_id}challPostDetail${post.auth_id}">${post.auth_title}</a></td>
+								<td><a href="#">${post.auth_title}</a></td>
 								<td>${post.auth_date}</td>
 							</tr>
 					</tbody>
 					</c:forEach>
 
-							</table>
-				<div style="margin:30px"></div>
-				<div style="text-align:center; ">		
-			<button style="background-color:Gainsboro; border-radius:5%; padding:6px 11px; font-color:white">
-			<a href="/challengePost/insertChallPost">글쓰기</a></button></div>
+							</table> --%>
+						<div>
+						<table>
+						<tr><td>${post.auth_title}</td></tr>
+						<tr><td>${post.auth_cont}</td></tr>
+						</table>
+						</div>
+						
 			
 		
 	</div>

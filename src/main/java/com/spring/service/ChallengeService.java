@@ -96,13 +96,19 @@ public class ChallengeService {
 
 	public void insertChallPost(ChallengePost newPost) {
 
-			mapper.insertChallPost(newPost);		
+
+	mapper.insertChallPost(newPost);	
+
 	}
 
 	public ChallengePost getPostByAuthId(int auth_id) {
 		
+
 		return mapper.getPostByAuthId(auth_id);
+
+
 	}
+
 
 	public boolean updateChallenge(Challenge updateChallenge) {
     
@@ -114,6 +120,20 @@ public class ChallengeService {
 		return mapper.getAllChallR();
 
 	}
+
+
+	public boolean insertPost(ChallengePost newPost) throws Exception {
+boolean result = false;
+		
+		int res = mapper.insertPost(newPost);
+		
+		if(res != 0) {
+			result = true;
+		} else {
+			throw new Exception("게시글 등록 실패");
+		}
+		
+		return result;
 
 	public boolean deleteUserchallbyChallId(int challId) {
 		return mapper.deleteUserchallbyChallId(challId);
@@ -135,6 +155,7 @@ public class ChallengeService {
 	public void insertHost(String userId, int challId) {
 		mapper.insertHost(userId, challId);
 		
+
 	}
 	
 
