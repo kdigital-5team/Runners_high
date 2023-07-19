@@ -129,15 +129,6 @@ public class ChallengeController {
 	}
 	
 
-
-	@RequestMapping(value = "/registChall/selectChallRace" , method = RequestMethod.GET)
-	public String selectRace(Model model) {
-		List<RaceAndRegion> raceList = raceService.getAllRaces();
-		model.addAttribute("raceList", raceList);
-		return "selectChallRace";
-	}
-	
-
 	@RequestMapping(value="/getRaceId",  method=RequestMethod.POST)
 	@ResponseBody
 	String getRace(@RequestBody String raceId,HttpSession session) throws Exception {
@@ -242,27 +233,6 @@ public class ChallengeController {
 			model.addAttribute("userList", userList);
 			return "/challengeDetail";
 		}
-
-	@RequestMapping(value = "/challenge/{chall_id}", method = RequestMethod.GET)
-	public String getChallByChallId(@PathVariable int chall_id, Model model, HttpSession session) {
-		Challenge challenge = challService.getChallByChallId(chall_id);
-		User host = challService.getHostByChallId(chall_id);
-		String userId = (String) session.getAttribute("userId");
-		List<UserChallenge> userList = challService.getUserByChallId(chall_id);
-		List<UserChallenge> parList = new ArrayList<UserChallenge>();
-		UserChallenge userChall=new UserChallenge();
-		for(UserChallenge uc:userList) {
-			if(uc.getUser_id().equals(userId))
-				userChall = uc;
-			if(uc.getChall_reg_status().equals("Y"))
-				parList.add(uc);
-		}
-		model.addAttribute("challenge", challenge);
-		model.addAttribute("userChall", userChall);
-		model.addAttribute("host", host);
-		model.addAttribute("userList", parList);
-		return "/challengeDetail";
-	}
 
 	
 	// 챌린지 신청
