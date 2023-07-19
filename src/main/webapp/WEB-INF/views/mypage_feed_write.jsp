@@ -53,7 +53,8 @@
 							</div>
 							<form action="/mypage/feed" enctype="multipart/form-data" method="POST">					
 								<div class="post" style="border:none; margin-top:60%;">
-									<div class="username">${feedList[0].user_id}</div>
+									<div class="username">${user.user_id}</div>
+									<div class="userintro">${user.intro}</div>
 								</div>
 							</form>	
 							<div onclick="location.href='#'" style="border:none; margin-top:14%; margin-left:2%; margin-right:15%">
@@ -91,7 +92,7 @@
 						<div style="display:table-cell; margin:auto; margin-top:5px;">		                	
 		                	<input class="form-control" type="text" name="feed_title" style="width:600px; display:block;">
 	                	</div>
-	                	<button type="submit" class="btn btn-default" value="글 등록하기" style="margin-left:205px; margin-right:10px; margin-top:5px;">
+	                	<button type="submit" class="btn btn-default" name ="user_id" value= ${user.user_id}  style="margin-left:205px; margin-right:10px; margin-top:5px;">
 	                		등록
 	                	</button>
 					</div>

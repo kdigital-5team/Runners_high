@@ -7,7 +7,11 @@
  <mapper namespace="com.spring.mapper.FeedMapper">
  	
  	<select id="getAllFeeds" resultType="com.spring.dto.PersonalFeed">
- 		SELECT 	*		
+ 		SELECT 	feed_id,
+				user_id,
+				feed_title,
+				feed_cont,	
+				feed_writing_date		
  		FROM personal_feed
  	</select>
  	
@@ -36,7 +40,7 @@
 				feed_cont,	
 				feed_writing_date
  		FROM personal_feed 
- 		WHERE user_id = 'akqkrdl1227@gmail.com'
+ 		WHERE user_id = #{userId}
  		
  	</select>	
  	

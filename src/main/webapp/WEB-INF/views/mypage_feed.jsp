@@ -47,7 +47,8 @@
 							</div>
 							<form action="/mypage/feed" enctype="multipart/form-data" method="POST">					
 								<div class="post" style="border:none; margin-top:60%;">
-									<div class="username">${feedList[0].user_id}</div>
+									<div class="username">${user.user_id}</div>
+									<div class="userintro">${user.intro}</div>
 								</div>
 							</form>	
 							<div onclick="location.href='/mypage/edit'" style="border:none; margin-top:14%; margin-left:2%; margin-right:15%">
@@ -85,13 +86,15 @@
 				
 				<div class="row">
 					<c:forEach items="${feedList}" var="feed" varStatus="vs">
-						
+						<c:if test="${userId eq feed.user_id}">
 							<div class="col-6 col-sm-6 col-md-4 col-lg-3" style="margin-bottom:30px">
 								<div class="img-wrapper">
 									<a id="layer_button" target="_self" role=button><img
 										src="../static/images/test.jpg" alt="Image" class="img-block"></a>
 								</div>
 							</div>
+							
+						</c:if>
 							 <div class="layer" id="layer">
 								<div class="layer_content">
 									<div class="post">
@@ -129,7 +132,6 @@
 									</div>
 								</div>
 							</div>
-
 					</c:forEach>
 				</div>
 				
@@ -138,9 +140,8 @@
 	</div>
 	<!-- 피드 상세보기 레이어 팝업 js문 -->
 	<script>
-            const layer_button = document.getElementById("layer_button");
-            const layer = document.getElementById("layer");
-            const layer_content = document.getElementById("layer_content");
+            const layer_button = document.getElementsByClass("feed1${feed.feed_id}");
+            const layer = document.getElementsByClass("layer");
 
             layer_button.addEventListener("click", function(e) {
                 layer.style.display = "flex";
@@ -152,6 +153,9 @@
                     layer.style.display = "none"
                 }
             });
+            
+            var layer_button[];
+            
   </script>
 
 	<!-- footer -->
