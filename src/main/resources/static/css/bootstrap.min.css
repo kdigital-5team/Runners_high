@@ -253,6 +253,17 @@ select:focus {
 	background: #e0eaf5;
 }
 
+/* main 이미지 재정렬 0719 */
+#right-media-flex {
+	flex-direction: row-reverse;
+	text-align: right;
+}
+
+#right-media-img {
+	position: relative;
+	left: 16px;
+}
+
 /* select 커스텀 0717 */
 .selectBox * {
   box-sizing: border-box;

@@ -75,8 +75,7 @@ public class MypageController {
 	public String myPageEdit(HttpServletRequest request, @ModelAttribute("userId") String userId,
 			@ModelAttribute("userNickname") String userNickname, @RequestParam("userPic") MultipartFile userPicFile,
 			@ModelAttribute("userIntro") String userIntro, @ModelAttribute("userPw") String userPw,
-			@RequestParam("pw_quest_input") String userPwQ, @ModelAttribute("userPwA") String userPwA,
-			RedirectAttributes rttr) throws Exception {
+			@RequestParam("pw_quest_input") String userPwQ, @ModelAttribute("userPwA") String userPwA) throws Exception {
 
 		HttpSession session = request.getSession(false);
 		boolean result = false;
@@ -88,14 +87,11 @@ public class MypageController {
 		result = service.updateUserProfile(user);
 
 		if (result) {
-
-			rttr.addFlashAttribute("success", "프로필 수정을 완료했습니다!");
 			return "redirect:/test";
 
 		} else {
 
-			rttr.addFlashAttribute("fail", "프로필 수정에 실패했습니다. 다시 시도해주세요.");
-			return "redirect:/mypage/edit";
+			return "mypage_edit";
 		}
 	}
 

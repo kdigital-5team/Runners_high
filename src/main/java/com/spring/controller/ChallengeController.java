@@ -60,7 +60,7 @@ public class ChallengeController {
 		model.addAttribute("stateList",stateList);
 		//model.addAttribute("cityList",cityList);
 		//model.addAttribute("districtList",districtList);
-		return "/registChall";
+		return "regist_chall";
 	}
 	
 	// 챌린지 추가

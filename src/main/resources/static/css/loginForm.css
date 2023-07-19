@@ -262,6 +262,10 @@ input[type="submit"] {
     margin-top: 20px;
 }
 
+input[type="submit"]:hover {
+    background-color: #f9d010;
+}
+
 button, input {
 	overflow: visible
 }

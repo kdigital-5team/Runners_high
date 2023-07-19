@@ -53,7 +53,7 @@ public class UserController {
 	// http://localhost:8081/findPw
 	@RequestMapping(value = "/findPw/updatePw", method = RequestMethod.GET)
 	public String updatePw() throws Exception {
-		return "findPw";
+		return "updatePw";
 	}
 	
 	// 회원가입
@@ -108,42 +108,48 @@ public class UserController {
 	
 	// 비밀번호 찾기
     @RequestMapping(value="/findPw", method=RequestMethod.POST)
-    public String findPw(@RequestParam String user_id, String pw_quest, String pw_quest_answer,
+    public String findPw(@RequestParam String user_id, @RequestParam("pw_quest_input") String pw_quest, String pw_quest_answer,
     		HttpServletRequest request) throws Exception {
+    	
     	HttpSession session = request.getSession(true);
-		String pw = service.findPw(user_id, pw_quest, pw_quest_answer);
-		try {
-			pw.isEmpty();
-		} catch(Exception e) {
-			
-			//db에서 조건에 맞는 값이 없어서 가져오지 못한 경우 발생
-			
-			System.out.println("Null Point!");
-			return "findPw"; 
-		}
-		// db에서 정상적으로 가져온 경우 세션을 만들어주고 다음 페이지로 이동
-		session.setAttribute("userId", user_id);
-		return "updatePw";
+    	
+    	System.out.println("입력한 접속자 정보 : " + user_id);
+    	
+    	String pw = service.findPw(user_id, pw_quest, pw_quest_answer);
+    	
+    	if (pw == "" || pw == null) {
+    		System.out.println("접속자 조회 결과 : 없는 유저입니다.");
+    		throw new Exception();
+    	}
+    	
+    	session.setAttribute("userId", user_id);
+    	System.out.println("세션에 유저 정보 저장 : " + session.getAttribute("userId"));
+    	
+    	return "updatePw";
+    	
 	}
     
     // 비밀번호 변경
     @RequestMapping(value="/findPw/updatePw", method=RequestMethod.POST)
     public String updatePw(HttpServletRequest request) throws Exception {
+    	System.out.println("update pw controller 실행");
+    	
     	HttpSession session = request.getSession(true);
     	String new_Pw = request.getParameter("new_Pw");
     	String userId = session.getAttribute("userId").toString();
     	
     	boolean userResult = false;
+    	
     	try {
     			userResult = service.updatePw(new_Pw, userId);
 				
     	} catch (Exception e) {
 			e.printStackTrace();
 			session.invalidate();
-			return "home";
+			return "main";
     	}
     	session.invalidate();
-    	return "home";
+    	return "redirect:/login";
     }
 
 
