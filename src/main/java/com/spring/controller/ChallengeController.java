@@ -29,10 +29,11 @@ import com.spring.dto.Challenge;
 import com.spring.dto.ChallengePost;
 
 import com.spring.dto.ChallengeRegion;
-
+import com.spring.dto.RaceAndRegion;
 import com.spring.dto.User;
 import com.spring.dto.UserChallenge;
 import com.spring.service.ChallengeService;
+import com.spring.service.RaceService;
 import com.spring.service.RegionService;
 import com.spring.service.RouteService;
 
@@ -47,6 +48,9 @@ public class ChallengeController {
 	
 	@Autowired
 	private RouteService routeService;
+	
+	@Autowired
+	private RaceService raceService;
 	
 	@RequestMapping(value = "/registChall", method = RequestMethod.GET)
 	public String registChall(Model model) throws Exception {
@@ -86,6 +90,7 @@ public class ChallengeController {
 				
 				int challId = newChallenge.getChall_id();
 				System.out.println(challId);
+				challService.insertHost(userId, challId);
 				session.setAttribute("challId", challId);
 				
 				return "registChallRoute";
@@ -99,7 +104,22 @@ public class ChallengeController {
 		return "index";
 	}
 	
-
+	@RequestMapping(value = "/registChall/selectChallRace" , method = RequestMethod.GET)
+	public String selectRace(Model model) {
+		List<RaceAndRegion> raceList = raceService.getAllRaces();
+		model.addAttribute("raceList", raceList);
+		return "selectChallRace";
+	}
+	
+	@RequestMapping(value="/getRaceId",  method=RequestMethod.POST)
+	@ResponseBody
+	String getRace(@RequestBody String raceId,HttpSession session) throws Exception {
+        JSONParser jsonParser = new JSONParser();
+        JSONObject jsonObj = (JSONObject) jsonParser.parse(raceId);
+		session.setAttribute("raceId", Long.toString((long) jsonObj.get("raceId")));
+		System.out.println(jsonObj.get("raceId"));
+		return raceId;
+	}
 	
 	@RequestMapping(value="/getCity", method=RequestMethod.POST)
 	@ResponseBody
@@ -183,16 +203,18 @@ public class ChallengeController {
 		User host = challService.getHostByChallId(chall_id);
 		String userId = (String) session.getAttribute("userId");
 		List<UserChallenge> userList = challService.getUserByChallId(chall_id);
+		List<UserChallenge> parList = new ArrayList<UserChallenge>();
 		UserChallenge userChall=new UserChallenge();
 		for(UserChallenge uc:userList) {
 			if(uc.getUser_id().equals(userId))
 				userChall = uc;
+			if(uc.getChall_reg_status().equals("Y"))
+				parList.add(uc);
 		}
-		System.out.println(challenge.getChall_week_auth());
 		model.addAttribute("challenge", challenge);
 		model.addAttribute("userChall", userChall);
 		model.addAttribute("host", host);
-		model.addAttribute("userList", userList);
+		model.addAttribute("userList", parList);
 		return "/challengeDetail";
 	}
 	
@@ -342,8 +364,9 @@ public class ChallengeController {
 				challResult = challService.updateChallenge(updateChallenge);
 				
 				if(challResult) {
-					
-					return "redirect:/challenge/"+updateChallenge.getChall_id();
+					if(updateChallenge.getChall_sit().equals("모집종료"))
+						challService.deleteApplyUserbyChallId(chall_id);
+					return "redirect:/challenge/"+chall_id;
 				}
 				
 			} catch (Exception e) {
@@ -351,6 +374,27 @@ public class ChallengeController {
 				e.printStackTrace();
 				return "index";
 			}
+			return "index";
+		}
+		
+		@RequestMapping(value = "/challenge/delete/{chall_id}", method = RequestMethod.GET)
+		String deleteChallbyChallId(@PathVariable int chall_id, HttpSession session) {
+			String userId = (String) session.getAttribute("userId");
+			User host = challService.getHostByChallId(chall_id);
+			if(!host.getUser_id().equals(userId))
+				return "redirect:/main";
+			
+			boolean deleteChall = false;
+			
+			
+				challService.deleteUserchallbyChallId(chall_id);
+				challService.deleteRoutebyChallId(chall_id);
+				deleteChall = challService.deleteChallbyChallId(chall_id);
+				
+				if(deleteChall) {
+					System.out.println("삭제");
+					return "redirect:/main";
+				}
 			return "index";
 		}
 

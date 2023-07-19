@@ -55,6 +55,17 @@ public interface ChallengeMapper {
 
 	public List<ChallengeRegion> getAllChallR();
 
+
 	public int insertPost(ChallengePost newPost);
+
+	public boolean deleteUserchallbyChallId(int challId);
+
+	public boolean deleteChallbyChallId(int challId);
+
+	public boolean deleteRoutebyChallId(int challId);
+
+	public void deleteApplyUserbyChallId(int chall_id);
+
+	public void insertHost(String userId, int challId);
 
 }

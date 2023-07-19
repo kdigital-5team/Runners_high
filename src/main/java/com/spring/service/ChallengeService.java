@@ -96,11 +96,9 @@ public class ChallengeService {
 
 	public void insertChallPost(ChallengePost newPost) {
 
-	mapper.insertChallPost(newPost);
 
-		mapper.insertChallPost(newPost);
+	mapper.insertChallPost(newPost);	
 
-		
 	}
 
 	public ChallengePost getPostByAuthId(int auth_id) {
@@ -108,19 +106,21 @@ public class ChallengeService {
 
 		return mapper.getPostByAuthId(auth_id);
 
-		
-		
+
 	}
 
 
 	public boolean updateChallenge(Challenge updateChallenge) {
+    
 		return mapper.updateChallenge(updateChallenge);
 	}
 
 	public List<ChallengeRegion> getAllChallR() {
+    
 		return mapper.getAllChallR();
 
 	}
+
 
 	public boolean insertPost(ChallengePost newPost) throws Exception {
 boolean result = false;
@@ -134,6 +134,28 @@ boolean result = false;
 		}
 		
 		return result;
+
+	public boolean deleteUserchallbyChallId(int challId) {
+		return mapper.deleteUserchallbyChallId(challId);
+	}
+
+	public boolean deleteChallbyChallId(int challId) {
+		return mapper.deleteChallbyChallId(challId);
+	}
+
+	public boolean deleteRoutebyChallId(int challId) {
+		return mapper.deleteRoutebyChallId(challId);
+	}
+
+	public void deleteApplyUserbyChallId(int chall_id) {
+		mapper.deleteApplyUserbyChallId(chall_id);
+		
+	}
+
+	public void insertHost(String userId, int challId) {
+		mapper.insertHost(userId, challId);
+		
+
 	}
 	
 
