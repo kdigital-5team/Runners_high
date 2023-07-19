@@ -408,28 +408,31 @@ a:hover {
 }
 
 .custom-media .img-wrap {
-<<<<<<< HEAD
-  -webkit-box-flex: 0;
-  -ms-flex: 0 0 360px;
-  flex: 0 0 250px;
-  border-radius: 7px;
-  overflow: hidden; }
-  .custom-media .img-wrap img {
-    max-height: 100%; }
-    
-=======
-	-webkit-box-flex: 0;
-	-ms-flex: 0 0 360px;
-	flex: 0 0 250px;
-	border-radius: 7px;
-	overflow: hidden;
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 360px;
+    flex: 0 0 250px;
+    border-radius: 7px;
+    overflow: hidden;
+    position: relative;
 }
 
+.custom-media .img-wrap::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+    z-index: -1;
+}
+  
 .custom-media .img-wrap img {
-	max-height: 100%;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
 }
-
->>>>>>> 1776df226ebf912924f9aaecb4791916ae16aa48
+    
 .section-title {
 	position: relative;
 	padding-left: 20px;
