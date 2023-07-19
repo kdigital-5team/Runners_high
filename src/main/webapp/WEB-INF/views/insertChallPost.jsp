@@ -50,9 +50,9 @@
 						data-stellar-background-ratio="0.5">
 						<div class="hero-contents">
 							<p>
-								<a href="/mypage/feed"><strong>피드</strong></a> <span class="mx-2">|</span>
+								<a href="/mypage/feed"><strong>소개</strong></a> <span class="mx-2">|</span>
 								<a href="${chall_id}challengePost">인증게시판</a> <span class="mx-2">|</span> <a
-									href="/mypage/title">칭호</a> <span class="mx-2"></span>
+									href="/mypage/title">캘린더</a> <span class="mx-2"></span>
 							</p>
 						</div>
 					</div>
@@ -74,13 +74,13 @@
 	                	</button>
 					</div>
 					<hr>
-					<div class="form-group">
+					<!-- <div class="form-group">
 						<div style="height: 150px; width: 200px; vertical-align: middle;">	
 							<label>이미지 파일 첨부</label> 
 				            <input type="file" name="file" onchange="readURL(this);"/>
 							<img id="preview" src="#" width=250 height=150 alt="선택된 이미지가 없습니다" style="align-content: flex-end; ">
 						</div>
-					</div> 
+					</div>  -->
 					<div class="form-group">
 						<div style="display:table-cell; width:50%; vertical-align: middle; margin-right:10px;">
 							<textarea class="form-control" name="auth_cont" rows="5" style="width:600px; display:block; margin: 0 auto;"></textarea>
