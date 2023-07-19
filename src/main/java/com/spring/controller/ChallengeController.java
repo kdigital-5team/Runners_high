@@ -63,10 +63,10 @@ public class ChallengeController {
 		return "/registChall";
 	}
 	
-	// 회원가입
-	// http://localhost:8081/regist\
+	// 챌린지 추가
+	// http://localhost:8081/registChall
 		@RequestMapping(value = "/registChall", method = RequestMethod.POST)
-		public String insertDept(@ModelAttribute Challenge newChallenge,
+		public String insertChallenge(@ModelAttribute Challenge newChallenge,
 								 Model model,
 								 @RequestParam String region_district,
 								 HttpSession session) throws Exception {
@@ -104,14 +104,10 @@ public class ChallengeController {
 					System.out.println(challId);
 					session.setAttribute("challId", challId);
 					session.removeAttribute(raceId);
+					challService.insertHost(userId, challId);
+					
 					return "registChallRoute";
 				}
-
-				int challId = newChallenge.getChall_id();
-				System.out.println(challId);
-				challService.insertHost(userId, challId);
-				session.setAttribute("challId", challId);
-
 				
 			} catch (Exception e) {
 				
