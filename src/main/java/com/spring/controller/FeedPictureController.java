@@ -17,6 +17,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.spring.dto.FeedPicture;
 import com.spring.service.FeedPictureService;
@@ -27,7 +29,7 @@ public class FeedPictureController {
 	@Autowired
 	FeedPictureService pictureService;
 	
-	@GetMapping("/feed/write")
+	@RequestMapping(value = "/feed/write", method = RequestMethod.GET)
 	public ResponseEntity<Resource> downloadFile(@PathVariable int fileNo){
 		System.out.println(fileNo);
 		

@@ -75,8 +75,8 @@ public class RouteController {
 	}
 	
 
-	@RequestMapping(value="/getPath", method=RequestMethod.POST)
 	@ResponseBody
+	@RequestMapping(value="/getPath", method=RequestMethod.POST)
 	String getPath(@RequestBody String chall_path, Model model, HttpSession session) throws Exception {
 		boolean routeResult = false;
 		int chall_Id = (int)session.getAttribute("challId");
