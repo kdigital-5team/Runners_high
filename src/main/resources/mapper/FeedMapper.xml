@@ -25,7 +25,7 @@
 				SYSDATE)
 
 		<selectKey keyProperty="feed_id" resultType="int">
-			SELECT personal_feed_seq.NEXTVAL AS feed_id FROM DUAL
+			SELECT personal_feed_seq.CURRVAL AS feed_id FROM DUAL
 		</selectKey>
 	</insert>
 	

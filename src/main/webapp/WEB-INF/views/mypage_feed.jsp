@@ -48,7 +48,6 @@
 							<form action="/mypage/feed" enctype="multipart/form-data" method="POST">					
 								<div class="post" style="border:none; margin-top:60%;">
 									<div class="username">${feedList[0].user_id}</div>
-									<div class="username">33333333333333</div>
 								</div>
 							</form>	
 							<div onclick="location.href='#'" style="border:none; margin-top:14%; margin-left:2%; margin-right:15%">
