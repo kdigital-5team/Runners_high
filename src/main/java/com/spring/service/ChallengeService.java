@@ -102,7 +102,6 @@ public class ChallengeService {
 	public ChallengePost getPostByAuthId(int auth_id) {
 		
 		return mapper.getPostByAuthId(auth_id);
-
 	}
 
 	public boolean updateChallenge(Challenge updateChallenge) {
@@ -114,6 +113,28 @@ public class ChallengeService {
     
 		return mapper.getAllChallR();
 
+	}
+
+	public boolean deleteUserchallbyChallId(int challId) {
+		return mapper.deleteUserchallbyChallId(challId);
+	}
+
+	public boolean deleteChallbyChallId(int challId) {
+		return mapper.deleteChallbyChallId(challId);
+	}
+
+	public boolean deleteRoutebyChallId(int challId) {
+		return mapper.deleteRoutebyChallId(challId);
+	}
+
+	public void deleteApplyUserbyChallId(int chall_id) {
+		mapper.deleteApplyUserbyChallId(chall_id);
+		
+	}
+
+	public void insertHost(String userId, int challId) {
+		mapper.insertHost(userId, challId);
+		
 	}
 	
 
