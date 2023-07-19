@@ -129,6 +129,11 @@ public class ChallengeService {
 		mapper.deleteApplyUserbyChallId(chall_id);
 		
 	}
+
+	public void insertHost(String userId, int challId) {
+		mapper.insertHost(userId, challId);
+		
+	}
 	
 
 

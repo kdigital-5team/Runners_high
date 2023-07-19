@@ -90,6 +90,7 @@ public class ChallengeController {
 				
 				int challId = newChallenge.getChall_id();
 				System.out.println(challId);
+				challService.insertHost(userId, challId);
 				session.setAttribute("challId", challId);
 				
 				return "registChallRoute";

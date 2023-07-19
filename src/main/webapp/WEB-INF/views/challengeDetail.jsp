@@ -53,7 +53,11 @@
 			</div>
 			<div style="float: left; width: 33%">
 				<span>${challenge.chall_sit}</span>
-				<c:if test="${userId ne challenge.chall_reg_id && userChall.user_reg_status ne 'Y' && userChall.user_deny_num lt 2 && challenge.chall_sit eq '모집중'}">
+				<c:if test="${userId ne challenge.chall_reg_id 
+								&& userChall.user_reg_status ne 'Y' 
+								&& userChall.user_deny_num lt 2 
+								&& challenge.chall_sit eq '모집중'
+								&& fn:length(userList) lt challenge.chall_size }">
 					<form action="/challenge/${challenge.chall_id}/apply" method="post">
 						<input type="hidden" name="applyId" value="${userId}">
 						<input type="submit" class="btn btn-primary" value="신청">
@@ -95,7 +99,7 @@
 			<span style="margin: 2%; font-size: 15px"><b>${challenge.chall_intro }</b></span>
 		</div>
 		<div style="margin: auto; width: 50%; margin-top: 10px">참가자</div>
-		<div style="margin: auto; background-color: #F0F0F0; width: 50%; height: 100px; margin-bottom: 10px;">
+		<div style="margin: auto; background-color: #F0F0F0; width: 50%; height: 100px; margin-bottom: 20px;">
 			<c:forEach items="${userList }" var="apply_user">
 					<div style="display: inline-block; width: 10%;">
 						<div style="width:100%; padding-top:100%; height:0; border-radius: 70%;  

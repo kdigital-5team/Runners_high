@@ -246,6 +246,19 @@
 			</selectKey>
  	</insert>
  	
+ 	<insert id="insertHost" parameterType="com.spring.dto.UserChallenge" >
+ 		INSERT INTO USER_CHALL
+ 					(user_id,
+ 					chall_id,
+ 					chall_reg_status,
+ 					user_reg_status)
+ 		VALUES(#{userId},
+ 				#{challId},
+ 				'Y',
+ 				'Y')
+ 					
+ 	</insert>
+ 	
 
  	<!-- 인증게시판 -->
  	

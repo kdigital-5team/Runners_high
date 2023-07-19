@@ -63,4 +63,6 @@ public interface ChallengeMapper {
 
 	public void deleteApplyUserbyChallId(int chall_id);
 
+	public void insertHost(String userId, int challId);
+
 }
