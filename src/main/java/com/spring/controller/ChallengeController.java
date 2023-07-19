@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.spring.dto.Challenge;
 
@@ -218,28 +219,40 @@ public class ChallengeController {
 			User host = challService.getHostByChallId(chall_id);
 			String userId = (String) session.getAttribute("userId");
 			List<UserChallenge> userList = challService.getUserByChallId(chall_id);
+			List<UserChallenge> parList = new ArrayList<UserChallenge>();
 			UserChallenge userChall=new UserChallenge();
 			for(UserChallenge uc:userList) {
 				if(uc.getUser_id().equals(userId))
 					userChall = uc;
+				if(uc.getChall_reg_status().equals("Y"))
+					parList.add(uc);
+					
 			}
 			model.addAttribute("challenge", challenge);
 			model.addAttribute("userChall", userChall);
 			model.addAttribute("host", host);
-			model.addAttribute("userList", userList);
+			model.addAttribute("userList", parList);
 			return "/challengeDetail";
 		}
 
 	
 	// 챌린지 신청
 	@RequestMapping(value="/challenge/{chall_id}/apply", method = RequestMethod.POST)
-	public String applyByChallId(@PathVariable int chall_id, Model model, HttpSession session, @RequestParam("applyId") String applyId) {
+	public String applyByChallId(@PathVariable int chall_id,
+								HttpSession session, 
+								@RequestParam("applyId") String applyId,
+								RedirectAttributes rttr) {
 		if(applyId==null || applyId=="") {
 			return "redirect:/login";
 		}
+		int isOtherApply=0;
+		isOtherApply = challService.checkOtherChall(applyId, chall_id);
+		if(isOtherApply ==0) {
+			challService.applyByChallId(applyId, chall_id);
+		}
+		else
+			rttr.addFlashAttribute("isTrue", "존재");
 		
-		challService.applyByChallId(applyId, chall_id);
-		System.out.println(applyId);
 		return "redirect:/challenge/"+chall_id;
 	}
 	

@@ -37,7 +37,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12">
-						<div id="map" style="width: 80%; padding-top:35%; height:0;margin: 2%; border-radius: 5px; margin:auto;
+						<div id="map" style="width: 80%; padding-top:35%; height:0; border-radius: 5px; margin:auto; 
 										background-position:center;
 										background-size:cover;">
 						</div>
@@ -72,14 +72,15 @@
 			</div>
 			<div style="float: left; width: 34%;">
 				<div style="float: left; width:30%; padding-top:30%; height:0; border-radius: 70%; 
-					background-image: url(${host.user_pic});
+					background-image: url(/images/${host.user_pic});
 					background-position:center;">
 				</div>
 				<div style="float: right; width: 65%;  vertical-align: middle;">
 					<div>챌린지 호스트</div>
-					<div id="chall_id">${challenge.chall_id}</div>
-					<div>${host.intro }</div>
+					<div id="chall_id" style="display: none;">${challenge.chall_id}</div>
+					<div>${host.user_title }</div>
 					<div>${host.nickname }</div>
+					<div>${host.intro }</div>
 				</div>
 			</div>
 		</div>
@@ -106,7 +107,7 @@
 			<c:forEach items="${userList }" var="apply_user">
 					<div style="display: inline-block; width: 10%;">
 						<div style="width:100%; padding-top:100%; height:0; border-radius: 70%;  
-						background-image: url(${apply_user.user_pic});
+						background-image: url(/images/${apply_user.user_pic});
 						background-position:center;
 						background-size:cover;">
 						</div>
@@ -118,6 +119,7 @@
 		</div>
 
 		
+	</div>
 	</div>
 
 	<!-- footer -->
@@ -206,7 +208,9 @@ $(document).ready(function (){
 		    alert('현위치를 찾을 수 없습니다.');
 		}
 });
-
+var isTrue='${isTrue}';
+if(isTrue=='존재')
+	alert("이미 신청/참가한 챌린지가 있습니다.");
 if(${userChall.user_deny_num}>=2)
 	alert("거절 5회로 신청 불가");
 

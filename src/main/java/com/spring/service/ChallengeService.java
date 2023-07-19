@@ -162,6 +162,10 @@ boolean result = false;
 		
 
 	}
+
+	public int checkOtherChall(String applyId, int chall_id) {
+		return mapper.checkOtherChall(applyId, chall_id);
+	}
 	
 
 
