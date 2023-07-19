@@ -331,8 +331,9 @@ a:hover {
 }
 
 .hero-wrap {
-	background-position: top center;
+	background-image: url('../images/running_1.jpg');
 	height: 70vh;
+	background-size: cover;
 	min-height: 670px;
 	position: relative;
 }

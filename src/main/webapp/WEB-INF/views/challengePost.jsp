@@ -106,7 +106,8 @@
 							</table>
 				<div style="margin:30px"></div>
 				<div style="text-align:center; ">		
-			<button style="background-color:Gainsboro; border-radius:5%; padding:6px 11px; font-color:white"><a href="/challengePost/insertChallPost">글쓰기</a></button></div>
+			<button style="background-color:Gainsboro; border-radius:5%; padding:6px 11px; font-color:white">
+			<a href="/challengePost/insertChallPost">글쓰기</a></button></div>
 			
 		
 	</div>

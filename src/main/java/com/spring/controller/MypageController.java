@@ -7,6 +7,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -70,11 +72,12 @@ public class MypageController {
 	public String myPageEdit(HttpServletRequest request, @ModelAttribute("userId") String userId,
 			@ModelAttribute("userNickname") String userNickname, @RequestParam("userPic") MultipartFile userPicFile,
 			@ModelAttribute("userIntro") String userIntro, @ModelAttribute("userPw") String userPw,
-			@ModelAttribute("userPwQ") String userPwQ, @ModelAttribute("userPwA") String userPwA,
+			@RequestParam("pw_quest_input") String userPwQ, @ModelAttribute("userPwA") String userPwA,
 			RedirectAttributes rttr) throws Exception {
 
 		HttpSession session = request.getSession(false);
 		boolean result = false;
+		
 		User user = service.getUserByUserId(session.getAttribute("userId").toString());
 
 		updateProfile(user, userNickname, userPicFile, userIntro, userPw, userPwQ, userPwA);
@@ -95,12 +98,24 @@ public class MypageController {
 
 	// 프로필 수정 method
 	public void updateProfile(User user, String userNickname, MultipartFile userPicFile, String userIntro,
-			String userPw, String userPwQ, String userPwA) {
+			String userPw, String userPwQ, String userPwA) throws Exception {
 
+		String nickNameRegex = "^[ㄱ-ㅎ가-힣a-zA-Z0-9]{2,10}$";
+		String pwRegex = "^(?=.*[0-9a-zA-Z])(?=.*[!@#$%^*+=-]).{4,20}$";
+		
+		boolean nickNamematcher = false;
+		boolean pwmatcher = false;
+		
 		System.out.println("updateProfile 실행");
 
 		if (userNickname != null && !userNickname.isEmpty()) {
+			nickNamematcher = Pattern.matches(nickNameRegex, userNickname);
+			
 			user.setNickname(userNickname);
+			
+			if (!nickNamematcher) {
+				throw new Exception("잘못된 값 또는 잘못된 양식으로 프로필 수정 실패");
+			}
 		}
 
 		if (userPicFile != null && !userPicFile.isEmpty()) {
@@ -129,7 +144,14 @@ public class MypageController {
 		}
 
 		if (userPw != null && !userPw.isEmpty()) {
+			
+			pwmatcher = Pattern.matches(pwRegex, userPw);
+			
 			user.setUser_pw(userPw);
+			
+			if(!pwmatcher) {
+				throw new Exception("잘못된 값 또는 잘못된 양식으로 프로필 수정 실패");
+			}
 		}
 
 		if (userPwQ != null && !userPwQ.isEmpty()) {
