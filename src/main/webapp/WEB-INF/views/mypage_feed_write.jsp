@@ -41,7 +41,29 @@
 
 		<!-- header -->
 		<%@ include file="./inc/header.jsp"%>
-
+		
+		<div class="container">
+				<div class="row">
+					<div class="col-lg-10">
+						<div class="display-flex">
+							<div class="post" style="border:none; margin-top:10%; margin-left:35%">
+								<div class="post-header2">
+									<img src="/static/images/test.jpg" alt="Profile Picture">									
+								</div>
+							</div>
+							<form action="/mypage/feed" enctype="multipart/form-data" method="POST">					
+								<div class="post" style="border:none; margin-top:60%;">
+									<div class="username">${feedList[0].user_id}</div>
+								</div>
+							</form>	
+							<div onclick="location.href='#'" style="border:none; margin-top:14%; margin-left:2%; margin-right:15%">
+								<button>프로필 수정</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		
 		<!-- 피드 / 챌린지 / 칭호 탭 -->
 		<div class="container">
 			<div class="row">
@@ -75,7 +97,7 @@
 					</div>
 					<hr>
 					<div class="form-group">
-						<div style="height: 150px; width: 200px; vertical-align: middle;">	
+						<div style="height: 150px; width: 200px; vertical-align: middle; margin-left:41%">	
 							<label>이미지 파일 첨부</label> 
 				            <input type="file" name="file" onchange="readURL(this);"/>
 							<img id="preview" src="#" width=250 height=150 alt="선택된 이미지가 없습니다" style="align-content: flex-end; ">
