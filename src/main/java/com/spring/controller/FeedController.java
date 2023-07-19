@@ -2,6 +2,7 @@ package com.spring.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -17,12 +18,17 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.spring.dto.FeedPicture;
 import com.spring.dto.PersonalFeed;
+import com.spring.dto.User;
 import com.spring.service.FeedPictureService;
 import com.spring.service.FeedService;
+import com.spring.service.UserService;
 
 @Controller
 public class FeedController {
 	private static final Logger logger = LoggerFactory.getLogger(FeedController.class);
+	
+	@Autowired
+	private UserService service;
 	
 	@Autowired
 	private FeedService feedservice;
@@ -75,6 +81,6 @@ public class FeedController {
 	  	}	  
 	  
 	  return view;
-	} 
+	} 	
 	 
 }

@@ -106,6 +106,12 @@ public class ChallengeController {
 					session.removeAttribute(raceId);
 					return "registChallRoute";
 				}
+
+				int challId = newChallenge.getChall_id();
+				System.out.println(challId);
+				challService.insertHost(userId, challId);
+				session.setAttribute("challId", challId);
+
 				
 			} catch (Exception e) {
 				
@@ -122,6 +128,16 @@ public class ChallengeController {
 		return "selectChallRace";
 	}
 	
+
+
+	@RequestMapping(value = "/registChall/selectChallRace" , method = RequestMethod.GET)
+	public String selectRace(Model model) {
+		List<RaceAndRegion> raceList = raceService.getAllRaces();
+		model.addAttribute("raceList", raceList);
+		return "selectChallRace";
+	}
+	
+
 	@RequestMapping(value="/getRaceId",  method=RequestMethod.POST)
 	@ResponseBody
 	String getRace(@RequestBody String raceId,HttpSession session) throws Exception {
@@ -208,6 +224,7 @@ public class ChallengeController {
 	}
 	
 	// 챌린지 상세 페이지
+
 		@RequestMapping(value = "/challenge/{chall_id}", method = RequestMethod.GET)
 		public String getChallByChallId(@PathVariable int chall_id, Model model, HttpSession session) {
 			Challenge challenge = challService.getChallByChallId(chall_id);
@@ -225,6 +242,28 @@ public class ChallengeController {
 			model.addAttribute("userList", userList);
 			return "/challengeDetail";
 		}
+
+	@RequestMapping(value = "/challenge/{chall_id}", method = RequestMethod.GET)
+	public String getChallByChallId(@PathVariable int chall_id, Model model, HttpSession session) {
+		Challenge challenge = challService.getChallByChallId(chall_id);
+		User host = challService.getHostByChallId(chall_id);
+		String userId = (String) session.getAttribute("userId");
+		List<UserChallenge> userList = challService.getUserByChallId(chall_id);
+		List<UserChallenge> parList = new ArrayList<UserChallenge>();
+		UserChallenge userChall=new UserChallenge();
+		for(UserChallenge uc:userList) {
+			if(uc.getUser_id().equals(userId))
+				userChall = uc;
+			if(uc.getChall_reg_status().equals("Y"))
+				parList.add(uc);
+		}
+		model.addAttribute("challenge", challenge);
+		model.addAttribute("userChall", userChall);
+		model.addAttribute("host", host);
+		model.addAttribute("userList", parList);
+		return "/challengeDetail";
+	}
+
 	
 	// 챌린지 신청
 	@RequestMapping(value="/challenge/{chall_id}/apply", method = RequestMethod.POST)
@@ -321,11 +360,20 @@ public class ChallengeController {
 		}
 		
 		@RequestMapping(value="/challengePost/insertChallPost", method=RequestMethod.GET)
-		public String insertPost(@ModelAttribute ChallengePost newPost, Model model) {
+		public String insertChallPostForm() {
 			
-			challService.insertChallPost(newPost);
 			return "insertChallPost";
 		}
+		
+//		@RequestMapping(value="/challengePost/insertChallPost", method=RequestMethod.GET)
+//		public String insertChallPost(ChallengePost newPost) {
+//			challService.insertChallPost(newPost);
+//			
+//			String view = "error";
+//			view = "redirect:/challenge/{chall_id}challPostDetail";
+//			return view;
+//		}
+//		
 		
 
 	// 챌린지 수정폼
@@ -363,8 +411,9 @@ public class ChallengeController {
 				challResult = challService.updateChallenge(updateChallenge);
 				
 				if(challResult) {
-					
-					return "redirect:/challenge/"+updateChallenge.getChall_id();
+					if(updateChallenge.getChall_sit().equals("모집종료"))
+						challService.deleteApplyUserbyChallId(chall_id);
+					return "redirect:/challenge/"+chall_id;
 				}
 				
 			} catch (Exception e) {
@@ -372,6 +421,27 @@ public class ChallengeController {
 				e.printStackTrace();
 				return "index";
 			}
+			return "index";
+		}
+		
+		@RequestMapping(value = "/challenge/delete/{chall_id}", method = RequestMethod.GET)
+		String deleteChallbyChallId(@PathVariable int chall_id, HttpSession session) {
+			String userId = (String) session.getAttribute("userId");
+			User host = challService.getHostByChallId(chall_id);
+			if(!host.getUser_id().equals(userId))
+				return "redirect:/main";
+			
+			boolean deleteChall = false;
+			
+			
+				challService.deleteUserchallbyChallId(chall_id);
+				challService.deleteRoutebyChallId(chall_id);
+				deleteChall = challService.deleteChallbyChallId(chall_id);
+				
+				if(deleteChall) {
+					System.out.println("삭제");
+					return "redirect:/main";
+				}
 			return "index";
 		}
 

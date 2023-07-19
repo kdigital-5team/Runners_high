@@ -41,29 +41,7 @@
 
 		<!-- header -->
 		<%@ include file="./inc/header.jsp"%>
-		
-		<div class="container">
-				<div class="row">
-					<div class="col-lg-10">
-						<div class="display-flex">
-							<div class="post" style="border:none; margin-top:10%; margin-left:35%">
-								<div class="post-header2">
-									<img src="/static/images/test.jpg" alt="Profile Picture">									
-								</div>
-							</div>
-							<form action="/mypage/feed" enctype="multipart/form-data" method="POST">					
-								<div class="post" style="border:none; margin-top:60%;">
-									<div class="username">${feedList[0].user_id}</div>
-								</div>
-							</form>	
-							<div onclick="location.href='#'" style="border:none; margin-top:14%; margin-left:2%; margin-right:15%">
-								<button>프로필 수정</button>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		
+
 		<!-- 피드 / 챌린지 / 칭호 탭 -->
 		<div class="container">
 			<div class="row">
@@ -73,7 +51,7 @@
 						<div class="hero-contents">
 							<p>
 								<a href="/mypage/feed"><strong>피드</strong></a> <span class="mx-2">|</span>
-								<a href="/mypage/chall">참여 챌린지</a> <span class="mx-2">|</span> <a
+								<a href="${chall_id}challengePost">인증게시판</a> <span class="mx-2">|</span> <a
 									href="/mypage/title">칭호</a> <span class="mx-2"></span>
 							</p>
 						</div>
@@ -85,11 +63,11 @@
 		<!-- 피드 글 작성 -->
 		<div class="container">
 			<div class="post">	        
-		        <form action='<c:url value='/mypage/write'/>' method="POST" enctype="multipart/form-data">					
+		        <form action='<c:url value='/challengePost/insertChallPost'/>' method="GET" enctype="multipart/form-data">					
 					<div class="form-group row">	
 						<label style="margin-left:20px; margin-top:15px; margin-right:19%;">제목</label>					
 						<div style="display:table-cell; margin:auto; margin-top:5px;">		                	
-		                	<input class="form-control" type="text" name="feed_title" style="width:600px; display:block;">
+		                	<input class="form-control" type="text" name="auth_title" style="width:600px; display:block;">
 	                	</div>
 	                	<button type="submit" class="btn btn-default" value="글 등록하기" style="margin-left:205px; margin-right:10px; margin-top:5px;">
 	                		등록
@@ -97,15 +75,15 @@
 					</div>
 					<hr>
 					<div class="form-group">
-						<div style="height: 150px; width: 200px; vertical-align: middle; margin-left:41%">	
+						<div style="height: 150px; width: 200px; vertical-align: middle;">	
 							<label>이미지 파일 첨부</label> 
 				            <input type="file" name="file" onchange="readURL(this);"/>
 							<img id="preview" src="#" width=250 height=150 alt="선택된 이미지가 없습니다" style="align-content: flex-end; ">
 						</div>
-					</div>
+					</div> 
 					<div class="form-group">
 						<div style="display:table-cell; width:50%; vertical-align: middle; margin-right:10px;">
-							<textarea class="form-control" name="feed_cont" rows="5" style="width:600px; display:block; margin: 0 auto;"></textarea>
+							<textarea class="form-control" name="auth_cont" rows="5" style="width:600px; display:block; margin: 0 auto;"></textarea>
 						</div>
 					</div>	
 				</form>

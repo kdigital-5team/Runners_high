@@ -98,20 +98,68 @@ public class ChallengeService {
 
 		mapper.insertChallPost(newPost);
 		
+
+
+	mapper.insertChallPost(newPost);	
+
+
 	}
 
 	public ChallengePost getPostByAuthId(int auth_id) {
 		
+
 		return mapper.getPostByAuthId(auth_id);
+
 
 	}
 
+
 	public boolean updateChallenge(Challenge updateChallenge) {
+    
 		return mapper.updateChallenge(updateChallenge);
 	}
 
 	public List<ChallengeRegion> getAllChallR() {
+    
 		return mapper.getAllChallR();
+
+	}
+
+
+	public boolean insertPost(ChallengePost newPost) throws Exception {
+boolean result = false;
+		
+		int res = mapper.insertPost(newPost);
+		
+		if(res != 0) {
+			result = true;
+		} else {
+			throw new Exception("게시글 등록 실패");
+		}
+		
+		return result;
+  }
+  
+	public boolean deleteUserchallbyChallId(int challId) {
+		return mapper.deleteUserchallbyChallId(challId);
+	}
+
+	public boolean deleteChallbyChallId(int challId) {
+		return mapper.deleteChallbyChallId(challId);
+	}
+
+	public boolean deleteRoutebyChallId(int challId) {
+		return mapper.deleteRoutebyChallId(challId);
+	}
+
+	public void deleteApplyUserbyChallId(int chall_id) {
+		mapper.deleteApplyUserbyChallId(chall_id);
+		
+	}
+
+	public void insertHost(String userId, int challId) {
+		mapper.insertHost(userId, challId);
+		
 
 	}
 	
