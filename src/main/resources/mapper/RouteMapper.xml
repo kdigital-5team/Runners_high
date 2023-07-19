@@ -16,6 +16,12 @@
  			 					#{latitude},
  			 						#{longitude})
  	</insert>
- 	
+ 		<select id="getlatLongById" resultType="com.spring.dto.Route">
+ 		SELECT chall_id,
+ 					route_lat, 
+ 			   			route_long
+ 			FROM chall_route
+ 				WHERE chall_id = #{challId}
+ 	</select>
  	
  </mapper>

@@ -96,8 +96,12 @@ public class ChallengeService {
 
 	public void insertChallPost(ChallengePost newPost) {
 
+		mapper.insertChallPost(newPost);
+		
+
 
 	mapper.insertChallPost(newPost);	
+
 
 	}
 
@@ -134,7 +138,8 @@ boolean result = false;
 		}
 		
 		return result;
-
+  }
+  
 	public boolean deleteUserchallbyChallId(int challId) {
 		return mapper.deleteUserchallbyChallId(challId);
 	}

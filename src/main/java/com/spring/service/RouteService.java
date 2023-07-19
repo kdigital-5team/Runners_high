@@ -1,11 +1,12 @@
 package com.spring.service;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
+import com.spring.dto.Route;
 import com.spring.mapper.RouteMapper;
 
 @Service
@@ -29,6 +30,8 @@ public class RouteService {
 		
 		return result;
 	}
-
+	public List<Route> getlatLongById(int challId) {
+		return mapper.getlatLongById(challId);
+	}
 }
 

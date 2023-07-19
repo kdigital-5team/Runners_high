@@ -17,8 +17,8 @@ import lombok.ToString;
 //route_marker = null Yes
 public class Route {
 	private int chall_id;
-	private int route_lat;
-	private int route_long;
+	private double route_lat;
+	private double route_long;
 	
 
 }
