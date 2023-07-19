@@ -13,6 +13,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -37,7 +39,7 @@ public class FeedController {
 	private FeedPictureService pictureservice;
 	
 	// 전체 피드 리스트
-		 @GetMapping("/mypage/feed")
+	@RequestMapping(value = "/mypage/feed", method = RequestMethod.GET)
 		 public String getAllFeeds(Model model) {
 			 List<PersonalFeed> feedList = feedservice.getAllFeeds();
 			 model.addAttribute("feedList", feedList);
@@ -45,14 +47,14 @@ public class FeedController {
 		 }
 	
 	// 피드 작성 get
-	 @GetMapping("/mypage/write")
+	 @RequestMapping(value = "/mypage/write", method = RequestMethod.GET)
 	 public String getWrite() throws Exception {
 	  logger.info("get feed write");
 	  return "mypage_feed_write";
 	 }
 	
 	// 피드 작성 post
-	 @PostMapping("/mypage/write")
+	 @RequestMapping(value = "/mypage/write", method = RequestMethod.POST)
 	 public String feedWrite(@ModelAttribute PersonalFeed pf,
 			 					@RequestParam("file") MultipartFile file,
 			 					Model model, HttpSession session) throws Exception {
