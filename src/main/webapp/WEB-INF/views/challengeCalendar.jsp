@@ -43,30 +43,14 @@
 		</div>
 		<div class="hero-contents" style="margin-top: 20px;">
 			<div style="float:left; width: 33%; text-align: center;">
-				<h2>${challenge.chall_name}</h2>
+				<h2>${chall.chall_name}</h2>
 				<p>
-					<fmt:formatDate pattern="yyyy-MM-dd" value="${challenge.chall_start_date}"/> ~ <fmt:formatDate pattern="yyyy-MM-dd" value="${challenge.chall_end_date}"/><span class="mx-2">/</span>${fn:length(parList)}명
+					<fmt:formatDate pattern="yyyy-MM-dd" value="${chall.chall_start_date}"/> ~ <fmt:formatDate pattern="yyyy-MM-dd" value="${chall.chall_end_date}"/><span class="mx-2">/</span>${fn:length(parList)}명
 					<div class="caption" style="font-size: 10px"></div>
 				</p>
 			</div>
 			<div style="float: left; width: 33%">
-				<span>${challenge.chall_sit}</span>
-				<c:if test="${userId ne challenge.chall_reg_id 
-								&& userChall.user_reg_status ne 'Y' 
-								&& userChall.user_deny_num lt 2 
-								&& challenge.chall_sit eq '모집중'
-								&& fn:length(userList) lt challenge.chall_size }">
-					<form action="/challenge/${challenge.chall_id}/apply" method="post">
-						<input type="hidden" name="applyId" value="${userId}">
-						<input type="submit" class="btn btn-primary" value="신청">
-					</form>
-				</c:if>
-				<c:if test="${userId ne challenge.chall_reg_id && userChall.user_reg_status eq 'Y'}">
-					<form action="/challenge/${challenge.chall_id}/withdraw" method="post">
-						<input type="hidden" name="applyId" value="${userId}">
-						<input type="submit" class="btn btn-danger" value="탈퇴">
-					</form>
-				</c:if>
+				<span>${chall.chall_sit}</span>
 			</div>
 			<div style="float: left; width: 34%;">
 				<div style="width:30%; padding-top:30%; height:0; border-radius: 70%; float:left; 
@@ -76,7 +60,7 @@
 				</div>
 				<div style="float: right; width: 65%;  vertical-align: middle;">
 					<div>챌린지 호스트</div>
-					<div id="chall_id" style="display: none;">${challenge.chall_id}</div>
+					<div id="chall_id" style="display: none;">${chall.chall_id}</div>
 					<div>${host.user_title }</div>
 					<div>${host.nickname }</div>
 					<div>${host.intro }</div>
@@ -84,78 +68,40 @@
 			</div>
 		</div>
 		
-		<div style="margin: auto; text-align: center; float: left; width: 40%; margin-left: 28%; margin-top: 10px">
-			<a href="/challenge/${challenge.chall_id }">소개</a><span class="mx-2">|</span> 
-			<c:if test="${userId eq challenge.chall_reg_id }">
-				<a href="#">관리</a><span class="mx-2">|</span> 
+		<div style="margin: auto; text-align: center;">
+			<a href="/challenge/${chall.chall_id}">소개</a><span class="mx-2">|</span> 
+			<c:if test="${userId eq chall.chall_reg_id }">
+				<a href="/challenge/${chall.chall_id}host">관리</a><span class="mx-2">|</span> 
 			</c:if>
-			<c:if test="${challenge.chall_sit eq '모집종료' }">
-				<a href="${chall_id}challengePost">인증 게시판</a><span class="mx-2">|</span>
+			<c:if test="${chall.chall_sit eq '모집종료' }">
+				<a href="${chall.chall_id}challengePost">인증 게시판</a><span class="mx-2">|</span>
 			</c:if>
-			<a href="/challenge/${challenge.chall_id}calendar">캘린더</a>
+			<a href="#">캘린더</a>
 		</div>
-		<div style="float: left; width: 32%; margin-top: 10px">
-			<c:if test="${challenge.chall_sit ne '모집종료'}">
-				<form action="/challenge/${challenge.chall_id}modify" method="GET" id="detailForm" style="display: inline-block;">
-								<input type="submit" class="btn btn-secondary" value="수정">	
-				</form>
-				<button class="btn btn-danger" onclick="deleteChall('${challenge.chall_id}')" style="display: inline-block;">삭제</button>
-			</c:if>
-		</div>
-		<div style="width: 50%; margin: auto; clear: both;">
-		<c:if test="${not empty applist}"> <span class="mx-2">신청자</span></c:if>
-		<c:forEach items="${appList}" var="app">
-			<div style="background-color: #F0F0F0; vertical-align: center;">
-				<div style="display:inline-block; width:20%; padding-top:20%; height:0; border-radius: 70%;  
-					background-image: url(${challenge.chall_pic});
-					background-position:center;
-					background-size:cover;">
-				</div>
-				<div style="display:inline-block; width: 50%; position:relative;">
-					<div>칭호</div>
-					<div>${app.nickname }</div>
-					<div>안녕</div>
-				</div>
-				<div style="display:inline-block; position:relative; margin-buttom:50%;">
-					<button class="btn btn-primary" onclick="acceptId('${app.user_id }','${challenge.chall_id}')">수락</button>
-					<button class="btn btn-danger" onclick="declinetId('${app.user_id }','${challenge.chall_id}')">거절</button>
-				</div>
-			</div>
-		</c:forEach>
-		</div>
-		<div style="width: 70%; margin: auto;">
-			<span>맴버별 인증율</span>
-		<c:forEach items="${parList}" var="par">
+		<div style="width: 70%; margin: auto; margin-top: 20px; text-align: center;">
+			<span>나의 인증율</span>
 			<div>
-				<div style="width: 15%; float: left; height: 150px;">
-						<c:if test="${par.user_id ne host.user_id}">
-						<button class="btn btn-danger" style="margin: auto; margin-top: 50%; display: block;" onclick="kickId('${par.user_id}','${challenge.chall_id}')">추방</button>
-						</c:if>
-					</div>
-				<div style="width: 15%; float: left; height: 150px;">
-					<div style="width:100%; padding-top:100%; height:0; border-radius: 70%;  
-							background-image: url(/images/${par.user_pic});
-							background-position:center;
-							background-size:cover;">
-					</div>
-					<div style="text-align: center;">
-						${par.nickname }
-					</div>
-				</div>
-				<div style="text-align: center; width: 70%; float: right; height: 150px;">
-					${par.chall_auth_num/challenge.chall_all_auth*100}%
+				<div style="text-align: center; width: 100%; height: 150px;">
+					${myUC.chall_auth_num/chall.chall_all_auth*100}%
 					<div style="width: 75%; background-color: #BDFFAD; height: 25px; position: relative; margin: auto;">
-						<div style="width: ${par.chall_auth_num/challenge.chall_all_auth*100}%; background-color: #32FF00; height: 25px; position: relative;">
+						<div style="width: ${myUC.chall_auth_num/chall.chall_all_auth*100}%; background-color: #32FF00; height: 25px; position: relative;">
 					</div>
 					</div>
 				</div>
-				<div style="clear: both;"></div>
 			</div>
-		</c:forEach>
-		<div>
-			
 		</div>
-	</div>
+		<div style="width: 70%; margin: auto; text-align: center;">
+			<span>전체 인증율</span>
+			<div>
+				<div style="text-align: center; width: 100%; height: 150px;">
+					${avgAuth/chall.chall_all_auth*100}%
+					<div style="width: 75%; background-color: #BDFFAD; height: 25px; position: relative; margin: auto;">
+						<div style="width: ${avgAuth/chall.chall_all_auth*100}%; background-color: #32FF00; height: 25px; position: relative;">
+					</div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 	</div>
 

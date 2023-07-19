@@ -43,7 +43,7 @@
 						</div>
 			</div>
 		</div>
-		<div class="hero-contents">
+		<div class="hero-contents" style="margin-top: 20px;">
 			<div style="float:left; width: 33%; text-align: center;">
 				<h2>${challenge.chall_name}</h2>
 				<p>
@@ -71,9 +71,10 @@
 				</c:if>
 			</div>
 			<div style="float: left; width: 34%;">
-				<div style="float: left; width:30%; padding-top:30%; height:0; border-radius: 70%; 
-					background-image: url(/images/${host.user_pic});
-					background-position:center;">
+				<div style="width:30%; padding-top:30%; height:0; border-radius: 70%; float:left; 
+						background-image: url(/images/${host.user_pic});
+						background-position:center;
+						background-size:cover;">
 				</div>
 				<div style="float: right; width: 65%;  vertical-align: middle;">
 					<div>챌린지 호스트</div>
@@ -93,7 +94,7 @@
 			<c:if test="${challenge.chall_sit eq '모집종료' }">
 				<a href="${chall_id}challengePost">인증 게시판</a><span class="mx-2">|</span>
 			</c:if>
-			<a href="mypage_title">캘린더</a>
+			<a href="/challenge/${challenge.chall_id}calendar">캘린더</a>
 		</div>
 
 		<div style="margin: auto; width: 80%;">챌린지 소개</div>

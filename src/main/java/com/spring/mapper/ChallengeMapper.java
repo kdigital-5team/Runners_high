@@ -68,6 +68,6 @@ public interface ChallengeMapper {
 
 	public void insertHost(String userId, int challId);
 
-	public int checkOtherChall(String applyId, int chall_id);
+	public int checkOtherChall(String applyId);
 
 }

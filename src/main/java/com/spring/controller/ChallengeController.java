@@ -54,8 +54,15 @@ public class ChallengeController {
 	private RaceService raceService;
 	
 	@RequestMapping(value = "/registChall", method = RequestMethod.GET)
-	public String registChall(Model model) throws Exception {
+	public String registChall(Model model, HttpSession session, RedirectAttributes rttr) throws Exception {
 		List<String> stateList = service.getAllState();
+		String userId = (String) session.getAttribute("userId");
+		int isOtherApply=0;
+		isOtherApply = challService.checkOtherChall(userId);
+		if(isOtherApply>0) {
+			rttr.addFlashAttribute("isTrue", "존재");
+			return "redirect:/challenge";
+		}
 		//List<String> cityList = service.getCityByState();
 		//List<String> districtList = service.getDistrictByCity();
 		model.addAttribute("stateList",stateList);
@@ -73,6 +80,8 @@ public class ChallengeController {
 								 HttpSession session) throws Exception {
 			String userId = (String) session.getAttribute("userId");
 			String raceId = (String)session.getAttribute("raceId");
+			
+			
 			System.out.println(newChallenge);
 			System.out.println(region_district);
 			System.out.println(userId);
@@ -246,7 +255,7 @@ public class ChallengeController {
 			return "redirect:/login";
 		}
 		int isOtherApply=0;
-		isOtherApply = challService.checkOtherChall(applyId, chall_id);
+		isOtherApply = challService.checkOtherChall(applyId);
 		if(isOtherApply ==0) {
 			challService.applyByChallId(applyId, chall_id);
 		}
@@ -422,6 +431,36 @@ public class ChallengeController {
 					return "redirect:/main";
 				}
 			return "index";
+		}
+		
+		@RequestMapping(value="challenge/{challId}calendar")
+		String calendarbyChallId(@PathVariable int challId, HttpSession session, Model model) {
+			String userId = (String)session.getAttribute("userId");
+			UserChallenge myUC = new UserChallenge();
+			User host = challService.getHostByChallId(challId);
+			List<UserChallenge> userList = challService.getUserByChallId(challId);
+			List<UserChallenge> parList = new ArrayList<UserChallenge>();
+			Challenge chall = challService.getChallByChallId(challId);
+			int count =0;
+			int totalAuth=0;
+			for(UserChallenge uc:userList) {
+				if(uc.getUser_id().equals(userId) && uc.getChall_reg_status().equals("Y"))
+					myUC = uc;
+				if(uc.getChall_reg_status().equals("Y")) {
+					totalAuth += uc.getChall_auth_num();
+					count++;
+					parList.add(uc);
+				}
+				
+				
+			}
+			float avgAuth = totalAuth/count;
+			model.addAttribute("myUC", myUC);
+			model.addAttribute("chall", chall);
+			model.addAttribute("avgAuth", avgAuth);
+			model.addAttribute("parList", parList);
+			model.addAttribute("host", host);
+			return "challengeCalendar";
 		}
 
 }

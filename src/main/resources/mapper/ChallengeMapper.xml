@@ -262,7 +262,7 @@
  	<select id="checkOtherChall" resultType="_int">
  		select count(user_id)
  		from user_chall
- 		where user_id=#{applyId} and chall_id != #{chall_id} and (user_reg_status='Y' or chall_reg_status='Y') 
+ 		where user_id=#{applyId} and (user_reg_status='Y' or chall_reg_status='Y') 
  	</select>
  	
 
