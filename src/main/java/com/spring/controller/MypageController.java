@@ -20,6 +20,8 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -33,20 +35,21 @@ public class MypageController {
 	@Autowired
 	UserService service;
 
-	@GetMapping("/mypage/chall")
+	
+	@RequestMapping(value = "/mypage/chall", method = RequestMethod.GET)
 	public String mypage_chall() {
 		System.out.println("chall");
 		return "mypage_chall";
 	}
 
-	@GetMapping("/mypage/title")
+	@RequestMapping(value = "/mypage/title", method = RequestMethod.GET)
 	public String events() {
 		System.out.println("title");
 		return "mypage_title";
 	}
 
 	// 프로필 수정으로 이동
-	@GetMapping("/mypage/edit")
+	@RequestMapping(value = "/mypage/edit", method = RequestMethod.GET)
 	public String myPageEditForm(HttpServletRequest request, Model model) throws Exception {
 
 		HttpSession session = request.getSession(false);
@@ -68,7 +71,7 @@ public class MypageController {
 	}
 
 	// 프로필 수정
-	@PutMapping("/mypage/edit")
+	@RequestMapping(value = "/mypage/edit", method = RequestMethod.PUT)
 	public String myPageEdit(HttpServletRequest request, @ModelAttribute("userId") String userId,
 			@ModelAttribute("userNickname") String userNickname, @RequestParam("userPic") MultipartFile userPicFile,
 			@ModelAttribute("userIntro") String userIntro, @ModelAttribute("userPw") String userPw,
@@ -184,7 +187,7 @@ public class MypageController {
 		}
 	}
 
-	@GetMapping("/test")
+	@RequestMapping(value = "/test", method = RequestMethod.GET)
 	public String test(HttpServletRequest request, Model model) {
 
 		HttpSession session = request.getSession(false);

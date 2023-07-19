@@ -149,13 +149,14 @@ public class UserController {
 
 	// http://localhost:8081/login
 	// 로그인 폼으로 이동
-	@GetMapping("/login")
+    
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String loginForm() {
 		return "login";
 	}
 
 	// 로그인
-	@PostMapping("/login")
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String login(@RequestParam("userId") String userId, @RequestParam("userPw") String userPw,
 			HttpSession session,
 			Model model) {
@@ -191,7 +192,7 @@ public class UserController {
 	}
 
 	// 로그아웃
-	@GetMapping("/logout")
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String logout(HttpSession session) {
 
 		if (session != null) {
