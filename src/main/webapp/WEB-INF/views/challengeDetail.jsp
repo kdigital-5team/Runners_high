@@ -37,7 +37,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12">
-						<div id="map" style="float: left; width: 35%; padding-top:35%; height:0;margin: 2%; border-radius: 5px;
+						<div id="map" style="width: 80%; padding-top:35%; height:0;margin: 2%; border-radius: 5px; margin:auto;
 										background-position:center;
 										background-size:cover;">
 						</div>
@@ -72,7 +72,7 @@
 			</div>
 			<div style="float: left; width: 34%;">
 				<div style="float: left; width:30%; padding-top:30%; height:0; border-radius: 70%; 
-					background-image: url(${challenge.chall_pic});
+					background-image: url(${host.user_pic});
 					background-position:center;">
 				</div>
 				<div style="float: right; width: 65%;  vertical-align: middle;">
@@ -95,21 +95,18 @@
 			<a href="mypage_title">캘린더</a>
 		</div>
 
-		<div style="margin: auto; width: 50%;">챌린지 소개</div>
-		<div style="margin: auto; width: 50%; height: 300px; background-color: #F0F0F0;" >
+		<div style="margin: auto; width: 80%;">챌린지 소개</div>
+		<div style="margin: auto; width: 80%; height: 300px; background-color: #F0F0F0;" >
 			<span style="margin: 2%; font-size: 15px"><b>${challenge.chall_intro }</b></span>
 		</div>
 
-		<div style="margin: auto; width: 50%; margin-top: 10px">참가자</div>\
-		<div style="margin: auto; background-color: #F0F0F0; width: 50%; height: 100px; margin-bottom: 10px;">
-
-		<div style="margin: auto; width: 50%; margin-top: 10px">참가자</div>
-		<div style="margin: auto; background-color: #F0F0F0; width: 50%; height: 100px; margin-bottom: 20px;">
+		<div style="margin: auto; width: 80%; margin-top: 10px">참가자</div>
+		<div style="margin: auto; background-color: #F0F0F0; width: 80%; height: 120px; margin-bottom: 10px;">
 
 			<c:forEach items="${userList }" var="apply_user">
 					<div style="display: inline-block; width: 10%;">
 						<div style="width:100%; padding-top:100%; height:0; border-radius: 70%;  
-						background-image: url(../static/images/profileImages/default_image.png);
+						background-image: url(${apply_user.user_pic});
 						background-position:center;
 						background-size:cover;">
 						</div>
