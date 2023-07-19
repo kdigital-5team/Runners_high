@@ -95,13 +95,17 @@ public class ChallengeService {
 	}
 
 	public void insertChallPost(ChallengePost newPost) {
+
+		mapper.insertChallPost(newPost);
 		
 	}
 
 	public ChallengePost getPostByAuthId(int auth_id) {
 		
 		return mapper.getPostByAuthId(auth_id);
+
 	}
+
 	public boolean updateChallenge(Challenge updateChallenge) {
 		return mapper.updateChallenge(updateChallenge);
 	}

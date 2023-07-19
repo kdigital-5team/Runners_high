@@ -216,39 +216,53 @@
    		function success(pos) { // 위치 정보를 가져오는데 성공했을 때 호출되는 콜백 함수 (pos : 위치 정보 객체)
 
    		 	for (var i=1; i<='<c:out value="${ListEnd}"/>'; i++){
+   	   		    const lat = pos.coords.latitude;
+   	   		    const lng = pos.coords.longitude;
    		 	var container = document.getElementById('map'+i); //지도를 담을 영역의 DOM 레퍼런스
-
    		 	var chall_id = document.getElementById(i).innerText;
-   		 	console.log(chall_id);
    		   	$.ajax({
-   		        async : true, 
+   		        async : false, 
    		        type : 'POST', 
    		        data: JSON.stringify({chall_id}),
    		        url: "/getLatLongById",
    		        dataType: "text",
    		        contentType: "application/json; charset=UTF-8",
    		        success: function(data) {  
-   		        if(data == "main"){
+   		        if(data){
+   		        		var raceLat=JSON.parse(data).item[0].route_lat;
+   		        		var raceLong=JSON.parse(data).item[0].route_long;
+   	      			 var options = { //지도를 생성할 때 필요한 기본 옵션
+   	         	   			center: new kakao.maps.LatLng(raceLat, raceLong), //지도의 중심좌표.
+   	         	   			level: 6 //지도의 레벨(확대, 축소 정도)
+   	         	   		};
+   	      				var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴	
+   	      				var linePath = [];
+   		        
+   		        	for (var itemLength=0; itemLength<JSON.parse(data).item.length; itemLength++){
+   		        		linePath.push(new kakao.maps.LatLng(JSON.parse(data).item[itemLength].route_lat, JSON.parse(data).item[itemLength].route_long));
+   		        	}
+   		        		// 지도에 표시할 선을 생성합니다
+   		        		var polyline = new kakao.maps.Polyline({
+   		        		    path: linePath, // 선을 구성하는 좌표배열 입니다
+   		        		    strokeWeight: 5, // 선의 두께 입니다
+   		        		    strokeColor: '#ff0000', // 선의 색깔입니다
+   		        		    strokeOpacity: 0.7, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
+   		        		    strokeStyle: 'solid' // 선의 스타일입니다
+   		        		});
+
+   		        		// 지도에 선을 표시합니다 
+   		        		polyline.setMap(map);  
+   		 
    		        	
-   		      	//alert('등록완료 하였습니다.');
-   		      	
    		        	} else {
-   		        		//alert('등록하지 못했습니다!');
+   		        		
    		        	}
    		      	},
    		      	error: function(error) {
-   		      		//alert('등록하지 못했습니다!');
+   		      		
    		          } 
    		        })
-   		        var lat = pos.coords.latitude;
-   	   		    var lng = pos.coords.longitude;
-   	   		    var Clat = ${Route};
-   	   		    console.log(Clat);
-      			 var options = { //지도를 생성할 때 필요한 기본 옵션
-         	   			center: new kakao.maps.LatLng(lat, lng), //지도의 중심좌표.
-         	   			level: 6 //지도의 레벨(확대, 축소 정도)
-         	   		};
-   			var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
+   		        
    			
    			
    		 	}
@@ -260,6 +274,8 @@
    		    alert('현위치를 찾을 수 없습니다.');
    		}
 	});
+	
+	
 	let keyword=null;
 	function test(button_id, option){
 		const target = document.getElementById(button_id);

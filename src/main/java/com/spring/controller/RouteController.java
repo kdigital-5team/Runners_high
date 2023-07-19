@@ -36,21 +36,42 @@ public class RouteController {
 		return "/registChall";	
 	}
 	
+	@ResponseBody
 	@RequestMapping(value = "/getLatLongById", method = RequestMethod.POST)
-	public String getLatLongById(@RequestBody String challId, Model model) throws Exception {
+	public JSONObject getLatLongById(@RequestBody String challId, Model model) throws Exception {
+		List<Route> route = null;
+		JSONObject obj = new JSONObject();
 		 try {
              JSONParser jsonParser = new JSONParser();
              JSONObject jsonObj = (JSONObject) jsonParser.parse(challId);
-             System.out.println(jsonObj.get("chall_id").toString());
-             List<Route> route = routeService.getlatLongById(Integer.parseInt(jsonObj.get("chall_id").toString()));
-             System.out.println(route);
-             model.addAttribute("Route", route);
+             route = routeService.getlatLongById(Integer.parseInt(jsonObj.get("chall_id").toString()));
+             
+             try {
+                 JSONArray jArray = new JSONArray();//배열이 필요할때
+                 for (int i = 0; i < route.size(); i++)//배열
+                 {
+                     JSONObject sObject = new JSONObject();//배열 내에 들어갈 json
+                     sObject.put("chall_id", route.get(i).getChall_id());
+                     sObject.put("route_lat", route.get(i).getRoute_lat());
+                     sObject.put("route_long", route.get(i).getRoute_long());
+                     jArray.add(sObject);
+                 }
+                 obj.put("item", jArray);//배열을 넣음
+
+                 System.out.println(obj.toString());
+
+             } catch (Exception e) {
+                 e.printStackTrace();
+             }
+             
+             
+
+             model.addAttribute("Route", obj);
 		 }
              catch (Exception e) {
                  e.printStackTrace();
-                 return "index";
          }
-		return "/challenge";
+		return obj;
 	}
 	
 
@@ -67,7 +88,7 @@ public class RouteController {
                
                for(int i=0 ; i<coordsArray.size() ; i++){
                        JSONObject tempObj = (JSONObject) coordsArray.get(i);
-                       routeResult = routeService.insertRoute(chall_Id, tempObj.get("La").toString(), tempObj.get("Ma").toString());
+                       routeResult = routeService.insertRoute(chall_Id, tempObj.get("Ma").toString(), tempObj.get("La").toString());
                       // 인설트-> DB -> 
                        System.out.println(tempObj.get("La"));
                        System.out.println(tempObj.get("Ma"));

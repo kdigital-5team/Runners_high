@@ -85,7 +85,6 @@ public class ChallengeController {
 				session.removeAttribute(raceId);
 				raceId=null;
 			}
-			System.out.println(raceId);
 			boolean challResult = false;
 			
 		
@@ -209,24 +208,23 @@ public class ChallengeController {
 	}
 	
 	// 챌린지 상세 페이지
-	@RequestMapping(value = "/challenge/{chall_id}", method = RequestMethod.GET)
-	public String getChallByChallId(@PathVariable int chall_id, Model model, HttpSession session) {
-		Challenge challenge = challService.getChallByChallId(chall_id);
-		User host = challService.getHostByChallId(chall_id);
-		String userId = (String) session.getAttribute("userId");
-		List<UserChallenge> userList = challService.getUserByChallId(chall_id);
-		UserChallenge userChall=new UserChallenge();
-		for(UserChallenge uc:userList) {
-			if(uc.getUser_id().equals(userId))
-				userChall = uc;
+		@RequestMapping(value = "/challenge/{chall_id}", method = RequestMethod.GET)
+		public String getChallByChallId(@PathVariable int chall_id, Model model, HttpSession session) {
+			Challenge challenge = challService.getChallByChallId(chall_id);
+			User host = challService.getHostByChallId(chall_id);
+			String userId = (String) session.getAttribute("userId");
+			List<UserChallenge> userList = challService.getUserByChallId(chall_id);
+			UserChallenge userChall=new UserChallenge();
+			for(UserChallenge uc:userList) {
+				if(uc.getUser_id().equals(userId))
+					userChall = uc;
+			}
+			model.addAttribute("challenge", challenge);
+			model.addAttribute("userChall", userChall);
+			model.addAttribute("host", host);
+			model.addAttribute("userList", userList);
+			return "/challengeDetail";
 		}
-		System.out.println(challenge.getChall_week_auth());
-		model.addAttribute("challenge", challenge);
-		model.addAttribute("userChall", userChall);
-		model.addAttribute("host", host);
-		model.addAttribute("userList", userList);
-		return "/challengeDetail";
-	}
 	
 	// 챌린지 신청
 	@RequestMapping(value="/challenge/{chall_id}/apply", method = RequestMethod.POST)
