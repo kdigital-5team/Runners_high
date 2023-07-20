@@ -69,8 +69,9 @@ public class ChallengeController {
 		model.addAttribute("stateList",stateList);
 		//model.addAttribute("cityList",cityList);
 		//model.addAttribute("districtList",districtList);
-		return "regist_chall";
+		return "registChall";
 	}
+	
 	
 	// 챌린지 추가
 	// http://localhost:8081/registChall
@@ -80,9 +81,7 @@ public class ChallengeController {
 								 @RequestParam String region_district,
 								 HttpSession session) throws Exception {
 			String userId = (String) session.getAttribute("userId");
-			String raceId = (String)session.getAttribute("raceId");
-			
-			
+			String raceId = newChallenge.getRace_id();
 			System.out.println(newChallenge);
 			System.out.println(region_district);
 			System.out.println(userId);
@@ -93,7 +92,6 @@ public class ChallengeController {
 				return "alert";
 
 			} else if (newChallenge.getChall_category().equals("일상용")) {
-				session.removeAttribute(raceId);
 				raceId=null;
 			}
 			boolean challResult = false;
@@ -138,13 +136,13 @@ public class ChallengeController {
 
 	@RequestMapping(value="/getRaceId",  method=RequestMethod.POST)
 	@ResponseBody
-	String getRace(@RequestBody String raceId,HttpSession session) throws Exception {
+	String getRace(@RequestBody String raceId,HttpSession session, Model model) throws Exception {
         JSONParser jsonParser = new JSONParser();
         JSONObject jsonObj = (JSONObject) jsonParser.parse(raceId);
-		session.setAttribute("raceId", Long.toString((long) jsonObj.get("raceId")));
-		System.out.println(jsonObj.get("raceId"));
+		
 		return raceId;
 	}
+
 	
 	@RequestMapping(value="/getCity", method=RequestMethod.POST)
 	@ResponseBody
@@ -158,6 +156,41 @@ public class ChallengeController {
 	List<String> getDistrict(@RequestBody String city) throws Exception {
 		List<String> districtList = service.getDistrictByCity(city);
 		return districtList;
+	}
+	
+	@RequestMapping(value="/getRegionIdByRaceId", method=RequestMethod.POST)
+	@ResponseBody
+	String getRegionIdByRaceId(@RequestBody String raceId) throws Exception {
+        JSONParser jsonParser = new JSONParser();
+        JSONObject jsonObj = (JSONObject) jsonParser.parse(raceId);
+		int regionId = raceService.getRegionIdByRaceId(Integer.parseInt(jsonObj.get("raceId").toString()));
+		return Integer.toString(regionId);
+	}
+	@RequestMapping(value="/getStateById", method=RequestMethod.POST)
+	@ResponseBody
+	String getStateyId(@RequestBody String regionId) throws Exception {
+		JSONParser jsonParser = new JSONParser();
+        JSONObject jsonObj = (JSONObject) jsonParser.parse(regionId);
+		String state= service.getStateById(Integer.parseInt(jsonObj.get("regionId").toString()));
+		return state;
+	}
+	
+	@RequestMapping(value="/getCityById", method=RequestMethod.POST)
+	@ResponseBody
+	String getCityById(@RequestBody String regionId) throws Exception {
+		JSONParser jsonParser = new JSONParser();
+        JSONObject jsonObj = (JSONObject) jsonParser.parse(regionId);
+		String city = service.getCityById(Integer.parseInt(jsonObj.get("regionId").toString()));
+		return city;
+	}
+	
+	@RequestMapping(value="/getDistrictById", method=RequestMethod.POST)
+	@ResponseBody
+	String getDistrictById(@RequestBody String regionId) throws Exception {
+		JSONParser jsonParser = new JSONParser();
+        JSONObject jsonObj = (JSONObject) jsonParser.parse(regionId);
+		String district = service.getDistrictById(Integer.parseInt(jsonObj.get("regionId").toString()));
+		return district;
 	}
 
 	// 전체 챌린지 리스트

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,8 +11,6 @@
 
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css?family=Nunito+Sans:200,300,400,700,900|Oswald:400,700">
-
-<link rel="stylesheet" href="../static/css/form.css">
 <link rel="stylesheet" href="../static/css/bootstrap.min.css">
 <link rel="stylesheet" href="../static/css/jquery.fancybox.min.css">
 <link rel="stylesheet" href="../static/css/jquery-ui.css">
@@ -20,13 +18,164 @@
 <link rel="stylesheet" href="../static/css/owl.theme.default.min.css">
 <link rel="stylesheet" href="../static/css/animate.css">
 <link rel="stylesheet" href="../static/fonts/flaticon/font/flaticon.css">
-<link rel="stylesheet" href="../static/css/aos.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <style>
+        td {
+            width: 50px;
+            height: 50px;
+        }
 
+        .Calendar { 
+            text-align: center;
+            margin: 0 auto; 
+        }
+
+        .Calendar>thead>tr:first-child>td { font-weight: bold; }
+
+        .Calendar>thead>tr:last-child>td {
+            background-color: gray;
+            color: white;
+        }        
+
+        .pastDay{ background-color: lightgray; }
+
+        .today{            
+            background-color: #FFCA64;            
+            cursor: pointer;
+        }
+
+        .futureDay{            
+            background-color: #FFFFFF;
+            cursor: pointer;
+        }
+
+        .futureDay.choiceDay, .today.choiceDay{            
+            background-color: #3E85EF;            
+            color: #fff;
+            cursor: pointer;
+        }
+    </style>
+
+    
 </head>
 <body>
+
+<form name= "regist_form" id="regist_form" method="post" action="/registChall">
+    <div class="container">
+    
+        <h1>챌린지 등록</h1>
+        <div class="form-group">
+            <label for="inputChall">챌린지명</label>
+            <input type="text" class="form-control" id="chall_name" name="chall_name" placeholder="챌린지명">
+            <label for="challName_check"></label>
+        </div>
+        <div class="form-group">
+            <label for="inputIntro">설명</label>
+            <input type="text" class="form-control" id="chall_intro" name="chall_intro" placeholder="챌린지 설명">
+             <label for="chall_intro"></label>
+        </div>
+        <div class="form-group">
+            <label for="inputDate">기간</label>
+            <label><input type="text" class="form-control" id="chall_start_date" name="chall_start_date" value=""  readonly></label>
+            <label><input type="text" class="form-control" id="chall_end_date" name="chall_end_date"value="" readonly></label>
+        	<table class="Calendar">
+        	<thead>
+           		<tr>
+               	 <td onClick="prevCalendar();" style="cursor:pointer;">&#60;</td>
+                	<td colspan="5">
+                    	<span id="calYear"></span>년
+                    	<span id="calMonth"></span>월
+                	</td>
+                <td onClick="nextCalendar();" style="cursor:pointer;">&#62;</td>
+            	</tr>
+            	<tr>
+                	<td>일</td>
+                	<td>월</td>
+                	<td>화</td>
+                	<td>수</td>
+                	<td>목</td>
+                	<td>금</td>
+                	<td>토</td>
+            	</tr>
+        	</thead>
+
+        	<tbody>
+        	</tbody>
+    		</table>
+		</div>
+        <div class="form-group">
+            <label for="input_chall_week_auth">주간 인증 횟수</label>
+            <select id="chall_week_auth" name="chall_week_auth">
+				<option value ="1"> 주 1회</option>
+				<option value ="2"> 주 2회 </option>
+				<option value ="3"> 주 3회 </option>
+				<option value ="4"> 주 4회 </option>
+				<option value ="5"> 주 5회</option>
+				<option value ="6"> 주 6회 </option>
+				<option value ="7"> 매일 </option>
+			</select >
+        </div>
+        <div class="form-group">
+        	<label for="chall_size">인원</label>
+       		<input type="text" class="form-control" id="chall_size" name="chall_size" placeholder="인원 수">
+       		<label for="size_check"></label>
+		</div>
+        <div class="form-group">
+        	<label for="chall_category">챌린지 목적</label>
+        	<p></p>
+        	<select id="chall_category" name="chall_category" onchange=challRacePopup();>
+				<option value ="일상용" > 일상용</option>
+				<option value ="대회용" > 대회용 </option>
+			</select >
+			<label><input type="hidden" class="form-control" id="race_id" name="race_id" value=""  readonly></label>
+		</div>
+		<div class="form-group">
+        	<label for="region">지역</label>
+        	<p></p>
+        	<label for="region_state">도</label>
+        	<select id="region_state" name="region_state" onchange="chageState();">
+        	    <c:forEach var="state" items="${stateList}">
+          		<option>${state}</option>
+          		</c:forEach>
+			</select >
+			<label for="region_city">시</label>
+        	<select id="region_city" name="region_city" onchange="chageCity();">
+			</select >
+			<label for="region_district">군/구</label>
+        	<select id="region_district" name="region_district" onchange="chageDistrict();">
+			</select >
+		</div>
+		<div class="form-group">
+        	<label for="chall_sit">모집상태</label>
+        	<p></p>
+        	<select id="chall_sit" name="chall_sit">
+				<option value ="모집중"> 모집중</option>
+				<option value ="모집 종료"> 모집 종료 </option>
+				<option value ="모집 예정"> 모집 예정 </option>
+			</select >
+		</div>
+		<div class="form-group">
+        	<label for="chall_online">온라인/오프라인 여부</label>
+        	<p></p>
+        	<select id="chall_online" name="chall_online">
+				<option value ="온라인"> 온라인 </option>
+				<option value ="오프라인"> 오프라인  </option>
+				<option value ="모두"> 모두 </option>
+			</select >
+		</div>
+		<div class="form-group">
+        	<label for="chall_all_auth">챌린지 최소 인증률</label>
+       		<input type="text" class="form-control" id="chall_all_auth" name="chall_all_auth" placeholder="최소 40% 이상 숫자로만 입력해주세요!">
+       		<label for="all_auth_check"></label>
+		</div>
+        <button type="button" class="btn btn-primary" onclick="submit2();">등록하기</button>
+    </div>
+</form>
+<!-- footer -->
+<%@ include file="./inc/footer.jsp"%>
+</body>
 	<script type="text/javascript"
-		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a9fd4644a9a496749d0625dffe4286f8&libraries=services,clusterer,drawing"></script>
-	<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a9fd4644a9a496749d0625dffe4286f8&libraries=services,clusterer,drawing"></script>
 	<script src="../static/js/jquery.min.js"></script>
 	<script src="../static/js/jquery-migrate-3.0.1.min.js"></script>
 	<script src="../static/js/jquery-ui.js"></script>
@@ -37,143 +186,17 @@
 	<script src="../static/js/jquery.fancybox.min.js"></script>
 	<script src="../static/js/aos.js"></script>
 	<script src="../static/js/main.js"></script>
-
-	<!-- header -->
-	<%@ include file="./inc/header.jsp"%>
-
-
-	<!-- 챌린지 등록  -->
-	<div class="site-wrap-width">
-		<div class="site-section"></div>
-		<div class="site-section">
-			<div class="container">
-				<form name="regist_form" id="regist_form" method="post" action="/registChall">
-						<div class="context-form">
-							<h2 class="form-h2">챌린지 등록</h2>
-							<label for="inputChall">챌린지명</label><br> 
-								<input type="text" id="chall_name" name="chall_name" placeholder="챌린지명"><br> 
-								<label for="challName_check"></label>
-						</div>
-						<div class="context-form">
-							<label for="inputIntro">설명</label><br> 
-								<input type="text" id="chall_intro" name="chall_intro" placeholder="챌린지 설명"><br> 
-								<label for="chall_intro"></label>
-						</div>
-						<div class="context-form">
-							<label for="inputDate">기간</label><br> 
-							<label>
-								<input
-								type="text" id="chall_start_date"
-								name="chall_start_date" value="" readonly>
-							</label> 
-							<label>
-								<input type="text" id="chall_end_date" name="chall_end_date" value="" readonly>
-							</label>
-							<table class="Calendar">
-								<thead>
-									<tr>
-										<td onClick="prevCalendar();" style="cursor: pointer;">&#60;</td>
-											<td colspan="5">
-												<span id="calYear"></span>년 
-												<span id="calMonth"></span>월
-											</td>
-										<td onClick="nextCalendar();" style="cursor: pointer;">&#62;</td>
-									</tr>
-									<tr>
-										<td>일</td>
-										<td>월</td>
-										<td>화</td>
-										<td>수</td>
-										<td>목</td>
-										<td>금</td>
-										<td>토</td>
-									</tr>
-								</thead>
-
-								<tbody>
-								</tbody>
-							</table>
-						</div>
-						<div class="context-form">
-							<label for="input_chall_week_auth">주간 인증 횟수</label><br>
-								<select
-									id="chall_week_auth" name="chall_week_auth">
-									<option value="1">주 1회</option>
-									<option value="2">주 2회</option>
-									<option value="3">주 3회</option>
-									<option value="4">주 4회</option>
-									<option value="5">주 5회</option>
-									<option value="6">주 6회</option>
-									<option value="7">매일</option>
-								</select>
-						</div>
-						<div class="context-form">
-							<label for="chall_size">인원</label><br> 
-								<input type="text"class="" id="chall_size" name="chall_size" placeholder="인원 수"><br> 
-							<label for="size_check"></label>
-						</div>
-						<div class="context-form">
-							<label for="chall_category">챌린지 목적</label><br>
-							<select id="chall_category" name="chall_category"
-								onchange=challRacePopup();>
-								<option value="일상용">일상용</option>
-								<option value="대회용">대회용</option>
-							</select>
-						</div>
-						<div class="context-form">
-							<label for="region">지역</label><br>
-							<label for="region_state">도</label> 
-								<select id="region_state" name="region_state" onchange="chageState();">
-									<c:forEach var="state" items="${stateList}">
-										<option>${state}</option>
-									</c:forEach>
-								</select> 
-							<label for="region_city">시</label> 
-								<select id="region_city" name="region_city" onchange="chageCity();">
-								</select> 
-							<label for="region_district">군/구</label> 
-								<select
-									id="region_district" name="region_district" onchange="chageDistrict();">
-								</select>
-						</div>
-						<div class="context-form">
-							<label for="chall_sit">모집상태</label><br>
-								<select id="chall_sit" name="chall_sit">
-									<option value="모집중">모집중</option>
-									<option value="모집 종료">모집 종료</option>
-									<option value="모집 예정">모집 예정</option>
-								</select>
-						</div>
-						<div class="context-form">
-							<label for="chall_online">온라인/오프라인 여부</label><br>
-								<select id="chall_online" name="chall_online">
-									<option value="온라인">온라인</option>
-									<option value="오프라인">오프라인</option>
-									<option value="모두">모두</option>
-								</select>
-						</div>
-						<div class="context-form">
-							<label for="chall_all_auth">챌린지 최소 인증률</label><br> 
-								<input type="text" id="chall_all_auth" name="chall_all_auth" placeholder="최소 40% 이상 숫자로만 입력해주세요!"> 
-								<label for="all_auth_check"></label>
-						</div>
-							<input type="submit" value="등록" />
-						<br><br>
-				</form>
-			</div>
-		</div>
-	</div>
-	
-	<!-- footer -->
-	<%@ include file="./inc/footer.jsp"%>
-</body>
-
-<script type="text/javascript">
+<script src="https://code.jquery.com/jquery-3.4.1.js" ></script>
+<script src="jquery.cookie.js"></script>  
+<script>
 var popup;
 var chall_path;
-var race_id = '<%=(String) session.getAttribute("raceId")%>';
 var all_auth_chk = false;
 var size_chk = false;
+var regionId = null;
+var state=null;
+var city=null;
+var district=null;
 const allAuthCheck = RegExp(/^[0-9]+$/);
 const allSizeCheck = RegExp(/^[0-9]+$/);	
 	
@@ -219,15 +242,19 @@ const allSizeCheck = RegExp(/^[0-9]+$/);
 	});
 
 
-// 챌린지 등록 달력
+
+
+
+
+
+
 window.onload = function () { buildCalendar(); }    // 웹 페이지가 로드되면 buildCalendar 실행
 let nowMonth = new Date();  // 현재 달을 페이지를 로드한 날의 달로 초기화
 let today = new Date();     // 페이지를 로드한 날짜를 저장
 today.setHours(0,0,0,0);    // 비교 편의를 위해 today의 시간을 초기화
-
 // 달력 생성 : 해당 달에 맞춰 테이블을 만들고, 날짜를 채워 넣는다.
 function buildCalendar() {
-	<%session.removeAttribute("raceId");%>
+	<% session.removeAttribute("raceId");%>
     let firstDate = new Date(nowMonth.getFullYear(), nowMonth.getMonth(), 1);     // 이번달 1일
     let lastDate = new Date(nowMonth.getFullYear(), nowMonth.getMonth() + 1, 0);  // 이번달 마지막날
 
@@ -320,15 +347,85 @@ function challRacePopup(){
     	var popOption = "width = 500, height = 500, top = 50, left = 50, location = no";
     	var openUrl ='/registChall/selectChallRace';
     	popup = window.open(openUrl, 'pop', popOption);
+    	
+	}
+}
 
-    }
+function setChildValue(raceId){
+	var raceId = raceId.raceId
+    document.getElementById("race_id").value = raceId;
+   	
+    $.ajax({
+        async : false, 
+        type : 'POST', 
+        data: JSON.stringify({raceId}),
+        url: "/getRegionIdByRaceId",
+        dataType: "text",
+        contentType: "application/json; charset=UTF-8",
+        success: function(data) { 
+        regionId=data;
+        },
+        error: function(error) {
+            alert("자동으로 주소값을 불러오는데 실패했습니다.");
+        } 
+    });
+    $.ajax({
+        async : false, 
+        type : 'POST', 
+        data: JSON.stringify({regionId}),
+        url: "/getStateById",
+        dataType: "text",
+        contentType: "application/json; charset=UTF-8",
+        success: function(data) { 
+      	console.log("data", data);
+      	state=data;
+        },
+        error: function(error) {
+            alert("자동으로 주소값을 불러오는데 실패했습니다.");
+        } 
+    });
+    $.ajax({
+        async : false, 
+        type : 'POST', 
+        data: JSON.stringify({regionId}),
+        url: "/getCityById",
+        dataType: "text",
+        contentType: "application/json; charset=UTF-8",
+        success: function(data) { 
+      	console.log("data", data);
+      	city=data;
+        },
+        error: function(error) {
+            alert("자동으로 주소값을 불러오는데 실패했습니다.");
+        } 
+    });
+    
+    $.ajax({
+        async : false, 
+        type : 'POST', 
+        data: JSON.stringify({regionId}),
+        url: "/getDistrictById",
+        dataType: "text",
+        contentType: "application/json; charset=UTF-8",
+        success: function(data) { 
+      	console.log("data", data);
+      	district=data;
+        },
+        error: function(error) {
+            alert("자동으로 주소값을 불러오는데 실패했습니다.");
+        } 
+    });
+    
+    
+    $('#region_state').val(state).prop('selected',true).change();
+
 }
 
 function chageState(){
     var state = document.getElementById("region_state").value;
     console.log(state)
           $.ajax({
-              async : true, 
+              async : false, 
               type : 'POST', 
               data: state,
               url: "/getCity",
@@ -346,19 +443,21 @@ function chageState(){
                   alert("도를 입력해주세요!");
               }        
           });
+    $('#region_city').val(city).prop('selected',true).change();
 }
+
 
 function chageCity(){
     var city = document.getElementById("region_city").value;
     console.log(city)
           $.ajax({
-              async : true, 
+              async : false, 
               type : 'POST', 
               data: city,
               url: "/getDistrict",
               dataType: "json",
               contentType: "application/json; charset=UTF-8",
-              success: function(data) {  
+              success: function(data) { 
             	console.log("data", data);
             	$("#region_district option").remove();
             	for(var count = 0; count < data.length; count++){ 
@@ -369,6 +468,7 @@ function chageCity(){
                   alert("시를 입력해주세요!");
               } 
           });
+    $('#region_district').val(district).prop('selected',true).change();
 
 }
 
@@ -380,15 +480,12 @@ function chageDistrict(){
 function submit2(){
 	Form=document.regist_form;
 	if(Form.chall_start_date.value=="" || Form.chall_end_date.value=="" || Form.chall_all_auth.value=="" || Form.region_district.value==""  || !all_auth_chk || !size_chk){
-		
 	        alert("필수 입력란이 비었거나 입력 조건에 부합하지않습니다. 다시 확인해 주세요.");
-
 	        
 	        
 	} else {
 	       document.regist_form.submit();
 
-        
 	    }
 	};
 	

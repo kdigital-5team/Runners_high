@@ -97,7 +97,6 @@
 		<%-- 	</c:if> --%>
 			
 
-			</c:if>
 			<a href="/challenge/${challenge.chall_id}calendar">캘린더</a>
 
 		</div>
