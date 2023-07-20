@@ -93,7 +93,7 @@
 			</c:if>
 			<c:if test="${challenge.chall_sit eq '모집종료' }">
 				<a href="${chall_id}challengePost">인증 게시판</a><span class="mx-2">|</span>
-
+			</c:if>
 
 
 			<a href="/challenge/${challenge.chall_id}calendar">캘린더</a>
@@ -110,7 +110,7 @@
 			<c:forEach items="${userList }" var="apply_user">
 					<div style="display: inline-block; width: 10%;">
 						<div style="width:100%; padding-top:100%; height:0; border-radius: 70%;  
-						background-image: url(/images/${apply_user.user_pic});
+						background-image: url(/images/${apply_user.user_pic}), url(../static/images/profileImages/default_image.png);
 						background-position:center;
 						background-size:cover;">
 						</div>

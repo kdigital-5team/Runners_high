@@ -1,4 +1,3 @@
-
 /*!
  * Bootstrap v4.5.0 (https://getbootstrap.com/)
  * Copyright 2011-2020 The Bootstrap Authors
@@ -41,49 +40,91 @@
 }
 
 /* regist_chall 양식 0719 */
-        td {
-            width: 50px;
-            height: 50px;
-        }
+td {
+	width: 50px;
+	height: 50px;
+}
 
-        .Calendar { 
-            text-align: center;
-            margin: 0 auto; 
-        }
+.Calendar {
+	text-align: center;
+	margin: 25px auto 30px;
+	box-shadow: 2px 20px 20px 7px rgb(180 181 187/ 25%)
+}
 
-        .Calendar>thead>tr:first-child>td { font-weight: bold; }
+.Calendar>thead>tr:first-child>td {
+	font-weight: bold;
+}
 
-        .Calendar>thead>tr:last-child>td {
-            background-color: gray;
-            color: white;
-        }        
+.Calendar>thead>tr:last-child>td {
+	background-color: gray;
+	color: white;
+}
 
-        .pastDay{ background-color: lightgray; }
+.pastDay {
+	background-color: lightgray;
+}
 
-        .today{            
-            background-color: #FFCA64;            
-            cursor: pointer;
-        }
+.pastDay + .yesterDay {
+	border-top-right-radius: 17px;
+    border-bottom-right-radius: 17px;
+}
 
-        .futureDay{            
-            background-color: #FFFFFF;
-            cursor: pointer;
-        }
+.today {
+	background-color: #ffd587;
+	border-radius: 17px;
+	cursor: pointer;
+}
 
-        .futureDay.choiceDay, .today.choiceDay{            
-            background-color: #3E85EF;            
-            color: #fff;
-            cursor: pointer;
-        }
+.futureDay {
+	background-color: #FFFFFF;
+	cursor: pointer;
+}
+
+.futureDay.choiceDay, .today.choiceDay {
+	background-color: #d0e3ff;
+	border-radius: 17px;
+	cursor: pointer;
+}
+
+/*슬라이더*/
+#chall_week_auth {
+	width: 350px;
+}
+
+/* 버튼 */
+.customBtn {
+	width: 134px;
+	border-radius: 4px;
+	color: #767676;
+}
 
 /* 로고 0716 */
 #main-logo:not([href]) {
-    text-align: center;
-    margin: auto;
-   	padding: 110px 18px 10px 0px;
-    font-size: xxx-large;
-    font-weight: bold;
-    color: #1b319d;
+	text-align: center;
+	margin: auto;
+	padding: 110px 18px 10px 0px;
+	font-size: xxx-large;
+	font-weight: bold;
+	color: #1b319d;
+}
+
+.selectBox2 {
+	margin: auto;
+    position: relative;
+    width: 330px;
+    height: 48px;
+    border-radius: 4px;
+    border: none;
+    background: url(../images/arrow.png) calc(100% - 21px) center no-repeat;
+    z-index: 20;
+    background-size: 12px;
+    cursor: pointer;
+    background-color: whitesmoke;
+    color: #767676
+}
+
+.label {
+	color: #767676
 }
 
 /* sub 헤드라인 */
@@ -92,8 +133,9 @@
 	text-align: center;
 	margin-top: -10px;
 	margin-bottom: -0.5rem;
-	padding: 0 8px 0 0; 
+	padding: 0 8px 0 0;
 }
+
 *, :after, :before {
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box
@@ -125,7 +167,7 @@ body {
 
 /* form 중앙정렬 : 단, 상위 요소에 align이 없어야 적용 0712 */
 .site-section {
-	text-align : center;
+	text-align: center;
 }
 
 [tabindex="-1"]:focus:not(:focus-visible) {
@@ -257,15 +299,15 @@ th {
 /* label 설정 0716 */
 label {
 	font-weight: bold;
-    font-size: 19px;
-    margin-top: 15px;
+	font-size: 19px;
+	margin-top: 15px;
 }
 
 .notice-label {
 	font-size: 14px;
-    font-weight: normal;
-    margin-top: 3px;
-    color: #898989;
+	font-weight: normal;
+	margin-top: 3px;
+	color: #898989;
 }
 
 #pw-only {
@@ -295,28 +337,36 @@ textarea {
 	background-color: whitesmoke;
 	width: 32%;
 	padding: 10px 10px;
-    border-radius: 4px;
-    box-sizing: border-box;
-    border: none;
-    resize: none;
-    overflow: hidden;
+	border-radius: 4px;
+	box-sizing: border-box;
+	border: none;
+	resize: none;
+	overflow: hidden;
 }
 /* inputbox 수정 0705 */
 button, input, optgroup, select {
-    background-color: whitesmoke;
-    width: 32%;
-    height: 48px;
-    padding: 0 10px;
-    margin-bottom: 16px;
-    font-family: inherit;
-    font-size: inherit;
-    border-radius: 4px;
-    line-height: inherit;
-    box-sizing: border-box;
+	background-color: whitesmoke;
+	width: 32%;
+	height: 48px;
+	padding: 0 10px;
+	margin-bottom: 16px;
+	font-family: inherit;
+	font-size: inherit;
+	border-radius: 4px;
+	line-height: inherit;
+	box-sizing: border-box;
 }
 
 #auth_code {
 	width: 20%;
+}
+
+#chall_start_date {
+	width: 170px;
+}
+
+#chall_end_date {
+	width: 170px;
 }
 
 /* photo class 설정 0712 */
@@ -326,27 +376,30 @@ button, input, optgroup, select {
 	margin: auto;
 	position: relative;
 }
-.photo{
+
+.photo {
 	width: 100%;
 	height: 100%;
-	object-fit:cover;	
+	object-fit: cover;
 	border-radius: 50%;
 	overflow: hidden;
 }
-.photo:hover{
+
+.photo:hover {
 	filter: brightness(0.5);
 	cursor: pointer;
 }
+
 #upload-pic {
 	width: 100%;
 	height: 100%;
 	margin: auto;
 	position: absolute;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    border:none;
-    opacity: 0;
-    z-index: -1;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	border: none;
+	opacity: 0;
+	z-index: -1;
 }
 
 #userPic {
@@ -354,33 +407,33 @@ button, input, optgroup, select {
 }
 
 .deco-banner {
-    background-color: #FFDC3D;
-    width: 100%;
-    height: 92px;
-    position: absolute;
-    top: -4px;
+	background-color: #FFDC3D;
+	width: 100%;
+	height: 92px;
+	position: absolute;
+	top: -4px;
 }
 
 /* input 기본 양식 0713 */
-input {
-	size=30px;
+input {size =30px;
 	border: 0;
 }
+
 input:read-only {
 	outline: none;
 }
 
 /* inputbox 수정 0705 */
 input[type="submit"] {
-color: #fff;
-    font-size: 15px;
-    background-color: #FFDC3D;
-    margin-top: 80px;
-    border-radius: 4px;
+	color: #fff;
+	font-size: 15px;
+	background-color: #FFDC3D;
+	margin-top: 50px;
+	border-radius: 4px;
 }
 
-input[type="submit"]:hover{
-	background-color:#f9d010;
+input[type="submit"]:hover {
+	background-color: #f9d010;
 }
 
 /* 이메일 인증 수정 0717 */
@@ -390,8 +443,6 @@ input[type="submit"]:hover{
 	border-radius: 30px;
 	margin-bottom: 6px;
 }
-
-
 
 #auth_code {
 	
@@ -408,7 +459,6 @@ button, select {
 [role=button] {
 	cursor: pointer
 }
-
 
 select {
 	word-wrap: normal
@@ -508,7 +558,7 @@ template {
 	font-size: 2rem
 }
 
-/* form 전용 h2 설정 0716 */ 
+/* form 전용 h2 설정 0716 */
 .form-h2 {
 	font-weight: bold;
 	margin-bottom: 30px;
@@ -768,18 +818,17 @@ pre code {
 	padding-left: 0
 }
 
-.col, .col-1, .col-2, .col-3, .col-4, .col-5, .col-7, .col-8,
-	.col-9, .col-10, .col-11, .col-12, .col-auto, .col-lg, .col-lg-1,
-	.col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7,
-	.col-lg-8, .col-lg-9, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg-auto,
-	.col-md, .col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5,
-	.col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11,
-	.col-md-12, .col-md-auto, .col-sm, .col-sm-1, .col-sm-2, .col-sm-3,
-	.col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9,
-	.col-sm-10, .col-sm-11, .col-sm-12, .col-sm-auto, .col-xl, .col-xl-1,
-	.col-xl-2, .col-xl-3, .col-xl-4, .col-xl-5, .col-xl-6, .col-xl-7,
-	.col-xl-8, .col-xl-9, .col-xl-10, .col-xl-11, .col-xl-12, .col-xl-auto
-	{
+.col, .col-1, .col-2, .col-3, .col-4, .col-5, .col-7, .col-8, .col-9,
+	.col-10, .col-11, .col-12, .col-auto, .col-lg, .col-lg-1, .col-lg-3,
+	.col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9,
+	.col-lg-10, .col-lg-11, .col-lg-12, .col-lg-auto, .col-md, .col-md-1,
+	.col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7,
+	.col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12, .col-md-auto,
+	.col-sm, .col-sm-1, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5,
+	.col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-10, .col-sm-11,
+	.col-sm-12, .col-sm-auto, .col-xl, .col-xl-1, .col-xl-2, .col-xl-3,
+	.col-xl-4, .col-xl-5, .col-xl-6, .col-xl-7, .col-xl-8, .col-xl-9,
+	.col-xl-10, .col-xl-11, .col-xl-12, .col-xl-auto {
 	position: relative;
 	width: 100%;
 	padding-right: 15px;
@@ -1597,7 +1646,6 @@ pre code {
 		flex: 0 0 8.33333%;
 		max-width: 8.33333%
 	}
-	
 	.col-lg-3 {
 		-webkit-box-flex: 0;
 		-ms-flex: 0 0 25%;
@@ -2568,8 +2616,7 @@ select.form-control[multiple], select.form-control[size] {
 	box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25)
 }
 
-.was-validated
-	{
+.was-validated {
 	padding-right: calc(1.5em + 0.75rem);
 	background-position: top calc(0.375em + 0.1875rem) right
 		calc(0.375em + 0.1875rem)
@@ -4714,7 +4761,6 @@ input[type=button].btn-block, input[type=reset].btn-block, input[type=submit].bt
 	}
 }
 
-
 .card {
 	position: relative;
 	display: -webkit-box;
@@ -6790,35 +6836,51 @@ keyframes spinner-border {
 50
 
 
+
+
 %
 {
 opacity
 
 
+
+
 :
+
+
 
 
 1
+
+
 ;
-
-
 -webkit-transform
 
 
+
+
 :
 
 
+
+
 none
+
+
 ;
-
-
 transform
 
 
+
+
 :
 
 
+
+
 none
+
+
 
 
 }
@@ -6832,35 +6894,51 @@ keyframes spinner-grow { 0%{
 50
 
 
+
+
 %
 {
 opacity
 
 
+
+
 :
+
+
 
 
 1
+
+
 ;
-
-
 -webkit-transform
 
 
+
+
 :
 
 
+
+
 none
+
+
 ;
-
-
 transform
 
 
+
+
 :
 
 
+
+
 none
+
+
 
 
 }
