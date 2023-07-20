@@ -105,6 +105,34 @@
 										onclick="test(this.id, this.name)" class="option">경기도</button></li>
 									<li><button style="width: 100px" type="button" id="강원도" name="region_state"
 										onclick="test(this.id, this.name)" class="option">강원도</button></li>
+										<li><button style="width: 100px" type="button" id="경상남도" name="region_state"
+										onclick="test(this.id, this.name)" class="option">경상남ㄷ</button></li>
+										<li><button style="width: 100px" type="button" id="강원도" name="region_state"
+										onclick="test(this.id, this.name)" class="option">강원도</button></li>
+										<li><button style="width: 100px" type="button" id="강원도" name="region_state"
+										onclick="test(this.id, this.name)" class="option">강원도</button></li>
+										<li><button style="width: 100px" type="button" id="강원도" name="region_state"
+										onclick="test(this.id, this.name)" class="option">강원도</button></li>
+										<li><button style="width: 100px" type="button" id="강원도" name="region_state"
+										onclick="test(this.id, this.name)" class="option">강원도</button></li>
+										<li><button style="width: 100px" type="button" id="강원도" name="region_state"
+										onclick="test(this.id, this.name)" class="option">강원도</button></li>
+										<li><button style="width: 100px" type="button" id="강원도" name="region_state"
+										onclick="test(this.id, this.name)" class="option">강원도</button></li>
+										<li><button style="width: 100px" type="button" id="강원도" name="region_state"
+										onclick="test(this.id, this.name)" class="option">강원도</button></li>
+										<li><button style="width: 100px" type="button" id="강원도" name="region_state"
+										onclick="test(this.id, this.name)" class="option">강원도</button></li>
+										<li><button style="width: 100px" type="button" id="강원도" name="region_state"
+										onclick="test(this.id, this.name)" class="option">강원도</button></li>
+										<li><button style="width: 100px" type="button" id="강원도" name="region_state"
+										onclick="test(this.id, this.name)" class="option">강원도</button></li>
+										<li><button style="width: 100px" type="button" id="강원도" name="region_state"
+										onclick="test(this.id, this.name)" class="option">강원도</button></li>
+										<li><button style="width: 100px" type="button" id="강원도" name="region_state"
+										onclick="test(this.id, this.name)" class="option">강원도</button></li>
+										<li><button style="width: 100px" type="button" id="강원도" name="region_state"
+										onclick="test(this.id, this.name)" class="option">강원도</button></li>
 							</ul>
 						</li>
 						<li class="has-children">시/군
@@ -141,7 +169,7 @@
 						<div class="col-sm-6 col-md-4 col-lg-3 mb-5 mb-lg-5">
 							
 								<div class="custom-media d-block">
-									<div class="img-wrap mb-3">
+									<div class="img-wrap mb-3" style="height: 160px;">
 										<a href="${race.race_url}"><img src="${race.race_pic}"
 											alt="Image" class="img-fluid"></a>
 									</div>

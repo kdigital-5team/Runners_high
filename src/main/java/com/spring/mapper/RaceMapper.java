@@ -18,6 +18,8 @@ public interface RaceMapper {
 
 	public int getRegionIdByRaceId(int raceId);
 
+	public boolean updateRaceCon();
+
 	
 
 

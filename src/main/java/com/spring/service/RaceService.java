@@ -34,6 +34,10 @@ public class RaceService {
 		
 	}
 
+	public boolean updateRaceCon() {
+		return mapper.updateRaceCon();
+	}
+
 
 	
 	
