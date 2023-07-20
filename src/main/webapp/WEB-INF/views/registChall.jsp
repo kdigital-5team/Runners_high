@@ -127,6 +127,7 @@
 				<option value ="일상용" > 일상용</option>
 				<option value ="대회용" > 대회용 </option>
 			</select >
+			<label><input type="hidden" class="form-control" id="race_id" name="race_id" value=""  readonly></label>
 		</div>
 		<div class="form-group">
         	<label for="region">지역</label>
@@ -185,13 +186,17 @@
 	<script src="../static/js/jquery.fancybox.min.js"></script>
 	<script src="../static/js/aos.js"></script>
 	<script src="../static/js/main.js"></script>
-<script src="https://code.jquery.com/jquery-3.4.1.js" ></script> 
+<script src="https://code.jquery.com/jquery-3.4.1.js" ></script>
+<script src="jquery.cookie.js"></script>  
 <script>
 var popup;
 var chall_path;
-var race_id = '<%=(String)session.getAttribute("raceId")%>';
 var all_auth_chk = false;
 var size_chk = false;
+var regionId = null;
+var state=null;
+var city=null;
+var district=null;
 const allAuthCheck = RegExp(/^[0-9]+$/);
 const allSizeCheck = RegExp(/^[0-9]+$/);	
 	
@@ -342,15 +347,85 @@ function challRacePopup(){
     	var popOption = "width = 500, height = 500, top = 50, left = 50, location = no";
     	var openUrl ='/registChall/selectChallRace';
     	popup = window.open(openUrl, 'pop', popOption);
+    	
+	}
+}
 
-    }
+function setChildValue(raceId){
+	var raceId = raceId.raceId
+    document.getElementById("race_id").value = raceId;
+   	
+    $.ajax({
+        async : false, 
+        type : 'POST', 
+        data: JSON.stringify({raceId}),
+        url: "/getRegionIdByRaceId",
+        dataType: "text",
+        contentType: "application/json; charset=UTF-8",
+        success: function(data) { 
+        regionId=data;
+        },
+        error: function(error) {
+            alert("자동으로 주소값을 불러오는데 실패했습니다.");
+        } 
+    });
+    $.ajax({
+        async : false, 
+        type : 'POST', 
+        data: JSON.stringify({regionId}),
+        url: "/getStateById",
+        dataType: "text",
+        contentType: "application/json; charset=UTF-8",
+        success: function(data) { 
+      	console.log("data", data);
+      	state=data;
+        },
+        error: function(error) {
+            alert("자동으로 주소값을 불러오는데 실패했습니다.");
+        } 
+    });
+    $.ajax({
+        async : false, 
+        type : 'POST', 
+        data: JSON.stringify({regionId}),
+        url: "/getCityById",
+        dataType: "text",
+        contentType: "application/json; charset=UTF-8",
+        success: function(data) { 
+      	console.log("data", data);
+      	city=data;
+        },
+        error: function(error) {
+            alert("자동으로 주소값을 불러오는데 실패했습니다.");
+        } 
+    });
+    
+    $.ajax({
+        async : false, 
+        type : 'POST', 
+        data: JSON.stringify({regionId}),
+        url: "/getDistrictById",
+        dataType: "text",
+        contentType: "application/json; charset=UTF-8",
+        success: function(data) { 
+      	console.log("data", data);
+      	district=data;
+        },
+        error: function(error) {
+            alert("자동으로 주소값을 불러오는데 실패했습니다.");
+        } 
+    });
+    
+    
+    $('#region_state').val(state).prop('selected',true).change();
+
 }
 
 function chageState(){
     var state = document.getElementById("region_state").value;
     console.log(state)
           $.ajax({
-              async : true, 
+              async : false, 
               type : 'POST', 
               data: state,
               url: "/getCity",
@@ -368,19 +443,21 @@ function chageState(){
                   alert("도를 입력해주세요!");
               }        
           });
+    $('#region_city').val(city).prop('selected',true).change();
 }
+
 
 function chageCity(){
     var city = document.getElementById("region_city").value;
     console.log(city)
           $.ajax({
-              async : true, 
+              async : false, 
               type : 'POST', 
               data: city,
               url: "/getDistrict",
               dataType: "json",
               contentType: "application/json; charset=UTF-8",
-              success: function(data) {  
+              success: function(data) { 
             	console.log("data", data);
             	$("#region_district option").remove();
             	for(var count = 0; count < data.length; count++){ 
@@ -391,6 +468,7 @@ function chageCity(){
                   alert("시를 입력해주세요!");
               } 
           });
+    $('#region_district').val(district).prop('selected',true).change();
 
 }
 
@@ -402,15 +480,12 @@ function chageDistrict(){
 function submit2(){
 	Form=document.regist_form;
 	if(Form.chall_start_date.value=="" || Form.chall_end_date.value=="" || Form.chall_all_auth.value=="" || Form.region_district.value==""  || !all_auth_chk || !size_chk){
-		
 	        alert("필수 입력란이 비었거나 입력 조건에 부합하지않습니다. 다시 확인해 주세요.");
-
 	        
 	        
 	} else {
 	       document.regist_form.submit();
 
-        
 	    }
 	};
 	

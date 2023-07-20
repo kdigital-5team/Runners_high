@@ -109,7 +109,8 @@ function selectRace(raceId){
         dataType: "json",
         contentType: "application/json; charset=UTF-8",
         success: function(data) {  
-      	console.log("data", data);
+        opener.setChildValue(data);
+        console.log(data);
       	alert("선택 완료");
       	window.close();
         },

@@ -127,7 +127,7 @@ public class ChallengeService {
 
 
 	public boolean insertPost(ChallengePost newPost) throws Exception {
-boolean result = false;
+			boolean result = false;
 		
 		int res = mapper.insertPost(newPost);
 		
@@ -152,15 +152,16 @@ boolean result = false;
 		return mapper.deleteRoutebyChallId(challId);
 	}
 
-	public void deleteApplyUserbyChallId(int chall_id) {
-		mapper.deleteApplyUserbyChallId(chall_id);
-		
-	}
 
 	public void insertHost(String userId, int challId) {
 		mapper.insertHost(userId, challId);
 		
 
+	}
+
+	public void deleteApplyUserbyChallId(int chall_id) {
+		mapper.deleteApplyUserbyChallId(chall_id);
+		
 	}
 	
 

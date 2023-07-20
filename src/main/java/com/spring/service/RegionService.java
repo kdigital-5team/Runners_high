@@ -32,6 +32,18 @@ public class RegionService {
 	public String getIdByDistrict(String district) {
 		return mapper.getIdByDistrict(district);
 	}
+	public Region getRegionbyId(int regionId) {
+		return mapper.getRegionById(regionId);
+	}
+	public String getStateById(int regionId) {
+		return mapper.getStateById(regionId);
+	}
+	public String getCityById(int regionId) {
+		return mapper.getCityById(regionId);
+	}
+	public String getDistrictById(int regionId) {
+		return mapper.getDistrictById(regionId);
+	}
 
 
 }

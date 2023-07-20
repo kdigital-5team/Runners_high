@@ -25,7 +25,7 @@
 <link rel="stylesheet" href="../static/css/feed.css">
 <link rel="stylesheet" href="../static/fonts/flaticon/font/flaticon.css">
 <link rel="stylesheet" href="../static/css/aos.css">
-<link rel="stylesheet" href="../static/css/style2.css">
+<link rel="stylesheet" href="../static/css/style.css">
 
 </head>
 <style>
@@ -36,21 +36,7 @@
 	<div class="site-wrap">
 		<div class="container">
 			<div class="row">
-				<div class="col-lg-12">
-						<div id="map" style="float: left; width: 35%; padding-top:35%; height:0;margin: 2%; border-radius: 5px;
-										background-position:center;
-										background-size:cover;">
-						</div>
-			</div>
 		</div>
-		<div class="hero-contents">
-			<div style="float:left; width: 33%; text-align: center;">
-				<h2>${challenge.chall_name}</h2>
-				<p>
-					<fmt:formatDate pattern="yyyy-MM-dd" value="${challenge.chall_start_date}"/> ~ <fmt:formatDate pattern="yyyy-MM-dd" value="${challenge.chall_end_date}"/><span class="mx-2">/</span>${fn:length(userList)}명
-					<div class="caption" style="font-size: 10px"></div>
-				</p>
-			</div>
 			<div style="float: left; width: 33%">
 				<span>${challenge.chall_sit}</span>
 				<c:if test="${userId ne challenge.chall_reg_id 
@@ -70,6 +56,15 @@
 					</form>
 				</c:if>
 			</div>
+					<div class="hero-contents">
+			<div style="float:left; width: 33%; text-align: center;">
+				<h2>${challenge.chall_name}</h2>
+				<p>
+					<fmt:formatDate pattern="yyyy-MM-dd" value="${challenge.chall_start_date}"/> ~ <fmt:formatDate pattern="yyyy-MM-dd" value="${challenge.chall_end_date}"/><span class="mx-2">/</span>${fn:length(userList)}명
+					<div class="caption" style="font-size: 10px"></div>
+				</p>
+			</div>
+			
 			<div style="float: left; width: 34%;">
 				<div style="float: left; width:30%; padding-top:30%; height:0; border-radius: 70%; 
 					background-image: url(${challenge.chall_pic});
@@ -77,13 +72,12 @@
 				</div>
 				<div style="float: right; width: 65%;  vertical-align: middle;">
 					<div>챌린지 호스트</div>
-					<div id="chall_id">${challenge.chall_id}</div>
+					<div id="chall_id" style="display:none">${challenge.chall_id}</div>
 					<div>${host.intro }</div>
 					<div>${host.nickname }</div>
 				</div>
 			</div>
 		</div>
-		
 		<div style="margin: auto; text-align: center;">
 			<a href="#">소개</a><span class="mx-2">|</span> 
 			<c:if test="${userId eq challenge.chall_reg_id }">
@@ -94,15 +88,19 @@
 			</c:if>
 			<a href="mypage_title">캘린더</a>
 		</div>
-
+ 		<div class="col-lg-12">
+			<div id="map" style = "margin: auto; width: 50%; height: 300px;">
+				background-position:center;
+			 	background-size:cover;">
+			</div>
+		</div>
 		<div style="margin: auto; width: 50%;">챌린지 소개</div>
 		<div style="margin: auto; width: 50%; height: 300px; background-color: #F0F0F0;" >
 			<span style="margin: 2%; font-size: 15px"><b>${challenge.chall_intro }</b></span>
 		</div>
 
-		<div style="margin: auto; width: 50%; margin-top: 10px">참가자</div>\
+		<div style="margin: auto; width: 50%; margin-top: 10px">참가자</div>
 		<div style="margin: auto; background-color: #F0F0F0; width: 50%; height: 100px; margin-bottom: 10px;">
-
 		<div style="margin: auto; width: 50%; margin-top: 10px">참가자</div>
 		<div style="margin: auto; background-color: #F0F0F0; width: 50%; height: 100px; margin-bottom: 20px;">
 
@@ -168,7 +166,7 @@ $(document).ready(function (){
 		        		console.log(raceLong);
 	      			 var options = { //지도를 생성할 때 필요한 기본 옵션
 	         	   			center: new kakao.maps.LatLng(raceLat, raceLong), //지도의 중심좌표.
-	         	   			level: 6 //지도의 레벨(확대, 축소 정도)
+	         	   			level: 4 //지도의 레벨(확대, 축소 정도)
 	         	   		};
 	      				var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴	
 	      				var linePath = [];
