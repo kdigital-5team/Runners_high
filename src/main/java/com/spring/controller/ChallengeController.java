@@ -13,6 +13,8 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.scheduling.annotation.Schedules;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -31,13 +33,16 @@ import com.spring.dto.Challenge;
 import com.spring.dto.ChallengePost;
 
 import com.spring.dto.ChallengeRegion;
+import com.spring.dto.PersonalFeed;
 import com.spring.dto.RaceAndRegion;
 import com.spring.dto.User;
 import com.spring.dto.UserChallenge;
 import com.spring.service.ChallengeService;
+import com.spring.service.FeedService;
 import com.spring.service.RaceService;
 import com.spring.service.RegionService;
 import com.spring.service.RouteService;
+import com.spring.service.UserService;
 
 @Controller
 // http://localhost:8081/regist
@@ -53,6 +58,12 @@ public class ChallengeController {
 	
 	@Autowired
 	private RaceService raceService;
+	
+	@Autowired
+	private UserService userService;
+	
+	@Autowired
+	private FeedService feedService;
 	
 	@RequestMapping(value = "/registChall", method = RequestMethod.GET)
 	public String registChall(Model model, HttpSession session, RedirectAttributes rttr) throws Exception {
@@ -510,6 +521,40 @@ public class ChallengeController {
 			model.addAttribute("parList", parList);
 			model.addAttribute("host", host);
 			return "challengeCalendar";
+		}
+		
+		// 다른 사람 피드로 이동
+		@RequestMapping(value = "/feed/{otherId}", method = RequestMethod.GET)
+		public String getAllFeeds(@PathVariable String otherId, Model model, HttpSession session) throws Exception {
+			String userId =(String) session.getAttribute("userId");
+			
+			User user = userService.getUserByUserId(otherId);
+			
+			model.addAttribute("user", user);
+			
+			List<PersonalFeed> feedList = feedService.getAllFeeds();
+			model.addAttribute("feedList", feedList);
+			
+			if(userId.equals(otherId)) {
+				return "/mypage_feed";
+			}
+			
+			else {
+				model.addAttribute("other", otherId);
+				return "otherFeed";
+			}
+		 }
+		
+		@Scheduled(cron = "0 0 0 * * *")
+		public String updateChallSit() {
+			boolean updateChallSit = challService.updateChallSit();
+			
+			if(updateChallSit) {
+				return "redirect:/main";
+			}
+			
+			else
+				return "redirect:/challenge";
 		}
 
 }

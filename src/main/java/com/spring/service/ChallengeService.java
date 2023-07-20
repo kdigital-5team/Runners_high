@@ -166,6 +166,10 @@ boolean result = false;
 	public int checkOtherChall(String applyId) {
 		return mapper.checkOtherChall(applyId);
 	}
+
+	public boolean updateChallSit() {
+		return mapper.updateChallSit();
+	}
 	
 
 
