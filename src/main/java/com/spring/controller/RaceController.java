@@ -141,7 +141,7 @@ public class RaceController {
 		
 	}
 	
-	@Scheduled(cron = "10 * * * * *")
+	@Scheduled(cron = "0 0 2 * * *")
 	public String updateRaceCon() {
 		boolean updateRaceCon = service.updateRaceCon();
 		
