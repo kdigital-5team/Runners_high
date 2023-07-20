@@ -32,7 +32,7 @@ CREATE TABLE rh_user (
     nickname        VARCHAR2(30 BYTE) NOT NULL,
     intro           VARCHAR2(300 BYTE),
     user_title      NUMBER(10),
-    user_pic        VARCHAR2(300 BYTE)
+    user_pic        VARCHAR2(300 BYTE) DEFAULT 'default_image.png'
 );
 
 ALTER TABLE rh_user ADD CONSTRAINT user_pk PRIMARY KEY ( user_id );
