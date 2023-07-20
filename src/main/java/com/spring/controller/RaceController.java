@@ -26,6 +26,7 @@ public class RaceController {
 	@Autowired
 	private RaceService service;
 	
+	
 	@RequestMapping(value = "/events", method = RequestMethod.GET)
 	public String getAllRace(Model model) {
 		List<RaceAndRegion> raceList = service.getAllRaces();

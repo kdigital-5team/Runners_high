@@ -101,38 +101,40 @@
 							</ul></li>
 						<li class="has-children">도
 							<ul class="dropdown arrow-top">
-									<li><button style="width: 100px" type="button" id="경기도" name="region_state"
+									<li><button style="width: 100px" type="button" id="서울특별시" name="region_state"
+										onclick="test(this.id, this.name)" class="option">서울특별시</button></li>
+									<li><button style="width: 100px" type="button" id="부산광역시" name="region_state"
+										onclick="test(this.id, this.name)" class="option">부산광역시</button></li>
+										<li><button style="width: 100px" type="button" id="대구광역시" name="region_state"
+										onclick="test(this.id, this.name)" class="option">대구광역시</button></li>
+										<li><button style="width: 100px" type="button" id="인천광역시" name="region_state"
+										onclick="test(this.id, this.name)" class="option">인천광역시</button></li>
+										<li><button style="width: 100px" type="button" id="광주광역시" name="region_state"
+										onclick="test(this.id, this.name)" class="option">광주광역시</button></li>
+										<li><button style="width: 100px" type="button" id="대전광역시" name="region_state"
+										onclick="test(this.id, this.name)" class="option">대전광역시</button></li>
+										<li><button style="width: 100px" type="button" id="울산광역시" name="region_state"
+										onclick="test(this.id, this.name)" class="option">울산광역시</button></li>
+										<li><button style="width: 100px" type="button" id="세종특별차치시" name="region_state"
+										onclick="test(this.id, this.name)" class="option">세종특별자치시</button></li>
+										<li><button style="width: 100px" type="button" id="경기도" name="region_state"
 										onclick="test(this.id, this.name)" class="option">경기도</button></li>
-									<li><button style="width: 100px" type="button" id="강원도" name="region_state"
+										<li><button style="width: 100px" type="button" id="강원도" name="region_state"
 										onclick="test(this.id, this.name)" class="option">강원도</button></li>
+										<li><button style="width: 100px" type="button" id="충청북도" name="region_state"
+										onclick="test(this.id, this.name)" class="option">충청북도</button></li>
+										<li><button style="width: 100px" type="button" id="충청남도" name="region_state"
+										onclick="test(this.id, this.name)" class="option">충청남도</button></li>
+										<li><button style="width: 100px" type="button" id="전라북도" name="region_state"
+										onclick="test(this.id, this.name)" class="option">전라북도</button></li>
+										<li><button style="width: 100px" type="button" id="전라남도" name="region_state"
+										onclick="test(this.id, this.name)" class="option">전라남도</button></li>
+										<li><button style="width: 100px" type="button" id="경상북도" name="region_state"
+										onclick="test(this.id, this.name)" class="option">경상북도</button></li>
 										<li><button style="width: 100px" type="button" id="경상남도" name="region_state"
-										onclick="test(this.id, this.name)" class="option">경상남ㄷ</button></li>
-										<li><button style="width: 100px" type="button" id="강원도" name="region_state"
-										onclick="test(this.id, this.name)" class="option">강원도</button></li>
-										<li><button style="width: 100px" type="button" id="강원도" name="region_state"
-										onclick="test(this.id, this.name)" class="option">강원도</button></li>
-										<li><button style="width: 100px" type="button" id="강원도" name="region_state"
-										onclick="test(this.id, this.name)" class="option">강원도</button></li>
-										<li><button style="width: 100px" type="button" id="강원도" name="region_state"
-										onclick="test(this.id, this.name)" class="option">강원도</button></li>
-										<li><button style="width: 100px" type="button" id="강원도" name="region_state"
-										onclick="test(this.id, this.name)" class="option">강원도</button></li>
-										<li><button style="width: 100px" type="button" id="강원도" name="region_state"
-										onclick="test(this.id, this.name)" class="option">강원도</button></li>
-										<li><button style="width: 100px" type="button" id="강원도" name="region_state"
-										onclick="test(this.id, this.name)" class="option">강원도</button></li>
-										<li><button style="width: 100px" type="button" id="강원도" name="region_state"
-										onclick="test(this.id, this.name)" class="option">강원도</button></li>
-										<li><button style="width: 100px" type="button" id="강원도" name="region_state"
-										onclick="test(this.id, this.name)" class="option">강원도</button></li>
-										<li><button style="width: 100px" type="button" id="강원도" name="region_state"
-										onclick="test(this.id, this.name)" class="option">강원도</button></li>
-										<li><button style="width: 100px" type="button" id="강원도" name="region_state"
-										onclick="test(this.id, this.name)" class="option">강원도</button></li>
-										<li><button style="width: 100px" type="button" id="강원도" name="region_state"
-										onclick="test(this.id, this.name)" class="option">강원도</button></li>
-										<li><button style="width: 100px" type="button" id="강원도" name="region_state"
-										onclick="test(this.id, this.name)" class="option">강원도</button></li>
+										onclick="test(this.id, this.name)" class="option">경상남도</button></li>
+										<li><button style="width: 100px" type="button" id="제주도" name="region_state"
+										onclick="test(this.id, this.name)" class="option">제주도</button></li>
 							</ul>
 						</li>
 						<li class="has-children">시/군
@@ -256,22 +258,80 @@ let keyword=null;
 		option_list.append("<li style=\"display:inline-block\" name="+ option +"><button type=\"button\" onclick=\"removeBtn(this,this.innerText)\">" + target.innerText + "</button></li>");
 		
 		var region_list =$("#region_list");
-		const gangwon = ["강릉시","동해시","삼척시","속초시","원주시","춘천시","태백시","고성군","양구군","양양군","영월군","인제군","정선군","철원군","평창군","홍천군","화천군","횡성군"];
-	  	const gyeonggi = ["고양시","과천시","광명시","광주시","구리시","군포시","김포시","남양주시","동두천시","부천시","성남시","수원시","시흥시","안산시","안성시","안양시","양주시","오산시","용인시","의왕시","의정부시","이천시","파주시","평택시","포천시","하남시","화성시","가평군","양평군","여주군","연천군"];
-	  	
+		var rList = document.getElementById("region_list");
+		const gangwon = ["강릉시","고성군","동해시","삼척시","속초시","양구군","양양군","영월군","원주시","인제군","정선군","철원군","춘천시","태백시","홍천군","화천군","횡성군"];
+	  	const gyeonggi = ["가평군","고양시","과천시","광명시","광주시","구리시","군포시","남양주시","동두천시","부천시","성남시","수원시","시흥시","안산시","안성시","안양시","양주시","양평군","여주시","연천군","오산시","용인시","의왕시","의정부시","이천시","파주시","평택시","포천시","하남시","화성시"];
+	  	const chungbuk =["괴산군","단양군","보은군","영동군","옥천군","음성군","제천시","증평군","진천군","청주시","충주시"];
+	  	const chungnam =["계룡시","공주시","금산군","논산시","당진시","보령시","부여군","서산시","서천군","아산시","예산군","천안시","청양군","태안군"];
+	  	const jeonbuk=["고창군","군산시","김제시","남원시","무주군","부안군","순창군","완주군","익산시","임실군","장수군","전주시","정읍시","진안군"];
+	  	const jeonnam=["강진군","고흥군","곡성군","광양시","구례군","나주시","담양군","목포시","무안군","보성군","순천시","신안군","여주시","영광군","영암군","완도군","장성군","장흥군","진도군","함평군","해남군","화순군"];
+	  	const gyeongbuk=["경산시","경주시","고령군","구미시","군위군","김천시","문경시","봉화군","상주시","성주군","안동시","영덕군","영양군","영주시","영천시","예천군","울릉군","울진군","의성군","청도군","청송군","포항시"];
+	  	const gyeongnam=["거제시","거창군","고성군","김해시","남해군","밀양시","사천시","산천군","양산시","의령군","진주시","창녕군","창원시","통영시","하동군","함안군","함양군","합천군"];
+	  	const jeju=["제주시","서귀포시"];
 	  	
 	  	if(button_id=="경기도"){
+	  		rList.replaceChildren();
 	  		for(i=0; i<gyeonggi.length; i++){
 	  			region_list.append("<li><button style=\"width: 100px\" type=\"button\" id=\""+gyeonggi[i]+
 	  								"\" name=\"region_city\" onclick=\"test(this.id, this.name)\" class=\"option\">"+gyeonggi[i]+"</button></li>");
 	  		}
 	  	}
 	  	
-	  if(button_id=="강원도"){
-		for(i=0; i<gangwon.length; i++){
-  			region_list.append("<li>"+ gangwon[i] +"</li>");
-  		}
-  	}
+	  	if(button_id=="강원도"){
+	  		rList.replaceChildren();
+	  		for(i=0; i<gangwon.length; i++){
+	  			region_list.append("<li><button style=\"width: 100px\" type=\"button\" id=\""+gangwon[i]+
+	  								"\" name=\"region_city\" onclick=\"test(this.id, this.name)\" class=\"option\">"+gangwon[i]+"</button></li>");
+	  		}
+	  	}
+	  	
+	  	if(button_id=="중청북도"){
+	  		rList.replaceChildren();
+	  		for(i=0; i<chungbuk.length; i++){
+	  			region_list.append("<li><button style=\"width: 100px\" type=\"button\" id=\""+chungbuk[i]+
+	  								"\" name=\"region_city\" onclick=\"test(this.id, this.name)\" class=\"option\">"+chungbuk[i]+"</button></li>");
+	  		}
+	  	}
+	  	
+	  	if(button_id=="충청남도"){
+	  		rList.replaceChildren();
+	  		for(i=0; i<chungnam.length; i++){
+	  			region_list.append("<li><button style=\"width: 100px\" type=\"button\" id=\""+chungnam[i]+
+	  								"\" name=\"region_city\" onclick=\"test(this.id, this.name)\" class=\"option\">"+chungnam[i]+"</button></li>");
+	  		}
+	  	}
+	  	
+	  	if(button_id=="전라북도"){
+	  		rList.replaceChildren();
+	  		for(i=0; i<jeonbuk.length; i++){
+	  			region_list.append("<li><button style=\"width: 100px\" type=\"button\" id=\""+jeonbuk[i]+
+	  								"\" name=\"region_city\" onclick=\"test(this.id, this.name)\" class=\"option\">"+jeonbuk[i]+"</button></li>");
+	  		}
+	  	}
+	  	
+	  	if(button_id=="경상북도"){
+	  		rList.replaceChildren();
+	  		for(i=0; i<gyeongbuk.length; i++){
+	  			region_list.append("<li><button style=\"width: 100px\" type=\"button\" id=\""+gyeongbuk[i]+
+	  								"\" name=\"region_city\" onclick=\"test(this.id, this.name)\" class=\"option\">"+gyeongbuk[i]+"</button></li>");
+	  		}
+	  	}
+	  	
+	  	if(button_id=="경상남도"){
+	  		rList.replaceChildren();
+	  		for(i=0; i<gyeongnam.length; i++){
+	  			region_list.append("<li><button style=\"width: 100px\" type=\"button\" id=\""+gyeongnam[i]+
+	  								"\" name=\"region_city\" onclick=\"test(this.id, this.name)\" class=\"option\">"+gyeongnam[i]+"</button></li>");
+	  		}
+	  	}
+	  	
+	  	if(button_id=="제주도"){
+	  		rList.replaceChildren();
+	  		for(i=0; i<jeju.length; i++){
+	  			region_list.append("<li><button style=\"width: 100px\" type=\"button\" id=\""+jeju[i]+
+	  								"\" name=\"region_city\" onclick=\"test(this.id, this.name)\" class=\"option\">"+jeju[i]+"</button></li>");
+	  		}
+	  	}
 	  
 	  
 		search();
