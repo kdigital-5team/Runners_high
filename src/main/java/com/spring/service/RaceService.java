@@ -29,6 +29,11 @@ public class RaceService {
 		return mapper.getAllRaces();
 	}
 
+	public int getRegionIdByRaceId(int raceId) {
+		return mapper.getRegionIdByRaceId(raceId);
+		
+	}
+
 
 	
 	
