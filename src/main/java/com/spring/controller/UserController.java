@@ -178,11 +178,10 @@ public class UserController {
 						// session 만료 시간 : 2주
 						session.setMaxInactiveInterval(1209600);
 						
-						 System.out.println("model 1 : " + model.getAttribute("msg"));
-						
 						return "redirect:/main";
 						
 					} else {
+						
 						model.addAttribute("msg", "아이디/비밀번호를 다시 확인해주십시오.");
 						System.out.println("model 2 : " + model.getAttribute("msg"));
 						

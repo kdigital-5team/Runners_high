@@ -77,9 +77,10 @@ public class ChallengeController {
 	// http://localhost:8081/registChall
 		@RequestMapping(value = "/registChall", method = RequestMethod.POST)
 		public String insertChallenge(@ModelAttribute Challenge newChallenge,
-								 Model model,
-								 @RequestParam String region_district,
-								 HttpSession session) throws Exception {
+									  Model model,
+									  @RequestParam String region_district,
+									  HttpSession session) throws Exception {
+			
 			String userId = (String) session.getAttribute("userId");
 			String raceId = newChallenge.getRace_id();
 			System.out.println(newChallenge);
