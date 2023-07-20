@@ -1,77 +1,38 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
+<title>Runner's High &mdash; Regist Challenge</title>
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css?family=Nunito+Sans:200,300,400,700,900|Oswald:400,700">
+
+<link rel="stylesheet" href="../static/css/form.css">
 <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+<link href="https://getbootstrap.com/docs/5.2/assets/css/docs.css"
+	rel="stylesheet">
 <link rel="stylesheet" href="../static/css/jquery.fancybox.min.css">
 <link rel="stylesheet" href="../static/css/jquery-ui.css">
 <link rel="stylesheet" href="../static/css/owl.carousel.min.css">
 <link rel="stylesheet" href="../static/css/owl.theme.default.min.css">
 <link rel="stylesheet" href="../static/css/animate.css">
 <link rel="stylesheet" href="../static/fonts/flaticon/font/flaticon.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="../static/css/aos.css">
-<link rel="stylesheet" href="../static/css/style3.css">
-    <style>
-        td {
-            width: 50px;
-            height: 50px;
-        }
 
-        .Calendar { 
-            text-align: center;
-            margin: 0 auto; 
-        }
-
-        .Calendar>thead>tr:first-child>td { font-weight: bold; }
-
-        .Calendar>thead>tr:last-child>td {
-            background-color: gray;
-            color: white;
-        }        
-
-        .pastDay{ background-color: lightgray; }
-
-        .today{            
-            background-color: #FFCA64;            
-            cursor: pointer;
-        }
-
-        .futureDay{            
-            background-color: #FFFFFF;
-            cursor: pointer;
-        }
-
-        .futureDay.choiceDay, .today.choiceDay{            
-            background-color: #3E85EF;            
-            color: #fff;
-            cursor: pointer;
-        }
-    </style>
-
-    
 </head>
 <body>
-	<div class ="container">
-        	<h1>챌린지 루트</h1>
-        	<label for="chall_route_intro">지도를 마우스로 클릭하면 선 그리기가 시작되고 오른쪽 마우스를 클릭하면 선 그리기가 종료되면서 그려진 선의 실제 거리(단위 : m)를 표시합니다.</label>
-        	<div id="map" style="width: 800px; height: 600px;"></div>
-        <div>
-        	<button type="button" class="btn btn-primary" onclick="submit2();">등록하기</button>
-    	</div>
-    </div>
-</body>
-<!-- footer -->
-<%@ include file="./inc/footer.jsp"%>
+
 	<script type="text/javascript"
-	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a9fd4644a9a496749d0625dffe4286f8&libraries=services,clusterer,drawing"></script>
+		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a9fd4644a9a496749d0625dffe4286f8&libraries=services,clusterer,drawing"></script>
 	<script src="../static/js/jquery.min.js"></script>
 	<script src="../static/js/jquery-migrate-3.0.1.min.js"></script>
 	<script src="../static/js/jquery-ui.js"></script>
@@ -82,7 +43,35 @@
 	<script src="../static/js/jquery.fancybox.min.js"></script>
 	<script src="../static/js/aos.js"></script>
 	<script src="../static/js/main.js"></script>
-<script src="https://code.jquery.com/jquery-3.4.1.js" ></script> 
+	<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+
+	<!-- header -->
+	<%@ include file="./inc/header.jsp"%>
+
+	<!-- 챌린지 등록  -->
+	<div class="site-wrap-width">
+		<div class="site-section"></div>
+		<div class="site-section">
+			<div class="container">
+				<h1>챌린지 루트</h1>
+				<label for="chall_route_intro">지도를 마우스로 클릭하면 선 그리기가 시작되고 오른쪽
+					마우스를 클릭하면 선 그리기가 종료되면서 그려진 선의 실제 거리(단위 : m)를 표시합니다.</label>
+				<div id="map" style="width: 800px; height: 600px;"></div>
+				<div>
+					<input type="submit" value="등록"/>
+					<br><br><br>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<!-- footer -->
+	<%@ include file="./inc/footer.jsp"%>
+
+</body>
+
+
 <script>
 
 var chall_path;

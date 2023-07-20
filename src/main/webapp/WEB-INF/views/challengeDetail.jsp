@@ -112,7 +112,7 @@
 					<div style="display: inline-block; width: 10%;">
 						<div onclick="location.href='/feed/${apply_user.user_id}'" 
 							style="cursor: pointer; width:100%; padding-top:100%; height:0; border-radius: 70%; 
-							background-image: url(/images/${apply_user.user_pic});
+							background-image: url(/images/${apply_user.user_pic}), url(../static/images/profileImages/default_image.png);
 							background-position:center;
 							background-size:cover;">
 						</div>

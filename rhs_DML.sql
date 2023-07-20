@@ -243,7 +243,6 @@ INSERT INTO region values(region_seq.NEXTVAL,'충청북도', '음성군', '음�
 INSERT INTO region values(region_seq.NEXTVAL,'충청북도', '단양군', '단양');
 INSERT INTO region values(region_seq.NEXTVAL,'충청북도', '증평군', '증평');
 
-
 INSERT INTO region values(region_seq.NEXTVAL,'충청남도', '천안시', '동남구');
 INSERT INTO region values(region_seq.NEXTVAL,'충청남도', '천안시', '서북구');
 INSERT INTO region values(region_seq.NEXTVAL,'충청남도', '공주시', '공주');

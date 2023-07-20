@@ -11,7 +11,7 @@ import com.spring.dto.FeedPicture;
 @Mapper
 public interface FeedPictureMapper {
 	
-	FeedPicture getFeedPictureByFileNo(int fileNo) throws SQLException;
+	FeedPicture getFeedPictureByFileName(int filename) throws SQLException;
 
 	int insertFeedPicture(FeedPicture feedpicture) throws SQLException; // int 인 이유는 갯수로 넘어오기 때문?
 
