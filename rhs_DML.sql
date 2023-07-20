@@ -114,36 +114,85 @@ INSERT INTO region VALUES (8, '충청남도', '천안시', '두정동');
 INSERT INTO race
         (race_id, region_id, race_org, race_name, race_date, race_apply, race_deadline, race_url, race_category, race_dist, race_pic)
     VALUES
-        (race_seq.NEXTVAL, 1, '(주) 스포테인', '서울오픈 런', '2023.08.26', '2023.06.19', '2023.07.31', 'http://irunman.kr/sub1_1.php?uid=79', '마라톤', 'Half, 10km, 5km', 
+        (race_seq.NEXTVAL, 1, '(주) 스포테인', '서울오픈 런', '2023.08.26', '2023.06.19', '2023.07.31', 'http://irunman.kr/sub1_1.php?uid=79', '마라톤', '하프코스, 10km, 5km', 
         'http://www.irunman.kr/admin/data/webedit/20220701132808_qxtfxhcd.jpg');
+
+INSERT INTO race
+        (race_id, region_id, race_org, race_name, race_date, race_apply, race_deadline, race_url, race_category, race_dist, race_pic)
+    VALUES
+        (race_seq.NEXTVAL, 1, '명품트레일런', '울산염포대왕트레일', '2023.07.23', '2023.05.31', '2023.07.21', 'http://www.mtrailrun.kr/run/1000.asp?T=3&wgu=1&wma=238', '마라톤', '14.8km', 
+        'http://www.mtrailrun.kr/images/top.png');
         
 INSERT INTO race
         (race_id, region_id, race_org, race_name, race_date, race_apply, race_deadline, race_url, race_category, race_dist, race_pic)
     VALUES
-        (race_seq.NEXTVAL, 4, '(사)한국산악마라톤연맹', '제4회안산.인왕산.북악산TrailRunning', '2023.07.16', '2023.01.03', '2023.07.10', 'http://koreatrail.net', '걷기', '10km', 'https://image.ytn.co.kr/general/jpg/2020/1130/202011300700017010_d.jpg');
+        (race_seq.NEXTVAL, 4, '주식회사 땀', '전설에 고향RUN', '2023.07.29', '2023.06.30', '2023.07.24', 'http://reg.runday.co.kr/marathon/2307marathon', '마라톤', '하프코스, 10km, 5km, 3km,, 7km', 'https://runday-challenge.s3.ap-northeast-2.amazonaws.com/marathon/2_7%EC%9B%94%EB%A7%88%EB%9D%BC%ED%86%A4%EB%A7%88%EB%9D%BC%ED%86%A4%EC%83%81%EC%84%B8%ED%99%94%EB%A9%B4%EC%9D%B4%EB%AF%B8%EC%A7%80_1125_540_1688028286784.png');
 
--- challenge
-INSERT INTO challenge 
-        (chall_id, chall_reg_id, region_id, race_id, chall_name, chall_intro, chall_start_date, chall_end_date, chall_all_auth, chall_week_auth,
-        chall_category, chall_sit, chall_auth, chall_online, chall_size, chall_pic) 
-    VALUES 
-        (challenge_req.NEXTVAL, 'fexis1594@gmail.com', 1, 1, '마라톤 챌린지', '실제로 42.195km를 주 1회 달립니다!', '20230701', '20230725', 4, 1, '대회용', '모집중', 40, '온라인', 
-        5, 'https://image.ytn.co.kr/general/jpg/2020/1130/202011300700017010_d.jpg');
+INSERT INTO race
+        (race_id, region_id, race_org, race_name, race_date, race_apply, race_deadline, race_url, race_category, race_dist, race_pic)
+    VALUES
+        (race_seq.NEXTVAL, 1, '명품트레일런', '밀양아리랑 트레일런', '2023.08.06', '2023.05.31', '2023.07.31', 'http://www.mtrailrun.kr/run/1000.asp?T=3&wgu=1&wma=239', '마라톤', '15km', 
+        'http://www.mtrailrun.kr/images/top.png');
+        
+INSERT INTO race
+        (race_id, region_id, race_org, race_name, race_date, race_apply, race_deadline, race_url, race_category, race_dist, race_pic)
+    VALUES
+        (race_seq.NEXTVAL, 1, '부울경트레일런', '영얄8봉종주60k', '2023.08.12', '2023.04.24', '2023.07.05', 'https://cafe.naver.com/buktr/148', '마라톤', '산악60km', 
+        'https://cafeskthumb-phinf.pstatic.net/MjAyMzA3MDNfMTM3/MDAxNjg4MzUxMjk0MDg3.qEe49YzDkg5VG0hkxRbkVJkVeq4ypSUXki9AGxb_NWQg.jmPoilLJAufqCIl-usLjEm2pPag6v1Jz9eV33YPXQ10g.JPEG/KakaoTalk_20230627_104101334.jpg?type=w1080');
 
-CREATE OR REPLACE PROCEDURE UPDATE_CON
-IS
-BEGIN
+INSERT INTO race
+        (race_id, region_id, race_org, race_name, race_date, race_apply, race_deadline, race_url, race_category, race_dist, race_pic)
+    VALUES
+        (race_seq.NEXTVAL, 1, '매일경제TV', '한 여름밤의 쿨 2023 썸머나이트 런', '2023.08.12', '2023.04.27', '2023.07.28', 'http://night.run1080.com/', '마라톤', '10km, 5km', 
+        'http://night.run1080.com/images/main/main_bann.jpg');
+
+INSERT INTO race
+        (race_id, region_id, race_org, race_name, race_date, race_apply, race_deadline, race_url, race_category, race_dist, race_pic)
+    VALUES
+        (race_seq.NEXTVAL, 1, '(사)한국산악마라톤연맹', '제32회 광복78주년화대종주CLIMBATHON', '2023.08.13', '2023.01.19', '2023.07.31', 'http://koreatrail.net/', '마라톤', '48km, 40km', 
+        'http://koreatrail.net/home/tBoard_PHOTO/img/a20230606105241.jpg');
+
+INSERT INTO race
+        (race_id, region_id, race_org, race_name, race_date, race_apply, race_deadline, race_url, race_category, race_dist, race_pic)
+    VALUES
+        (race_seq.NEXTVAL, 1, '광주일보, 마라톤세상', '제8회 너릿재 혹서기 마라톤대회', '2023.08.13', '2023.06.12', '2023.08.03', 'http://marathonworld.kr/', '마라톤', '8.5km, 17km', 
+        'http://marathonworld.kr/images/2023.png');
+        
+INSERT INTO race
+        (race_id, region_id, race_org, race_name, race_date, race_apply, race_deadline, race_url, race_category, race_dist, race_pic)
+    VALUES
+        (race_seq.NEXTVAL, 1, '네버스탑협동조합', '제19회부산썸머비치울트라마라톤대회', '2023.08.19', '2023.05.01', '2023.07.21', 'http://bbu100.com/', '마라톤', '100km, 50km', 
+        'http://bbu100.com/images/main/main_visual_01.jpg');
+
+INSERT INTO race
+        (race_id, region_id, race_org, race_name, race_date, race_apply, race_deadline, race_url, race_category, race_dist, race_pic)
+    VALUES
+        (race_seq.NEXTVAL, 1, '명품트레일', '포항호미반도트레일', '2023.08.20', '2023.06.10', '2023.08.18', 'http://mtrailrun.kr/run/1000.asp?T=3&wgu=1&wma=240', '마라톤', '27km', 
+        'http://www.mtrailrun.kr/images/top.png');
+        
+INSERT INTO race
+        (race_id, region_id, race_org, race_name, race_date, race_apply, race_deadline, race_url, race_category, race_dist, race_pic)
+    VALUES
+        (race_seq.NEXTVAL, 1, '전국마라톤협회', '제12회 부여 굿뜨래 마라톤대회', '2023.08.27', '2023.04.03', '2023.08.16', 'http://www.run1080.com/new/mini/index.php?code=1372', '마라톤', '풀코스, 하프코스, 10km, 5km', 
+        'http://www.run1080.com/uploadFolder/img_games/title_img_1372.jpg');
+
+INSERT INTO race
+        (race_id, region_id, race_org, race_name, race_date, race_apply, race_deadline, race_url, race_category, race_dist, race_pic)
+    VALUES
+        (race_seq.NEXTVAL, 1, '순천만울트라조직위', '제15회순천만울트라마라톤대회', '2023.09.02', '2023.07.01', '2023.08.18', 'http://www.scultra100.net/pages/about2.php', '마라톤', '100km', 
+        'http://www.scultra100.net/theme/scultra/img/main_info.jpg');
+        
+INSERT INTO race
+        (race_id, region_id, race_org, race_name, race_date, race_apply, race_deadline, race_url, race_category, race_dist, race_pic)
+    VALUES
+        (race_seq.NEXTVAL, 1, '(주)스포테인', '	가든파이브 라이프 나이트레이스', '2023.09.09', '2023.07.10', '2023.08.25', 'http://irunman.kr/sub1_1.php?uid=81', '마라톤', '하프, 10km, 5km', 
+        'http://irunman.kr/admin/data/main/main_294');
+        
     UPDATE RACE SET race_con =
                     case
                         when SYSDATE<race_apply THEN '접수예정'
                         when SYSDATE>race_deadline THEN '접수마감'
                         ELSE '접수중'
-                        END;
-END UPDATE_CON;
-/
-EXEC UPDATE_CON;
-
-
-
-        
+                        END;   
+set define off;
 commit;
