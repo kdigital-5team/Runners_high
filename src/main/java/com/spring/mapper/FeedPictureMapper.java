@@ -1,6 +1,7 @@
 package com.spring.mapper;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.web.multipart.MultipartFile;
@@ -14,6 +15,6 @@ public interface FeedPictureMapper {
 
 	int insertFeedPicture(FeedPicture feedpicture) throws SQLException; // int 인 이유는 갯수로 넘어오기 때문?
 
-	FeedPicture getFeedPictureByfeedid(int feed_id);
+	public List<FeedPicture> getAllFeedPicture();
 	
 }

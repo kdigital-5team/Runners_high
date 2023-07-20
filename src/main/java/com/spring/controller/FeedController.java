@@ -40,49 +40,75 @@ public class FeedController {
 	
 	// 전체 피드 리스트
 	@RequestMapping(value = "/mypage/feed", method = RequestMethod.GET)
-		 public String getAllFeeds(Model model) {
-			 List<PersonalFeed> feedList = feedservice.getAllFeeds();
-			 model.addAttribute("feedList", feedList);
-			 return "mypage_feed";
-		 }
+	public String getAllFeeds(HttpServletRequest request, Model model) throws Exception {
+		HttpSession session = request.getSession(false);
+		System.out.println("접속 계정 : " + session.getAttribute("userId"));
+		
+		User user = service.getUserByUserId(session.getAttribute("userId").toString());
+		
+		model.addAttribute("user", user);
+		
+		if (session == null || !request.isRequestedSessionIdValid()) {
+			model.addAttribute("msg", "로그인 후 이용 가능한 서비스입니다.");
+			return "login";
+		}
+		
+		List<PersonalFeed> feedList = feedservice.getAllFeeds();
+		model.addAttribute("feedList", feedList);
+		
+		return "mypage_feed";
+	 }
 	
 	// 피드 작성 get
 	 @RequestMapping(value = "/mypage/write", method = RequestMethod.GET)
-	 public String getWrite() throws Exception {
-	  logger.info("get feed write");
-	  return "mypage_feed_write";
+	 public String getWrite(HttpServletRequest request, Model model) throws Exception {
+		 HttpSession session = request.getSession(false);
+		 
+		 User user = service.getUserByUserId(session.getAttribute("userId").toString());
+			
+		 model.addAttribute("user", user);
+		 
+		 logger.info("get feed write");
+		 return "mypage_feed_write";
 	 }
 	
 	// 피드 작성 post
 	 @RequestMapping(value = "/mypage/write", method = RequestMethod.POST)
-	 public String feedWrite(@ModelAttribute PersonalFeed pf,
+	 public String insertFeed(@ModelAttribute PersonalFeed pf,
 			 					@RequestParam("file") MultipartFile file,
-			 					Model model, HttpSession session) throws Exception {
-	  logger.info("feed write");
-	  
-	  String view = "error";
-	  
-	  boolean feedResult = false;
-	  boolean fileResult = false;
-	  
-	  try {
-		  feedResult = feedservice.insertFeed(pf);
+			 					Model model, HttpSession session) throws Exception {	
+		 
+		 User user = service.getUserByUserId(session.getAttribute("userId").toString());
+			
+		 model.addAttribute("user", user);
+		 
+		 logger.info("feed write");
 		  
-		  int pfeed = pf.getFeed_id();
+		 String view = "error";
+		 
+		 boolean feedResult = false;
+		  boolean fileResult = false;
 		  
-		  fileResult = pictureservice.insertFeedPicture(file, pfeed);
+		  try {
+			  feedResult = feedservice.insertFeed(pf);
+			  
+			  int pfeed = pf.getFeed_id();
+			  
+			  fileResult = pictureservice.insertFeedPicture(file, pfeed);
+			  
+			  if(feedResult && fileResult) {
+				  model.addAttribute("user", user);
+				  
+				  session.setAttribute("pfeed", pfeed);
+				  view = "redirect:/main";
+				  return view;
+			  }
+		  } catch (Exception e) {
+			e.printStackTrace();
+			return view;
+		  	}	  
 		  
-		  if(feedResult && fileResult) {
-			  session.setAttribute("pfeed", pfeed);
-			  view = "redirect:/main";
-			  return view;
-		  }
-	  } catch (Exception e) {
-		e.printStackTrace();
-		return view;
-	  	}	  
-	  
-	  return view;
+		  return view;		  
 	} 	
 	 
 }

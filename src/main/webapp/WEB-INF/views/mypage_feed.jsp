@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -42,12 +43,13 @@
 						<div class="display-flex">
 							<div class="post" style="border:none; margin-top:10%; margin-left:35%">
 								<div class="post-header2">
-									<img src="/static/images/test.jpg" alt="Profile Picture">									
+									<img src="/images/${user.user_pic}" alt="Profile Picture">									
 								</div>
 							</div>
 							<form action="/mypage/feed" enctype="multipart/form-data" method="POST">					
 								<div class="post" style="border:none; margin-top:60%;">
-									<div class="username">${feedList[0].user_id}</div>
+									<div class="username">${user.user_id}</div>
+									<div class="userIntro">${user.intro}</div>
 								</div>
 							</form>	
 							<div onclick="location.href='/mypage/edit'" style="border:none; margin-top:14%; margin-left:2%; margin-right:15%">
@@ -62,7 +64,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12">
-					<div class="hero-wrap text-center" style=""
+					<div class="hero-wrap text-center" 
 						data-stellar-background-ratio="0.5">
 						<div class="hero-contents">
 							<p>
@@ -85,74 +87,95 @@
 				
 				<div class="row">
 					<c:forEach items="${feedList}" var="feed" varStatus="vs">
-						
+						<c:if test="${userId eq feed.user_id}">
 							<div class="col-6 col-sm-6 col-md-4 col-lg-3" style="margin-bottom:30px">
 								<div class="img-wrapper">
-									<a id="layer_button" target="_self" role=button><img
-										src="../static/images/test.jpg" alt="Image" class="img-block"></a>
+									<a href="#" data-toggle="modal" data-target="#myModal2${vs.index}" ><img
+										src="/static/images/test.jpg" alt="Image" class="img-block">${feed.feed_title}</a>
 								</div>
 							</div>
-							 <div class="layer" id="layer">
-								<div class="layer_content">
-									<div class="post">
-										<div class="post-header">
-											<img src="/static/images/test.jpg" alt="Profile Picture">
-											<div class="username">${feed.user_id}</div>
-										</div>
-										<hr>
-										<div class="display-flex">
-											<img class="post-image" src="../static/images/test.jpg"
+						</c:if>							 
+ 						<div class="modal fade" id="myModal2${vs.index}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+						  <div class="modal-dialog modal-lg">
+						    <div class="modal-content">
+						      <div class="modal-header">
+						        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						        						        
+						      </div>
+						      <div class="modal-body">
+						        <div class="display-flex">
+											<img class="post-image" src="../images/test.jpg"
 												alt="Post Image">
+								</div>
+						        <hr>
+								
+						        <!-- 피드 제목 -->
+								<div class="post-description" style="font-size:20px;">
+									${feed.feed_title}
+								</div>
+								
+								<!-- 피드 내용 -->
+								<div class="post-description">
+									${feed.feed_cont}
+								</div>
+						        
+						      </div>
+						      
+						      <div class="modal-footer">
+						        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						       
+						      </div>
+						    </div>
+						  </div>
+						</div>
+						
+					<%-- <div class="layer" id="layer_${vs.index }">
+							<div class="layer_content">
+								<div class="post">
+									<div class="post-header">
+										<img src="/static/images/test.jpg" alt="Profile Picture">
+										<div class="username">${userId}</div>
+									</div>
+									<hr>
+									<div class="display-flex">
+										<img class="post-image" src="/images/${feed_picture.feed_pic_title}"
+											alt="Post Image">
+									</div>
+									<hr>
+									<div class="display-flex">
+										<div class="left-likes">
+											<button>Like</button>
 										</div>
-										<hr>
-										<div class="display-flex">
-											<div class="left-likes">
-												<button>Like</button>
-											</div>
-											<div class="left-likes-num">42</div>
-											<div class="right-edit">
-												<button>수정</button>
-											</div>
-											<div class="right-delete">
-												<button>삭제</button>
-											</div>
+										<div class="left-likes-num">42</div>
+										<div class="right-edit">
+											<button>수정</button>
 										</div>
-										<!-- 피드 제목 -->
-										<div class="post-description" style="font-size:20px;">
-											${feed.feed_title}
+										<div class="right-delete">
+											<button>삭제</button>
 										</div>
-										
-										<!-- 피드 내용 -->
-										<div class="post-description">
-											${feed.feed_cont}
-										</div>
+									</div>
+									<!-- 피드 제목 -->
+									<div class="post-description" style="font-size:20px;">
+										${feed.feed_title}
+									</div>
+									
+									<!-- 피드 내용 -->
+									<div class="post-description">
+										${feed.feed_cont}
 									</div>
 								</div>
 							</div>
-
+						</div>--%>
+						
 					</c:forEach>
 				</div>
 				
 			</div>
 		</div>
 	</div>
+	
 	<!-- 피드 상세보기 레이어 팝업 js문 -->
-	<script>
-            const layer_button = document.getElementById("layer_button");
-            const layer = document.getElementById("layer");
-            const layer_content = document.getElementById("layer_content");
-
-            layer_button.addEventListener("click", function(e) {
-                layer.style.display = "flex";
-            });            
-            
-            layer.addEventListener("click", e => {
-                const evTarget = e.target
-                if(evTarget.classList.contains("layer")) {
-                    layer.style.display = "none"
-                }
-            });
-  </script>
+	
 
 	<!-- footer -->
 	<%@ include file="./inc/footer.jsp"%>
