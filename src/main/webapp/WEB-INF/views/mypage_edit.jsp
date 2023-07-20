@@ -41,13 +41,12 @@
 	<%@ include file="./inc/header.jsp"%>
 
 	<!-- 피드 정보 수정 -->
-	<div class="site-wrap">
+	<div class="site-wrap-width">
 		<div class="site-section"></div>
 		<div class="site-section">
 			<div class="container">
 				<form action="/mypage/edit" enctype="multipart/form-data" method="POST" id="mypageEdit">
 					<input type="hidden" name="_method" value="PUT" />
-					<div>
 						<div class="context-form">
 							<h2 class="form-h2">프로필 수정</h2>
 							<label> 아이디 </label><br> 
@@ -100,12 +99,10 @@
 							<label> 비밀번호 확인 답변 </label><br> 
 							<input type="text" name="userPwA" placeholder="${user.pw_quest_answer}">
 						</div>
-					</div>
-
 					<p align="center">
 							<input type="submit" value="저장" />
 					</p>
-					<br> <br>
+					<br><br>
 				</form>
 			</div>
 		</div>
@@ -115,6 +112,8 @@
 	<!-- footer -->
 	<%@ include file="./inc/footer.jsp"%>
 
+
+</body>
 	<!-- 프로필 사진 수정 -->
 	<script type="text/javascript">
 		function onClickUpload(){
@@ -253,7 +252,7 @@ $(function() {
 		    if (user_pw === '') {
 		      $("label[for='user_pw']").text("");
 		    } else if (!getPwCheck.test(user_pw)) {
-		      $("label[for='user_pw']").text("비밀번호는 영어/숫자, 특수기호 조합으로 4~20자 이하만 가능합니다.");
+		      $("label[for='user_pw']").text("비밀번호는 특수문자를 포함한 4~20자 이하의 영어/숫자만 가능합니다.");
 	          $("label[for='user_pw']").css("color", "#e35c5c");
 		    } else {
 		      $("label[for='user_pw']").text("");
@@ -268,7 +267,7 @@ $(function() {
 			
 		    if (user_pw === user_pw_check) {
 		      $("label[for='user_pw_check']").text("비밀번호가 일치합니다.");
-		      $("label[for='user_pw_check']").css("color", "");
+		      $("label[for='user_pw_check']").css("color", "898989");
 		      pw_chk = true;
 		    } else if (user_pw === '' || user_pw_check === '') {
 		      $("label[for='user_pw_check']").text("");
@@ -284,7 +283,7 @@ $(function() {
 		var nickname = document.getElementById('nickname').value; 
 		
 		if (!getNickNameCheck.test($(event.target).val())) {
-			$("label[for='nickname_check']").text("닉네임은 한글, 영어, 숫자 조합 2글자 이상 10글자 이하만 가능합니다.");
+			$("label[for='nickname_check']").text("닉네임은 2~10자 이하의 한글/영어/숫자만 가능합니다.");
 			$("label[for='nickname_check']").css("color", "#e35c5c");
 			nickname_chk = false;
 			return false;
@@ -303,7 +302,7 @@ $(function() {
 						nickname_chk = false;
 					} else {
 						$("label[for='nickname_check']").text("사용 가능한 닉네임입니다.");
-						$("label[for='nickname_check']").css("color", "");
+						$("label[for='nickname_check']").css("color", "898989");
 						nickname_chk = true;
 					}
 				}
@@ -360,11 +359,10 @@ $('#mypageEdit').on("submit", function () {
 	            window.location.href = "/test";
 	        },
 	        error: function(error) {
-	            alert("프로필 수정에 실패했습니다. 양식에 맞춰 작성해주십시오.");
+	            alert("프로필 수정 정보를 다시 확인해주시기 바랍니다.");
 	            location.href="/mypage/edit";
 	        }
 	    });
 })
 </script>
-</body>
 </html>
