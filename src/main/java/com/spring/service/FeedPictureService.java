@@ -68,13 +68,9 @@ public class FeedPictureService {
 		return result;
 	}
 
-	public FeedPicture getFeedPictureByfeedid(int feed_id) {
+	public List<FeedPicture> getAllFeedPicture() {
 		
-		FeedPicture feedpicture = null;
-		
-		feedpicture = feedpicturemapper.getFeedPictureByfeedid(feed_id);
-		
-		return feedpicture;
+		return feedpicturemapper.getAllFeedPicture();
 	}	
 	
 }

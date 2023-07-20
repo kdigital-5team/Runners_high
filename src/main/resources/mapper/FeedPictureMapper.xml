@@ -41,16 +41,14 @@
 
  	</resultMap>
  	
- 	<select id="getFeedPictureFileByFileNo" parameterType="_int" resultMap="feedpicture">
+ 	<select id="getAllFeedPicture" parameterType="_int" resultMap="feedpicture">
  		SELECT 	feed_pic_id,
  				feed_id,
  				feed_pic_date,
  				feed_pic_title,
  				feed_pic_path,
  				feed_pic_uuid	
- 		FROM feed_picture 
- 		WHERE feed_pic_id = #{fileNo}
- 		
+ 		FROM feed_picture  		
  	</select>	
  	
  </mapper>

@@ -48,7 +48,7 @@
 						<div class="display-flex">
 							<div class="post" style="border:none; margin-top:10%; margin-left:35%">
 								<div class="post-header2">
-									<img src="/static/images/test.jpg" alt="Profile Picture">									
+									<img src="/images/${user.user_pic}" alt="Profile Picture">									
 								</div>
 							</div>
 							<form action="/mypage/feed" enctype="multipart/form-data" method="POST">					
@@ -92,7 +92,7 @@
 						<div style="display:table-cell; margin:auto; margin-top:5px;">		                	
 		                	<input class="form-control" type="text" name="feed_title" style="width:600px; display:block;">
 	                	</div>
-	                	<button type="submit" class="btn btn-default" name ="user_id" value= ${user.user_id}  style="margin-left:205px; margin-right:10px; margin-top:5px;">
+	                	<button type="submit" class="blue_outline_btn" name ="user_id" value= ${user.user_id}  style="border; margin-left:205px; margin-right:20px; margin-top:5px;">
 	                		등록
 	                	</button>
 					</div>
