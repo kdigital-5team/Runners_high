@@ -25,8 +25,8 @@ public class FeedPictureService {
 	@Autowired
 	FeedPictureMapper feedpicturemapper;
 	
-	public FeedPicture getFeedPictureByFileNo(int fileNo) throws Exception { 
-		FeedPicture feedpicture = feedpicturemapper.getFeedPictureByFileNo(fileNo);
+	public FeedPicture getFeedPictureByFileName(int filename) throws Exception { 
+		FeedPicture feedpicture = feedpicturemapper.getFeedPictureByFileName(filename);
 		
 		if(feedpicture == null) {
 			throw new Exception("존재하지 않는 파일");
@@ -42,7 +42,7 @@ public class FeedPictureService {
 			throw new Exception("파일 전달 오류 발생");
 		}
 		
-		String feed_pic_path = "C:/images/";
+		String feed_pic_path = "C:\\images\\";
 		String feed_pic_title = file.getOriginalFilename();
 		UUID uuid = UUID.randomUUID();
 		String feed_pic_uuid = uuid.toString();

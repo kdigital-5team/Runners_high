@@ -87,7 +87,7 @@ public class FeedController {
 		 String view = "error";
 		 
 		 boolean feedResult = false;
-		  boolean fileResult = false;
+		 boolean fileResult = false;
 		  
 		  try {
 			  feedResult = feedservice.insertFeed(pf);
@@ -100,7 +100,7 @@ public class FeedController {
 				  model.addAttribute("user", user);
 				  
 				  session.setAttribute("pfeed", pfeed);
-				  view = "redirect:/main";
+				  view = "redirect:/mypage/feed";
 				  return view;
 			  }
 		  } catch (Exception e) {
@@ -108,7 +108,7 @@ public class FeedController {
 			return view;
 		  	}	  
 		  
-		  return view;		  
-	} 	
+		  return view;
+	} 
 	 
 }
