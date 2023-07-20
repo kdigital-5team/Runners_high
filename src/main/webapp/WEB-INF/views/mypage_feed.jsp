@@ -50,7 +50,7 @@
 									<div class="username">${feedList[0].user_id}</div>
 								</div>
 							</form>	
-							<div onclick="location.href='#'" style="border:none; margin-top:14%; margin-left:2%; margin-right:15%">
+							<div onclick="location.href='/mypage/edit'" style="border:none; margin-top:14%; margin-left:2%; margin-right:15%">
 								<button>프로필 수정</button>
 							</div>
 						</div>
@@ -70,7 +70,7 @@
 								<a href="/mypage/chall">참여 챌린지</a> <span class="mx-2">|</span> <a
 									href="/mypage/title">칭호</a> <span class="mx-2"></span>
 								<button style="float: right; margin-left:-10%">
-									<a href="#" onclick="location.href='/mypage/write'">추가</a>
+									<a onclick="location.href='/mypage/write'">추가</a>
 								</button>
 							</p>
 						</div>

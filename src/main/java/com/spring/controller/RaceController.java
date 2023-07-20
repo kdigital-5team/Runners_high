@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.spring.dto.Race;
@@ -24,14 +25,14 @@ public class RaceController {
 	@Autowired
 	private RaceService service;
 	
-	@GetMapping("/events")
+	@RequestMapping(value = "/events", method = RequestMethod.GET)
 	public String getAllRace(Model model) {
 		List<RaceAndRegion> raceList = service.getAllRaces();
 		model.addAttribute("raceList", raceList);
 		return "events";
 	}
 	
-	@RequestMapping("/events/filter")
+	@RequestMapping(value = "/events/filter", method = RequestMethod.GET)
 	public String raceListbyOption(@RequestParam(value="opt[]", required=false) List<String> opt, @RequestParam(value="val[]", required=false) List<String> val, @RequestParam(value="keyword") String keyword, Model model) {
 		List<RaceAndRegion> raceList = null;
 		if(opt==null && (keyword==null||keyword=="")) {
@@ -85,7 +86,7 @@ public class RaceController {
 		
 	}
 	
-	@RequestMapping("/events/filter2")
+	@RequestMapping(value = "/events/filter2", method = RequestMethod.GET)
 	public String raceListbyOption2(@RequestParam(value="opt[]", required=false) List<String> opt, @RequestParam(value="val[]", required=false) List<String> val, @RequestParam(value="keyword") String keyword, Model model) {
 		List<RaceAndRegion> raceList = null;
 		if(opt==null && (keyword==null||keyword=="")) {

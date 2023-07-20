@@ -35,13 +35,13 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12">
-					<div class="hero-wrap text-center"
-						style="background-repeat: no-repeat; background-image: url(${challenge.chall_pic}); background-size:cover;"
-						data-stellar-background-ratio="0.5"></div>
-				</div>
+						<div id="map" style="width: 80%; padding-top:35%; height:0; border-radius: 5px; margin:auto; 
+										background-position:center;
+										background-size:cover;">
+						</div>
 			</div>
 		</div>
-		<div class="hero-contents">
+		<div class="hero-contents" style="margin-top: 20px;">
 			<div style="float:left; width: 33%; text-align: center;">
 				<h2>${challenge.chall_name}</h2>
 				<p>
@@ -51,17 +51,35 @@
 			</div>
 			<div style="float: left; width: 33%">
 				<span>${challenge.chall_sit}</span>
+				<c:if test="${userId ne challenge.chall_reg_id 
+								&& userChall.user_reg_status ne 'Y' 
+								&& userChall.user_deny_num lt 2 
+								&& challenge.chall_sit eq '모집중'
+								&& fn:length(userList) lt challenge.chall_size }">
+					<form action="/challenge/${challenge.chall_id}/apply" method="post">
+						<input type="hidden" name="applyId" value="${userId}">
+						<input type="submit" class="btn btn-primary" value="신청">
+					</form>
+				</c:if>
+				<c:if test="${userId ne challenge.chall_reg_id && userChall.user_reg_status eq 'Y'}">
+					<form action="/challenge/${challenge.chall_id}/withdraw" method="post">
+						<input type="hidden" name="applyId" value="${userId}">
+						<input type="submit" class="btn btn-danger" value="탈퇴">
+					</form>
+				</c:if>
 			</div>
 			<div style="float: left; width: 34%;">
-				<div style="float: left; width:30%; padding-top:30%; height:0; border-radius: 70%; 
-					background-image: url(${challenge.chall_pic});
-					background-position:center;
-					background-size:cover;">
+				<div style="width:30%; padding-top:30%; height:0; border-radius: 70%; float:left; 
+						background-image: url(/images/${host.user_pic});
+						background-position:center;
+						background-size:cover;">
 				</div>
 				<div style="float: right; width: 65%;  vertical-align: middle;">
 					<div>챌린지 호스트</div>
+					<div id="chall_id" style="display: none;">${challenge.chall_id}</div>
 					<div>${host.user_title }</div>
 					<div>${host.nickname }</div>
+					<div>${host.intro }</div>
 				</div>
 			</div>
 		</div>
@@ -74,7 +92,7 @@
 			<c:if test="${challenge.chall_sit eq '모집종료' }">
 				<a href="${chall_id}challengePost">인증 게시판</a><span class="mx-2">|</span>
 			</c:if>
-			<a href="mypage_title">캘린더</a>
+			<a href="/challenge/${challenge.chall_id}calendar">캘린더</a>
 		</div>
 		<div style="float: left; width: 32%; margin-top: 10px">
 			<c:if test="${challenge.chall_sit ne '모집종료'}">
@@ -84,8 +102,8 @@
 				<button class="btn btn-danger" onclick="deleteChall('${challenge.chall_id}')" style="display: inline-block;">삭제</button>
 			</c:if>
 		</div>
-		<div style="width: 50%; margin: auto;">
-		<span class="mx-2">신청자</span>
+		<div style="width: 50%; margin: auto; clear: both;">
+		<c:if test="${not empty applist}"> <span class="mx-2">신청자</span></c:if>
 		<c:forEach items="${appList}" var="app">
 			<div style="background-color: #F0F0F0; vertical-align: center;">
 				<div style="display:inline-block; width:20%; padding-top:20%; height:0; border-radius: 70%;  
@@ -105,16 +123,18 @@
 			</div>
 		</c:forEach>
 		</div>
-		<div style="width: 50%; margin: auto;">
+		<div style="width: 70%; margin: auto;">
 			<span>맴버별 인증율</span>
 		<c:forEach items="${parList}" var="par">
 			<div>
 				<div style="width: 15%; float: left; height: 150px;">
+						<c:if test="${par.user_id ne host.user_id}">
 						<button class="btn btn-danger" style="margin: auto; margin-top: 50%; display: block;" onclick="kickId('${par.user_id}','${challenge.chall_id}')">추방</button>
+						</c:if>
 					</div>
 				<div style="width: 15%; float: left; height: 150px;">
 					<div style="width:100%; padding-top:100%; height:0; border-radius: 70%;  
-							background-image: url(../static/images/profileImages/default_image.png);
+							background-image: url(/images/${par.user_pic});
 							background-position:center;
 							background-size:cover;">
 					</div>
@@ -135,13 +155,15 @@
 		<div>
 			
 		</div>
-
-		
+	</div>
+	</div>
 	</div>
 
 	<!-- footer -->
 	<%@ include file="./inc/footer.jsp"%>
 
+	<script type="text/javascript"
+	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a9fd4644a9a496749d0625dffe4286f8&libraries=services,clusterer,drawing"></script>
 	<script src="../js/jquery.min.js"></script>
 	<script src="../js/jquery-migrate-3.0.1.min.js"></script>
 	<script src="../js/jquery-ui.js"></script>
@@ -157,6 +179,72 @@
 
 </body>
 <script type="text/javascript">
+$(document).ready(function (){
+	navigator.geolocation.getCurrentPosition(success, fail);
+	
+	function success(pos) { // 위치 정보를 가져오는데 성공했을 때 호출되는 콜백 함수 (pos : 위치 정보 객체)
+   	    const lat = pos.coords.latitude;
+   		const lng = pos.coords.longitude;
+	 	var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
+
+	 	var chall_id = document.getElementById('chall_id').innerText;
+	 	console.log(chall_id);
+	   	$.ajax({
+	        async : true, 
+	        type : 'POST', 
+	        data: JSON.stringify({chall_id}),
+	        url: "/getLatLongById",
+	        dataType: "text",
+	        contentType: "application/json; charset=UTF-8",
+	        success: function(data) {  
+	        if(data){
+	        		var raceLat=JSON.parse(data).item[0].route_lat;
+	        		var raceLong=JSON.parse(data).item[0].route_long;
+	        		console.log(raceLat);
+	        		console.log(raceLong);
+      			 var options = { //지도를 생성할 때 필요한 기본 옵션
+         	   			center: new kakao.maps.LatLng(raceLat, raceLong), //지도의 중심좌표.
+         	   			level: 6 //지도의 레벨(확대, 축소 정도)
+         	   		};
+      				var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴	
+      				var linePath = [];
+	        
+	        	for (var itemLength=0; itemLength<JSON.parse(data).item.length; itemLength++){
+	        		linePath.push(new kakao.maps.LatLng(JSON.parse(data).item[itemLength].route_lat, JSON.parse(data).item[itemLength].route_long));
+	        	}
+	        		// 지도에 표시할 선을 생성합니다
+	        		var polyline = new kakao.maps.Polyline({
+	        		    path: linePath, // 선을 구성하는 좌표배열 입니다
+	        		    strokeWeight: 5, // 선의 두께 입니다
+	        		    strokeColor: '#ff0000', // 선의 색깔입니다
+	        		    strokeOpacity: 0.7, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
+	        		    strokeStyle: 'solid' // 선의 스타일입니다
+	        		});
+
+	        		// 지도에 선을 표시합니다 
+	        		polyline.setMap(map);  
+	 
+	        	
+	        	} else {
+	        		
+	        	}
+	      	},
+	      	error: function(error) {
+	      		
+	          } 
+	        })
+	        
+		
+		
+	 	
+   		
+   		
+
+	}
+	function fail(err) { // 위치 정보를 가져오는데 실패했을 때 호출되는 콜백 함수
+	    alert('현위치를 찾을 수 없습니다.');
+	}
+});
 	function acceptId(user_id, chall_id){
 		var new_form = document.createElement('form');
 		
