@@ -40,13 +40,17 @@
 
 	<!-- header -->
 	<%@ include file="./inc/header.jsp"%>
+<<<<<<< Updated upstream:src/main/webapp/WEB-INF/views/regist_chall.jsp
 
 
 	<!-- 챌린지 등록  -->
+=======
+>>>>>>> Stashed changes:src/main/webapp/WEB-INF/views/registChall.jsp
 	<div class="site-wrap-width">
 		<div class="site-section"></div>
 		<div class="site-section">
 			<div class="container">
+<<<<<<< Updated upstream:src/main/webapp/WEB-INF/views/regist_chall.jsp
 				<form name="regist_form" id="regist_form" method="post" action="/registChall">
 						<div class="context-form">
 							<h2 class="form-h2">챌린지 등록</h2>
@@ -169,6 +173,125 @@
 </body>
 
 <script type="text/javascript">
+=======
+<form name= "regist_form" id="regist_form" method="post" action="/registChall">
+    <div class="container">
+        <h1>챌린지 등록</h1>
+        <div class="form-group">
+            <label for="inputChall">챌린지명</label>
+            <input type="text" class="form-control" id="chall_name" name="chall_name" placeholder="챌린지명">
+            <label for="challName_check"></label>
+        </div>
+        <div class="form-group">
+            <label for="inputIntro">설명</label>
+            <input type="text" class="form-control" id="chall_intro" name="chall_intro" placeholder="챌린지 설명">
+             <label for="chall_intro"></label>
+        </div>
+        <div class="form-group">
+            <label for="inputDate">기간</label>
+            <label><input type="text" class="form-control" id="chall_start_date" name="chall_start_date" value=""  readonly></label>
+            <label><input type="text" class="form-control" id="chall_end_date" name="chall_end_date"value="" readonly></label>
+        	<table class="Calendar">
+        	<thead>
+           		<tr>
+               	 <td onClick="prevCalendar();" style="cursor:pointer;">&#60;</td>
+                	<td colspan="5">
+                    	<span id="calYear"></span>년
+                    	<span id="calMonth"></span>월
+                	</td>
+                <td onClick="nextCalendar();" style="cursor:pointer;">&#62;</td>
+            	</tr>
+            	<tr>
+                	<td>일</td>
+                	<td>월</td>
+                	<td>화</td>
+                	<td>수</td>
+                	<td>목</td>
+                	<td>금</td>
+                	<td>토</td>
+            	</tr>
+        	</thead>
+
+        	<tbody>
+        	</tbody>
+    		</table>
+		</div>
+        <div class="form-group">
+            <label for="input_chall_week_auth">주간 인증 횟수</label>
+            <select id="chall_week_auth" name="chall_week_auth">
+				<option value ="1"> 주 1회</option>
+				<option value ="2"> 주 2회 </option>
+				<option value ="3"> 주 3회 </option>
+				<option value ="4"> 주 4회 </option>
+				<option value ="5"> 주 5회</option>
+				<option value ="6"> 주 6회 </option>
+				<option value ="7"> 매일 </option>
+			</select >
+        </div>
+        <div class="form-group">
+        	<label for="chall_size">인원</label>
+       		<input type="text" class="form-control" id="chall_size" name="chall_size" placeholder="인원 수">
+       		<label for="size_check"></label>
+		</div>
+        <div class="form-group">
+        	<label for="chall_category">챌린지 목적</label>
+        	<p></p>
+        	<select id="chall_category" name="chall_category" onchange=challRacePopup();>
+				<option value ="일상용" > 일상용</option>
+				<option value ="대회용" > 대회용 </option>
+			</select >
+			<label><input type="hidden" class="form-control" id="race_id" name="race_id" value=""  readonly></label>
+		</div>
+		<div class="form-group">
+        	<label for="region">지역</label>
+        	<p></p>
+        	<label for="region_state">도</label>
+        	<select id="region_state" name="region_state" onchange="chageState();">
+        	    <c:forEach var="state" items="${stateList}">
+          		<option>${state}</option>
+          		</c:forEach>
+			</select >
+			<label for="region_city">시</label>
+        	<select id="region_city" name="region_city" onchange="chageCity();">
+			</select >
+			<label for="region_district">군/구</label>
+        	<select id="region_district" name="region_district" onchange="chageDistrict();">
+			</select >
+		</div>
+		<div class="form-group">
+        	<label for="chall_sit">모집상태</label>
+        	<p></p>
+        	<select id="chall_sit" name="chall_sit">
+				<option value ="모집중"> 모집중</option>
+				<option value ="모집 종료"> 모집 종료 </option>
+				<option value ="모집 예정"> 모집 예정 </option>
+			</select >
+		</div>
+		<div class="form-group">
+        	<label for="chall_online">온라인/오프라인 여부</label>
+        	<p></p>
+        	<select id="chall_online" name="chall_online">
+				<option value ="온라인"> 온라인 </option>
+				<option value ="오프라인"> 오프라인  </option>
+				<option value ="모두"> 모두 </option>
+			</select >
+		</div>
+		<div class="form-group">
+        	<label for="chall_all_auth">챌린지 최소 인증률</label>
+       		<input type="text" class="form-control" id="chall_all_auth" name="chall_all_auth" placeholder="최소 40% 이상 숫자로만 입력해주세요!">
+       		<label for="all_auth_check"></label>
+		</div>
+        <button type="button" class="btn btn-primary" onclick="submit2();">등록하기</button>
+    </div>
+</form>
+		</div>
+		</div>
+	</div>
+<!-- footer -->
+<%@ include file="./inc/footer.jsp"%>
+</body>
+<script>
+>>>>>>> Stashed changes:src/main/webapp/WEB-INF/views/registChall.jsp
 var popup;
 var chall_path;
 var race_id = '<%=(String) session.getAttribute("raceId")%>';
