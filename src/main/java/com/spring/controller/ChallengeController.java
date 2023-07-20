@@ -1,5 +1,6 @@
 package com.spring.controller;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -358,13 +359,13 @@ public class ChallengeController {
 
 	//인증게시판 리스트
 		@RequestMapping(value="challenge/{chall_id}challengePost")
-		public String challengePost(@PathVariable int chall_id, Model model, HttpSession session) {
+		public String getPostByChallId(@PathVariable int chall_id, Model model, HttpSession session) {
 			Challenge challenge = challService.getChallByChallId(chall_id);
 			User host = challService.getHostByChallId(chall_id);
 			String userId = (String) session.getAttribute("userId");
 			List<UserChallenge> userList = challService.getUserByChallId(chall_id);
 			UserChallenge userChall=new UserChallenge();
-			List<ChallengePost> postList = challService.getAllPost();
+			List<ChallengePost> postList = challService.getPostByChallId(chall_id);
 			model.addAttribute("postList", postList);
 			
 			model.addAttribute("challenge", challenge);
@@ -374,18 +375,40 @@ public class ChallengeController {
 			return "challengePost";
 		}
 
-		@RequestMapping(value = "/challenge/{chall_id}challPostDetail", method = RequestMethod.GET)
-		public String getPostByAuthId(@RequestParam("auth_id") int auth_id, Model model) {
+		@RequestMapping(value = "/challenge/{chall_id}challPostDetail{auth_id}", method = RequestMethod.GET)
+		public String getPostByAuthId(@PathVariable int chall_id, @RequestParam("auth_id") int auth_id, Model model) {
 			ChallengePost post = challService.getPostByAuthId(auth_id);
-			model.addAttribute(auth_id);
+			model.addAttribute("post", post);
 			
 			return "challengePostDetail";
 		}
 		
-		@RequestMapping(value="/challengePost/insertChallPost", method = RequestMethod.GET)
-		public String insertChallPost() {
+		
+		@RequestMapping(value="/challenge/{chall_id}insertChallPost", method = RequestMethod.GET)		//게시글 작성 화면 호출
+	    public String insertChallPostForm() throws Exception{
+	    	return "/insertChallPost";
+	    }
+		
+		@RequestMapping(value="/challenge/{chall_id}insertChallPost", method = RequestMethod.POST)
+		public String insertChallPost(@PathVariable int chall_id, @ModelAttribute ChallengePost challpost, Model model) throws Exception {
+		
+			String view = "error";
 			
-			return "insertChallPost";
+			boolean postresult = false;
+			
+			try {
+				postresult = challService.insertChallPost(challpost);
+				if(postresult) {
+					
+					view = "redirect:/challenge/"+chall_id;
+					return view;
+				}
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			return view;
 		}
 		
 //		@RequestMapping(value="/challengePost/insertChallPost", method = RequestMethod.GET)
