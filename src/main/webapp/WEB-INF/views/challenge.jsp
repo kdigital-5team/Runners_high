@@ -177,7 +177,7 @@
 										<div style="font-size: 15px">${chall.region_state} ${chall.region_city}</div>
 										<div class="caption" style="font-size: 15px"><fmt:formatDate pattern="yyyy-MM-dd" value="${chall.chall_start_date}"/> ~ <fmt:formatDate pattern="yyyy-MM-dd" value="${chall.chall_end_date}"/></div>
 										<div>인증 주 ${chall.chall_week_auth}회 / 최대 ${chall.chall_size}명</div>
-										<div id="${status.count}" style="display:none">${chall.chall_id}</div>
+										<div style="display: none;" id="${status.count}">${chall.chall_id}</div>
 									</div>
 								</div>
 						</div>
@@ -355,6 +355,10 @@
 		
 		
 	}
+	
+	var isTrue='${isTrue}';
+	if(isTrue=='존재')
+		alert("이미 신청/참가한 챌린지가 있습니다.");
 
   </script>
 </html>

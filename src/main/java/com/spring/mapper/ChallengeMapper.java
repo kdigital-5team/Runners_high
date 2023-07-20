@@ -64,9 +64,10 @@ public interface ChallengeMapper {
 
 	public boolean deleteRoutebyChallId(int challId);
 
+	public void deleteApplyUserbyChallId(int chall_id);
 
 	public void insertHost(String userId, int challId);
 
-	public void deleteApplyUserbyChallId(int chall_id);
+	public int checkOtherChall(String applyId);
 
 }

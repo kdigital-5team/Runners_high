@@ -62,34 +62,31 @@
 		
 		<!-- 피드 글 작성 -->
 		<div class="container">
-			<div class="post">	        
+			<!-- <div class="post"> -->	        
 		        <form action='<c:url value='/challengePost/insertChallPost'/>' method="GET" enctype="multipart/form-data">					
-					<div class="form-group row">	
-						<label style="margin-left:20px; margin-top:15px; margin-right:19%;">제목</label>					
-						<div style="display:table-cell; margin:auto; margin-top:5px;">		                	
-		                	<input class="form-control" type="text" name="auth_title" style="width:600px; display:block;">
-	                	</div>
-	                	<button type="submit" class="btn btn-default" value="글 등록하기" style="margin-left:205px; margin-right:10px; margin-top:5px;">
-	                		등록
-	                	</button>
+					<div class="form-group">	
+						<label for="auth_title">제목</label>					
+						<!-- <div style="display:table-cell; margin:auto; margin-top:5px;"> -->		                	
+		                	<input class="form-control" type="text" name="auth_title" id="auth_title" ><!-- style="width:600px; display:block;" -->
+	                	<!-- </div> -->
+	                	
 					</div>
-					<hr>
 					<div class="form-group">
-						<div style="height: 150px; width: 200px; vertical-align: middle;">	
-							<label>이미지 파일 첨부</label> 
-				            <input type="file" name="file" onchange="readURL(this);"/>
-							<img id="preview" src="#" width=250 height=150 alt="선택된 이미지가 없습니다" style="align-content: flex-end; ">
-						</div>
-					</div> 
+					<input class="form-control" type="number" name="chall_id" placeholder="2">
+					</div>
+					 
 					<div class="form-group">
-						<div style="display:table-cell; width:50%; vertical-align: middle; margin-right:10px;">
-							<textarea class="form-control" name="auth_cont" rows="5" style="width:600px; display:block; margin: 0 auto;"></textarea>
-						</div>
+						<!-- <div style="display:table-cell; width:50%; vertical-align: middle; margin-right:10px;"> -->
+							<textarea class="form-control" type="text" name="auth_cont" id="auth_cont"></textarea>
+							<!-- rows="5" style="width:600px; display:block; margin: 0 auto;" -->
+						<!-- </div> -->
 					</div>	
 				</form>
 			</div>
 		</div>
-	</div>
+		<div style="text-align:center; ">		
+			<button type="submit" style="background-color:Gainsboro; border-radius:5%; padding:6px 11px; font-color:white">등록</button></div>
+	<!-- </div> -->
 	<!-- 사진 첨부용 자바 스크립트 -->
 	<script type="text/javascript">
 

@@ -32,11 +32,10 @@
 
 	<!-- Context -->
 	<div class="site-wrap">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-12">
-					<div class="hero-wrap"></div>
-				</div>
+		<div id="custom-main-banner">
+			<div class="hero-wrap"></div>
+			<div class="container">
+				<div class="row"></div>
 			</div>
 		</div>
 
@@ -46,34 +45,34 @@
 					<div class="col-md-12 col-lg-12 mb-12 mb-lg-12">
 						<div class="custom-media d-flex">
 							<div class="img-wrap mr-3">
-									<img src="../static/images/running_2.jpg" alt="Image" class="img-fluid">
+								<img src="../static/images/running_2.jpg" alt="Image"
+									class="img-fluid">
 							</div>
 							<div>
 								<span class="caption">대회일정</span>
-								<h2>
-									<a href="#">국내 마라톤 / 걷기 대회 일정 전체 조회가 가능한 페이지입니다</a>
-								</h2>
+								<h3>
+									<a href="/events">국내 마라톤/걷기 대회 일정을 한번에 확인하세요.</a>
+								</h3>
 								<h1 class="mb-0">
-									<a href="#" class="more"><span class="mr-2">+</span>GO</a>
+									<a href="/events" class="more"><span class="mr-2">+</span>GO</a>
 								</h1>
 							</div>
 						</div>
 					</div>
-					<div class="col-md-12 col-lg-12 mb-12 mb-lg-12"
-						style="padding: 30px 0px 0px 0px">
-						<div class="custom-media d-flex">
-							<div style="text-align: right">
-								<span class="caption">챌린지</span>
-								<h2>
-									<a href="#">다양한 러닝 챌린지를 구상하고 모집할 수 있는 페이지입니다</a>
-								</h2>
-								<h1 class="mb-0">
-									<a href="#" class="more"><span class="mr-2">+</span>GO</a>
-								</h1>
+					<div class="col-md-12 col-lg-12 mb-12 mb-lg-12">
+						<div class="custom-media d-flex" id="right-media-flex">
+							<div class="img-wrap mr-3" id="right-media-img">
+								<img src="../static/images/running_3.jpg" alt="Image"
+									class="img-fluid">
 							</div>
-							<!--  style="padding: 0px 0px 0px 20px" -->
-							<div class="img-wrap mr-3">
-									<img src="../static/images/running_3.jpg" alt="Image" class="img-fluid">
+							<div>
+								<span class="caption">챌린지</span>
+								<h3>
+									<a href="/challenge">다양한 유저 챌린지와 함께 달려보세요.</a>
+								</h3>
+								<h1 class="mb-0">
+									<a href="/challenge" class="more"><span class="mr-2">+</span>GO</a>
+								</h1>
 							</div>
 						</div>
 					</div>

@@ -19,7 +19,7 @@
 	  								feed_cont,	
 	  								feed_writing_date) 
 		VALUES (personal_feed_seq.nextval, 
-				'akqkrdl1227@gmail.com', 
+				'petal1363@naver.com', 
 				#{feed_title}, 
 				#{feed_cont}, 
 				SYSDATE)

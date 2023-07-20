@@ -29,8 +29,20 @@
 
 </head>
 <body> 
-<script src="https://code.jquery.com/jquery-3.4.1.js" ></script> 
+	<script src="https://code.jquery.com/jquery-3.4.1.js" ></script> 
+	<script src="../static/js/jquery.min.js"></script>
+	<script src="../static/js/jquery-migrate-3.0.1.min.js"></script>
+	<script src="../static/js/jquery-ui.js"></script>
+	<script src="../static/js/popper.min.js"></script>
+	<script src="../static/js/bootstrap.min.js"></script>
+	<script src="../static/js/owl.carousel.min.js"></script>
+	<script src="../static/js/jquery.stellar.min.js"></script>
+	<script src="../static/js/jquery.fancybox.min.js"></script>
+	<script src="../static/js/aos.js"></script>
+	<script src="../static/js/main.js"></script>
+
 	<div class="site-wrap-width">
+		<div class="deco-banner"></div>
 		<div class="col-6 col-lg-2 site-logo" id="main-logo">
 			<a role="button" onclick="location.href='/main'">Runner's High</a>
 		</div>
@@ -141,11 +153,14 @@ $(function() {
 	const getPwCheck = RegExp(/^(?=.*[0-9a-zA-Z])(?=.*[!@#$%^*+=-]).{4,20}$/i);
   	const getNickNameCheck = RegExp(/^[ㄱ-ㅎ가-힣a-zA-Z0-9]{2,10}$/);
 
+  	// 기본 안내
+  	$("label[for='id_check']").text("*20자 이하의 영어/숫자의 이메일(@.com)");
+  	$("label[for='user_pw']").text("*특수문자(!@#$%^*+=-)를 반드시 포함한 4~20자의 영어/숫자");
 
 	$('#user_id').keyup(function() {
 		var user_id = $('#user_id').val(); 
         if(!getIdCheck.test($(event.target).val())){
-        	 $("label[for='id_check']").text("아이디는 영어와 숫자 조합으로 20자 이하의 이메일(@ .com)만 가능합니다.");
+        	 $("label[for='id_check']").text("아이디는 20자 이하의 영어/숫자 이메일(@ .com)만 가능합니다.");
         	    $("label[for='id_check']").css({
         	        "color": "#e35c5c",
         	        "display": "inline-block"
@@ -166,7 +181,7 @@ $(function() {
                         id_chk = false;
                     } else {
                     	 $("label[for='id_check']").text("사용 가능한 아이디입니다.");
-                        $("label[for='id_check']").css("color", "");
+                        $("label[for='id_check']").css("color", "##898989");
                     	id_chk = true;
                     }            
                 },
@@ -187,7 +202,7 @@ $(function() {
 		    if (user_pw === '') {
 		      $("label[for='user_pw']").text("");
 		    } else if (!getPwCheck.test(user_pw)) {
-		      $("label[for='user_pw']").text("비밀번호는 영어/숫자, 특수기호 조합으로 4~20자 이하만 가능합니다.");
+		      $("label[for='user_pw']").text("비밀번호는 특수문자를 포함한 4~20자 이하의 영어/숫자만 가능합니다.");
 		      $("label[for='user_pw']").css("color", "#e35c5c");
 		    } else {
 		      $("label[for='user_pw']").text("");
@@ -203,7 +218,7 @@ $(function() {
 			
 		    if (user_pw === user_pw_check) {
 		      $("label[for='user_pw_check']").text("비밀번호가 일치합니다.");
-		      $("label[for='user_pw_check']").css("color", "");
+		      $("label[for='user_pw_check']").css("color", "#898989");
 		    } else if (user_pw === '' || user_pw_check === '') {
 		      $("label[for='user_pw_check']").text("");
 		    } else {
@@ -216,7 +231,7 @@ $(function() {
    		$('#nickname').keyup(function() {
    			var nickname = $('#nickname').val(); 
    	        if(!getNickNameCheck.test($(event.target).val())){
-   	        	 $("label[for='nickname_check']").text("닉네임은 한글, 영어, 숫자 조합 2글자 이상 10글자 이하만 가능합니다.");
+   	        	 $("label[for='nickname_check']").text("닉네임은 2~10자 이하의 한글/영어/숫자만 가능합니다.");
    	        	 $("label[for='nickname_check']").css("color", "#e35c5c");
    	        	 nickname_chk = false;
    	        } else if(nickname.trim().length != 0) {
@@ -234,7 +249,7 @@ $(function() {
    	                    	nickname_chk = false;
    	                    } else {
    	                    	 $("label[for='nickname_check']").text("사용 가능한 닉네임입니다.");
-   	                    	 $("label[for='nickname_check']").css("color", "");
+   	                    	 $("label[for='nickname_check']").css("color", "#898989");
    	                    	 nickname_chk = true;
    	                    }            
    	                },
@@ -266,7 +281,7 @@ $(function() {
 	                chkEmailConfirm(data);
 	                
 	                $("label[for='code_check']").text("작성하신 이메일로 전송된 인증번호를 입력해주세요.");
-	                $("label[for='code_check']").css("color", "");
+	                $("label[for='code_check']").css("color", "#898989");
 	            },
 	            error: function(xhr, status, e) {
 	            	console.log("error", e);
@@ -279,7 +294,7 @@ $(function() {
 		$('#auth_code').keyup(function(){
 		if(data.code == $('#auth_code').val()){
 	           $("label[for='code_check']").text("인증되었습니다.");
-	           $("label[for='code_check']").css("color", "");
+	           $("label[for='code_check']").css("color", "#898989");
 	          	code_chk = true;
 		
 		} else{
