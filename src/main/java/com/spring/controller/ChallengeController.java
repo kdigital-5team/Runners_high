@@ -1,6 +1,7 @@
 package com.spring.controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -441,6 +442,8 @@ public class ChallengeController {
 			List<UserChallenge> userList = challService.getUserByChallId(challId);
 			List<UserChallenge> parList = new ArrayList<UserChallenge>();
 			Challenge chall = challService.getChallByChallId(challId);
+			Date date = chall.getChall_start_date();
+			System.out.println(date);
 			int count =0;
 			int totalAuth=0;
 			for(UserChallenge uc:userList) {
