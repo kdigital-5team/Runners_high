@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <title>Runner's High &mdash; Login</title>
 <meta charset="utf-8">
@@ -14,6 +14,7 @@
 
 <link rel="stylesheet" href="../static/css/loginForm.css">
 <link rel="stylesheet" href="../static/css/login.css">
+
 <link rel="stylesheet" href="../static/css/jquery.fancybox.min.css">
 <link rel="stylesheet" href="../static/css/jquery-ui.css">
 <link rel="stylesheet" href="../static/css/owl.carousel.min.css">
@@ -24,6 +25,17 @@
 
 </head>
 <body>
+	<script src="https://code.jquery.com/jquery-3.4.1.js" ></script> 
+	<script src="../static/js/jquery.min.js"></script>
+	<script src="../static/js/jquery-migrate-3.0.1.min.js"></script>
+	<script src="../static/js/jquery-ui.js"></script>
+	<script src="../static/js/popper.min.js"></script>
+	<script src="../static/js/bootstrap.min.js"></script>
+	<script src="../static/js/owl.carousel.min.js"></script>
+	<script src="../static/js/jquery.stellar.min.js"></script>
+	<script src="../static/js/jquery.fancybox.min.js"></script>
+	<script src="../static/js/aos.js"></script>
+	<script src="../static/js/main.js"></script>
 
 	<div class="site-wrap">
 			<div class="col-6 col-lg-2 site-logo" id="main-logo">
@@ -34,32 +46,24 @@
 			<div class="container">
 				<form action="/login" method="POST" id="login-form">
 					<p align="center">
-						<input type="text" name="userId" size="30" placeholder="이메일" id="login_id"
-							style="border: 0 solid black"> 
-							</br> 
-						<label for="id_check"></label>
-							</br> 
-						<input type="password"
-							name="userPw" size="30" placeholder="비밀번호" id="login_pw"
-							style="border: 0 solid black">
-							</br>
+						<input type="text" name="userId" size="30" placeholder="이메일" id="login_id" 
+							   style="border: 0 solid black"><br> 
+						<label for="id_check"></label><br> 
+						<input type="password" name="userPw" size="30" placeholder="비밀번호" id="login_pw"
+							   style="border: 0 solid black"><br>
 						<label for="pw_check"></label>
 					</p>
 					<p align="center">
 						<span style="font-size: 12pt;"> 
-						<input type="submit"
-							value="Login" 
-							id="login-btn"
-							style="border: 0 solid black"
-							onclick="getAlert()">
+						<input type="submit" value="Login" id="login-btn" onclick="getAlert()"
+							   style="border: 0 solid black">
 						</span>
 					</p>
 					<div id="sub-page">
-						<a href="/updatePw" id="sub-page">비밀번호 찾기</a> <span>|</span> <a href="/regist"
-							id="sub-page">회원가입</a>
+						<a href="/findPw" id="sub-page">비밀번호 찾기</a> <span>|</span> 
+						<a href="/regist"id="sub-page">회원가입</a>
 					</div>
-					<br>
-					<br>
+					<br><br>
 					<!-- 
 					카카오 로그인 API
 					<a class="social" href="https://kauth.kakao.com/oauth/authorize?client_id=6b8fd47f0536895682320ac460cd43a2&redirect_uri=http://localhost:8081/login/kakao&response_type=code">
@@ -74,17 +78,6 @@
 	<!-- footer -->
 	<%@ include file="./inc/footer.jsp"%>
  
-	<script src="../static/js/jquery.min.js"></script>
-	<script src="../static/js/jquery-migrate-3.0.1.min.js"></script>
-	<script src="../static/js/jquery-ui.js"></script>
-	<script src="../static/js/popper.min.js"></script>
-	<script src="../static/js/bootstrap.min.js"></script>
-	<script src="../static/js/owl.carousel.min.js"></script>
-	<script src="../static/js/jquery.stellar.min.js"></script>
-	<script src="../static/js/jquery.fancybox.min.js"></script>
-	<script src="../static/js/aos.js"></script>
-	<script src="../static/js/main.js"></script>
-	
 	<!-- 로그인 실패 alert -->
 <script type="text/javascript">
 	let msg = '${msg}';
@@ -99,7 +92,6 @@
 </script>
 
 </body>
- 	<script src="https://code.jquery.com/jquery-3.4.1.js" ></script>
  	<script>
  	// 잘못된 id, pw 양식 검수
 	var id_chk = false, pw_chk = false; 
@@ -120,7 +112,8 @@
   			
   			// 양식에 맞지 않는 값 검수
   			else if(!getIdCheck.test($(event.target).val())){
-  				$("label[for='id_check']").text("아이디는 영문/숫자 조합의 이메일만 가능합니다.");
+  				$("label[for='id_check']").text("아이디는 20자 이하의 영어/숫자 이메일(@ .com)만 가능합니다.");
+  				$("label[for='id_check']").css("color", "#e35c5c");
   			
   				id_chk=false;
   			} 
@@ -135,6 +128,7 @@
   			// 빈 값 검수
   			if($(event.target).val() === ''){
   				$("label[for='pw_check']").text("비밀번호를 입력해주시기 바랍니다.");
+  				$("label[for='pw_check']").css("color", "#e35c5c");
   			
   				pw_chk=false;
   			} else {

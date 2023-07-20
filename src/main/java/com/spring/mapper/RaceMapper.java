@@ -16,6 +16,8 @@ public interface RaceMapper {
 
 	public List<RaceAndRegion> getAllRaces();
 
+	public int getRegionIdByRaceId(int raceId);
+
 	
 
 

@@ -55,7 +55,15 @@ public class UserService {
 	public String findPw(String user_id, String pw_quest, String pw_quest_answer) throws Exception{
 		return mapper.findPw(user_id, pw_quest, pw_quest_answer);
 	}
+	
 	public boolean updatePw(String new_pw, String user_id) throws Exception{
+		
+		System.out.println("update user service 실행");
+		
+		System.out.println("암호화 전 : " + new_pw);
+		new_pw = BCrypt.hashpw(new_pw, BCrypt.gensalt());
+		System.out.println("암호화 후 : " + new_pw);
+		
 		return mapper.updatePw(new_pw, user_id);
 	}
 

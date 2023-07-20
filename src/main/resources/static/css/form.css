@@ -40,6 +40,42 @@
 		"Liberation Mono", "Courier New", monospace
 }
 
+/* regist_chall 양식 0719 */
+        td {
+            width: 50px;
+            height: 50px;
+        }
+
+        .Calendar { 
+            text-align: center;
+            margin: 0 auto; 
+        }
+
+        .Calendar>thead>tr:first-child>td { font-weight: bold; }
+
+        .Calendar>thead>tr:last-child>td {
+            background-color: gray;
+            color: white;
+        }        
+
+        .pastDay{ background-color: lightgray; }
+
+        .today{            
+            background-color: #FFCA64;            
+            cursor: pointer;
+        }
+
+        .futureDay{            
+            background-color: #FFFFFF;
+            cursor: pointer;
+        }
+
+        .futureDay.choiceDay, .today.choiceDay{            
+            background-color: #3E85EF;            
+            color: #fff;
+            cursor: pointer;
+        }
+
 /* 로고 0716 */
 #main-logo:not([href]) {
     text-align: center;
@@ -229,6 +265,7 @@ label {
 	font-size: 14px;
     font-weight: normal;
     margin-top: 3px;
+    color: #898989;
 }
 
 #pw-only {
@@ -316,6 +353,14 @@ button, input, optgroup, select {
 	display: none;
 }
 
+.deco-banner {
+    background-color: #FFDC3D;
+    width: 100%;
+    height: 92px;
+    position: absolute;
+    top: -4px;
+}
+
 /* input 기본 양식 0713 */
 input {
 	size=30px;
@@ -331,8 +376,7 @@ color: #fff;
     font-size: 15px;
     background-color: #FFDC3D;
     margin-top: 80px;
-    inline-size: 134px;
-    border-radius: 30px;
+    border-radius: 4px;
 }
 
 input[type="submit"]:hover{

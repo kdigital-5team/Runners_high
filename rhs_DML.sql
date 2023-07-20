@@ -4,6 +4,68 @@
 --2. 다녔던 초등학교의 명칭은?
 --3. 기억나는 장소는?
 
+-- user
+INSERT INTO rh_user 
+        (user_id, user_pw, pw_quest, pw_quest_answer, nickname) 
+    VALUES 
+        ('test01@gmail.com', 'test**', '어렸을 때 장래희망은?', '화가', 'Testing01');
+INSERT INTO rh_user 
+        (user_id, user_pw, pw_quest, pw_quest_answer, nickname) 
+    VALUES 
+        ('test02@gmail.com', 'test**', '어렸을 때 장래희망은?', '대통령', 'abcAcademy');
+INSERT INTO rh_user 
+        (user_id, user_pw, pw_quest, pw_quest_answer, nickname) 
+    VALUES 
+        ('test03@gmail.com', 'test**', '어렸을 때 장래희망은?', '의사', 'test001');
+INSERT INTO rh_user 
+        (user_id, user_pw, pw_quest, pw_quest_answer, nickname) 
+    VALUES 
+        ('test04@gmail.com', 'test**', '어렸을 때 장래희망은?', '백수', '43242342');
+INSERT INTO rh_user 
+        (user_id, user_pw, pw_quest, pw_quest_answer, nickname) 
+    VALUES 
+        ('test05@gmail.com', 'test**', '어렸을 때 장래희망은?', '닌자', '남혁');
+INSERT INTO rh_user 
+        (user_id, user_pw, pw_quest, pw_quest_answer, nickname) 
+    VALUES 
+        ('test06@gmail.com', 'test**', '다녔던 초등학교의 명칭은?', '봉우리 초등학교', '봉승헌');
+INSERT INTO rh_user 
+        (user_id, user_pw, pw_quest, pw_quest_answer, nickname) 
+    VALUES 
+        ('test07@gmail.com', 'test**', '다녔던 초등학교의 명칭은?', '남산 초등학교', '권인혜');
+INSERT INTO rh_user 
+        (user_id, user_pw, pw_quest, pw_quest_answer, nickname) 
+    VALUES 
+        ('test08@gmail.com', 'test**', '다녔던 초등학교의 명칭은?', '두류', '손재영');
+INSERT INTO rh_user 
+        (user_id, user_pw, pw_quest, pw_quest_answer, nickname) 
+    VALUES 
+        ('test09@gmail.com', 'test**', '다녔던 초등학교의 명칭은?', '기억 안 남', '양여름');
+INSERT INTO rh_user 
+        (user_id, user_pw, pw_quest, pw_quest_answer, nickname) 
+    VALUES 
+        ('test10@gmail.com', 'test**', '다녔던 초등학교의 명칭은?', '모름', '백상');
+INSERT INTO rh_user 
+        (user_id, user_pw, pw_quest, pw_quest_answer, nickname) 
+    VALUES 
+        ('test11@gmail.com', 'test**', '기억나는 장소는?', '캐나다', 'loream');
+INSERT INTO rh_user 
+        (user_id, user_pw, pw_quest, pw_quest_answer, nickname) 
+    VALUES 
+        ('test12@gmail.com', 'test**', '기억나는 장소는?', '우리집', 'Loream3422');
+INSERT INTO rh_user 
+        (user_id, user_pw, pw_quest, pw_quest_answer, nickname) 
+    VALUES 
+        ('test13@gmail.com', 'test**', '기억나는 장소는?', '서울특별시 서대문구 통일로 97 ', 'testing983328');
+INSERT INTO rh_user 
+        (user_id, user_pw, pw_quest, pw_quest_answer, nickname) 
+    VALUES 
+        ('test14@gmail.com', 'test**', '기억나는 장소는?', '없음', 'user2934');
+INSERT INTO rh_user 
+        (user_id, user_pw, pw_quest, pw_quest_answer, nickname) 
+    VALUES 
+        ('test15@gmail.com', 'test**', '기억나는 장소는?', '대한민국', 'TdfjksSAd');
+
 
 -- title
 INSERT INTO title 
@@ -80,5 +142,8 @@ BEGIN
 END UPDATE_CON;
 /
 EXEC UPDATE_CON;
+
+
+
         
 commit;

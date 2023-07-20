@@ -22,10 +22,34 @@
  				WHERE region_city = #{city}
  	</select>
  	
- 	 	<select id="getIdByDistrict" resultType="string">
+ 	 <select id="getIdByDistrict" resultType="string">
  		SELECT DISTINCT region_id
  			FROM region
  				WHERE region_district = #{district}
- 	</select>
+ 	 </select>
+ 	 
+ 	 <select id="getRegionById" resultType="com.spring.dto.Region">
+ 		SELECT  region_id,
+ 						region_state,
+ 							region_city,
+ 								region_district
+ 					FROM region
+ 						WHERE region_id = #{regionId}
+ 	 </select>
+ 	 <select id="getStateById" resultType="string">
+ 		SELECT DISTINCT region_state
+ 			FROM region
+ 				WHERE region_id = #{regionId}
+ 	 </select>
+ 	 <select id="getCityById" resultType="string">
+ 		SELECT DISTINCT region_city
+ 			FROM region
+ 				WHERE region_id = #{regionId}
+ 	 </select>
+ 	  <select id="getDistrictById" resultType="string">
+ 		SELECT DISTINCT region_district
+ 			FROM region
+ 				WHERE region_id = #{regionId}
+ 	 </select>
 
  </mapper>
