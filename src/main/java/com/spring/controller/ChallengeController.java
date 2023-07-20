@@ -324,10 +324,10 @@ public class ChallengeController {
 
 	//인증게시판 리스트
 		@RequestMapping(value="challenge/{chall_id}challengePost")
-		public String challengePost(@PathVariable int chall_id, Model model) {
+		public String challengePost(@PathVariable int chall_id, Model model, HttpSession session) {
 			Challenge challenge = challService.getChallByChallId(chall_id);
 			User host = challService.getHostByChallId(chall_id);
-//			String userId = (String) session.getAttribute("userId");
+			String userId = (String) session.getAttribute("userId");
 			List<UserChallenge> userList = challService.getUserByChallId(chall_id);
 			UserChallenge userChall=new UserChallenge();
 			List<ChallengePost> postList = challService.getAllPost();
@@ -348,11 +348,24 @@ public class ChallengeController {
 			return "challengePostDetail";
 		}
 		
-		@RequestMapping(value="/challengePost/insertChallPost", method=RequestMethod.GET)
-		public String insertChallPostForm() {
+		@RequestMapping(value="/challengePost/insertChallPost", method = RequestMethod.GET)
+		public String insertChallPost() {
 			
 			return "insertChallPost";
 		}
+		
+//		@RequestMapping(value="/challengePost/insertChallPost", method = RequestMethod.GET)
+//		public String insertChallPost(Model model, String auth_title, String auth_cont, Date auth_date, int auth_id, int chall_id, String comment_id) {
+//			ChallengePost challengePost = new ChallengePost();
+//			challengePost.setAuth_id(auth_id);
+//			challengePost.setChall_id(chall_id);
+//			challengePost.setComment_id(comment_id);
+//			challengePost.setAuth_title(auth_title);
+//			challengePost.setAuth_cont(auth_cont);
+//			challengePost.setAuth_date(auth_date);
+//			challService.insertChallPost(challengePost);
+//			return "redirect:/challenge/{chall_id}challPostDetail";
+//		} 
 		
 //		@RequestMapping(value="/challengePost/insertChallPost", method=RequestMethod.GET)
 //		public String insertChallPost(ChallengePost newPost) {
