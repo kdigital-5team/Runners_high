@@ -91,7 +91,7 @@
 			<c:if test="${userId eq challenge.chall_reg_id }">
 				<a href="/challenge/${challenge.chall_id}host">관리</a><span class="mx-2">|</span> 
 			</c:if>
-			<c:if test="${challenge.chall_sit eq '모집종료' }">
+			<%-- <c:if test="${challenge.chall_sit eq '모집종료' }"> --%>
 				<a href="${chall_id}challengePost">인증 게시판</a><span class="mx-2">|</span>
 
 

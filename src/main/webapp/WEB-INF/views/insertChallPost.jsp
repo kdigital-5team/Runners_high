@@ -43,7 +43,7 @@
 		<%@ include file="./inc/header.jsp"%>
 
 		<!-- 피드 / 챌린지 / 칭호 탭 -->
-		<div class="container">
+		<%-- <div class="container">
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="hero-wrap text-center" style=""
@@ -58,12 +58,13 @@
 					</div>
 				</div>
 			</div>
-		</div>
+		</div> --%>
+		<div  class="container"><h2>인증하기</h2></div>
 		
 		<!-- 피드 글 작성 -->
 		<div class="container">
 			<!-- <div class="post"> -->	        
-		        <form action='<c:url value='/challengePost/insertChallPost'/>' method="GET" enctype="multipart/form-data">					
+		        <form action='<c:url value='/challengePost/insertChallPost'/>' method="POST" enctype="multipart/form-data">					
 					<div class="form-group">	
 						<label for="auth_title">제목</label>					
 						<!-- <div style="display:table-cell; margin:auto; margin-top:5px;"> -->		                	
@@ -72,20 +73,26 @@
 	                	
 					</div>
 					<div class="form-group">
-					<input class="form-control" type="number" name="chall_id" placeholder="2">
+					<label for="chall_id">챌린지 id</label>
+					
+					<input class="form-control" type="number" name="chall_id" id="chall_id">
+					
 					</div>
 					 
 					<div class="form-group">
+					<label for="auth_cont">내용</label>	
 						<!-- <div style="display:table-cell; width:50%; vertical-align: middle; margin-right:10px;"> -->
-							<textarea class="form-control" type="text" name="auth_cont" id="auth_cont"></textarea>
+							<textarea class="form-control" type="text" name="auth_cont" id="auth_cont" style="height:600px"]></textarea>
 							<!-- rows="5" style="width:600px; display:block; margin: 0 auto;" -->
 						<!-- </div> -->
 					</div>	
+					<div style="text-align:center; background-color:white;">		
+			<button type="submit" style="background-color:Gainsboro; border-radius:5%; padding:6px 11px; font-color:white">등록</button></div>
 				</form>
 			</div>
 		</div>
-		<div style="text-align:center; ">		
-			<button type="submit" style="background-color:Gainsboro; border-radius:5%; padding:6px 11px; font-color:white">등록</button></div>
+		
+			
 	<!-- </div> -->
 	<!-- 사진 첨부용 자바 스크립트 -->
 	<script type="text/javascript">
