@@ -66,7 +66,7 @@
 							</div>
 							<input type="file" name="userPic" accept=".jpg, .png, .jpeg" id="userPic">
 						</div>
-						<div class="context-form" id="virtualInput">
+						<div class="context-form">
 							<label> 한줄 소개 </label><br>
 							<textarea id="textArea" name="userIntro" rows="1" maxlength="300"
 									  placeholder="${user.intro}" wrap="hard"
@@ -267,7 +267,7 @@ $(function() {
 			
 		    if (user_pw === user_pw_check) {
 		      $("label[for='user_pw_check']").text("비밀번호가 일치합니다.");
-		      $("label[for='user_pw_check']").css("color", "898989");
+		      $("label[for='user_pw_check']").css("color", "#898989");
 		      pw_chk = true;
 		    } else if (user_pw === '' || user_pw_check === '') {
 		      $("label[for='user_pw_check']").text("");
@@ -302,7 +302,7 @@ $(function() {
 						nickname_chk = false;
 					} else {
 						$("label[for='nickname_check']").text("사용 가능한 닉네임입니다.");
-						$("label[for='nickname_check']").css("color", "898989");
+						$("label[for='nickname_check']").css("color", "#898989");
 						nickname_chk = true;
 					}
 				}
@@ -356,7 +356,7 @@ $('#mypageEdit').on("submit", function () {
 	        contentType: false,
 	        success: function(response) {
 	            alert("프로필 수정을 완료했습니다.");
-	            window.location.href = "/test";
+	            window.location.href = "/mypage/feed";
 	        },
 	        error: function(error) {
 	            alert("프로필 수정 정보를 다시 확인해주시기 바랍니다.");

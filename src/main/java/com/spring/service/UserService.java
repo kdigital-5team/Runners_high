@@ -56,6 +56,7 @@ public class UserService {
 		return mapper.findPw(user_id, pw_quest, pw_quest_answer);
 	}
 	
+	// 새 비밀번호로 수정
 	public boolean updatePw(String new_pw, String user_id) throws Exception{
 		
 		System.out.println("update user service 실행");

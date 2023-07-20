@@ -268,9 +268,10 @@
 
  	<!-- 인증게시판 -->
  	
- 	<select id="getAllPost" resultType="com.spring.dto.ChallengePost" >
+ 	<select id="getPostByChallId" resultType="com.spring.dto.ChallengePost" >
 		SELECT chall_id, auth_id, auth_title, auth_date
 		FROM auth_post
+		WHERE chall_id=#{chall_id}
 	</select>
 	
 	<select id="getPostByAuthId" resultType="com.spring.dto.ChallengePost">
@@ -281,7 +282,7 @@
 	
 	<insert id="insertChallPost" parameterType="com.spring.dto.ChallengePost">
 	INSERT INTO auth_post (auth_id, chall_id, comment_id, auth_title, auth_cont, auth_date)
-	VALUES (POST_SEQ.nextval, 2, null, #{auth_title}, #{auth_cont}, sysdate)
+	VALUES (POST_SEQ.nextval, #{chall_id}, #{comment_id, jdbcType=VARCHAR}, #{auth_title}, #{auth_cont}, SYSDATE)
 	</insert>
 
  	<update id="updateChallenge" 
