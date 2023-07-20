@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,6 +25,7 @@ import lombok.RequiredArgsConstructor;
 public class RaceController {
 	@Autowired
 	private RaceService service;
+	
 	
 	@RequestMapping(value = "/events", method = RequestMethod.GET)
 	public String getAllRace(Model model) {
@@ -138,5 +140,17 @@ public class RaceController {
 			return "/eventsFilter2";
 		}
 		
+	}
+	
+	@Scheduled(cron = "0 0 2 * * *")
+	public String updateRaceCon() {
+		boolean updateRaceCon = service.updateRaceCon();
+		
+		if(updateRaceCon) {
+			return "redirect:/main";
+		}
+		
+		else
+			return "redirect:/challenge";
 	}
 }

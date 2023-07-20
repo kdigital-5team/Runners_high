@@ -47,7 +47,7 @@
 				region.region_district, 
 				(select race.race_name from race, challenge where race.race_id = challenge.race_id) as race_name
 		FROM challenge, region
-		WHERE challenge.region_id = region.region_id
+		WHERE challenge.region_id = region.region_id and chall_sit != '종료' and chall_sit != '진행중'
 		ORDER BY chall_id DESC
 	</select>
 
@@ -167,7 +167,7 @@
 				(select race.race_name from race, challenge where race.race_id = challenge.race_id) as race_name
 		FROM challenge, region
 		<trim prefixOverrides="AND |OR" prefix="WHERE">
-			challenge.region_id = region.region_id
+			challenge.region_id = region.region_id and chall_sit != '종료' and chall_sit != '진행중'
 			<if test="!online.isEmpty()">
 				and challenge.chall_online IN 
 				<foreach close=")" open="(" separator="," index="idx" item="value" collection="online">
@@ -301,6 +301,16 @@
 				chall_week_auth = #{chall_week_auth}
 				
 			WHERE chall_id=#{chall_id}
+	</update>
+	
+	<update id="updateChallSit">
+		update challenge
+		set chall_sit =
+			(CASE
+				WHEN SYSDATE <![CDATA[>=]]> chall_start_date and SYSDATE <![CDATA[<=]]> chall_end_date THEN '진행중'
+				WHEN SYSDATE <![CDATA[>]]> chall_end_date THEN '종료'
+				ELSE chall_sit
+				END)
 	</update>
 
 </mapper>

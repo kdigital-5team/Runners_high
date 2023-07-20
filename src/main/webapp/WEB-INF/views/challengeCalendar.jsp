@@ -87,7 +87,8 @@
 				<span>${chall.chall_sit}</span>
 			</div>
 			<div style="float: left; width: 34%;">
-				<div style="width:30%; padding-top:30%; height:0; border-radius: 70%; float:left; 
+				<div onclick="location.href='/feed/${host.user_id}'" 
+						style="cursor: pointer; width:30%; padding-top:30%; height:0; border-radius: 70%; float:left; 
 						background-image: url(/images/${host.user_pic});
 						background-position:center;
 						background-size:cover;">
@@ -107,7 +108,7 @@
 			<c:if test="${userId eq chall.chall_reg_id }">
 				<a href="/challenge/${chall.chall_id}host">관리</a><span class="mx-2">|</span> 
 			</c:if>
-			<c:if test="${chall.chall_sit eq '모집종료' }">
+			<c:if test="${challenge.chall_sit ne '모집중' || challenge.chall_sit ne '모집예정' }">
 				<a href="${chall.chall_id}challengePost">인증 게시판</a><span class="mx-2">|</span>
 			</c:if>
 			<a href="#">캘린더</a>

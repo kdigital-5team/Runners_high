@@ -177,6 +177,7 @@ boolean result = false;
 		return mapper.checkOtherChall(applyId);
 	}
 
-
-
+	public boolean updateChallSit() {
+		return mapper.updateChallSit();
+	}
 }

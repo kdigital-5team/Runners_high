@@ -1,8 +1,10 @@
 package com.spring.mapper;
 
+import java.util.Date;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.springframework.scheduling.annotation.Scheduled;
 
 import com.spring.dto.Challenge;
 
@@ -70,6 +72,8 @@ public interface ChallengeMapper {
 
 	public int checkOtherChall(String applyId);
 
+	public boolean updateChallSit();
+	
 	public List<ChallengePost> getPostByChallId(int chall_id);
 
 }
