@@ -93,7 +93,7 @@
 			</c:if>
 			<c:if test="${challenge.chall_sit eq '모집종료' }">
 				<a href="${chall_id}challengePost">인증 게시판</a><span class="mx-2">|</span>
-
+			</c:if>
 
 
 			<a href="/challenge/${challenge.chall_id}calendar">캘린더</a>
