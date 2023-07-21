@@ -121,11 +121,11 @@ CREATE TABLE challenge (
     chall_intro      VARCHAR2(500 BYTE) NOT NULL,
     chall_start_date DATE NOT NULL,
     chall_end_date   DATE NOT NULL,
-    chall_all_auth   NUMBER(10) NOT NULL,
+    chall_all_auth   NUMBER(3) NOT NULL,
     chall_week_auth  NUMBER(10)  NULL,
     chall_category   VARCHAR2(20 BYTE),
     chall_sit        VARCHAR2(20 BYTE),
-    chall_auth       NUMBER(3),
+    chall_auth       NUMBER(10),
     chall_online     VARCHAR2(20 BYTE),
     chall_size       NUMBER(20),
     chall_pic        VARCHAR2(300 BYTE)

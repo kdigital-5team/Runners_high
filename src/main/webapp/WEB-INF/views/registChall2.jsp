@@ -107,11 +107,10 @@
 			</div>
 	        <div class="context-form">
 	        	<label for="chall_category">챌린지 목적</label><br>
-	        	<div id="chall_category" name="chall_category">
-					<button type="button" class="customBtn" value ="일상용" onclick="selectedBtn(this, 'purpose');"> 일상용</button>
-					<button type="button" class="customBtn" value ="대회용" onclick="selectedBtn(this, 'purpose'); challRacePopup();"> 대회용 </button>
-					<label><input type="hidden" id="race_id" name="race_id" value=""  readonly></label>
-				</div>
+					<input type="button" class="customBtn" value ="일상용" onclick="selectedBtn(this, 'chall_category');">
+					<input type="button" class="customBtn" value ="대회용" onclick="selectedBtn(this, 'chall_category'); challRacePopup();">
+					<input type="hidden" id="race_id" name="race_id" value=""  readonly>
+					<input type="hidden" name="chall_category" id="chall_category" value="">
 			</div>
 				<div class="context-form">
 		        	<label for="region">지역</label>
@@ -132,19 +131,17 @@
 	        	<label class="notice-label">*'일상용' 챌린지의 경우 선택 입력</label><br>
 			<div class="context-form">
 	        	<label for="chall_sit">모집상태</label><br>
-	        	<div id="chall_sit" name="chall_sit">
-					<button type="button" class="customBtn" onclick="selectedBtn(this , 'sit');" value ="모집중"> 모집중</button>
-					<button type="button" class="customBtn" onclick="selectedBtn(this, 'sit');" value ="모집 종료"> 모집 종료 </button>
-					<button type="button" class="customBtn" onclick="selectedBtn(this, 'sit');" value ="모집 예정"> 모집 예정 </button>
-				</div >
+					<input type="button" class="customBtn" onclick="selectedBtn(this , 'chall_sit');" value ="모집중">
+					<input type="button" class="customBtn" onclick="selectedBtn(this, 'chall_sit');" value ="모집 종료">
+					<input type="button" class="customBtn" onclick="selectedBtn(this, 'chall_sit');" value ="모집 예정">
+					<input type="hidden" name="chall_sit" id="chall_sit" value="">
 			</div>
 			<div class="context-form">
 	        	<label for="chall_online">온라인/오프라인</label><br>
-	        	<div id="chall_online" name="chall_online">
-					<button type="button" class="customBtn" onclick="selectedBtn(this, 'online');" value ="온라인"> 온라인 </button>
-					<button type="button" class="customBtn" onclick="selectedBtn(this, 'online');" value ="오프라인"> 오프라인  </button>
-					<button type="button" class="customBtn" onclick="selectedBtn(this, 'online');" value ="모두"> 모두 </button><br>
-				</div>
+					<input type="button" class="customBtn" onclick="selectedBtn(this, 'chall_online');" value ="온라인">
+					<input type="button" class="customBtn" onclick="selectedBtn(this, 'chall_online');" value ="오프라인">
+					<input type="button" class="customBtn" onclick="selectedBtn(this, 'chall_online');" value ="모두"><br>
+					<input type="hidden" name="chall_online" id="chall_online" value="">
 				<label class="notice-label">*오프라인 모임 개최 여부</label><br>
 			</div>
 			<div class="context-form">
@@ -152,7 +149,7 @@
 	       		<input type="text" id="chall_all_auth" name="chall_all_auth" placeholder="예 : 40, 90"><br>
 	       		<label class="notice-label" for="all_auth_check"></label>
 			</div>
-			<input type="submit" value="다음" />
+			<input type="button" onclick="submit2();" value="다음" />
 			<br><br><br>
 </form>
 </div>
@@ -329,32 +326,39 @@ label.addEventListener('click', function(event){
 });
  */
 
-<!-- 버튼 선택 -->
-// 선택된 버튼들을 저장하는 배열
-var selectedButtons = {
-		'purpose' : null,
-		'sit' : null,
-		'online' : null
-};
+ <!-- 버튼 -->
+//선택된 버튼들을 저장하는 객체
+ var selectedButtons = {
+   'chall_category': null,
+   'chall_sit': null,
+   'chall_online': null
+ };
 
+ // 버튼 선택에 따른 값, css 변경
+ function selectedBtn(button, type) {
+     switch (type) {
+         case 'chall_category':
+             chall_category = button.value;
+             break;
+         case 'chall_sit':
+             chall_sit = button.value;
+             break;
+         case 'chall_online':
+             chall_online = button.value;
+             break;
+     }
 
-function selectedBtn(button, type) {
-    var selected = selectedButtons[type];
-    
-    // 이미 선택되었으면 취소
-    if (selected === button) {
-        button.style.backgroundColor = "";
-        selectedButtons[type] = null;
-    } else {
-    	// 다른 버튼 선택 전 이전에 선택한 버튼 초기화
-        if (selected) {
-            selected.style.backgroundColor = "";
-            selectedButtons[type] = null;
-        }
-        button.style.backgroundColor = "#d0e3ff";
-        selectedButtons[type] = button;
-    }
-}
+     if (selectedButtons[type] === button) {
+         button.style.backgroundColor = '';
+         selectedButtons[type] = null;
+     } else {
+         if (selectedButtons[type]) {
+             selectedButtons[type].style.backgroundColor = '';
+         }
+         button.style.backgroundColor = '#d0e3ff';
+         selectedButtons[type] = button;
+     }
+ }
 
 <!-- 캘린더 -->
 let nowMonth = new Date();  // 현재 달을 페이지를 로드한 날의 달로 초기화
@@ -639,29 +643,27 @@ function chageDistrict(){
 
 function submit2(){
 	
-	event.preventDefault()
-	 
-	var Form = document.regist_form;
+	Form = document.regist_form;
 	
-	var auth = document.getElementById("chall_week_auth").value();
-	var size = document.getElementById("chall_size").value();
-	var category = document.getElementById("chall_category").value();
-	var sit = document.getElementById("chall_sit").value();
-	var chall_online = document.getElementById("chall_category").value();
-		
-	alert("auth : " + auth +
-		 "\n category : " + category +
-		 "\n sit : " + sit +
-		 "\n chall_online : " + chall_online
-		 );
+	console.log(Form);
 	
-	return;
 	if(Form.chall_start_date.value=="" || Form.chall_end_date.value=="" || Form.chall_all_auth.value=="" || Form.region_district.value==""  || !all_auth_chk || !size_chk){
 	        alert("필수 입력란이 비었거나 입력 조건에 부합하지않습니다. 다시 확인해 주세요.");
 	        
 	        
 	} else {
-	       // document.regist_form.submit();
+			 Form.chall_category.value = chall_category;
+	         Form.chall_sit.value = chall_sit;
+	         Form.chall_online.value = chall_online;
+		
+	         alert(
+	        		 "chall_sit : " + chall_sit + " : " + Form.chall_sit.value +		 
+	        		 "\nchall_category : " + chall_category + " : " + Form.chall_category.value +		 
+	        		 "\nchall_online : " + chall_online + " : " + Form.chall_online.value		 
+	         );
+	         document.regist_form.submit();
+	         
+	         return;
 	    }
 	};
 		
