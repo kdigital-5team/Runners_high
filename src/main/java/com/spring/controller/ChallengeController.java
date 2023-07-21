@@ -641,6 +641,27 @@ public class ChallengeController {
 			}
 		 }
 		
+		// 다른 사람 챌린지로 이동
+				@RequestMapping(value = "/otherChall/{otherId}", method = RequestMethod.GET)
+				public String getOtherChall(@PathVariable String otherId, Model model, HttpSession session) throws Exception {
+					String userId =(String) session.getAttribute("userId");
+					
+					User user = userService.getUserByUserId(otherId);
+					List<ChallengeRegion> myChallList = challService.getChallByUserId(otherId);
+					List<UserChallenge> myUCList = challService.getUserChallbyUserId(otherId);
+					model.addAttribute("user", user);
+					model.addAttribute("myUCList", myUCList);
+					model.addAttribute("myChallList", myChallList);
+					
+					if(userId.equals(otherId)) {
+						return "/mypage_feed";
+					}
+					
+					else {
+						return "otherChall";
+					}
+				 }
+		
 		@Scheduled(cron = "0 0 0 * * *")
 		public String updateChallSit() {
 			boolean updateChallSit = challService.updateChallSit();

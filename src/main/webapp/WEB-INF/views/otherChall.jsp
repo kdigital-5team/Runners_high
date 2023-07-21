@@ -61,7 +61,7 @@
 						data-stellar-background-ratio="0.5">
 						<div class="hero-contents">
 							<p>
-								<a href="/feed/{otherId}">피드</a><span class="mx-2">|</span>
+								<a href="/feed/${user.user_id}">피드</a><span class="mx-2">|</span>
 								<a href="#"><strong>참여 챌린지</strong></a> <span class="mx-2">|</span> 
 								<a href="/mypage/title">칭호</a> <span class="mx-2"></span>
 							</p>
@@ -84,11 +84,7 @@
 									height:200px; 
 									background-color:#F0F0F0; 
 									margin:2%; margin-bottom:20px; 
-									border-radius: 5px;  
-									cursor: pointer;" 
-								<c:if test="${chall.chall_sit ne '종료' }"> 
-									onclick="location.href='/challenge/${chall.chall_id}'"
-								</c:if>>
+									border-radius: 5px;">
 						<div>
 									<div id="map${status.count}" style="float: left; width: 35%; padding-top:35%; height:0;margin: 2%; border-radius: 5px;
 										background-position:center;
