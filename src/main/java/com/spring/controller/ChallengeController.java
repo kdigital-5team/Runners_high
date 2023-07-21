@@ -292,14 +292,11 @@ public class ChallengeController {
 	// 검색필터를 통해 보여지는 챌린지 리스트
 	@GetMapping("/challenge/filter")
 	public String getChallByOption(@RequestParam(value="opt[]", required=false) List<String> opt, @RequestParam(value="val[]", required=false) List<String> val, @RequestParam(value="keyword") String keyword, Model model) {
-		List<ChallengeRegion> challList = new ArrayList<ChallengeRegion>();
+		List<ChallengeRegion> challList = null;
 		if(opt==null && (keyword==null||keyword=="")) {
 			challList=challService.getAllChallR();
-			for(ChallengeRegion cr : challList) {
-				System.out.println(cr);
-			}
 			model.addAttribute("challList", challList);
-			return "/challFilter";
+			return "/challengeFilter";
 		}
 		else {
 			List<String> online= new ArrayList<String>();
@@ -652,6 +649,27 @@ public class ChallengeController {
 				return "otherFeed";
 			}
 		 }
+		
+		// 다른 사람 챌린지로 이동
+				@RequestMapping(value = "/otherChall/{otherId}", method = RequestMethod.GET)
+				public String getOtherChall(@PathVariable String otherId, Model model, HttpSession session) throws Exception {
+					String userId =(String) session.getAttribute("userId");
+					
+					User user = userService.getUserByUserId(otherId);
+					List<ChallengeRegion> myChallList = challService.getChallByUserId(otherId);
+					List<UserChallenge> myUCList = challService.getUserChallbyUserId(otherId);
+					model.addAttribute("user", user);
+					model.addAttribute("myUCList", myUCList);
+					model.addAttribute("myChallList", myChallList);
+					
+					if(userId.equals(otherId)) {
+						return "/mypage_feed";
+					}
+					
+					else {
+						return "otherChall";
+					}
+				 }
 		
 		@Scheduled(cron = "0 0 0 * * *")
 		public String updateChallSit() {

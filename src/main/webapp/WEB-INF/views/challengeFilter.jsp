@@ -26,8 +26,13 @@
 										<c:if test="${chall.chall_category eq '대회용'}">
 											<div style="font-size: 15px">${chall.race_name }</div>
 										</c:if>
-										
+										<c:if test="${chall.region_state eq chall.region_city}">
+										<div style="font-size: 15px">${chall.region_state} ${chall.region_district}</div>
+										</c:if>
+										<c:if test="${chall.region_state ne chall.region_city}">
 										<div style="font-size: 15px">${chall.region_state} ${chall.region_city}</div>
+										</c:if>
+										<div>${race.region_state} ${race.region_city}</div>
 										<div class="caption" style="font-size: 15px"><fmt:formatDate pattern="yyyy-MM-dd" value="${chall.chall_start_date}"/> ~ <fmt:formatDate pattern="yyyy-MM-dd" value="${chall.chall_end_date}"/></div>
 										<div>인증 주 ${chall.chall_week_auth}회 / 최대 ${chall.chall_size}명</div>
 										<div style="display: none;" id="${status.count}">${chall.chall_id}</div>

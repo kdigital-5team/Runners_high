@@ -6,14 +6,19 @@
 						<div class="col-sm-6 col-md-4 col-lg-3 mb-5 mb-lg-5">
 							
 								<div class="custom-media d-block">
-									<div class="img-wrap mb-3">
+									<div class="img-wrap mb-3" style="height: 160px;">
 										<a href="${race.race_url}"><img src="${race.race_pic}"
 											alt="Image" class="img-fluid"></a>
 									</div>
 									<div>
 										<h5 style="display: inline-block; overflow:hidden; text-overflow: ellipsis; white-space: nowrap; width: 70%;"><a href="#" data-toggle="modal" data-target="#myModal${vs.index}">${race.race_name}</a></h5>
 										<div style="display: inline-block; float: right; width: 30%">${race.race_con}</div>
+										<c:if test="${race.region_state eq race.region_city}">
+										<div>${race.region_state} ${race.region_district}</div>
+										</c:if>
+										<c:if test="${race.region_state ne race.region_city}">
 										<div>${race.region_state} ${race.region_city}</div>
+										</c:if>
 										<span class="caption" style="font-size: 10px"><fmt:formatDate pattern="yyyy-MM-dd" value="${race.race_date}"/></span>
 									</div>
 								</div>

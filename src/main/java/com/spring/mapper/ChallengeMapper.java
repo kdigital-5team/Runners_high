@@ -76,4 +76,8 @@ public interface ChallengeMapper {
 	
 	public List<ChallengePost> getPostByChallId(int chall_id);
 
+	public List<ChallengeRegion> getChallByUserId(String userId);
+
+	public List<UserChallenge> getUserChallbyUserId(String userId);
+
 }

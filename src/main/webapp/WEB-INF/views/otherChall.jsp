@@ -43,15 +43,10 @@
 								<div class="post-header2">
 									<img src="/images/${user.user_pic}" alt="Profile Picture">									
 								</div>
-							</div>
-							<form action="/mypage/feed" enctype="multipart/form-data" method="POST">					
-								<div class="post" style="border:none; margin-top:95%;">
-									<div class="username">${user.nickname}</div>
-									<div class="userIntro">${user.intro}</div>
-								</div>
-							</form>	
-							<div onclick="location.href='/mypage/edit'" style="border:none; margin-top:14%; margin-left:2%; margin-right:15%">
-								<button>프로필 수정</button>
+							</div>				
+							<div class="post" style="border:none; margin-top: 12%;">
+								<div class="username">${user.user_id}</div>
+								<div class="userIntro">${user.intro}</div>
 							</div>
 						</div>
 					</div>
@@ -66,10 +61,9 @@
 						data-stellar-background-ratio="0.5">
 						<div class="hero-contents">
 							<p>
-								<a href="/mypage/feed">피드</a> <span class="mx-2">|</span> <a
-									href="/mypage/chall"><strong>참여 챌린지</strong></a> <span
-									class="mx-2">|</span> <a href="/mypage/title">칭호</a> <span
-									class="mx-2"></span>
+								<a href="/feed/${user.user_id}">피드</a><span class="mx-2">|</span>
+								<a href="#"><strong>참여 챌린지</strong></a> <span class="mx-2">|</span> 
+								<a href="/mypage/title">칭호</a> <span class="mx-2"></span>
 							</p>
 						</div>
 					</div>
@@ -90,11 +84,7 @@
 									height:200px; 
 									background-color:#F0F0F0; 
 									margin:2%; margin-bottom:20px; 
-									border-radius: 5px;  
-									cursor: pointer;" 
-								<c:if test="${chall.chall_sit ne '종료' }"> 
-									onclick="location.href='/challenge/${chall.chall_id}'"
-								</c:if>>
+									border-radius: 5px;">
 						<div>
 									<div id="map${status.count}" style="float: left; width: 35%; padding-top:35%; height:0;margin: 2%; border-radius: 5px;
 										background-position:center;

@@ -180,4 +180,12 @@ boolean result = false;
 	public boolean updateChallSit() {
 		return mapper.updateChallSit();
 	}
+
+	public List<ChallengeRegion> getChallByUserId(String userId) {
+		return mapper.getChallByUserId(userId);
+	}
+
+	public List<UserChallenge> getUserChallbyUserId(String userId) {
+		return mapper.getUserChallbyUserId(userId);
+	}
 }
