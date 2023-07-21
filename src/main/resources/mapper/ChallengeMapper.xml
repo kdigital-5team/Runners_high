@@ -275,7 +275,7 @@
 	</select>
 	
 	<select id="getPostByAuthId" resultType="com.spring.dto.ChallengePost">
-		SELECT auth_title, auth_cont
+		SELECT auth_title, auth_cont, chall_id
 		FROM auth_post
 		WHERE auth_id=#{auth_id}
 	</select>

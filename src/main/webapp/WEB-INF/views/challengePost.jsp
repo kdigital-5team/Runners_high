@@ -112,7 +112,7 @@
 							<tr>
 								
 								<td>${post.auth_id}</td>
-								<td><a href="/challenge/${chall_id}challPostDetail${post.auth_id}">${post.auth_title}</a></td>
+								<td><a href="/challenge/challPostDetail${post.auth_id}">${post.auth_title}</a></td>
 								<td><fmt:formatDate value="${post.auth_date}" pattern="yyyy-MM-dd"/></td>
 							</tr>
 					</tbody>

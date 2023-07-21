@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>${post.auth_title}</title>
+<title>${challenge.chall_name}</title>
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -118,7 +118,7 @@
 					<div class="form-group">	
 						<label for="auth_title">제목</label>					
 							                	
-		                	<input class="form-control" type="text" name="auth_title" id="auth_title" value="${post.auth_title}" >
+		                	<input class="form-control" type="text" name="auth_title" id="auth_title" value="${post.auth_title}">
 	                
 	                	
 					</div>
@@ -132,12 +132,11 @@
 					<div class="form-group">
 					<label for="auth_cont">내용</label>	
 						<!-- <div style="display:table-cell; width:50%; vertical-align: middle; margin-right:10px;"> -->
-							<input class="form-control" type="text" name="auth_cont" id="auth_cont" style="height:600px" value="${post.auth_cont}"></input>
+							<input class="form-control" type="text" name="auth_cont" id="auth_cont" style="height:400px" value="${post.auth_cont}"></input>
 							<!-- rows="5" style="width:600px; display:block; margin: 0 auto;" -->
 						<!-- </div> -->
 					</div>	
 					
-					<span><button><a href="/modifyPost/${auth_id}">수정하기</a></button></span>
 			</div>
 						
 			

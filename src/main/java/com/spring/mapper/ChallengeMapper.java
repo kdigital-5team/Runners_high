@@ -76,4 +76,6 @@ public interface ChallengeMapper {
 	
 	public List<ChallengePost> getPostByChallId(int chall_id);
 
+	public boolean updateChallPost();
+
 }

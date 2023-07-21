@@ -180,4 +180,9 @@ boolean result = false;
 	public boolean updateChallSit() {
 		return mapper.updateChallSit();
 	}
+
+	public boolean updateChallPost(ChallengePost post) {
+		
+		return mapper.updateChallPost();
+	}
 }
