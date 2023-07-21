@@ -84,6 +84,25 @@ public class ChallengeController {
 		return "registChall";
 	}
 	
+	// 테스트용
+	@RequestMapping(value = "/registChall2", method = RequestMethod.GET)
+	public String registChall2(Model model, HttpSession session, RedirectAttributes rttr) throws Exception {
+		List<String> stateList = service.getAllState();
+		String userId = (String) session.getAttribute("userId");
+		int isOtherApply=0;
+		isOtherApply = challService.checkOtherChall(userId);
+		if(isOtherApply>0) {
+			rttr.addFlashAttribute("isTrue", "존재");
+			return "redirect:/challenge";
+		}
+		//List<String> cityList = service.getCityByState();
+		//List<String> districtList = service.getDistrictByCity();
+		model.addAttribute("stateList",stateList);
+		//model.addAttribute("cityList",cityList);
+		//model.addAttribute("districtList",districtList);
+		return "registChall2";
+	}
+	
 	
 	// 챌린지 추가
 	// http://localhost:8081/registChall
@@ -138,6 +157,62 @@ public class ChallengeController {
 			}
 			return "index";
 		}
+		
+		
+		// 챌린지 추가 테스트용
+		// http://localhost:8081/registChall
+			@RequestMapping(value = "/registChall2", method = RequestMethod.POST)
+			public String insertChallenge2(@ModelAttribute Challenge newChallenge,
+										  Model model,
+										  @RequestParam String region_district,
+										  HttpSession session) throws Exception {
+				
+				String userId = (String) session.getAttribute("userId");
+				String raceId = newChallenge.getRace_id();
+				System.out.println(newChallenge);
+				System.out.println(region_district);
+				System.out.println(userId);
+				
+				if (raceId==null && newChallenge.getChall_category().equals("대회용")) {
+					session.setAttribute("msg", "대회 선택을 다시 해주세요!");
+					session.setAttribute("url", "/registChall2");
+					return "alert";
+
+				} else if (newChallenge.getChall_category().equals("일상용")) {
+					raceId=null;
+				}
+				boolean challResult = false;
+				
+			
+				try {
+					newChallenge.setChall_reg_id(userId);
+					newChallenge.setRegion_id(service.getIdByDistrict(region_district));
+					System.out.println(newChallenge);
+					
+					newChallenge.setRace_id(raceId);
+					System.out.println(newChallenge);
+					challResult = challService.insertChallenge(newChallenge);
+					
+					if(challResult) {
+						System.out.println("등록완료");
+						
+						int challId = newChallenge.getChall_id();
+						System.out.println(challId);
+						session.setAttribute("challId", challId);
+						session.removeAttribute(raceId);
+						challService.insertHost(userId, challId);
+						
+						return "registChallRoute";
+					}
+					
+				} catch (Exception e) {
+					
+					e.printStackTrace();
+					return "index";
+				}
+				return "index";
+			}
+		
 	
 	@RequestMapping(value = "/registChall/selectChallRace" , method = RequestMethod.GET)
 	public String selectRace(Model model) {
