@@ -312,5 +312,46 @@
 				ELSE chall_sit
 				END)
 	</update>
+	
+	<select resultType="com.spring.dto.ChallengeRegion" 
+			id="getChallByUserId">
+		SELECT challenge.chall_id, 
+				challenge.chall_reg_id, 
+				challenge.chall_name, 
+				challenge.chall_intro, 
+				challenge.chall_start_date, 
+				challenge.chall_end_date, 
+				challenge.chall_all_auth, 
+				challenge.chall_week_auth, 
+				challenge.chall_category, 
+				challenge.chall_sit, 
+				challenge.chall_auth, 
+				challenge.chall_online, 
+				challenge.chall_size, 
+				challenge.chall_pic, 
+				region.region_state, 
+				region.region_city, 
+				region.region_district, 
+				(select race.race_name from race, challenge where race.race_id = challenge.race_id) as race_name
+		FROM challenge, region
+		WHERE challenge.region_id = region.region_id 
+				and challenge.chall_id in 
+				(select chall_id 
+				from user_chall
+				where user_id =#{userId} and user_reg_status != 'N')
+		ORDER BY chall_id DESC
+	</select>
+	
+	<select id="getUserChallbyUserId" resultType="com.spring.dto.UserChallenge">
+		select 	user_id,
+				chall_id,
+				chall_auth_num,
+				chall_reg_status,
+				user_chall_status,
+				user_reg_status
+		from user_chall
+		where user_id = #{userId} and user_reg_status != 'N'
+		ORDER BY chall_id DESC
+	</select>
 
 </mapper>

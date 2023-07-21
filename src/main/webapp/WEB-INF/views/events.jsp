@@ -178,7 +178,12 @@
 									<div>
 										<h5 style="display: inline-block; overflow:hidden; text-overflow: ellipsis; white-space: nowrap; width: 70%;"><a href="#" data-toggle="modal" data-target="#myModal${vs.index}">${race.race_name}</a></h5>
 										<div style="display: inline-block; float: right; width: 30%">${race.race_con}</div>
+										<c:if test="${race.region_state eq race.region_city}">
+										<div>${race.region_state} ${race.region_district}</div>
+										</c:if>
+										<c:if test="${race.region_state ne race.region_city}">
 										<div>${race.region_state} ${race.region_city}</div>
+										</c:if>
 										<span class="caption" style="font-size: 10px"><fmt:formatDate pattern="yyyy-MM-dd" value="${race.race_date}"/></span>
 									</div>
 								</div>
@@ -251,11 +256,10 @@ let keyword=null;
 
 	function test(button_id, option){
 		const target = document.getElementById(button_id);
-		console.log(target);
-		console.log(keyword);
-		target.disabled=true;
+		const sbutton = document.getElementById("select"+button_id);
 		var option_list = $("#option_list");
-		option_list.append("<li style=\"display:inline-block\" name="+ option +"><button type=\"button\" onclick=\"removeBtn(this,this.innerText)\">" + target.innerText + "</button></li>");
+		if(sbutton == null)
+			option_list.append("<li style=\"display:inline-block\"id=\"select"+button_id+"\" name="+ option +"><button type=\"button\" onclick=\"removeBtn(this,this.innerText)\">" + target.innerText + "</button></li>");
 		
 		var region_list =$("#region_list");
 		var rList = document.getElementById("region_list");
@@ -340,7 +344,6 @@ let keyword=null;
 	function removeBtn(ths, button_id){
 		var ths = $(ths);
 		const target = document.getElementById(button_id);
-		target.disabled=false;
 		ths.parents("li").remove();
 
 	search();

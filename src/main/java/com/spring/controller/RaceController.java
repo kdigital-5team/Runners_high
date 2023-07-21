@@ -81,7 +81,6 @@ public class RaceController {
 				}
 			}
 			raceList=service.getRaceByOption(category, dist, date, con, state, city, keyword);
-			System.out.println(raceList);
 			model.addAttribute("raceList", raceList);
 			return "/eventsFilter";
 		}
