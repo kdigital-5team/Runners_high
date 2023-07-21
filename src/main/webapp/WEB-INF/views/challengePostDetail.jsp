@@ -104,8 +104,10 @@
 							</table> --%>
 						<div>
 						<table>
+						<c:forEach items="${postList}" var="post">
 						<tr><td>${post.auth_title}</td></tr>
 						<tr><td>${post.auth_cont}</td></tr>
+						</c:forEach>
 						</table>
 						</div>
 						

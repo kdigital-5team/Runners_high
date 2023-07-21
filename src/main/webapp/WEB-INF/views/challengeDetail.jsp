@@ -55,7 +55,7 @@
 				<span>${challenge.chall_sit}</span>
 				<c:if test="${userId ne challenge.chall_reg_id 
 								&& userChall.user_reg_status ne 'Y' 
-								&& userChall.user_deny_num lt 2 
+								&& userChall.user_deny_num lt 5 
 								&& challenge.chall_sit eq '모집중'
 								&& fn:length(userList) lt challenge.chall_size }">
 					<form action="/challenge/${challenge.chall_id}/apply" method="post">
@@ -71,7 +71,8 @@
 				</c:if>
 			</div>
 			<div style="float: left; width: 34%;">
-				<div style="width:30%; padding-top:30%; height:0; border-radius: 70%; float:left; 
+				<div onclick="location.href='/feed/${host.user_id}'" 
+						style="cursor: pointer; width:30%; padding-top:30%; height:0; border-radius: 70%; float:left; 
 						background-image: url(/images/${host.user_pic});
 						background-position:center;
 						background-size:cover;">
@@ -88,18 +89,13 @@
 		
 		<div style="margin: auto; text-align: center;">
 			<a href="#">소개</a><span class="mx-2">|</span> 
-			
+			<c:if test="${userId eq challenge.chall_reg_id }">
 				<a href="/challenge/${challenge.chall_id}host">관리</a><span class="mx-2">|</span> 
-			
-			<%-- <c:if test="${challenge.chall_sit eq '모집종료' }"> --%>
+			</c:if>
+			<c:if test="${challenge.chall_sit ne '모집중' || challenge.chall_sit ne '모집예정' }">
 				<a href="${chall_id}challengePost">인증 게시판</a><span class="mx-2">|</span>
-
-		<%-- 	</c:if> --%>
-			
-
 			</c:if>
 			<a href="/challenge/${challenge.chall_id}calendar">캘린더</a>
-
 		</div>
 
 		<div style="margin: auto; width: 80%;">챌린지 소개</div>
@@ -112,10 +108,11 @@
 
 			<c:forEach items="${userList }" var="apply_user">
 					<div style="display: inline-block; width: 10%;">
-						<div style="width:100%; padding-top:100%; height:0; border-radius: 70%;  
-						background-image: url(/images/${apply_user.user_pic});
-						background-position:center;
-						background-size:cover;">
+						<div onclick="location.href='/feed/${apply_user.user_id}'" 
+							style="cursor: pointer; width:100%; padding-top:100%; height:0; border-radius: 70%; 
+							background-image: url(/images/${apply_user.user_pic}), url(../static/images/profileImages/default_image.png);
+							background-position:center;
+							background-size:cover;">
 						</div>
 						<div style="text-align: center;">
 							${apply_user.nickname }

@@ -37,13 +37,27 @@
 </style>
 
 <body>
-	<div class="site-wrap">
 
-		<!-- header -->
-		<%@ include file="./inc/header.jsp"%>
+		
+	<script type="text/javascript"
+		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a9fd4644a9a496749d0625dffe4286f8&libraries=services,clusterer,drawing"></script>
+	<script src="../static/js/jquery.min.js"></script>
+	<script src="../static/js/jquery-migrate-3.0.1.min.js"></script>
+	<script src="../static/js/jquery-ui.js"></script>
+	<script src="../static/js/popper.min.js"></script>
+	<script src="../static/js/bootstrap.min.js"></script>
+	<script src="../static/js/owl.carousel.min.js"></script>
+	<script src="../static/js/jquery.stellar.min.js"></script>
+	<script src="../static/js/jquery.fancybox.min.js"></script>
+	<script src="../static/js/aos.js"></script>
+	<script src="../static/js/main.js"></script>
+	<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 
+	<!-- header -->
+	<%@ include file="./inc/header.jsp"%>
+<div class="site-wrap">
 		<!-- 피드 / 챌린지 / 칭호 탭 -->
-		<div class="container">
+		<%-- <div class="container">
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="hero-wrap text-center" style=""
@@ -58,12 +72,13 @@
 					</div>
 				</div>
 			</div>
-		</div>
+		</div> --%>
+		<div  class="container"><h2>인증하기</h2></div>
 		
 		<!-- 피드 글 작성 -->
 		<div class="container">
-			<!-- <div class="post"> -->	        
-		        <form action='<c:url value='/challengePost/insertChallPost'/>' method="GET" enctype="multipart/form-data">					
+
+		        <form action='<c:url value='/challenge/${chall_id}/insertChallPost'/>'name= "regist_form" id="regist_form" method="post" enctype="multipart/form-data">					
 					<div class="form-group">	
 						<label for="auth_title">제목</label>					
 						<!-- <div style="display:table-cell; margin:auto; margin-top:5px;"> -->		                	
@@ -72,24 +87,45 @@
 	                	
 					</div>
 					<div class="form-group">
-					<input class="form-control" type="number" name="chall_id" placeholder="2">
+					<label><input type="hidden" class="form-control" id="chall_id" name="chall_id" value=${chall_id}  readonly></label>
+					
 					</div>
 					 
 					<div class="form-group">
+					<label for="auth_cont">내용</label>	
 						<!-- <div style="display:table-cell; width:50%; vertical-align: middle; margin-right:10px;"> -->
-							<textarea class="form-control" type="text" name="auth_cont" id="auth_cont"></textarea>
+							<textarea class="form-control" type="text" name="auth_cont" id="auth_cont" style="height:600px"]></textarea>
 							<!-- rows="5" style="width:600px; display:block; margin: 0 auto;" -->
 						<!-- </div> -->
 					</div>	
+					<div style="text-align:center; background-color:white;">		
+      					 <button type="button" class="btn btn-primary" onclick="submit2();">등록하기</button>
+    				</div>
 				</form>
 			</div>
 		</div>
-		<div style="text-align:center; ">		
-			<button type="submit" style="background-color:Gainsboro; border-radius:5%; padding:6px 11px; font-color:white">등록</button></div>
-	<!-- </div> -->
-	<!-- 사진 첨부용 자바 스크립트 -->
+		
 	<script type="text/javascript">
+	
+	var chall_id = null;
+	
+	$(document).ready(function(){
+		chall_id =  ${chall_id};
+	});
+	
+	function submit2(){
+		Form=document.regist_form;
+		if(Form.auth_cont.value =="" || Form.chall_id.value==""  || Form.auth_title.value==""){
+		        alert("필수 입력란이 비었거나 입력 조건에 부합하지않습니다. 다시 확인해 주세요.");
+		        
+		        
+		} else {
+		       document.regist_form.submit();
 
+		    }
+		};
+		
+		
 	   function readURL(input) {
 	      var file = input.files[0] 
 	      console.log(file)
@@ -104,20 +140,8 @@
 	      }
 	  }  
 	</script>
-	<!-- footer -->
-	<%@ include file="./inc/footer.jsp"%>
-
-	<script src="js/jquery.min.js"></script>
-	<script src="js/jquery-migrate-3.0.1.min.js"></script>
-	<script src="js/jquery-ui.js"></script>
-	<script src="js/popper.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<script src="js/owl.carousel.min.js"></script>
-	<script src="js/jquery.stellar.min.js"></script>
-	<script src="js/jquery.magnific-popup.min.js"></script>
-	<script src="js/aos.js"></script>
-
-	<script src="js/main.js"></script>
-
+<!-- footer -->
+<%@ include file="./inc/footer.jsp"%>
+</body>
 </body>
 </html>

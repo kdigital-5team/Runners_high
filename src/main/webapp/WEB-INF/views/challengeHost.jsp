@@ -69,7 +69,8 @@
 				</c:if>
 			</div>
 			<div style="float: left; width: 34%;">
-				<div style="width:30%; padding-top:30%; height:0; border-radius: 70%; float:left; 
+				<div onclick="location.href='/feed/${host.user_id}'" 
+						style="cursor: pointer; width:30%; padding-top:30%; height:0; border-radius: 70%; float:left; 
 						background-image: url(/images/${host.user_pic});
 						background-position:center;
 						background-size:cover;">
@@ -89,13 +90,13 @@
 			<c:if test="${userId eq challenge.chall_reg_id }">
 				<a href="#">관리</a><span class="mx-2">|</span> 
 			</c:if>
-			<c:if test="${challenge.chall_sit eq '모집종료' }">
+			<c:if test="${challenge.chall_sit ne '모집중' || challenge.chall_sit ne '모집예정' }">
 				<a href="${chall_id}challengePost">인증 게시판</a><span class="mx-2">|</span>
 			</c:if>
 			<a href="/challenge/${challenge.chall_id}calendar">캘린더</a>
 		</div>
 		<div style="float: left; width: 32%; margin-top: 10px">
-			<c:if test="${challenge.chall_sit ne '모집종료'}">
+			<c:if test="${challenge.chall_sit eq '모집중' || challenge.chall_sit eq '모집예정' }">
 				<form action="/challenge/${challenge.chall_id}modify" method="GET" id="detailForm" style="display: inline-block;">
 								<input type="submit" class="btn btn-secondary" value="수정">	
 				</form>

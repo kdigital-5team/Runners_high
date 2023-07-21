@@ -71,7 +71,8 @@
 				</c:if>
 			</div>
 			<div style="float: left; width: 34%;">
-				<div style="width:30%; padding-top:30%; height:0; border-radius: 70%; float:left; 
+				<div onclick="location.href='/feed/${host.user_id}'" 
+						style="cursor: pointer; width:30%; padding-top:30%; height:0; border-radius: 70%; float:left; 
 						background-image: url(/images/${host.user_pic});
 						background-position:center;
 						background-size:cover;">
@@ -112,7 +113,7 @@
 								
 								<td>${post.auth_id}</td>
 								<td><a href="/challenge/${chall_id}challPostDetail${post.auth_id}">${post.auth_title}</a></td>
-								<td>${post.auth_date}</td>
+								<td><fmt:formatDate value="${post.auth_date}" pattern="yyyy-MM-dd"/></td>
 							</tr>
 					</tbody>
 					</c:forEach>
@@ -121,7 +122,7 @@
 				<div style="margin:30px"></div>
 				<div style="text-align:center; ">		
 			<button style="background-color:Gainsboro; border-radius:5%; padding:6px 11px; font-color:white">
-			<a href="/challengePost/insertChallPost">글쓰기</a></button></div>
+			<a href="/challenge/${chall_id}insertChallPost">글쓰기</a></button></div>
 			
 		
 	</div>

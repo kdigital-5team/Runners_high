@@ -1,8 +1,10 @@
 package com.spring.mapper;
 
+import java.util.Date;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.springframework.scheduling.annotation.Scheduled;
 
 import com.spring.dto.Challenge;
 
@@ -47,7 +49,7 @@ public interface ChallengeMapper {
 	//인증게시판
 	public List<ChallengePost> getAllPost();
 
-	public void insertChallPost(ChallengePost newPost);
+	public int insertChallPost(ChallengePost challpost);
 
 	public ChallengePost getPostByAuthId(int auth_id);
 
@@ -69,5 +71,9 @@ public interface ChallengeMapper {
 	public void insertHost(String userId, int challId);
 
 	public int checkOtherChall(String applyId);
+
+	public boolean updateChallSit();
+	
+	public List<ChallengePost> getPostByChallId(int chall_id);
 
 }

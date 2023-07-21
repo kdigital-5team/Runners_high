@@ -11,6 +11,7 @@
  		SELECT race.race_id, region.region_state, region.region_city, region.region_district, race.race_org, race.race_name, race.race_date, race.race_apply, race.race_deadline, race.race_url, race.race_category, race.race_dist, race.race_pic, race.race_con 
  		FROM race, region
  		WHERE race.region_id = region.region_id
+ 		ORDER BY race_date DESC
  	</select>
  	
  	<select id="getRegionIdByRaceId" 
@@ -69,6 +70,17 @@
 				AND race.race_name LIKE '%'||#{keyword}||'%' 
 			</if>
 		</trim>
+		ORDER BY race_date DESC
 	</select>
+	
+	<update id="updateRaceCon">
+		update race
+		set race_con =(
+		case when SYSDATE <![CDATA[<]]> race_apply THEN '접수예정'
+		WHEN SYSDATE <![CDATA[>]]> race_deadline THEN '접수마감'
+		ELSE '접수중'
+		END
+		)
+	</update>
  	
  </mapper>
