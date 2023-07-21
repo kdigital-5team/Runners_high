@@ -467,31 +467,40 @@ public class ChallengeController {
 		}
 		
 		
+
+		
 		@RequestMapping(value="/challenge/{chall_id}insertChallPost", method = RequestMethod.GET)		//게시글 작성 화면 호출
-	    public String insertChallPostForm() throws Exception{
+	    public String insertChallPostForm(@PathVariable int chall_id, Model model) throws Exception{
+			System.out.println(chall_id);
+			model.addAttribute("chall_id", chall_id);
 	    	return "/insertChallPost";
 	    }
 		
-		@RequestMapping(value="/challenge/{chall_id}insertChallPost", method = RequestMethod.POST)
+		@RequestMapping(value="/challenge/{chall_id}/insertChallPost", method = RequestMethod.POST)
 		public String insertChallPost(@PathVariable int chall_id, @ModelAttribute ChallengePost challpost, Model model) throws Exception {
+
+			boolean challPostResult = false;
+			System.out.println(challpost);
 		
-			String view = "error";
-			
-			boolean postresult = false;
-			
 			try {
-				postresult = challService.insertChallPost(challpost);
-				if(postresult) {
+				System.out.println(challpost);
+				
+				challPostResult = challService.insertChallPost(challpost);
+				
+				if(challPostResult) {
+					System.out.println("등록완료");
+
 					
-					view = "redirect:/challenge/"+chall_id;
-					return view;
+					return "redirect:/challenge/"+chall_id;
 				}
 				
 			} catch (Exception e) {
+				
 				e.printStackTrace();
+				return "index";
 			}
 			
-			return view;
+			return "/challenge"+chall_id;
 		}
 		
 //		@RequestMapping(value="/challengePost/insertChallPost", method = RequestMethod.GET)
