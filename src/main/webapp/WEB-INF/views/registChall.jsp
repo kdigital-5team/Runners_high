@@ -187,6 +187,7 @@
 	<script src="../static/js/aos.js"></script>
 	<script src="../static/js/main.js"></script>
 <script src="https://code.jquery.com/jquery-3.4.1.js" ></script>
+<script src="jquery.cookie.js"></script>  
 <script>
 var popup;
 var chall_path;
