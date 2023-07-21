@@ -214,7 +214,7 @@ $(document).ready(function (){
 var isTrue='${isTrue}';
 if(isTrue=='존재')
 	alert("이미 신청/참가한 챌린지가 있습니다.");
-if(${userChall.user_deny_num}>=2)
+if(${userChall.user_deny_num}>=5)
 	alert("거절 5회로 신청 불가");
 
   </script>

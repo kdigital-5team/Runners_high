@@ -7,6 +7,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -26,7 +27,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.spring.dto.Challenge;
+import com.spring.dto.ChallengeRegion;
 import com.spring.dto.User;
+import com.spring.dto.UserChallenge;
+import com.spring.service.ChallengeService;
 import com.spring.service.UserService;
 
 @Controller
@@ -34,11 +39,23 @@ public class MypageController {
 
 	@Autowired
 	UserService service;
+	
+	@Autowired
+	ChallengeService challService;
 
 	
 	@RequestMapping(value = "/mypage/chall", method = RequestMethod.GET)
-	public String mypage_chall() {
-		System.out.println("chall");
+	public String mypage_chall(HttpSession session, Model model) throws Exception {
+		String userId =(String)session.getAttribute("userId");
+		if(userId == null || userId=="")
+			return "login";
+		
+		User user = service.getUserByUserId(userId);
+		List<ChallengeRegion> myChallList = challService.getChallByUserId(userId);
+		List<UserChallenge> myUCList = challService.getUserChallbyUserId(userId);
+		model.addAttribute("user", user);
+		model.addAttribute("myUCList", myUCList);
+		model.addAttribute("myChallList", myChallList);
 		return "mypage_chall";
 	}
 

@@ -220,7 +220,7 @@
             </div>
           </div>
 					
-				</div>
+		</div>
 				<div id="show-dog-img">
 				</div>
 
