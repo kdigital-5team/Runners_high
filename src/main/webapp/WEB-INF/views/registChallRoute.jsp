@@ -58,7 +58,7 @@
 					마우스를 클릭하면 선 그리기가 종료되면서 그려진 선의 실제 거리(단위 : m)를 표시합니다.</label>
 				<div id="map" style="width: 800px; height: 600px;"></div>
 				<div>
-					<input type="submit" value="등록"/>
+					<input type="submit" onclick="submit2();" value="등록"/>
 					<br><br><br>
 				</div>
 			</div>
