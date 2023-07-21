@@ -217,14 +217,11 @@ public class ChallengeController {
 	// 검색필터를 통해 보여지는 챌린지 리스트
 	@GetMapping("/challenge/filter")
 	public String getChallByOption(@RequestParam(value="opt[]", required=false) List<String> opt, @RequestParam(value="val[]", required=false) List<String> val, @RequestParam(value="keyword") String keyword, Model model) {
-		List<ChallengeRegion> challList = new ArrayList<ChallengeRegion>();
+		List<ChallengeRegion> challList = null;
 		if(opt==null && (keyword==null||keyword=="")) {
 			challList=challService.getAllChallR();
-			for(ChallengeRegion cr : challList) {
-				System.out.println(cr);
-			}
 			model.addAttribute("challList", challList);
-			return "/challFilter";
+			return "/challengeFilter";
 		}
 		else {
 			List<String> online= new ArrayList<String>();
