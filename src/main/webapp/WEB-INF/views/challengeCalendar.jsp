@@ -280,7 +280,7 @@ function buildCalendar() {
 
         let nowColumn = nowRow.insertCell();        // 새 열을 추가하고
         nowColumn.innerText = leftPad(nowDay.getDate());      // 추가한 열에 날짜 입력
-        nowColumn.id = nowDay;
+        nowColumn.id = nowDay.getFullYear()+"-"+leftPad(nowDay.getMonth()+1)+"-"+leftPad(nowDay.getDate());
 
     
         if (nowDay.getDay() == 0) {                 // 일요일인 경우 글자색 빨강으로
@@ -293,14 +293,14 @@ function buildCalendar() {
 
 
         if (nowDay < today) {                       // 지난날인 경우
-            nowColumn.className = "pastDay";
+            nowColumn.className;
         }
         else if (nowDay.getFullYear() == today.getFullYear() && nowDay.getMonth() == today.getMonth() && nowDay.getDate() == today.getDate()) { // 오늘인 경우           
-            nowColumn.className = "today";
+            nowColumn.className;
             nowColumn.onclick = function () { choiceDate(this); }
         }
         else {                                      // 미래인 경우
-            nowColumn.className = "futureDay";
+            nowColumn.className;
             nowColumn.onclick = function () { choiceDate(this); }
         }
     }
@@ -338,6 +338,15 @@ function leftPad(value) {
     }
     return value;
 }
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<c:forEach items="${postList}" var="post">
+<fmt:formatDate pattern="yyyy-MM-dd" value="${post.auth_date}"/>
+	var authDay = document.getElementById("<fmt:formatDate pattern="yyyy-MM-dd" value="${post.auth_date}"/>");
+	console.log(authDay);
+</c:forEach>
+var dd = document.getElementById("2023-07-23");
+console.log(dd);
   </script>
 
 </html>
