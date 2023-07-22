@@ -25,11 +25,13 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.spring.dto.Challenge;
 import com.spring.dto.ChallengePost;
 import com.spring.dto.ChallengeRegion;
+import com.spring.dto.FeedPicture;
 import com.spring.dto.PersonalFeed;
 import com.spring.dto.RaceAndRegion;
 import com.spring.dto.User;
 import com.spring.dto.UserChallenge;
 import com.spring.service.ChallengeService;
+import com.spring.service.FeedPictureService;
 import com.spring.service.FeedService;
 import com.spring.service.RaceService;
 import com.spring.service.RegionService;
@@ -56,6 +58,9 @@ public class ChallengeController {
 	
 	@Autowired
 	private FeedService feedService;
+	
+	@Autowired
+	private FeedPictureService pictureservice;
 	
 	@RequestMapping(value = "/registChall", method = RequestMethod.GET)
 	public String registChall(Model model, HttpSession session, RedirectAttributes rttr) throws Exception {
@@ -567,6 +572,9 @@ public class ChallengeController {
 			
 			List<PersonalFeed> feedList = feedService.getAllFeeds();
 			model.addAttribute("feedList", feedList);
+			
+			List<FeedPicture> picList = pictureservice.getAllFeedPicture();
+			model.addAttribute("picList", picList);
 			
 			if(userId.equals(otherId)) {
 				return "/mypage_feed";
