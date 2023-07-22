@@ -102,10 +102,11 @@
 						      <div class="modal-header">
 						        <div class="post-header">
 									<img src="/images/${user.user_pic}" alt="Profile Picture">		
-									<div>	
+									<div style="width:200px">	
 										<div class="username">${user.nickname}</div>
 										<div class="userIntro">${user.intro}</div>
-									</div>									
+									</div>
+									<div class="feedDate" style="margin-left:300px">${feed.feed_writing_date}</div>									
 								</div>						        						        
 						      </div>
 						      <div class="modal-body">
