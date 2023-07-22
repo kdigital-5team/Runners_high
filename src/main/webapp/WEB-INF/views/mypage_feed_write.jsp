@@ -57,7 +57,7 @@
 							</div>
 						</form>	
 						<div onclick="location.href='/mypage/edit'" style="border:none; float:right; margin-top:12%;">
-							<button>프로필 수정</button>
+							<button class="btn btn-dark">프로필 수정</button>
 						</div>
 					</div>
 				</div>
@@ -90,7 +90,7 @@
 						<div style="display:table-cell; margin:auto; margin-top:5px;">		                	
 		                	<input class="form-control" type="text" name="feed_title" style="width:600px; display:block;">
 	                	</div>
-	                	<button type="submit" class="blue_outline_btn" name ="user_id" value= ${user.user_id}  style="border; margin-left:205px; margin-right:20px; margin-top:5px;">
+	                	<button type="submit" class="btn btn-dark" name ="user_id" value= ${user.user_id}  style="border; margin-left:205px; margin-right:20px; margin-top:5px;">
 	                		등록
 	                	</button>
 					</div>

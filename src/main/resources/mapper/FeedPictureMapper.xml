@@ -51,4 +51,10 @@
  		FROM feed_picture  		
  	</select>	
  	
+ 	<delete id="deleteFeedPicbyFeedId" parameterType="com.spring.dto.PersonalFeed">
+			delete 
+			from feed_picture
+			where feed_id=#{feed_id}
+	</delete>
+ 	
  </mapper>
