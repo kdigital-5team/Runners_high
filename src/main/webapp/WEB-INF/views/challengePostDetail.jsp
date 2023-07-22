@@ -112,7 +112,7 @@
 						
 						</div> --%>
 						
-						<div class="container" >
+						<div class="container" style="width:60%" >
 			<!-- <div class="post"> -->	        
 		        			
 					<div class="form-group">	
@@ -122,7 +122,7 @@
 					
 					<div class="form-group">
 					<label for="auth_cont">내용</label>	
-							<input class="form-control" type="text" name="auth_cont" id="auth_cont" style="height:600px" value="${post.auth_cont}"></input>
+							<input class="form-control" type="text" name="auth_cont" id="auth_cont" style="height:400px" value="${post.auth_cont}"></input>
 					</div>	
 					
 					<span>
@@ -179,7 +179,7 @@
 		
 		document.body.appendChild(dform);
 		dform.submit();
-		alert("삭제가 완료되었습니다.");
+		
 		location.href="/challenge";
 	}
   </script>
