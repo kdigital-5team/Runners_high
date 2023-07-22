@@ -112,32 +112,32 @@
 						
 						</div> --%>
 						
-						<div class="container">
+						<div class="container" >
 			<!-- <div class="post"> -->	        
-		        					
+		        			
 					<div class="form-group">	
-						<label for="auth_title">제목</label>					
-							                	
+						<label for="auth_title">제목</label>	
 		                	<input class="form-control" type="text" name="auth_title" id="auth_title" value="${post.auth_title}" >
-	                
-	                	
 					</div>
-					<div class="form-group">
-					<label for="chall_id">챌린지 id</label>
 					
-					<input class="form-control" type="number" name="chall_id" id="chall_id" value="${post.chall_id }">
-					
-					</div>
-					 
 					<div class="form-group">
 					<label for="auth_cont">내용</label>	
-						<!-- <div style="display:table-cell; width:50%; vertical-align: middle; margin-right:10px;"> -->
 							<input class="form-control" type="text" name="auth_cont" id="auth_cont" style="height:600px" value="${post.auth_cont}"></input>
-							<!-- rows="5" style="width:600px; display:block; margin: 0 auto;" -->
-						<!-- </div> -->
 					</div>	
 					
-					<span><button><a href="/modifyPost/${auth_id}">수정하기</a></button></span>
+					<span>
+					<a href="/modifyPost/${auth_id}">
+					<button type="button" class="btn btn-primary">
+					수정하기
+					</button>
+					</a>
+					</span>
+					
+					<span>
+					<button type="button" class="btn btn-primary" onclick="deletePost('${auth_id}')">
+					삭제하기
+					</button>
+					</span>
 			</div>
 						
 			
@@ -166,6 +166,21 @@
 	function apply(){
 
 	}
-
+	
+	function deletePost(auth_id){
+		
+		
+		let dform = document.createElement('form');
+		dform.type="hidden";
+		dform.name="_method";
+		dform.method='DELETE';
+		dform.action='/challenge/deletepost/'+auth_id;
+		
+		
+		document.body.appendChild(dform);
+		dform.submit();
+		alert("삭제가 완료되었습니다.");
+		location.href="/challenge";
+	}
   </script>
 </html>

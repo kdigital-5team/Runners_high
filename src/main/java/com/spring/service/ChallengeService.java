@@ -183,12 +183,17 @@ boolean result = false;
 
 	public boolean updateChallPost(ChallengePost post) {
 		
-		return mapper.updateChallPost();
+		return mapper.updateChallPost();}
 	public List<ChallengeRegion> getChallByUserId(String userId) {
 		return mapper.getChallByUserId(userId);
 	}
 
 	public List<UserChallenge> getUserChallbyUserId(String userId) {
 		return mapper.getUserChallbyUserId(userId);
+	}
+
+	public boolean deletePostByAuthId(int auth_id) {
+		
+		return mapper.deletePostByAuthId(auth_id);
 	}
 }

@@ -284,6 +284,18 @@
 	INSERT INTO auth_post (auth_id, chall_id, comment_id, auth_title, auth_cont, auth_date)
 	VALUES (POST_SEQ.nextval, #{chall_id}, #{comment_id, jdbcType=VARCHAR}, #{auth_title}, #{auth_cont}, SYSDATE)
 	</insert>
+	
+	<delete id="deletePostByAuthId" parameterType="com.spring.dto.ChallengePost">
+	DELETE auth_post
+	WHERE auth_id=#{auth_id}
+	</delete>
+	
+	<update id="updateChallPost" parameterType="com.spring.dto.ChallengePost">
+	UPDATE auth_post
+	SET auth_title=#{auth_title, jdbcType=VARCHAR},
+		auth_cont=#{auth_cont, jdbcType=VARCHAR}
+	WHERE auth_id=#{auth_id}
+	</update>
 
  	<update id="updateChallenge" 
 			parameterType="com.spring.dto.Challenge">

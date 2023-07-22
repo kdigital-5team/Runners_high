@@ -477,35 +477,52 @@ public class ChallengeController {
 			
 			return "updateChallPost";
 		}
-		
-		@RequestMapping(value = "/modifyPost/{auth_id}", method = RequestMethod.PUT)
-		public String updateChallPost(@PathVariable int auth_id,
+		//수정
+		@RequestMapping(value = "/updatePost/{auth_id}", method = RequestMethod.POST)
+		public String updateChallPost(@PathVariable int auth_id, 
 								@ModelAttribute("auth_title") String auth_title,
 								@ModelAttribute("auth_cont") String auth_cont) {
-			String view = "error";
+			
 			
 			boolean result = false;
 			
 			ChallengePost post = challService.getPostByAuthId(auth_id);
-			post.getAuth_title();
-			post.getAuth_cont();
+			post.setAuth_title(auth_title);
+			post.setAuth_cont(auth_cont);
 			
 			try {
 				 result = challService.updateChallPost(post);
 				 
 				 if(result) {
 //					 
-					 return "redirect:/challenge/challPostDetail" + auth_id;
+					 return "redirect:/challenge/challengePost"+auth_id;
 				 }
 			} catch (Exception e) {
 				e.printStackTrace();
-				return view;
+				return "index";
 			}
 			
-			return view;
+			return "index";
 		}
 		
-		
+		//삭제
+		@RequestMapping(value = "/challenge/deletepost/{auth_id}", method = RequestMethod.GET)
+		public String deletePostByAuthId(@PathVariable int auth_id) {
+			
+			
+			boolean deletePost = false;
+			
+			challService.deletePostByAuthId(auth_id);
+			deletePost = challService.deletePostByAuthId(auth_id);
+			
+				if(deletePost) {
+					
+					return "redirect:/challenge";
+				}
+				
+			
+			return "index";
+		}
 
 		
 		@RequestMapping(value="/challenge/{chall_id}insertChallPost", method = RequestMethod.GET)		//게시글 작성 화면 호출

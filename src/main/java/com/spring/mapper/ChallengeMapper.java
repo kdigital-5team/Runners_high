@@ -77,8 +77,11 @@ public interface ChallengeMapper {
 	public List<ChallengePost> getPostByChallId(int chall_id);
 
 	public boolean updateChallPost();
+	
 	public List<ChallengeRegion> getChallByUserId(String userId);
 
 	public List<UserChallenge> getUserChallbyUserId(String userId);
+
+	public boolean deletePostByAuthId(int auth_id);
 
 }
