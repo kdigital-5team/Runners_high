@@ -140,39 +140,99 @@ a:hover {
 	color: #000;
 }
 
-/* 태그 0722 */
+/* 챌린지 목록 0722 */
+.list-map {
+	float: left;
+	width: 35%;
+	padding-top: 35%;
+	height: 0;
+	margin: 2%;
+	border-radius: 5px;
+	background-position: center;
+	background-size: cover;
+}
+
+.row-challenge {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-ms-flex-wrap: wrap;
+	flex-wrap: wrap;
+	margin-bottom: 3rem !important;
+	position: relative;
+	/* left: 62px; */
+}
+
+.challenge-block {
+	width: 45%;
+	float: left;
+	height: 200px;
+	background-color: #F0F0F0;
+	margin: 2% 0 2% 2%;
+	margin-bottom: 20px;
+	border-radius: 9px;
+	cursor: pointer;
+}
+
+.inline-block {
+	float: left;
+	width: 59%;
+	margin: 5px 0 5px 2px;
+}
 
 .tag-default {
+	display: flex;
+	align-items: center;
+	justify-content: center;
 	float: left;
-    background-color: #0a49a5;
-    width: 25%;
-    text-align: center;
-    margin-top: 4%;
-    margin-bottom: 4%;
-    border-radius: 27px;
-    color: white;
+	background-color: #c9c9c9;
+	width: 25%;
+	height: 26px;
+	margin-top: 4%;
+	margin-bottom: 4%;
+	border-radius: 13px;
+	margin-right: 3px;
 }
 
-.tag-sit1{
-    background-color: #0a49a5;
+.tag-text {
+	color: #ffffff;
+	font-size: 14px;
 }
 
-.tag-sit2{
-	background-color: black;
+.tag-sit1 {
+	background-color: #549aff;
 }
 
-.tag-sit3{
-    background-color: red;
+.tag-sit3 {
+	background-color: #3d3d3d;
 }
 
-.tag-cat1{
+.tag-cat2 {
 	background-color: #ffd02f;
 }
 
-.tag-cat2{
-	background-color: #ff9600;
+.challenge-name {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	width: 100%;
+	margin-right: 5%;
 }
 
+.challenge-name-t {
+	color: #353535;
+}
+
+.caption {
+	font-size: 14px;
+	color: #7d7d7d;
+	line-height: 19px;
+}
+
+.caption-img {
+	width: 6%;
+	margin: 0 1px 3px 2px;
+}
 
 .bg-black {
 	background: #000;
