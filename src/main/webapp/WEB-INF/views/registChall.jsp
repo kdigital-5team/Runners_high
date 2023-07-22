@@ -116,19 +116,19 @@
 				<div class="context-form">
 		        	<label for="region">지역</label><br>
 	        		<label class="notice-label">*'일상용' 챌린지의 경우 선택 입력</label><br>
-		        	<label for="region_state">도</label>
-		        	<select id="region_state" name="region_state" onchange="chageState();">
+		        	<label class="simple-label" for="region_state">도</label>
+		        	<select class="region-select" id="region_state" name="region_state" onchange="chageState();">
 		        		<option selected hidden=""></option>
 		        	    <c:forEach var="state" items="${stateList}">
 		          		<option>${state}</option>
 		          		</c:forEach>
-					</select >
-					<label for="region_city">시</label>
-		        	<select id="region_city" name="region_city" onchange="chageCity();">
-					</select >
-					<label for="region_district">군/구</label>
-		        	<select id="region_district" name="region_district" onchange="chageDistrict();">
-					</select >
+					</select>
+					<label class="simple-label" for="region_city">시</label>
+		        	<select class="region-select" id="region_city" name="region_city" onchange="chageCity();">
+					</select>
+					<label class="simple-label" for="region_district">군/구</label>
+		        	<select class="region-select" id="region_district" name="region_district" onchange="chageDistrict();">
+					</select>
 				</div>
 			<div class="context-form">
 	        	<label for="chall_sit">모집상태</label><br>

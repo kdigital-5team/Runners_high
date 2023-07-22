@@ -310,6 +310,15 @@ label {
 	color: #898989;
 }
 
+.simple-label {
+	font-weight: normal;
+    font-size: 14px;
+}
+
+.region-select {
+	width: 110px;
+}
+
 #pw-only {
 	margin-top: 30px;
 }
@@ -321,6 +330,20 @@ button {
 button:focus {
 	outline: 1px dotted;
 	outline: 5px auto -webkit-focus-ring-color
+}
+
+/* 지도 0722 */
+#map {
+	width: 800px; 
+	height: 600px;
+	margin: 0 auto 30px;
+	
+}
+
+.info-label {
+	color: black; 
+	font-weight: bold; 
+	margin-right: 20px;
 }
 
 /* context-form 설정 0716 */
