@@ -36,7 +36,7 @@
 	<div class="site-wrap">
 		
 						<form name="update_form" id="update_form" method="POST" action="/updatePost/${auth_id}">
-						<div class="container">
+						<div class="container" style="width:60%">
 			<!-- <div class="post"> -->	        
 		        					
 					<div class="form-group">	

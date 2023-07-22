@@ -73,11 +73,11 @@
 				</div>
 			</div>
 		</div> --%>
-		<div  class="container"><h2>인증하기</h2></div>
+		
 		
 		<!-- 피드 글 작성 -->
-		<div class="container">
-
+		<div class="container" style="width:60%" >
+			<div  class="container"><h2>인증하기</h2></div>
 		        <form action='<c:url value='/challenge/${chall_id}/insertChallPost'/>'name= "regist_form" id="regist_form" method="post" enctype="multipart/form-data">					
 					<div class="form-group">	
 						<label for="auth_title">제목</label>					
