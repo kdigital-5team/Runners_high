@@ -45,4 +45,11 @@
  		
  	</select>
  	
+ 	<delete id="deleteFeedbyFeedId" 
+			parameterType="com.spring.dto.PersonalFeed">
+			delete 
+			from personal_feed
+			where feed_id=#{feed_id}
+	</delete>
+ 	
  </mapper>

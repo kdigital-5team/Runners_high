@@ -52,7 +52,7 @@
 							</div>
 						</form>	
 						<div onclick="location.href='/mypage/edit'" style="border:none; float:right; margin-top:12%;">
-							<button>프로필 수정</button>
+							<button class="btn btn-dark">프로필 수정</button>
 						</div>
 					</div>
 				</div>
@@ -69,7 +69,7 @@
 								<a href="/mypage/feed"><strong>피드</strong></a> <span class="mx-2">|</span>
 								<a href="/mypage/chall">참여 챌린지</a> <span class="mx-2">|</span> <a
 									href="/mypage/title">칭호</a> <span class="mx-2"></span>
-								<button style="float: right; margin-left:-10%">
+								<button class="btn btn-dark" style="float: right; margin-left:-10%">
 									<a onclick="location.href='/mypage/write'">추가</a>
 								</button>
 							</p>
