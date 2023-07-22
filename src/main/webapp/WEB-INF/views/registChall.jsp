@@ -111,6 +111,7 @@
 					<input type="button" class="customBtn" value ="일상용" onclick="selectedBtn(this, 'chall_category');">
 					<input type="button" class="customBtn" value ="대회용" onclick="selectedBtn(this, 'chall_category'); challRacePopup();">
 					<input type="hidden" id="race_id" name="race_id" value=""  readonly>
+					<input type="hidden" id="region_id" name="region_id" value=""  readonly>
 					<input type="hidden" name="chall_category" id="chall_category" value="">
 			</div>
 				<div class="context-form">
@@ -518,8 +519,9 @@ function setChildValue(raceId){
         url: "/getRegionIdByRaceId",
         dataType: "text",
         contentType: "application/json; charset=UTF-8",
-        success: function(data) { 
+        success: function(data) {  
         regionId=data;
+        document.getElementById("region_id").value = regionId;
         },
         error: function(error) {
             alert("자동으로 주소값을 불러오는데 실패했습니다.");
