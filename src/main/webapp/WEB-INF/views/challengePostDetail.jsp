@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>${challenge.chall_name}</title>
+<title>${post.auth_title}</title>
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -34,7 +34,7 @@
 	<!-- header -->
 	<%@ include file="./inc/header.jsp"%>
 	<div class="site-wrap">
-		<div class="container">
+		<%-- <div class="container">
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="hero-wrap text-center"
@@ -70,15 +70,15 @@
 					<div>${host.nickname }</div>
 				</div>
 			</div>
-		</div>
+		</div> --%>
 		
-		<div style="margin: auto; text-align: center;">
+		<%-- <div style="margin: auto; text-align: center;">
 			<a href="mypage_feed">소개</a><span class="mx-2">|</span> 
 			<a href="/challengePost/${chall_id}">인증 게시판</a><span class="mx-2">|</span>
 			<a href="mypage_title">캘린더</a>
 			<spanclass="mx-2">
 				</span>
-		</div>
+		</div> --%>
 
 		
 		<%-- <table class="table table-hover table-striped">
@@ -102,14 +102,43 @@
 					</c:forEach>
 
 							</table> --%>
-						<div>
+						
+						<%-- <div>
+						
 						<table>
-						<c:forEach items="${postList}" var="post">
 						<tr><td>${post.auth_title}</td></tr>
 						<tr><td>${post.auth_cont}</td></tr>
-						</c:forEach>
 						</table>
-						</div>
+						
+						</div> --%>
+						
+						<div class="container" >
+			<!-- <div class="post"> -->	        
+		        			
+					<div class="form-group">	
+						<label for="auth_title">제목</label>	
+		                	<input class="form-control" type="text" name="auth_title" id="auth_title" value="${post.auth_title}" >
+					</div>
+					
+					<div class="form-group">
+					<label for="auth_cont">내용</label>	
+							<input class="form-control" type="text" name="auth_cont" id="auth_cont" style="height:600px" value="${post.auth_cont}"></input>
+					</div>	
+					
+					<span>
+					<a href="/modifyPost/${auth_id}">
+					<button type="button" class="btn btn-primary">
+					수정하기
+					</button>
+					</a>
+					</span>
+					
+					<span>
+					<button type="button" class="btn btn-primary" onclick="deletePost('${auth_id}')">
+					삭제하기
+					</button>
+					</span>
+			</div>
 						
 			
 		
@@ -137,6 +166,21 @@
 	function apply(){
 
 	}
-
+	
+	function deletePost(auth_id){
+		
+		
+		let dform = document.createElement('form');
+		dform.type="hidden";
+		dform.name="_method";
+		dform.method='DELETE';
+		dform.action='/challenge/deletepost/'+auth_id;
+		
+		
+		document.body.appendChild(dform);
+		dform.submit();
+		alert("삭제가 완료되었습니다.");
+		location.href="/challenge";
+	}
   </script>
 </html>

@@ -391,15 +391,71 @@ public class ChallengeController {
 			return "challengePost";
 		}
 
-		@RequestMapping(value = "/challenge/{chall_id}challPostDetail{auth_id}", method = RequestMethod.GET)
-		public String getPostByAuthId(@PathVariable int chall_id, @RequestParam("auth_id") int auth_id, Model model) {
+		@RequestMapping(value = "/challenge/challPostDetail{auth_id}", method = RequestMethod.GET)
+		public String getPostByAuthId(@PathVariable int auth_id, Model model) {
 			ChallengePost post = challService.getPostByAuthId(auth_id);
+			
+			
 			model.addAttribute("post", post);
 			
 			return "challengePostDetail";
 		}
 		
+		@RequestMapping(value = "/modifyPost/{auth_id}", method = RequestMethod.GET)
+		public String updateChallPostForm(@PathVariable int auth_id,
+									Model model) {
+			ChallengePost post = challService.getPostByAuthId(auth_id);
+			
+			model.addAttribute("post", post);
+			
+			return "updateChallPost";
+		}
+		//수정
+		@RequestMapping(value = "/updatePost/{auth_id}", method = RequestMethod.POST)
+		public String updateChallPost(@PathVariable int auth_id, 
+								@ModelAttribute("auth_title") String auth_title,
+								@ModelAttribute("auth_cont") String auth_cont) {
+			
+			
+			boolean result = false;
+			
+			ChallengePost post = challService.getPostByAuthId(auth_id);
+			post.setAuth_title(auth_title);
+			post.setAuth_cont(auth_cont);
+			
+			try {
+				 result = challService.updateChallPost(post);
+				 
+				 if(result) {
+//					 
+					 return "redirect:/challenge/challengePost"+auth_id;
+				 }
+			} catch (Exception e) {
+				e.printStackTrace();
+				return "index";
+			}
+			
+			return "index";
+		}
 		
+		//삭제
+		@RequestMapping(value = "/challenge/deletepost/{auth_id}", method = RequestMethod.GET)
+		public String deletePostByAuthId(@PathVariable int auth_id) {
+			
+			
+			boolean deletePost = false;
+			
+			challService.deletePostByAuthId(auth_id);
+			deletePost = challService.deletePostByAuthId(auth_id);
+			
+				if(deletePost) {
+					
+					return "redirect:/challenge";
+				}
+				
+			
+			return "index";
+		}
 
 		
 		@RequestMapping(value="/challenge/{chall_id}insertChallPost", method = RequestMethod.GET)		//게시글 작성 화면 호출
@@ -436,28 +492,9 @@ public class ChallengeController {
 			return "/challenge"+chall_id;
 		}
 		
-//		@RequestMapping(value="/challengePost/insertChallPost", method = RequestMethod.GET)
-//		public String insertChallPost(Model model, String auth_title, String auth_cont, Date auth_date, int auth_id, int chall_id, String comment_id) {
-//			ChallengePost challengePost = new ChallengePost();
-//			challengePost.setAuth_id(auth_id);
-//			challengePost.setChall_id(chall_id);
-//			challengePost.setComment_id(comment_id);
-//			challengePost.setAuth_title(auth_title);
-//			challengePost.setAuth_cont(auth_cont);
-//			challengePost.setAuth_date(auth_date);
-//			challService.insertChallPost(challengePost);
-//			return "redirect:/challenge/{chall_id}challPostDetail";
-//		} 
 		
-//		@RequestMapping(value="/challengePost/insertChallPost", method=RequestMethod.GET)
-//		public String insertChallPost(ChallengePost newPost) {
-//			challService.insertChallPost(newPost);
-//			
-//			String view = "error";
-//			view = "redirect:/challenge/{chall_id}challPostDetail";
-//			return view;
-//		}
-//		
+
+	
 		
 
 	// 챌린지 수정폼

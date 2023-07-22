@@ -205,7 +205,7 @@
 			        <tr><td>주최 : ${race.race_org}</td></tr>
 			        <tr><td>종목 : ${race.race_dist}</td></tr>
 			        <tr><td>개최 지역 : ${race.region_city} </td></tr>
-			        <tr><td>일시 : ${race.race_date}</td></tr>
+			        <tr><td>일시 : <fmt:formatDate pattern="yyyy-MM-dd" value="${race.race_date}"/></td></tr>
 			        <tr><td>접수 기간 :<fmt:formatDate pattern="yyyy-MM-dd" value="${race.race_apply}"/> ~ <fmt:formatDate pattern="yyyy-MM-dd" value="${race.race_deadline}"/></td></tr>
 			        <tr><td>상세정보 : <a href="${race.race_url}">${race.race_url}</a></td></tr>
 			        </table>
