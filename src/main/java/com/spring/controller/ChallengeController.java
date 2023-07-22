@@ -1,24 +1,17 @@
 package com.spring.controller;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.scheduling.annotation.Schedules;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,9 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.spring.dto.Challenge;
-
 import com.spring.dto.ChallengePost;
-
 import com.spring.dto.ChallengeRegion;
 import com.spring.dto.PersonalFeed;
 import com.spring.dto.RaceAndRegion;
@@ -84,58 +75,50 @@ public class ChallengeController {
 		return "registChall";
 	}
 	
-	// 테스트용
-	@RequestMapping(value = "/registChall2", method = RequestMethod.GET)
-	public String registChall2(Model model, HttpSession session, RedirectAttributes rttr) throws Exception {
-		List<String> stateList = service.getAllState();
-		String userId = (String) session.getAttribute("userId");
-		int isOtherApply=0;
-		isOtherApply = challService.checkOtherChall(userId);
-		if(isOtherApply>0) {
-			rttr.addFlashAttribute("isTrue", "존재");
-			return "redirect:/challenge";
-		}
-		//List<String> cityList = service.getCityByState();
-		//List<String> districtList = service.getDistrictByCity();
-		model.addAttribute("stateList",stateList);
-		//model.addAttribute("cityList",cityList);
-		//model.addAttribute("districtList",districtList);
-		return "registChall2";
-	}
-	
 	
 	// 챌린지 추가
 	// http://localhost:8081/registChall
 		@RequestMapping(value = "/registChall", method = RequestMethod.POST)
 		public String insertChallenge(@ModelAttribute Challenge newChallenge,
 									  Model model,
-									  @RequestParam String region_district,
+									  @RequestParam(required = false) String region_district,
 									  HttpSession session) throws Exception {
+			
+			System.out.println("registChall controller 실행");
 			
 			String userId = (String) session.getAttribute("userId");
 			String raceId = newChallenge.getRace_id();
-			System.out.println(newChallenge);
+			System.out.println("새로운 챌린지 정보1 : " + newChallenge);
 			System.out.println(region_district);
 			System.out.println(userId);
 			
-			if (raceId==null && newChallenge.getChall_category().equals("대회용")) {
-				session.setAttribute("msg", "대회 선택을 다시 해주세요!");
-				session.setAttribute("url", "/registChall");
-				return "alert";
-
-			} else if (newChallenge.getChall_category().equals("일상용")) {
-				raceId=null;
-			}
 			boolean challResult = false;
 			
 		
 			try {
+				if (raceId==null && newChallenge.getChall_category().equals("대회용")) {
+					session.setAttribute("msg", "대회 선택을 다시 해주세요!");
+					session.setAttribute("url", "/registChall");
+					return "alert";
+					
+				} else if (newChallenge.getChall_category().equals("일상용")) {
+					raceId=null;
+					
+					
+				}
+				
 				newChallenge.setChall_reg_id(userId);
-				newChallenge.setRegion_id(service.getIdByDistrict(region_district));
-				System.out.println(newChallenge);
+				
+				if ("일상용".equals(newChallenge.getChall_category()) && (region_district == null || region_district.isEmpty())) {
+					newChallenge.setRegion_id(null);
+				} else {
+					int regionId = service.getIdByDistrict(region_district);
+					newChallenge.setRegion_id(regionId);
+					System.out.println("새로운 챌린지 정보2 : " + newChallenge);
+				}
 				
 				newChallenge.setRace_id(raceId);
-				System.out.println(newChallenge);
+				System.out.println("새로운 챌린지 정보3 : " + newChallenge);
 				challResult = challService.insertChallenge(newChallenge);
 				
 				if(challResult) {
@@ -153,65 +136,10 @@ public class ChallengeController {
 			} catch (Exception e) {
 				
 				e.printStackTrace();
-				return "index";
+				return "challenge";
 			}
-			return "index";
+			return "challenge";
 		}
-		
-		
-		// 챌린지 추가 테스트용
-		// http://localhost:8081/registChall
-			@RequestMapping(value = "/registChall2", method = RequestMethod.POST)
-			public String insertChallenge2(@ModelAttribute Challenge newChallenge,
-										  Model model,
-										  @RequestParam String region_district,
-										  HttpSession session) throws Exception {
-				
-				String userId = (String) session.getAttribute("userId");
-				String raceId = newChallenge.getRace_id();
-				System.out.println(newChallenge);
-				System.out.println(region_district);
-				System.out.println(userId);
-				
-				if (raceId==null && newChallenge.getChall_category().equals("대회용")) {
-					session.setAttribute("msg", "대회 선택을 다시 해주세요!");
-					session.setAttribute("url", "/registChall2");
-					return "alert";
-
-				} else if (newChallenge.getChall_category().equals("일상용")) {
-					raceId=null;
-				}
-				boolean challResult = false;
-				
-			
-				try {
-					newChallenge.setChall_reg_id(userId);
-					newChallenge.setRegion_id(service.getIdByDistrict(region_district));
-					System.out.println(newChallenge);
-					
-					newChallenge.setRace_id(raceId);
-					System.out.println(newChallenge);
-					challResult = challService.insertChallenge(newChallenge);
-					
-					if(challResult) {
-						System.out.println("등록완료");
-						
-						int challId = newChallenge.getChall_id();
-						System.out.println(challId);
-						session.setAttribute("challId", challId);
-						session.removeAttribute(raceId);
-						challService.insertHost(userId, challId);
-						
-						return "registChallRoute";
-					}
-					
-				} catch (Exception e) {
-					
-					e.printStackTrace();
-					return "index";
-				}
-				return "index";
-			}
 		
 	
 	@RequestMapping(value = "/registChall/selectChallRace" , method = RequestMethod.GET)

@@ -22,7 +22,7 @@
  				WHERE region_city = #{city}
  	</select>
  	
- 	 <select id="getIdByDistrict" resultType="string">
+ 	 <select id="getIdByDistrict" resultType="int">
  		SELECT DISTINCT region_id
  			FROM region
  				WHERE region_district = #{district}

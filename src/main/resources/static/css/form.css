@@ -300,7 +300,7 @@ th {
 label {
 	font-weight: bold;
 	font-size: 19px;
-	margin-top: 15px;
+	margin-top: 30px;
 }
 
 .notice-label {
@@ -308,6 +308,15 @@ label {
 	font-weight: normal;
 	margin-top: 3px;
 	color: #898989;
+}
+
+.simple-label {
+	font-weight: normal;
+    font-size: 14px;
+}
+
+.region-select {
+	width: 110px;
 }
 
 #pw-only {
@@ -321,6 +330,20 @@ button {
 button:focus {
 	outline: 1px dotted;
 	outline: 5px auto -webkit-focus-ring-color
+}
+
+/* 지도 0722 */
+#map {
+	width: 800px; 
+	height: 600px;
+	margin: 0 auto 30px;
+	
+}
+
+.info-label {
+	color: black; 
+	font-weight: bold; 
+	margin-right: 20px;
 }
 
 /* context-form 설정 0716 */
@@ -425,6 +448,14 @@ input:read-only {
 
 /* inputbox 수정 0705 */
 input[type="submit"] {
+	color: #fff;
+	font-size: 15px;
+	background-color: #FFDC3D;
+	margin-top: 50px;
+	border-radius: 4px;
+}
+
+.next-btn {
 	color: #fff;
 	font-size: 15px;
 	background-color: #FFDC3D;

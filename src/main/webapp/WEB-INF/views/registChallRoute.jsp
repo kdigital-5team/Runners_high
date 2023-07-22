@@ -14,7 +14,6 @@
 
 <link rel="stylesheet" href="../static/css/form.css">
 <link rel="stylesheet" href="../static/css/bootstrap.min.css">
-
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
 	rel="stylesheet">
@@ -53,14 +52,15 @@
 		<div class="site-section"></div>
 		<div class="site-section">
 			<div class="container">
-				<h1>챌린지 루트</h1>
-				<label for="chall_route_intro">지도를 마우스로 클릭하면 선 그리기가 시작되고 오른쪽
-					마우스를 클릭하면 선 그리기가 종료되면서 그려진 선의 실제 거리(단위 : m)를 표시합니다.</label>
-				<div id="map" style="width: 800px; height: 600px;"></div>
-				<div>
+				<h2 class="form-h2">챌린지 등록</h2>
+				<label class="notice-label" for="chall_route_intro">
+					*챌린지를 수행할 대략적인 경로를 설정합니다. <br> 지도를 마우스로 좌클릭하면 선 그리기가 시작되고, 우클릭 시 선 그리기가 종료되며, 실제 거리(단위 : m)를 표시합니다. </label>
+			</div>
+			<div class="site-section">
+				<div id="map"></div>
+				<div id="distance-info"></div>
 					<input type="submit" onclick="submit2();" value="등록"/>
-					<br><br><br>
-				</div>
+					<br><br>
 			</div>
 		</div>
 	</div>
@@ -88,7 +88,7 @@ function submit2(){
 	        if(data == "main"){
 	        	
 	      	alert('등록완료 하였습니다.');
-	      	location.replace("main");
+	      	location.replace("challenge");
 	      	
 	        	} else {
 	        		alert('등록하지 못했습니다!');
@@ -151,7 +151,7 @@ function submit2(){
    	             map: map, // 선을 표시할 지도입니다 
    	             path: [clickPosition], // 선을 구성하는 좌표 배열입니다 클릭한 위치를 넣어줍니다
    	             strokeWeight: 3, // 선의 두께입니다 
-   	             strokeColor: '#db4040', // 선의 색깔입니다
+   	             strokeColor: 'rgb(61 141 255)', // 선의 색깔입니다
    	             strokeOpacity: 1, // 선의 불투명도입니다 0에서 1 사이값이며 0에 가까울수록 투명합니다
    	             strokeStyle: 'solid' // 선의 스타일입니다
    	         });
@@ -159,7 +159,7 @@ function submit2(){
    	         // 선이 그려지고 있을 때 마우스 움직임에 따라 선이 그려질 위치를 표시할 선을 생성합니다
    	         moveLine = new kakao.maps.Polyline({
    	             strokeWeight: 3, // 선의 두께입니다 
-   	             strokeColor: '#db4040', // 선의 색깔입니다
+   	             strokeColor: '#202e70', // 선의 색깔입니다
    	             strokeOpacity: 0.5, // 선의 불투명도입니다 0에서 1 사이값이며 0에 가까울수록 투명합니다
    	             strokeStyle: 'solid' // 선의 스타일입니다    
    	         });
@@ -206,7 +206,7 @@ function submit2(){
 
    	          
    	         var distance = Math.round(clickLine.getLength() + moveLine.getLength()), // 선의 총 거리를 계산합니다
-   	             content = '<div class="dotOverlay distanceInfo">총거리 <span class="number">' + distance + '</span>m</div>' ; // 커스텀오버레이에 추가될 내용입니다
+   	             content = '<div class="dotOverlay distanceInfo"><span class="info-label">총거리</span><span class="number">' + distance + '</span>m</div>' ; // 커스텀오버레이에 추가될 내용입니다
    	         
    	         // 거리정보를 지도에 표시합니다
    	         showDistance(content, mousePosition);   
@@ -298,6 +298,9 @@ function submit2(){
    	             zIndex: 3  
    	         });      
    	     }
+   	     
+   	    const distanceInfoDiv = document.getElementById('distance-info');
+   	    distanceInfoDiv.innerHTML = content;
    	 }
 
    	 // 그려지고 있는 선의 총거리 정보와 
@@ -382,14 +385,14 @@ function submit2(){
 
    	     // 거리와 도보 시간, 자전거 시간을 가지고 HTML Content를 만들어 리턴합니다
    	     var content = '<ul class="dotOverlay distanceInfo">';
-   	     content += '    <li>';
-   	     content += '        <span class="label">총거리</span><span class="number">' + distance + '</span>m';
+   	     content += '    <li style="list-style: none;">';
+   	     content += '        <span class="info-label">총거리</span><span class="number">' + distance + '</span>m';
    	     content += '    </li>';
-   	     content += '    <li>';
-   	     content += '        <span class="label">도보</span>' + walkHour + walkMin;
+   	     content += '    <li style="list-style: none;">';
+   	     content += '        <span class="info-label">도보</span>' + walkHour + walkMin;
    	     content += '    </li>';
-   	     content += '    <li>';
-   	     content += '        <span class="label">자전거</span>' + bycicleHour + bycicleMin;
+   	     content += '    <li style="list-style: none;">';
+   	     content += '        <span class="info-label">자전거</span>' + bycicleHour + bycicleMin;
    	     content += '    </li>';
    	     content += '</ul>'
 
