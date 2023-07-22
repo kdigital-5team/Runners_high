@@ -300,7 +300,7 @@ th {
 label {
 	font-weight: bold;
 	font-size: 19px;
-	margin-top: 15px;
+	margin-top: 30px;
 }
 
 .notice-label {
@@ -425,6 +425,14 @@ input:read-only {
 
 /* inputbox ¼öÁ¤ 0705 */
 input[type="submit"] {
+	color: #fff;
+	font-size: 15px;
+	background-color: #FFDC3D;
+	margin-top: 50px;
+	border-radius: 4px;
+}
+
+.next-btn {
 	color: #fff;
 	font-size: 15px;
 	background-color: #FFDC3D;
