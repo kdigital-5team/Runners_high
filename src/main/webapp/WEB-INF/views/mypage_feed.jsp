@@ -89,9 +89,13 @@
 					<c:forEach items="${feedList}" var="feed" varStatus="vs">
 						<c:if test="${userId eq feed.user_id}">
 							<div class="col-6 col-sm-6 col-md-4 col-lg-3" style="margin-bottom:30px">
-								<div class="img-wrapper">
-									<a href="#" data-toggle="modal" data-target="#myModal${vs.index}"><img src="/static/images/test.jpg" class="img-block">${feed.feed_title}</a>
-								</div>
+								<c:forEach items="${picList}" var="pic">
+					      			<c:if test="${feed.feed_id eq pic.feed_id}">
+										<div class="img-wrapper">
+											<a href="#" data-toggle="modal" data-target="#myModal${vs.index}"><img src="/images/${pic.feed_pic_title}" class="img-block">${feed.feed_title}</a>
+										</div>
+									</c:if>
+				      		</c:forEach>
 							</div>
 						</c:if>							 
  						<div class="modal fade" id="myModal${vs.index}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -107,10 +111,13 @@
 								</div>						        						        
 						      </div>
 						      <div class="modal-body">
-						      								
-								        <div class="display-flex">
-											<img class="post-image" src="/static/images/test.jpg" alt="Post Image">	
+					      		<c:forEach items="${picList}" var="pic">
+					      			<c:if test="${feed.feed_id eq pic.feed_id}">
+					      				<div class="display-flex">
+											<img class="post-image" src="/images/${pic.feed_pic_title}" alt="Post Image">	
 										</div>
+					      			</c:if>
+					      		</c:forEach>							        
 						        <hr>
 								<div class="display-flex">
 									<div class="left-likes">
