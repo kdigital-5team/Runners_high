@@ -39,22 +39,20 @@
 
 			<div class="container">
 				<div class="row">
-					<div class="col-lg-10">
-						<div class="display-flex">
-							<div class="post" style="border:none; margin-top:10%; margin-left:35%">
-								<div class="post-header2">
-									<img src="/images/${user.user_pic}" alt="Profile Picture">									
-								</div>
+					<div class="display-flex" style=" text-align: center; margin-left:30%">
+						<div class="post" style="border:none; float:left;">
+							<div class="post-header2">
+								<img src="/images/${user.user_pic}" alt="Profile Picture">									
 							</div>
-							<form action="/mypage/feed" enctype="multipart/form-data" method="POST">					
-								<div class="post" style="border:none; margin-top:95%;">
-									<div class="username">${user.nickname}</div>
-									<div class="userIntro">${user.intro}</div>
-								</div>
-							</form>	
-							<div onclick="location.href='/mypage/edit'" style="border:none; margin-top:14%; margin-left:2%; margin-right:15%">
-								<button>프로필 수정</button>
+						</div>
+						<form action="/mypage/feed" enctype="multipart/form-data" method="POST">					
+							<div class="post" style="border:none; float:middle; margin-top:15%; width:200px">
+								<div class="username">${user.nickname}</div>
+								<div class="userIntro">${user.intro}</div>
 							</div>
+						</form>	
+						<div onclick="location.href='/mypage/edit'" style="border:none; float:right; margin-top:12%;">
+							<button>프로필 수정</button>
 						</div>
 					</div>
 				</div>
@@ -104,10 +102,11 @@
 						      <div class="modal-header">
 						        <div class="post-header">
 									<img src="/images/${user.user_pic}" alt="Profile Picture">		
-									<div>	
+									<div style="width:200px">	
 										<div class="username">${user.nickname}</div>
 										<div class="userIntro">${user.intro}</div>
-									</div>									
+									</div>
+									<div class="feedDate" style="margin-left:300px">${feed.feed_writing_date}</div>									
 								</div>						        						        
 						      </div>
 						      <div class="modal-body">
