@@ -110,7 +110,7 @@
 					<div style="display: inline-block; width: 10%;">
 						<div onclick="location.href='/feed/${apply_user.user_id}'" 
 							style="cursor: pointer; width:100%; padding-top:100%; height:0; border-radius: 70%; 
-							background-image: url(/images/${apply_user.user_pic}), url(../static/images/profileImages/default_image.png);
+							background-image: url(/images/${apply_user.user_pic});
 							background-position:center;
 							background-size:cover;">
 						</div>
@@ -200,11 +200,6 @@ $(document).ready(function (){
 		          } 
 		        })
 		        
-			
-			
-		 	
-	   		
-	   		
 
 		}
 		function fail(err) { // 위치 정보를 가져오는데 실패했을 때 호출되는 콜백 함수

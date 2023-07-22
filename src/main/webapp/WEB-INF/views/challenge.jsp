@@ -6,7 +6,9 @@
 <html>
 <head>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-<title>챌린지 목록</title>
+
+<title>Runner's High &mdash; Challenge</title>
+
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -14,7 +16,6 @@
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css?family=Nunito+Sans:200,300,400,700,900|Oswald:400,700">
 <link rel="stylesheet" href="../static/fonts/icomoon/style.css">
-
 <link rel="stylesheet" href="../static/css/bootstrap.min.css">
 <link rel="stylesheet" href="../static/css/jquery.fancybox.min.css">
 <link rel="stylesheet" href="../static/css/jquery-ui.css">
@@ -22,14 +23,25 @@
 <link rel="stylesheet" href="../static/css/owl.theme.default.min.css">
 <link rel="stylesheet" href="../static/css/animate.css">
 <link rel="stylesheet" href="../static/fonts/flaticon/font/flaticon.css">
-
-
 <link rel="stylesheet" href="../static/css/aos.css">
-
 <link rel="stylesheet" href="../static/css/style.css">
 
 </head>
 <body>
+	<script type="text/javascript"
+	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a9fd4644a9a496749d0625dffe4286f8&libraries=services,clusterer,drawing"></script>
+	<script src="../static/js/jquery.min.js"></script>
+	<script src="../static/js/jquery-migrate-3.0.1.min.js"></script>
+	<script src="../static/js/jquery-ui.js"></script>
+	<script src="../static/js/popper.min.js"></script>
+	<script src="../static/js/bootstrap.min.js"></script>
+	<script src="../static/js/owl.carousel.min.js"></script>
+	<script src="../static/js/jquery.stellar.min.js"></script>
+	<script src="../static/js/jquery.fancybox.min.js"></script>
+	<script src="../static/js/aos.js"></script>
+	<script src="../static/js/main.js"></script>
+	
+	
 	<!-- header -->
 	<%@ include file="./inc/header.jsp"%>
 
@@ -190,29 +202,34 @@
 										</div>
 									<div style="float: left; width: 59%; margin-left:2px;" >
 										<c:if test="${chall.chall_sit eq '모집중'}">
-										<div style="float: left; background-color:#FFCECE; width: 30%; text-align: center; margin-top: 4%; margin-bottom: 4%; border-radius: 5px;"><b>${chall.chall_sit}</b></div>
+											<div class="tag-default tag-sit1"><span>${chall.chall_sit}</span></div>
 										</c:if>
 										<c:if test="${chall.chall_sit eq '모집예정'}">
-										<div style="float: left; background-color:#FFCECE; width: 30%; text-align: center; margin-top: 4%; margin-bottom: 4%; border-radius: 5px;"><b>${chall.chall_sit}</b></div>
+											<div class="tag-default tag-sit2"><span>${chall.chall_sit}</span></div>
 										</c:if>
 										<c:if test="${chall.chall_sit eq '모집종료'}">
-										<div style="float: left; background-color:#FF9999; width: 30%; text-align: center; margin-top: 4%; margin-bottom: 4%; border-radius: 5px;"><b>${chall.chall_sit}</b></div>
+											<div class="tag-default tag-sit3"><span>${chall.chall_sit}</span></div>
 										</c:if>
-										<div style="float:left; width: 30%; margin-right: 40%; text-align: center; margin-top: 4%; border-radius: 5px; background-color: #FFCC99" ><b>${chall.chall_category}</b></div>
+										<c:if test="${chall.chall_category eq '일상용'}">
+											<div class="tag-default tag-cat1"><span>${chall.chall_category}</span></div>
+										</c:if>
+										<c:if test="${chall.chall_category eq '대회용'}">
+											<div class="tag-default tag-cat2"><span>${chall.chall_category}</span></div>
+										</c:if>
 										<h3 style="overflow:hidden; text-overflow: ellipsis; white-space: nowrap; width: 100%; margin-right: 5%;"><a href="challenge/${chall.chall_id}">${chall.chall_name}</a></h3>
 										<c:if test="${chall.chall_category eq '대회용'}">
-											<div style="font-size: 15px">${chall.race_name }</div>
+											<div style="font-size: 15px">${chall.race_name}</div>
 										</c:if>
 										<c:if test="${chall.region_state eq chall.region_city}">
-										<div style="font-size: 15px">${chall.region_state} ${chall.region_district}</div>
+											<div style="font-size: 15px">${chall.region_state} ${chall.region_district}</div>
 										</c:if>
 										<c:if test="${chall.region_state ne chall.region_city}">
-										<div style="font-size: 15px">${chall.region_state} ${chall.region_city}</div>
+											<div style="font-size: 15px">${chall.region_state} ${chall.region_city}</div>
 										</c:if>
-										<div>${race.region_state} ${race.region_city}</div>
-										<div class="caption" style="font-size: 15px"><fmt:formatDate pattern="yyyy-MM-dd" value="${chall.chall_start_date}"/> ~ <fmt:formatDate pattern="yyyy-MM-dd" value="${chall.chall_end_date}"/></div>
-										<div>인증 주 ${chall.chall_week_auth}회 / 최대 ${chall.chall_size}명</div>
-										<div style="display: none;" id="${status.count}">${chall.chall_id}</div>
+											<div>${race.region_state} ${race.region_city}</div>
+											<div class="caption" style="font-size: 15px"><fmt:formatDate pattern="yyyy-MM-dd" value="${chall.chall_start_date}"/> ~ <fmt:formatDate pattern="yyyy-MM-dd" value="${chall.chall_end_date}"/></div>
+											<div>인증 주 ${chall.chall_week_auth}회 / 최대 ${chall.chall_size}명</div>
+											<div style="display: none;" id="${status.count}">${chall.chall_id}</div>
 									</div>
 								</div>
 						</div>
@@ -229,19 +246,7 @@
 
 	<!-- footer -->
 	<%@ include file="./inc/footer.jsp"%>
-	<script type="text/javascript"
-	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a9fd4644a9a496749d0625dffe4286f8&libraries=services,clusterer,drawing"></script>
-	<script src="../static/js/jquery.min.js"></script>
-	<script src="../static/js/jquery-migrate-3.0.1.min.js"></script>
-	<script src="../static/js/jquery-ui.js"></script>
-	<script src="../static/js/popper.min.js"></script>
-	<script src="../static/js/bootstrap.min.js"></script>
-	<script src="../static/js/owl.carousel.min.js"></script>
-	<script src="../static/js/jquery.stellar.min.js"></script>
-	<script src="../static/js/jquery.fancybox.min.js"></script>
-	<script src="../static/js/aos.js"></script>
-
-	<script src="../static/js/main.js"></script>
+	
 
 </body>
 <script type="text/javascript">

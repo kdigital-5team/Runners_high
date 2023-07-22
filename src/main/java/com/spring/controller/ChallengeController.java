@@ -508,7 +508,7 @@ public class ChallengeController {
 			String userId = (String) session.getAttribute("userId");
 			User host = challService.getHostByChallId(chall_id);
 			if(!host.getUser_id().equals(userId))
-				return "redirect:/main";
+				return "redirect:/challenge";
 			
 			boolean deleteChall = false;
 			
@@ -518,8 +518,8 @@ public class ChallengeController {
 				deleteChall = challService.deleteChallbyChallId(chall_id);
 				
 				if(deleteChall) {
-					System.out.println("삭제");
-					return "redirect:/main";
+					System.out.println("챌린지 삭제");
+					return "redirect:/challenge";
 				}
 			return "index";
 		}
