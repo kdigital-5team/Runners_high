@@ -140,6 +140,40 @@ a:hover {
 	color: #000;
 }
 
+/* еб╠в 0722 */
+
+.tag-default {
+	float: left;
+    background-color: #0a49a5;
+    width: 25%;
+    text-align: center;
+    margin-top: 4%;
+    margin-bottom: 4%;
+    border-radius: 27px;
+    color: white;
+}
+
+.tag-sit1{
+    background-color: #0a49a5;
+}
+
+.tag-sit2{
+	background-color: black;
+}
+
+.tag-sit3{
+    background-color: red;
+}
+
+.tag-cat1{
+	background-color: #ffd02f;
+}
+
+.tag-cat2{
+	background-color: #ff9600;
+}
+
+
 .bg-black {
 	background: #000;
 }

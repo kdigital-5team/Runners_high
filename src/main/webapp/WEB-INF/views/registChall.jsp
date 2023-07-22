@@ -133,8 +133,8 @@
 			<div class="context-form">
 	        	<label for="chall_sit">모집상태</label><br>
 					<input type="button" class="customBtn" onclick="selectedBtn(this , 'chall_sit');" value ="모집중">
-					<input type="button" class="customBtn" onclick="selectedBtn(this, 'chall_sit');" value ="모집 종료">
-					<input type="button" class="customBtn" onclick="selectedBtn(this, 'chall_sit');" value ="모집 예정">
+					<input type="button" class="customBtn" onclick="selectedBtn(this, 'chall_sit');" value ="모집종료">
+					<input type="button" class="customBtn" onclick="selectedBtn(this, 'chall_sit');" value ="모집예정">
 					<input type="hidden" name="chall_sit" id="chall_sit" value="">
 			</div>
 			<div class="context-form">
@@ -652,6 +652,9 @@ function submit2() {
         Form.chall_category.value = chall_category;
         Form.chall_sit.value = chall_sit;
         Form.chall_online.value = chall_online;
+        
+        alert (chall_category + "\n" + chall_sit + "\n" + chall_online
+        		);
         
         document.regist_form.submit();
         return;

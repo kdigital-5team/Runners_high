@@ -26,22 +26,22 @@
     
   </head>
   <body>
+	  <script src="../static/js/jquery.min.js"></script>
+	  <script src="../static/js/jquery-migrate-3.0.1.min.js"></script>
+	  <script src="../static/js/jquery-ui.js"></script>
+	  <script src="../static/js/popper.min.js"></script>
+	  <script src="../static/js/bootstrap.min.js"></script>
+	  <script src="../static/js/owl.carousel.min.js"></script>
+	  <script src="../static/js/jquery.stellar.min.js"></script>
+	  <script src="../static/js/jquery.fancybox.min.js"></script>
+	  <script src="../static/js/aos.js"></script>
+	
+	  <script src="../static/js/main.js"></script>
   
     
   
  <h1> error page</h1>
 
-  <script src="../static/js/jquery.min.js"></script>
-  <script src="../static/js/jquery-migrate-3.0.1.min.js"></script>
-  <script src="../static/js/jquery-ui.js"></script>
-  <script src="../static/js/popper.min.js"></script>
-  <script src="../static/js/bootstrap.min.js"></script>
-  <script src="../static/js/owl.carousel.min.js"></script>
-  <script src="../static/js/jquery.stellar.min.js"></script>
-  <script src="../static/js/jquery.fancybox.min.js"></script>
-  <script src="../static/js/aos.js"></script>
-
-  <script src="../static/js/main.js"></script>
     
   </body>
 </html>
