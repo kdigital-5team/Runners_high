@@ -196,4 +196,12 @@ boolean result = false;
 		
 		return mapper.deletePostByAuthId(auth_id);
 	}
+
+	public boolean updateAuthNum(String userId, int chall_id) {
+		return mapper.updateAuthNum(userId, chall_id);
+	}
+
+	public List<ChallengePost> getPostByUserandChall(String userId, int challId) {
+		return mapper.getPostByUserandChall(userId, challId);
+	}
 }

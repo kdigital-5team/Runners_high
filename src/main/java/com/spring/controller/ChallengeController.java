@@ -466,21 +466,24 @@ public class ChallengeController {
 	    }
 		
 		@RequestMapping(value="/challenge/{chall_id}/insertChallPost", method = RequestMethod.POST)
-		public String insertChallPost(@PathVariable int chall_id, @ModelAttribute ChallengePost challpost, Model model) throws Exception {
-
+		public String insertChallPost(@PathVariable int chall_id, @ModelAttribute ChallengePost challpost, Model model, HttpSession session) throws Exception {
+			String userId = (String)session.getAttribute("userId");
 			boolean challPostResult = false;
+			boolean authNum = false;
 			System.out.println(challpost);
 		
 			try {
 				System.out.println(challpost);
-				
+				challpost.setComment_id(userId);
 				challPostResult = challService.insertChallPost(challpost);
 				
 				if(challPostResult) {
 					System.out.println("등록완료");
-
-					
-					return "redirect:/challenge/"+chall_id;
+					authNum = challService.updateAuthNum(userId, chall_id);
+					if(authNum) {
+						return "redirect:/challenge/"+chall_id;
+					}
+					return "index";
 				}
 				
 			} catch (Exception e) {
@@ -573,6 +576,7 @@ public class ChallengeController {
 			User host = challService.getHostByChallId(challId);
 			List<UserChallenge> userList = challService.getUserByChallId(challId);
 			List<UserChallenge> parList = new ArrayList<UserChallenge>();
+			List<ChallengePost> postList = challService.getPostByUserandChall(userId, challId);
 			Challenge chall = challService.getChallByChallId(challId);
 			Date date = chall.getChall_start_date();
 			System.out.println(date);
@@ -595,6 +599,7 @@ public class ChallengeController {
 			model.addAttribute("avgAuth", avgAuth);
 			model.addAttribute("parList", parList);
 			model.addAttribute("host", host);
+			model.addAttribute("postList", postList);
 			return "challengeCalendar";
 		}
 		
