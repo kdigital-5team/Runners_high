@@ -44,22 +44,20 @@
 		
 		<div class="container">
 				<div class="row">
-					<div class="col-lg-10">
-						<div class="display-flex">
-							<div class="post" style="border:none; margin-top:10%; margin-left:35%">
-								<div class="post-header2">
-									<img src="/images/${user.user_pic}" alt="Profile Picture">									
-								</div>
+					<div class="display-flex" style=" text-align: center; margin-left:30%">
+						<div class="post" style="border:none; float:left;">
+							<div class="post-header2">
+								<img src="/images/${user.user_pic}" alt="Profile Picture">									
 							</div>
-							<form action="/mypage/feed" enctype="multipart/form-data" method="POST">					
-								<div class="post" style="border:none; margin-top:60%;">
-									<div class="username">${user.user_id}</div>
-									<div class="userintro">${user.intro}</div>
-								</div>
-							</form>	
-							<div onclick="location.href='#'" style="border:none; margin-top:14%; margin-left:2%; margin-right:15%">
-								<button>프로필 수정</button>
+						</div>
+						<form action="/mypage/feed" enctype="multipart/form-data" method="POST">					
+							<div class="post" style="border:none; float:middle; margin-top:15%; width:200px">
+								<div class="username">${user.nickname}</div>
+								<div class="userIntro">${user.intro}</div>
 							</div>
+						</form>	
+						<div onclick="location.href='/mypage/edit'" style="border:none; float:right; margin-top:12%;">
+							<button>프로필 수정</button>
 						</div>
 					</div>
 				</div>
@@ -98,10 +96,10 @@
 					</div>
 					<hr>
 					<div class="form-group">
-						<div style="height: 150px; width: 200px; vertical-align: middle; margin-left:41%">	
-							<label>이미지 파일 첨부</label> 
+						<div style="height: 150px; width: 200px; vertical-align: middle;  margin-bottom:10%; margin-left:41%">	
+							
 				            <input type="file" name="file" onchange="readURL(this);"/>
-							<img id="preview" src="#" width=250 height=150 alt="선택된 이미지가 없습니다" style="align-content: flex-end; ">
+							<img id="preview" src="#" width=250 height=150 alt="선택된 이미지가 없습니다" style="align-content: flex-end; " onchange="setDetailImage(event);">
 						</div>
 					</div>
 					<div class="form-group">
@@ -130,20 +128,36 @@
 	      }
 	  }  
 	</script>
+	
+	<!-- 이미지 미리보기 -->
+	<script>
+	function setThumbnail(event){
+		var reader = new FileReader();
+		
+		reader.onload = function(event){
+			var img = document.createElement("img");
+			img.setAttribute("src", event.target.result);
+			img.setAttribute("class", "col-lg-6");
+			document.querySelector("div#image_container").appendChild(img);
+		};
+		
+		reader.readAsDataURL(event.target.files[0]);
+	}
+	</script>
 	<!-- footer -->
 	<%@ include file="./inc/footer.jsp"%>
 
-	<script src="js/jquery.min.js"></script>
-	<script src="js/jquery-migrate-3.0.1.min.js"></script>
-	<script src="js/jquery-ui.js"></script>
-	<script src="js/popper.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<script src="js/owl.carousel.min.js"></script>
-	<script src="js/jquery.stellar.min.js"></script>
-	<script src="js/jquery.magnific-popup.min.js"></script>
-	<script src="js/aos.js"></script>
+	<script src="/js/jquery.min.js"></script>
+	<script src="/js/jquery-migrate-3.0.1.min.js"></script>
+	<script src="/js/jquery-ui.js"></script>
+	<script src="/js/popper.min.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+	<script src="/js/owl.carousel.min.js"></script>
+	<script src="/js/jquery.stellar.min.js"></script>
+	<script src="/js/jquery.magnific-popup.min.js"></script>
+	<script src="/js/aos.js"></script>
 
-	<script src="js/main.js"></script>
+	<script src="/js/main.js"></script>
 
 </body>
 </html>

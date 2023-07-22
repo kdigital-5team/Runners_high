@@ -13,6 +13,7 @@
 				feed_cont,	
 				feed_writing_date		
  		FROM personal_feed
+ 		ORDER BY feed_id DESC
  	</select>
  	
  	<!-- 작성 -->
@@ -42,6 +43,6 @@
  		FROM personal_feed 
  		WHERE user_id = #{userId}
  		
- 	</select>	
+ 	</select>
  	
  </mapper>
