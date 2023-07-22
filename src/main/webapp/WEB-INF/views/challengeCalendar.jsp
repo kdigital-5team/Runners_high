@@ -304,6 +304,14 @@ function buildCalendar() {
             nowColumn.onclick = function () { choiceDate(this); }
         }
     }
+    
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+    <c:forEach items="${postList}" var="post">
+    <fmt:formatDate pattern="yyyy-MM-dd" value="${post.auth_date}"/>
+    	var authDay = document.getElementById("<fmt:formatDate pattern="yyyy-MM-dd" value="${post.auth_date}"/>");
+    	authDay.className="today";
+    </c:forEach>
 }
 
 // 날짜 선택
@@ -338,15 +346,6 @@ function leftPad(value) {
     }
     return value;
 }
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<c:forEach items="${postList}" var="post">
-<fmt:formatDate pattern="yyyy-MM-dd" value="${post.auth_date}"/>
-	var authDay = document.getElementById("<fmt:formatDate pattern="yyyy-MM-dd" value="${post.auth_date}"/>");
-	console.log(authDay);
-</c:forEach>
-var dd = document.getElementById("2023-07-23");
-console.log(dd);
   </script>
 
 </html>
