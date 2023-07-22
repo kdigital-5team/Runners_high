@@ -56,6 +56,9 @@ public class FeedController {
 		List<PersonalFeed> feedList = feedservice.getAllFeeds();
 		model.addAttribute("feedList", feedList);
 		
+		List<FeedPicture> picList = pictureservice.getAllFeedPicture();
+		model.addAttribute("picList", picList);
+		
 		return "mypage_feed";
 	 }
 	
