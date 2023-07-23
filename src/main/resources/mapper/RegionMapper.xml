@@ -22,10 +22,17 @@
  				WHERE region_city = #{city}
  	</select>
  	
- 	 <select id="getIdByDistrict" resultType="int">
+ 	 <select id="getIdByDistrict" resultType="string">
  		SELECT DISTINCT region_id
  			FROM region
  				WHERE region_district = #{district}
+ 	 </select>
+ 	<select id="getIdByStateCityDistrict" resultType="string">
+ 		SELECT DISTINCT region_id
+ 			FROM region
+ 				WHERE region_state = #{region_state} 
+ 				AND region_city = #{region_city}
+ 				AND region_district = #{region_district}
  	 </select>
  	 
  	 <select id="getRegionById" resultType="com.spring.dto.Region">

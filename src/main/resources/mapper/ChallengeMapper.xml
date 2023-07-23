@@ -228,7 +228,7 @@
  			 								chall_online,
  			 									chall_all_auth,
  			 									chall_week_auth,
- 			 									race_id) 
+ 			 									race_id)
  			 		VALUES (#{chall_name},
  			 		challenge_req.NEXTVAL,
  			 					#{chall_reg_id}, 
@@ -241,8 +241,8 @@
  			 											#{chall_sit},
  			 												#{chall_online},
  			 													#{chall_all_auth},
- 			 													#{chall_week_auth},
- 			 													race_id)
+ 			 														#{chall_week_auth},
+ 			 															#{race_id})
 			<selectKey keyProperty="chall_id" resultType="int">
 				SELECT challenge_req.CURRVAL AS chall_id FROM DUAL
 			</selectKey>
