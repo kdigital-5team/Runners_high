@@ -615,6 +615,8 @@ public class ChallengeController {
 		@RequestMapping(value = "/feed/{otherId}", method = RequestMethod.GET)
 		public String getAllFeeds(@PathVariable String otherId, Model model, HttpSession session) throws Exception {
 			String userId =(String) session.getAttribute("userId");
+			if(userId==null)
+				userId="";
 			
 			User user = userService.getUserByUserId(otherId);
 			
@@ -640,6 +642,8 @@ public class ChallengeController {
 				@RequestMapping(value = "/otherChall/{otherId}", method = RequestMethod.GET)
 				public String getOtherChall(@PathVariable String otherId, Model model, HttpSession session) throws Exception {
 					String userId =(String) session.getAttribute("userId");
+					if(userId==null)
+						userId="";
 					
 					User user = userService.getUserByUserId(otherId);
 					List<ChallengeRegion> myChallList = challService.getChallByUserId(otherId);
