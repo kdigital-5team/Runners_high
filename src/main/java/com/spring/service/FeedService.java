@@ -10,5 +10,4 @@ public interface FeedService {
 	public List<PersonalFeed> getAllFeeds();
 	
 	public boolean insertFeed(PersonalFeed pf) throws SQLException, Exception;
-
 }
