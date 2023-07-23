@@ -47,7 +47,7 @@
 				region.region_district, 
 				(select race.race_name from race, challenge where race.race_id = challenge.race_id) as race_name
 		FROM challenge, region
-		WHERE challenge.region_id = region.region_id and chall_sit != '종료' and chall_sit != '진행중'
+				WHERE challenge.region_id = region.region_id and chall_sit != '종료' and chall_sit != '진행중'
 		ORDER BY chall_id DESC
 	</select>
 
@@ -227,7 +227,8 @@
  			 							chall_sit,
  			 								chall_online,
  			 									chall_all_auth,
- 			 									chall_week_auth) 
+ 			 									chall_week_auth,
+ 			 									race_id) 
  			 		VALUES (#{chall_name},
  			 		challenge_req.NEXTVAL,
  			 					#{chall_reg_id}, 
@@ -240,7 +241,8 @@
  			 											#{chall_sit},
  			 												#{chall_online},
  			 													#{chall_all_auth},
- 			 													#{chall_week_auth})
+ 			 													#{chall_week_auth},
+ 			 													race_id)
 			<selectKey keyProperty="chall_id" resultType="int">
 				SELECT challenge_req.CURRVAL AS chall_id FROM DUAL
 			</selectKey>
