@@ -12,7 +12,7 @@ import lombok.ToString;
 @Setter
 @ToString
 public class Region {
-	private int region_id;
+	private String region_id;
 	private String region_state;
 	private String region_city;
 	private String region_district;

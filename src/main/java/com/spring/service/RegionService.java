@@ -29,7 +29,7 @@ public class RegionService {
 	public List<String> getDistrictByCity(String city) {
 		return mapper.getDistrictByCity(city);
 	}
-	public int getIdByDistrict(String district) {
+	public String getIdByDistrict(String district) {
 		return mapper.getIdByDistrict(district);
 	}
 	public Region getRegionbyId(int regionId) {
@@ -43,6 +43,10 @@ public class RegionService {
 	}
 	public String getDistrictById(int regionId) {
 		return mapper.getDistrictById(regionId);
+	}
+
+	public String getIdByStateCityDistrict(String region_state, String region_city, String region_district) {
+		return mapper.getIdByStateCityDistrict(region_state, region_district, region_city );
 	}
 
 
