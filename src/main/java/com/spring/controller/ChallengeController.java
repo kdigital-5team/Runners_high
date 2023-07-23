@@ -85,7 +85,7 @@ public class ChallengeController {
 		@RequestMapping(value = "/registChall", method = RequestMethod.POST)
 		public String insertChallenge(@ModelAttribute Challenge newChallenge,
 									  Model model,
-									  @RequestParam(required = false) String region_district, String region_id,
+									  @RequestParam(required = false) String region_state, String region_city,String region_district, String region_id,
 									  HttpSession session) throws Exception {
 			
 			System.out.println("registChall controller 실행");
@@ -106,18 +106,17 @@ public class ChallengeController {
 					return "alert";
 					
 				} else if (newChallenge.getChall_category().equals("일상용")) {
-					raceId=null;
+
 					
 					
 				}
 				
 				newChallenge.setChall_reg_id(userId);
 				
-				if ("일상용".equals(newChallenge.getChall_category()) && (region_district == null || region_district.isEmpty())) {
-					newChallenge.setRegion_id(null);
+				if  (region_district == null || region_district.isEmpty()) {
+					newChallenge.setRegion_id(service.getIdByDistrict("지역무관"));
 				} else {
-					int regionId = Integer.parseInt(region_id);
-					newChallenge.setRegion_id(regionId);
+					newChallenge.setRegion_id(service.getIdByStateCityDistrict(region_state, region_city, region_district));
 					System.out.println("새로운 챌린지 정보2 : " + newChallenge);
 				}
 				

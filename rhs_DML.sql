@@ -86,6 +86,7 @@ INSERT INTO title
         (title_seq.NEXTVAL, '인플루언서', 30);
 
 -- region
+INSERT INTO region values(region_seq.NEXTVAL,'지역무관', '지역무관', '지역무관');
 INSERT INTO region values(region_seq.NEXTVAL,'서울특별시', '서울특별시', '종로구');
 INSERT INTO region values(region_seq.NEXTVAL,'서울특별시', '서울특별시', '중구');
 INSERT INTO region values(region_seq.NEXTVAL,'서울특별시', '서울특별시', '용산구');
