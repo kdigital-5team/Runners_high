@@ -117,7 +117,7 @@ CREATE TABLE challenge (
     chall_reg_id     VARCHAR2(30 BYTE) NOT NULL,
     region_id        NUMBER(5),
     race_id          NUMBER(5),
-    chall_name       VARCHAR2(20 BYTE) NOT NULL,
+    chall_name       VARCHAR2(60 BYTE) NOT NULL,
     chall_intro      VARCHAR2(500 BYTE) NOT NULL,
     chall_start_date DATE NOT NULL,
     chall_end_date   DATE NOT NULL,
