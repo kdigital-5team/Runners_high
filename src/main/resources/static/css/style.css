@@ -160,7 +160,7 @@ a:hover {
 	flex-wrap: wrap;
 	margin-bottom: 3rem !important;
 	position: relative;
-	/* left: 62px; */
+	left: 22px;
 }
 
 .challenge-block {
@@ -172,6 +172,11 @@ a:hover {
 	margin-bottom: 20px;
 	border-radius: 9px;
 	cursor: pointer;
+}
+
+.space {
+	width: 2px;
+    height: 30px;
 }
 
 .inline-block {
