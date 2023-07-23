@@ -141,9 +141,10 @@ public class RaceController {
 		
 	}
 	
-	@Scheduled(cron = "0 0 2 * * *")
+	@Scheduled(cron = "50 * * * * *")
 	public String updateRaceCon() {
 		boolean updateRaceCon = service.updateRaceCon();
+		System.out.println("대회 일정 업데이트");
 		
 		if(updateRaceCon) {
 			return "redirect:/main";

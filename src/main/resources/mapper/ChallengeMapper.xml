@@ -288,6 +288,18 @@
 		WHERE chall_id=#{challId} and comment_id = #{userId}
 	</select>
 	
+	<select id="getUserByChallIdAndUserId" resultType="string" >
+		SELECT user_id
+		FROM user_chall
+		WHERE user_id=#{userId, jdbcType=VARCHAR} 
+				and chall_reg_status = 'Y' 
+				and chall_id =(
+								select chall_id
+								from challenge
+								where chall_id=#{chall_id} and chall_sit='진행중')
+	</select>
+	
+	
 	<insert id="insertChallPost" parameterType="com.spring.dto.ChallengePost">
 	INSERT INTO auth_post (auth_id, chall_id, comment_id, auth_title, auth_cont, auth_date)
 	VALUES (POST_SEQ.nextval, #{chall_id}, #{comment_id, jdbcType=VARCHAR}, #{auth_title}, #{auth_cont}, SYSDATE)

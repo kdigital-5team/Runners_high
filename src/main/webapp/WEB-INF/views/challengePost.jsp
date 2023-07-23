@@ -210,6 +210,10 @@ $(document).ready(function (){
 	function apply(){
 
 	}
+	
+	var cantPost='${cantPost}';
+	if(cantPost=='불가')
+		alert("챌린지 참가자가 아니거나, 인증 가능한 상태가 아닙니다");
 
   </script>
 </html>

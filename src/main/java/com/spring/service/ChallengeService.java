@@ -204,4 +204,8 @@ boolean result = false;
 	public List<ChallengePost> getPostByUserandChall(String userId, int challId) {
 		return mapper.getPostByUserandChall(userId, challId);
 	}
+
+	public String getUserByChallIdAndUserId(String userId, int chall_id) {
+		return mapper.getUserByChallIdAndUserId(userId, chall_id);
+	}
 }

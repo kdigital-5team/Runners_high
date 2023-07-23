@@ -459,7 +459,12 @@ public class ChallengeController {
 
 		
 		@RequestMapping(value="/challenge/{chall_id}insertChallPost", method = RequestMethod.GET)		//게시글 작성 화면 호출
-	    public String insertChallPostForm(@PathVariable int chall_id, Model model) throws Exception{
+	    public String insertChallPostForm(@PathVariable int chall_id, Model model, HttpSession session, RedirectAttributes rttr) throws Exception{
+			String userId = challService.getUserByChallIdAndUserId(((String)session.getAttribute("userId")), chall_id);
+			if(userId==null||userId=="") {
+				rttr.addFlashAttribute("cantPost", "불가");
+				return "redirect:/challenge/"+chall_id+"challengePost";
+			}
 			System.out.println(chall_id);
 			model.addAttribute("chall_id", chall_id);
 	    	return "/insertChallPost";
@@ -572,6 +577,9 @@ public class ChallengeController {
 		@RequestMapping(value="challenge/{challId}calendar")
 		String calendarbyChallId(@PathVariable int challId, HttpSession session, Model model) {
 			String userId = (String)session.getAttribute("userId");
+			if(userId==null || userId=="") {
+				return "redirect:/login";
+			}
 			UserChallenge myUC = new UserChallenge();
 			User host = challService.getHostByChallId(challId);
 			List<UserChallenge> userList = challService.getUserByChallId(challId);
@@ -649,9 +657,10 @@ public class ChallengeController {
 					}
 				 }
 		
-		@Scheduled(cron = "0 0 0 * * *")
+		@Scheduled(cron = "0 * * * * *")
 		public String updateChallSit() {
 			boolean updateChallSit = challService.updateChallSit();
+			System.out.println("챌린지 상태 업데이트");
 			
 			if(updateChallSit) {
 				return "redirect:/main";
