@@ -413,8 +413,8 @@ public class ChallengeController {
 		//수정
 		@RequestMapping(value = "/updatePost/{auth_id}", method = RequestMethod.POST)
 		public String updateChallPost(@PathVariable int auth_id, 
-								@ModelAttribute("auth_title") String auth_title,
-								@ModelAttribute("auth_cont") String auth_cont) {
+								@RequestParam("auth_title") String auth_title,
+								@RequestParam("auth_cont") String auth_cont) {
 			
 			
 			boolean result = false;
