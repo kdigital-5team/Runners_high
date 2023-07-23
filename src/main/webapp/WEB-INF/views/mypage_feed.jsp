@@ -92,7 +92,7 @@
 											<a href="#" data-toggle="modal" data-target="#myModal${vs.index}"><img src="/images/${pic.feed_pic_title}" class="img-block">${feed.feed_title}</a>
 										</div>
 									</c:if>
-				      		</c:forEach>
+				      			</c:forEach>
 							</div>
 						</c:if>							 
  						<div class="modal fade" id="myModal${vs.index}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -123,10 +123,10 @@
 									</div>
 									<div class="left-likes-num">42</div>
 									<div class="right-edit">
-										<button>수정</button>
+										<button class="btn btn-dark">수정</button>
 									</div>
 									<div class="right-delete">
-										<button>삭제</button>
+										<button class="btn btn-dark">삭제</button>
 									</div>
 								</div>
 								<br>
@@ -149,9 +149,7 @@
 				
 			</div>
 		</div>
-	</div>
-	
-	<!-- 피드 상세보기 레이어 팝업 js문 -->
+	</div>	
 
 	<!-- footer -->
 	<%@ include file="./inc/footer.jsp"%>
