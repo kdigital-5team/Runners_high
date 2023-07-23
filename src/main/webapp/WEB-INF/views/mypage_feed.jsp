@@ -67,8 +67,7 @@
 						<div class="hero-contents">
 							<p>
 								<a href="/mypage/feed"><strong>피드</strong></a> <span class="mx-2">|</span>
-								<a href="/mypage/chall">참여 챌린지</a> <span class="mx-2">|</span> <a
-									href="/mypage/title">칭호</a> <span class="mx-2"></span>
+								<a href="/mypage/chall">참여 챌린지</a> <span class="mx-2">|</span><a href="/mypage/title">칭호</a>
 								<button class="btn btn-dark" style="float: right; margin-left:-10%">
 									<a onclick="location.href='/mypage/write'">추가</a>
 								</button>
