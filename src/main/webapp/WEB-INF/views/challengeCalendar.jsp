@@ -290,19 +290,6 @@ function buildCalendar() {
             nowColumn.style.color = "#0000CD";
             nowRow = tbody_Calendar.insertRow();    // 새로운 행 추가
         }
-
-
-        if (nowDay < today) {                       // 지난날인 경우
-            nowColumn.className;
-        }
-        else if (nowDay.getFullYear() == today.getFullYear() && nowDay.getMonth() == today.getMonth() && nowDay.getDate() == today.getDate()) { // 오늘인 경우           
-            nowColumn.className;
-            nowColumn.onclick = function () { choiceDate(this); }
-        }
-        else {                                      // 미래인 경우
-            nowColumn.className;
-            nowColumn.onclick = function () { choiceDate(this); }
-        }
     }
     
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -312,20 +299,6 @@ function buildCalendar() {
     	var authDay = document.getElementById("<fmt:formatDate pattern="yyyy-MM-dd" value="${post.auth_date}"/>");
     	authDay.className="today";
     </c:forEach>
-}
-
-// 날짜 선택
-function choiceDate(nowColumn) {
-    
-    nowColumn.classList.add("choiceDay");           // 선택된 날짜에 "choiceDay" class 추가
-	if (document.getElementsByClassName("choiceDay")[0] && document.getElementsByClassName("choiceDay")[1]) {
-		$('input[name=chall_end_date]').attr('value',nowMonth.getFullYear() + "-" + leftPad(nowMonth.getMonth() + 1) + "-" + document.getElementsByClassName("choiceDay")[1].innerText );
-		console.log(document.getElementsByClassName("choiceDay")[1].innerText);
-
-	} else {
-		$('chall_start_date').val(document.getElementsByClassName("choiceDay")[0].innerText);
-		$('input[name=chall_start_date]').attr('value',nowMonth.getFullYear() + "-" + leftPad(nowMonth.getMonth() + 1) + "-" + document.getElementsByClassName("choiceDay")[0].innerText);
-	}
 }
 
 // 이전달 버튼 클릭

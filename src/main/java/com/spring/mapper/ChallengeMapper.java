@@ -88,4 +88,6 @@ public interface ChallengeMapper {
 
 	public List<ChallengePost> getPostByUserandChall(String userId, int challId);
 
+	public String getUserByChallIdAndUserId(String userId, int chall_id);
+
 }
