@@ -16,9 +16,6 @@
 										<c:if test="${chall.chall_sit eq '모집예정'}">
 											<div class="tag-default"><span class="tag-text">모집예정</span></div>
 										</c:if>
-										<c:if test="${chall.chall_sit eq '모집종료'}">
-											<div class="tag-default tag-sit3"><span class="tag-text">모집종료</span></div>
-										</c:if>
 										<c:if test="${chall.chall_category eq '일상용'}">
 											<div class="tag-default"><span class="tag-text">일상용</span></div>
 										</c:if>

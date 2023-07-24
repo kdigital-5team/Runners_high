@@ -121,8 +121,10 @@
 							</table>
 				<div style="margin:30px"></div>
 				<div style="text-align:center; ">		
-			<button style="background-color:Gainsboro; border-radius:5%; padding:6px 11px; font-color:white">
-			<a href="/challenge/${chall_id}insertChallPost">글쓰기</a></button></div>
+			
+			<a href="/challenge/${chall_id}insertChallPost">
+			<button class="btn btn-dark" style="font-color:white">글쓰기</button>
+			</a></div>
 			
 		
 	</div>

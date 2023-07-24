@@ -11,6 +11,7 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+<link rel="stylesheet" href="../static/css/style2.css">
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css?family=Nunito+Sans:200,300,400,700,900|Oswald:400,700">
 <link rel="stylesheet" href="../static/fonts/icomoon/style.css">
@@ -25,41 +26,6 @@
 <link rel="stylesheet" href="../static/css/feed.css">
 <link rel="stylesheet" href="../static/fonts/flaticon/font/flaticon.css">
 <link rel="stylesheet" href="../static/css/aos.css">
-<link rel="stylesheet" href="../static/css/style2.css">
-
- <style>
-        td {
-            width: 50px;
-            height: 50px;
-        }
-
-        .Calendar { 
-            text-align: center;
-            margin: 0 auto; 
-        }
-
-        .Calendar>thead>tr:first-child>td { font-weight: bold; }
-
-        .Calendar>thead>tr:last-child>td {
-            background-color: gray;
-            color: white;
-        }        
-
-        .pastDay{ background-color: lightgray; }
-
-        .today{            
-            background-color: #FFCA64;            
-        }
-
-        .futureDay{            
-            background-color: #FFFFFF;
-        }
-
-        .futureDay.choiceDay, .today.choiceDay{            
-            background-color: #3E85EF;            
-            color: #fff;
-        }
-    </style>
 
 </head>
 <body>
@@ -140,7 +106,7 @@
     		</table>
 		</div>
 		<div style="width: 70%; margin: auto; margin-top: 20px; text-align: center;">
-			<span>나의 인증율</span>
+			<span>나의 인증률</span>
 			<div>
 				<div style="text-align: center; width: 100%; height: 150px;">
 					${myUC.chall_auth_num/chall.chall_all_auth*100}%
@@ -152,7 +118,7 @@
 			</div>
 		</div>
 		<div style="width: 70%; margin: auto; text-align: center;">
-			<span>전체 인증율</span>
+			<span>전체 인증률</span>
 			<div>
 				<div style="text-align: center; width: 100%; height: 150px;">
 					${avgAuth/chall.chall_all_auth*100}%
@@ -241,12 +207,6 @@ $(document).ready(function (){
 	          } 
 	        })
 	        
-		
-		
-	 	
-   		
-   		
-
 	}
 	function fail(err) { // 위치 정보를 가져오는데 실패했을 때 호출되는 콜백 함수
 	    alert('현위치를 찾을 수 없습니다.');

@@ -63,17 +63,13 @@
 
 		<div class="row no-gutters site-subbar align-items-center py-3" >
 			<div style="margin: auto;" >
-			<div class="contact-form">
-					<label class="font-weight-bold" for="keyword" style="text-align: center;">챌린지 목록</label> <div></div>
-					<input type="text" class="form-control" id="keyword" placeholder="챌린지 검색" name="keyword" style="float: left; width:65%; height: 40px;" onkeypress="if(event.keyCode==13){searchKeyword();}"> 
-					<button type="button" onclick="searchKeyword()" style="margin-right: 5%; float: left; width: 20%" class="btn btn-dark">검색</button>
-					
-					<button type="button" onclick="loginCheck();" style="float: left; width: 10%" class="btn btn-dark">+</button>
-
+			<div class="contact-form2">
+					<input type="text" class="form-control" id="keyword" placeholder="챌린지명 입력" name="keyword" style="float: left; width:65%; height: 40px;" onkeypress="if(event.keyCode==13){searchKeyword();}"> 
+					<button type="button" onclick="searchKeyword()" class="btn btn-dark" style="width:61px;">검색</button>
+					<button type="button" onclick="loginCheck();" class="btn btn-dark" style="margin-left:5px;">+</button>
 			</div>
 				<nav class="site-navigation text-left text-md-left"
-					style="float: left;">
-
+					 style="float: left; position: relative; right: 347px;">
 					<ul class="site-menu js-clone-nav d-none d-lg-block">
 						<li class="has-children">온라인
 							<ul class="dropdown arrow-top">
@@ -215,20 +211,29 @@
 											<div class="tag-default tag-cat2"><span class="tag-text">대회용</span></div>
 										</c:if>
 										<h3 class="challenge-name"><a class="challenge-name-t" href="challenge/${chall.chall_id}">${chall.chall_name}</a></h3>
-										<c:if test="${chall.chall_category eq '대회용'}">
-											<div class="race-space">${chall.race_name}</div>
+										<c:if test="${chall.chall_category eq '대회용'}"
+											<div class="challenge-name-s">${chall.race_name}</div>
 										</c:if>
 										<c:if test="${chall.chall_category eq '일상용'}">
 											<div class="space"></div>
 										</c:if>
 										<div class="caption">
 											<c:if test="${chall.region_state eq chall.region_city}">
-												<div class="caption">${chall.region_state} ${chall.region_district}</div>
+												<c:if test="${chall.region_state eq '지역무관'}">
+														<div>${chall.region_state} </div>
+												</c:if>
+												<c:if test="${chall.region_state ne '지역무관'}">
+													<div>${chall.region_state} ${chall.region_district}</div>
+												</c:if>
 											</c:if>
 											<c:if test="${chall.region_state ne chall.region_city}">
-												<div class="caption">${chall.region_state} ${chall.region_city}</div>
+												<c:if test="${chall.region_state eq '지역무관'}">
+													<div>${chall.region_state} </div>
+												</c:if>
+												<c:if test="${chall.region_state ne '지역무관'}">
+													<div>${chall.region_state} ${chall.region_city}</div>
+												</c:if>
 											</c:if>
-											<div>${race.region_state} ${race.region_city}</div>
 												<span>
 													<fmt:formatDate pattern="yyyy-MM-dd" value="${chall.chall_start_date}"/> ~ <fmt:formatDate pattern="yyyy-MM-dd" value="${chall.chall_end_date}"/>
 												</span><br>

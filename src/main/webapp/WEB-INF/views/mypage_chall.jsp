@@ -14,6 +14,7 @@
 	href="https://fonts.googleapis.com/css?family=Nunito+Sans:200,300,400,700,900|Oswald:400,700">
 <link rel="stylesheet" href="../static/fonts/icomoon/style.css">
 
+<link rel="stylesheet" href="../static/css/style2.css">
 <link rel="stylesheet" href="../static/css/bootstrap.min.css">
 <link rel="stylesheet" href="../static/css/jquery.fancybox.min.css">
 <link rel="stylesheet" href="../static/css/jquery-ui.css">
@@ -25,7 +26,6 @@
 <link rel="stylesheet" href="../static/css/feed.css">
 <link rel="stylesheet" href="../static/fonts/flaticon/font/flaticon.css">
 <link rel="stylesheet" href="../static/css/aos.css">
-<link rel="stylesheet" href="../static/css/style2.css">
 
 </head>
 <style>
@@ -102,27 +102,36 @@
 												<div class="tag-default"><span class="tag-text">대기중</span></div>
 											</c:otherwise>
 										</c:choose>
+										<c:if test="${chall.chall_category eq '일상용'}">
+											<div class="tag-default"><span class="tag-text">${chall.chall_category}</span></div>
+										</c:if>
 										<c:if test="${chall.chall_category eq '대회용'}">
 											<div class="tag-default tag-cat2"><span class="tag-text">${chall.chall_category}</span></div>
 										</c:if>
-										<c:if test="${chall.chall_category ne '대회용'}">
-											<div class="tag-default"><span class="tag-text">${chall.chall_category}</span></div>
-										</c:if>
 										<h3 class="challenge-name">${chall.chall_name}</h3>
 											<c:if test="${chall.chall_category eq '대회용'}">
-												<div class="race-space">${chall.race_name}</div>
+												<div class="challenge-name-s">${chall.race_name}</div>
 											</c:if>
 											<c:if test="${chall.chall_category eq '일상용'}">
 												<div class="space"></div>
 											</c:if>
 										<div class="caption">
 											<c:if test="${chall.region_state eq chall.region_city}">
-												<div class="caption">${chall.region_state} ${chall.region_district}</div>
+												<c:if test="${chall.region_state eq '지역무관'}">
+														<div>${chall.region_state} </div>
+												</c:if>
+												<c:if test="${chall.region_state ne '지역무관'}">
+													<div>${chall.region_state} ${chall.region_district}</div>
+												</c:if>
 											</c:if>
 											<c:if test="${chall.region_state ne chall.region_city}">
-												<div class="caption">${chall.region_state} ${chall.region_city}</div>
+												<c:if test="${chall.region_state eq '지역무관'}">
+													<div>${chall.region_state} </div>
+												</c:if>
+												<c:if test="${chall.region_state ne '지역무관'}">
+													<div>${chall.region_state} ${chall.region_city}</div>
+												</c:if>
 											</c:if>
-											<div>${race.region_state} ${race.region_city}</div>
 												<span>
 													<fmt:formatDate pattern="yyyy-MM-dd" value="${chall.chall_start_date}"/> ~ <fmt:formatDate pattern="yyyy-MM-dd" value="${chall.chall_end_date}"/>
 												</span><br>

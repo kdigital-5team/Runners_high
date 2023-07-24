@@ -13,6 +13,8 @@
 	href="https://fonts.googleapis.com/css?family=Nunito+Sans:200,300,400,700,900|Oswald:400,700">
 <link rel="stylesheet" href="../fonts/icomoon/style.css">
 
+
+<link rel="stylesheet" href="../static/css/form.css">
 <link rel="stylesheet" href="../static/css/bootstrap.min.css">
 <link rel="stylesheet" href="../static/css/jquery.fancybox.min.css">
 <link rel="stylesheet" href="../static/css/jquery-ui.css">
@@ -55,7 +57,7 @@
 
 	<!-- header -->
 	<%@ include file="./inc/header.jsp"%>
-<div class="site-wrap">
+<div class="site-wrap-width">
 		<!-- 피드 / 챌린지 / 칭호 탭 -->
 		<%-- <div class="container">
 			<div class="row">
@@ -76,8 +78,9 @@
 		
 		
 		<!-- 피드 글 작성 -->
+		<div class="site-section"></div>
 		<div class="container" style="width:60%" >
-			<div  class="container"><h2>인증하기</h2></div>
+			<div  class="container" style="text-align:center"><h2 class="form-h2">인증하기</h2></div>
 		        <form action='<c:url value='/challenge/${chall_id}/insertChallPost'/>'name= "regist_form" id="regist_form" method="post" enctype="multipart/form-data">					
 					<div class="form-group">	
 						<label for="auth_title">제목</label>					
@@ -99,7 +102,7 @@
 						<!-- </div> -->
 					</div>	
 					<div style="text-align:center; background-color:white;">		
-      					 <button type="button" class="btn btn-primary" onclick="submit2();">등록하기</button>
+      					 <button type="button" class="btn btn-primary" onclick="submit2();" style="background-color:#FFDC3D; border:none;">등록하기</button>
     				</div>
 				</form>
 			</div>
