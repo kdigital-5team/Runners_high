@@ -97,9 +97,6 @@
 		</div>
 		<div style="float: left; width: 32%; margin-top: 10px">
 			<c:if test="${challenge.chall_sit eq '모집중' || challenge.chall_sit eq '모집예정' }">
-				<form action="/challenge/${challenge.chall_id}modify" method="GET" id="detailForm" style="display: inline-block;">
-								<input type="submit" class="btn btn-secondary" value="수정">	
-				</form>
 				<button class="btn btn-danger" onclick="deleteChall('${challenge.chall_id}')" style="display: inline-block;">삭제</button>
 			</c:if>
 		</div>
