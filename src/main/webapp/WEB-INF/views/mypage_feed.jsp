@@ -124,7 +124,7 @@
 										</div>
 										<div class="left-likes-num">42</div>
 										<div class="right-edit">
-											<button class="btn btn-dark">수정</button>
+											<button></button>
 										</div>
 										<div class="right-delete">
 											<button type="button" class="btn btn-dark" onclick="deleteFeed('${feed.feed_id}')" >삭제</button>
