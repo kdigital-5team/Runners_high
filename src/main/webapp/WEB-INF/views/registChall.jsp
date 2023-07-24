@@ -187,6 +187,7 @@ window.onload = function() {
     
     // window.onload 시 캘린더 실행
     buildCalendar(); 
+    
 }
 
 <!-- 동적으로 챌린지 설명 체크 -->

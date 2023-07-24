@@ -49,7 +49,7 @@
 									class="img-fluid">
 							</div>
 							<div>
-								<span class="caption">대회일정</span>
+								<span class="index-caption">대회일정</span>
 								<h3>
 									<a href="/events">국내 마라톤/걷기 대회 일정을 한번에 확인하세요.</a>
 								</h3>
@@ -66,7 +66,7 @@
 									class="img-fluid">
 							</div>
 							<div>
-								<span class="caption">챌린지</span>
+								<span class="index-caption">챌린지</span>
 								<h3>
 									<a href="/challenge">다양한 유저 챌린지와 함께 달려보세요.</a>
 								</h3>

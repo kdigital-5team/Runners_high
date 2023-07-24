@@ -18,9 +18,6 @@
 										<c:if test="${chall.chall_sit eq '모집예정'}">
 											<div class="tag-default tag-sit2"><span>${chall.chall_sit}</span></div>
 										</c:if>
-										<c:if test="${chall.chall_sit eq '모집종료'}">
-											<div class="tag-default tag-sit3"><span>${chall.chall_sit}</span></div>
-										</c:if>
 										<c:if test="${chall.chall_category eq '일상용'}">
 											<div class="tag-default tag-cat1"><span>${chall.chall_category}</span></div>
 										</c:if>
@@ -82,7 +79,7 @@
    		        		var polyline = new kakao.maps.Polyline({
    		        		    path: linePath, // 선을 구성하는 좌표배열 입니다
    		        		    strokeWeight: 5, // 선의 두께 입니다
-   		        		    strokeColor: '#ff0000', // 선의 색깔입니다
+   		        		    strokeColor: 'rgb(61 141 255)', // 선의 색깔입니다
    		        		    strokeOpacity: 0.7, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
    		        		    strokeStyle: 'solid' // 선의 스타일입니다
    		        		});
