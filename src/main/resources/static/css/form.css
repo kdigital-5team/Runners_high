@@ -64,7 +64,7 @@ td {
 	background-color: lightgray;
 }
 
-.pastDay + .yesterDay {
+.yesterDay {
 	border-top-right-radius: 17px;
     border-bottom-right-radius: 17px;
 }

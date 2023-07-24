@@ -131,6 +131,43 @@ a:hover {
 	color: #000;
 }
 
+/* Âü¿© Ã§¸°Áö Ä¶¸°´õ 0724 */
+td {
+	width: 50px;
+	height: 50px;
+}
+
+.Calendar {
+	text-align: center;
+	margin: 0 auto;
+}
+
+.Calendar>thead>tr:first-child>td {
+	font-weight: bold;
+}
+
+.Calendar>thead>tr:last-child>td {
+	background-color: gray;
+	color: white;
+}
+
+.pastDay {
+	background-color: lightgray;
+}
+
+.today {
+	background-color: #FFCA64;
+}
+
+.futureDay {
+	background-color: #FFFFFF;
+}
+
+.futureDay.choiceDay, .today.choiceDay {
+	background-color: #3E85EF;
+	color: #fff;
+}
+
 /* Ã§¸°Áö ¸ñ·Ï 0722 */
 .list-map {
 	float: left;
@@ -167,7 +204,7 @@ a:hover {
 
 .space {
 	width: 2px;
-    height: 30px;
+	height: 30px;
 }
 
 .inline-block {
@@ -217,10 +254,15 @@ a:hover {
 	white-space: nowrap;
 	width: 100%;
 	margin-right: 5%;
+	margin-bottom: 0;
 }
 
 .challenge-name-t {
 	color: #353535;
+}
+
+.challenge-name-s {
+	margin-bottom: 2px;
 }
 
 .caption {

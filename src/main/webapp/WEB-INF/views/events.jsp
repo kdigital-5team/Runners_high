@@ -15,6 +15,8 @@
 	href="https://fonts.googleapis.com/css?family=Nunito+Sans:200,300,400,700,900|Oswald:400,700">
 <link rel="stylesheet" href="../static/fonts/icomoon/style.css">
 
+<link rel="stylesheet" href="../static/css/style.css">
+<link rel="stylesheet" href="../static/css/aos.css">
 <link rel="stylesheet" href="../static/css/bootstrap.min.css">
 <link rel="stylesheet" href="../static/css/jquery.fancybox.min.css">
 <link rel="stylesheet" href="../static/css/jquery-ui.css">
@@ -22,11 +24,6 @@
 <link rel="stylesheet" href="../static/css/owl.theme.default.min.css">
 <link rel="stylesheet" href="../static/css/animate.css">
 <link rel="stylesheet" href="../static/fonts/flaticon/font/flaticon.css">
-
-
-<link rel="stylesheet" href="../static/css/aos.css">
-
-<link rel="stylesheet" href="../static/css/style.css">
 
 </head>
 <body>
@@ -38,7 +35,7 @@
 		<div class="row no-gutters site-subbar align-items-center py-3">
 			<div style="margin: auto; width: 60%;">
 				<nav class="site-navigation text-left text-md-left"
-					style="float: left; width: 60%">
+					 style="float: left;position: relative;width: 60%;right: 68px;">
 
 					<ul class="site-menu js-clone-nav d-none d-lg-block">
 						<li class="has-children">대회
@@ -139,19 +136,13 @@
 						</li>
 						<li class="has-children">시/군
 							<ul class="dropdown arrow-top" id="region_list" style="overflow: auto; height: 150px;">
-								
-								
 							</ul>
 						</li>
 					</ul>
-
-
-
 				</nav>
-				<div class="contact-form" style="float: right; width: 40%; margin-top: 25px">
-					<label class="font-weight-bold" for="keyword" style="display: inline-block;">대회명 검색</label> 
-					<input type="text" class="form-control" id="keyword" placeholder="대회명 입력" style="display: inline-block; width: 50%; height: 40px;" name="keyword" onkeypress="if(event.keyCode==13){searchKeyword();}"> 
-					<button type="button" style="display: inline-block;" onclick="searchKeyword()" class="btn btn-dark">검색</button>
+				<div class="contact-form">
+				  <input type="text" class="form-control" id="keyword" placeholder="대회명 입력" style="width: 50%; height: 40px;" name="keyword" onkeypress="if(event.keyCode==13){searchKeyword();}"> 
+				  <button type="button" onclick="searchKeyword()" class="btn btn-dark">검색</button>
 				</div>
 			</div>
 		</div>
@@ -172,50 +163,72 @@
 							
 								<div class="custom-media d-block">
 									<div class="img-wrap mb-3" style="height: 160px;">
-										<a href="${race.race_url}"><img src="${race.race_pic}"
-											alt="Image" class="img-fluid"></a>
+										<a href="#" data-toggle="modal" data-target="#myModal${vs.index}">
+											<img src="${race.race_pic}" alt="Image" class="img-fluid">
+										</a>
 									</div>
 									<div>
-										<h5 style="display: inline-block; overflow:hidden; text-overflow: ellipsis; white-space: nowrap; width: 70%;"><a href="#" data-toggle="modal" data-target="#myModal${vs.index}">${race.race_name}</a></h5>
-										<div style="display: inline-block; float: right; width: 30%">${race.race_con}</div>
-										<c:if test="${race.region_state eq race.region_city}">
-										<div>${race.region_state} ${race.region_district}</div>
+										<h5 style="display: inline-block; overflow:hidden; text-overflow: ellipsis; white-space: nowrap; width: 70%;">
+											<a href="#" data-toggle="modal" data-target="#myModal${vs.index}">${race.race_name}</a>
+										</h5>
+										<c:if test="${race.race_con eq '접수중'}">
+											<div class="tag-default2 tag-sit1"><span class="tag-text2">접수중</span></div>
 										</c:if>
-										<c:if test="${race.region_state ne race.region_city}">
-										<div>${race.region_state} ${race.region_city}</div>
+										<c:if test="${race.race_con eq '접수예정'}">
+											<div class="tag-default2"><span class="tag-text2">접수예정</span></div>
 										</c:if>
-										<span class="caption" style="font-size: 10px"><fmt:formatDate pattern="yyyy-MM-dd" value="${race.race_date}"/></span>
+										<c:if test="${race.race_con eq '접수마감'}">
+											<div class="tag-default2 tag-sit3"><span class="tag-text2">접수마감</span></div>
+										</c:if>
+										<span class="race-caption">
+											<c:if test="${race.region_state eq race.region_city}">
+												<div>${race.region_state} ${race.region_district}</div>
+											</c:if>
+											<c:if test="${race.region_state ne race.region_city}">
+												<div>${race.region_state} ${race.region_city}</div>
+											</c:if>
+											<fmt:formatDate pattern="yyyy-MM-dd" value="${race.race_date}"/>
+										</span>
 									</div>
 								</div>
 							
 						</div>
+						
 						<!-- Modal -->
 			<div class="modal fade" id="myModal${vs.index}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 			  <div class="modal-dialog">
 			    <div class="modal-content">
 			      <div class="modal-header">
 			        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-			        
 			      </div>
 			      <div class="modal-body">
-			        <img src="${race.race_pic}"
-											alt="Image" class="img-fluid">
+			        <img src="${race.race_pic}" alt="Image" class="img-fluid">
 			        <table>
-			        <tr><td>대회명 : ${race.race_name}</td></tr>
-			        <tr><td>주최 : ${race.race_org}</td></tr>
-			        <tr><td>종목 : ${race.race_dist}</td></tr>
-			        <tr><td>개최 지역 : ${race.region_city} </td></tr>
-			        <tr><td>일시 : <fmt:formatDate pattern="yyyy-MM-dd" value="${race.race_date}"/></td></tr>
-			        <tr><td>접수 기간 :<fmt:formatDate pattern="yyyy-MM-dd" value="${race.race_apply}"/> ~ <fmt:formatDate pattern="yyyy-MM-dd" value="${race.race_deadline}"/></td></tr>
-			        <tr><td>상세정보 : <a href="${race.race_url}">${race.race_url}</a></td></tr>
+				        <tr>
+				        	<td>대회명 : ${race.race_name}</td>
+				        </tr>
+				        <tr>
+				        	<td>주최 : ${race.race_org}</td>
+				        </tr>
+				        <tr>
+				        	<td>종목 : ${race.race_dist}</td>
+				        </tr>
+				        <tr>
+				        	<td>개최 지역 : ${race.region_city}</td>
+				        </tr>
+				        <tr>
+				        	<td>일시 : <fmt:formatDate pattern="yyyy-MM-dd" value="${race.race_date}"/></td>
+				        </tr>
+				        <tr>
+				        	<td>접수 기간 :<fmt:formatDate pattern="yyyy-MM-dd" value="${race.race_apply}"/> ~ <fmt:formatDate pattern="yyyy-MM-dd" value="${race.race_deadline}"/></td>
+				        </tr>
+				        <tr>
+				        	<td>상세정보 : 
+				        		<a href="${race.race_url}" target="_blank">${race.race_url}</a>
+				        	</td>
+				        </tr>
 			        </table>
-			        
-			        
-			      </div>
-			      
-			      <div class="modal-footer">
-			        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-			       
+				        <br>
 			      </div>
 			    </div>
 			  </div>
