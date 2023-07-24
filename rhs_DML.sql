@@ -478,10 +478,3 @@ INSERT INTO challenge
                         END;   
 
 commit;
-
-delete from challenge where chall_id =8;
-delete from user_chall where chall_id = 8;
-
-delete from chall_route where chall_id=8;
-
-select * from challenge;

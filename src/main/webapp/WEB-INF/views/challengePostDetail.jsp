@@ -55,15 +55,10 @@
 					</button>
 
 					</div>
-
-					</span>
 					</form>
 
 			</div>
 						
-			
-		
-	</div>
 	<!-- footer -->
 	<%@ include file="./inc/footer.jsp"%>
 
