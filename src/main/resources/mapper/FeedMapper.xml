@@ -44,4 +44,9 @@
  		WHERE user_id = #{userId}
  		
  	</select>
+ 	
+ 	<delete id="deleteFeedByFeedId">
+ 		DELETE FROM personal_feed
+ 		WHERE feed_id = #{feed_id}
+ 	</delete>
  </mapper>

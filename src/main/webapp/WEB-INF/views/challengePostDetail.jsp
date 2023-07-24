@@ -33,88 +33,10 @@
 <body>
 	<!-- header -->
 	<%@ include file="./inc/header.jsp"%>
-	<div class="site-wrap">
-		<%-- <div class="container">
-			<div class="row">
-				<div class="col-lg-12">
-					<div class="hero-wrap text-center"
-						style="background-repeat: no-repeat; background-image: url(${challenge.chall_pic}); background-size:cover;"
-						data-stellar-background-ratio="0.5"></div>
-				</div>
-			</div>
-		</div>
-		<div class="hero-contents">
-			<div style="float:left; width: 33%; text-align: center;">
-				<h2>${challenge.chall_name}</h2>
-				<p>
-					<fmt:formatDate pattern="yyyy-MM-dd" value="${challenge.chall_start_date}"/> ~ <fmt:formatDate pattern="yyyy-MM-dd" value="${challenge.chall_end_date}"/><span class="mx-2">/</span>${fn:length(userList)}명
-					<div class="caption" style="font-size: 10px"></div>
-				</p>
-			</div>
-			<div style="float: left; width: 33%">
-				<span>${challenge.chall_sit}</span>
-				<c:if test="${userId ne challenge.chall_reg_id}"> 
-					<form action="/challenge/${challenge.chall_id}/apply" method="post">
-						<input type="submit" value="신청">
-					</form>
-				</c:if>
-			</div>
-			<div style="float: left; width: 34%;">
-				<div style="float: left; width:30%; padding-top:30%; height:0; border-radius: 70%; 
-					background-image: url(${challenge.chall_pic});
-					background-position:center;">
-				</div>
-				<div style="float: right; width: 65%;  vertical-align: middle;">
-					<div>챌린지 호스트</div>
-					<div>${host.intro }</div>
-					<div>${host.nickname }</div>
-				</div>
-			</div>
-		</div> --%>
-		
-		<%-- <div style="margin: auto; text-align: center;">
-			<a href="mypage_feed">소개</a><span class="mx-2">|</span> 
-			<a href="/challengePost/${chall_id}">인증 게시판</a><span class="mx-2">|</span>
-			<a href="mypage_title">캘린더</a>
-			<spanclass="mx-2">
-				</span>
-		</div> --%>
-
-		
-		<%-- <table class="table table-hover table-striped">
-					<thead>
-						<tr>
-							
-						<th>글번호</th>
-							<th>제목</th>
-							<th>작성일</th>
-						</tr>
-					</thead>
-						<c:forEach items="${postList}" var="post">
-					<tbody>
-							<tr>
-								
-								<td>${post.auth_id}</td>
-								<td><a href="#">${post.auth_title}</a></td>
-								<td>${post.auth_date}</td>
-							</tr>
-					</tbody>
-					</c:forEach>
-
-							</table> --%>
-						
-						<%-- <div>
-						
-						<table>
-						<tr><td>${post.auth_title}</td></tr>
-						<tr><td>${post.auth_cont}</td></tr>
-						</table>
-						
-						</div> --%>
-						
-						<div class="container" style="width:60%" >
-			<!-- <div class="post"> -->	        
-		        			
+	
+		        <div class="site-wrap">
+				<form name="delete_form" id="delete_form" method="POST" action="/challenge/deletepost/${auth_id}">
+					<div class="container" style="width:60%">
 					<div class="form-group">	
 						<label for="auth_title">제목</label>	
 		                	<input class="form-control" type="text" name="auth_title" id="auth_title" value="${post.auth_title}" >
@@ -123,6 +45,7 @@
 					<div class="form-group">
 					<label for="auth_cont">내용</label>	
 							<input class="form-control" type="text" name="auth_cont" id="auth_cont" style="height:400px" value="${post.auth_cont}"></input>
+							<input type="hidden" id="chall_id" name="chall_id" value="${post.chall_id}"  readonly>
 					</div>	
 					
 					
@@ -130,13 +53,17 @@
 					<button type="button" class="btn btn-danger"   onclick="deletePost('${auth_id}')">
 					삭제하기
 					</button>
+
 					</div>
+
+					</span>
+					</form>
+
 			</div>
 						
 			
 		
 	</div>
-
 	<!-- footer -->
 	<%@ include file="./inc/footer.jsp"%>
 
@@ -152,6 +79,7 @@
 
 	<script src="js/main.js"></script>
 	
+	
 
 </body>
 <script type="text/javascript">
@@ -161,19 +89,8 @@
 	}
 	
 	function deletePost(auth_id){
+		 document.forms.delete_form.submit();
 		
-		
-		let dform = document.createElement('form');
-		dform.type="hidden";
-		dform.name="_method";
-		dform.method='DELETE';
-		dform.action='/challenge/deletepost/'+auth_id;
-		
-		
-		document.body.appendChild(dform);
-		dform.submit();
-		
-		location.href="/challenge";
 	}
   </script>
 </html>

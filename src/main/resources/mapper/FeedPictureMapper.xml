@@ -20,7 +20,7 @@
 		</selectKey>
  	</insert>
  	
- 	<select id="getFeedPictureByfeedid" parameterType="_int" resultMap="feedpicture">
+ 	<select id="getFeedPictureByFeedId" parameterType="_int" resultMap="feedpicture">
  		SELECT feed_pic_id,
  			feed_id,
 			feed_pic_date,
