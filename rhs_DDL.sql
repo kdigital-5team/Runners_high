@@ -282,7 +282,7 @@ ALTER TABLE feed_picture
 
 ALTER TABLE feed_like
     ADD CONSTRAINT feed_like_personal_feed_fk FOREIGN KEY ( feed_id )
-        REFERENCES personal_feed ( feed_id )
+        REFERENCES personal_feed ( feed_id );
 
 ALTER TABLE feed_like
     ADD CONSTRAINT feed_like_rh_user_fk FOREIGN KEY ( user_id )
