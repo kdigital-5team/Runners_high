@@ -26,6 +26,7 @@
 <link rel="stylesheet" href="../static/fonts/flaticon/font/flaticon.css">
 <link rel="stylesheet" href="../static/css/aos.css">
 <link rel="stylesheet" href="../static/css/style2.css">
+<link rel="stylesheet" href="../static/css/style4.css">
 
 </head>
 <style>
@@ -52,7 +53,8 @@
 				</p>
 			</div>
 			<div style="float: left; width: 33%">
-				<span>${challenge.chall_sit}</span>
+				<span id="block">${challenge.chall_sit}</span>
+				<span id="block">${challenge.chall_online}</span>
 				<c:if test="${userId ne challenge.chall_reg_id 
 								&& userChall.user_reg_status ne 'Y' 
 								&& userChall.user_deny_num lt 5 
@@ -99,12 +101,12 @@
 		</div>
 
 		<div style="margin: auto; width: 80%;">챌린지 소개</div>
-		<div style="margin: auto; width: 80%; height: 300px; background-color: #F0F0F0;" >
+		<div style="margin: auto; width: 80%; height: 300px; background-color: #F0F0F0; padding:15px" >
 			<span style="margin: 2%; font-size: 15px"><b>${challenge.chall_intro }</b></span>
 		</div>
 
 		<div style="margin: auto; width: 80%; margin-top: 10px">참가자</div>
-		<div style="margin: auto; background-color: #F0F0F0; width: 80%; height: 120px; margin-bottom: 10px;">
+		<div style="margin: auto; background-color: #F0F0F0; width: 80%; height: 120px; margin-bottom: 10px; padding:12px">
 
 			<c:forEach items="${userList }" var="apply_user">
 					<div style="display: inline-block; width: 10%;">
@@ -123,6 +125,7 @@
 
 		
 	</div>
+		<div class="site-section2"></div>
 	</div>
 
 	<!-- footer -->

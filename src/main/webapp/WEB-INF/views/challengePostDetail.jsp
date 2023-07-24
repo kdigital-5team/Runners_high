@@ -125,19 +125,12 @@
 							<input class="form-control" type="text" name="auth_cont" id="auth_cont" style="height:400px" value="${post.auth_cont}"></input>
 					</div>	
 					
-					<span>
-					<a href="/modifyPost/${auth_id}">
-					<button type="button" class="btn btn-primary">
-					수정하기
-					</button>
-					</a>
-					</span>
 					
-					<span>
-					<button type="button" class="btn btn-primary" onclick="deletePost('${auth_id}')">
+					<div style="text-align:center">
+					<button type="button" class="btn btn-danger"   onclick="deletePost('${auth_id}')">
 					삭제하기
 					</button>
-					</span>
+					</div>
 			</div>
 						
 			
