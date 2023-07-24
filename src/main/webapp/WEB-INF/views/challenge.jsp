@@ -63,13 +63,8 @@
 
 		<div class="row no-gutters site-subbar align-items-center py-3" >
 			<div style="margin: auto;" >
-			<div class="contact-form2">
-					<input type="text" class="form-control" id="keyword" placeholder="챌린지명 입력" name="keyword" style="float: left; width:65%; height: 40px;" onkeypress="if(event.keyCode==13){searchKeyword();}"> 
-					<button type="button" onclick="searchKeyword()" class="btn btn-dark" style="width:61px;">검색</button>
-					<button type="button" onclick="loginCheck();" class="btn btn-dark" style="margin-left:5px;">+</button>
-			</div>
 				<nav class="site-navigation text-left text-md-left"
-					 style="float: left; position: relative; right: 347px;">
+					     style="float: left;justify-content: center;align-items: center;display: flex;">
 					<ul class="site-menu js-clone-nav d-none d-lg-block">
 						<li class="has-children">온라인
 							<ul class="dropdown arrow-top">
@@ -169,10 +164,12 @@
 							</ul>
 						</li>
 					</ul>
-
-
-
 				</nav>
+				<div class="contact-form2">
+						<input type="text" class="form-control" id="keyword" placeholder="챌린지명 입력" name="keyword" style="float: left; width:65%; height: 40px;" onkeypress="if(event.keyCode==13){searchKeyword();}"> 
+						<button type="button" onclick="searchKeyword()" class="btn btn-dark" style="width:61px;">검색</button>
+						<button type="button" onclick="loginCheck();" class="btn btn-dark" style="margin-left:5px;">+</button>
+				</div>
 			</div>
 		</div>
 		<div style="width: 60%; margin: auto;">

@@ -33,10 +33,9 @@
 	<div class="site-wrap">
 
 		<div class="row no-gutters site-subbar align-items-center py-3">
-			<div style="margin: auto; width: 60%;">
+			<div style="margin: auto;">
 				<nav class="site-navigation text-left text-md-left"
-					 style="float: left;position: relative;width: 60%;right: 24px;">
-
+					 style="float: left;position: relative;left: 138px;top: 3px;">
 					<ul class="site-menu js-clone-nav d-none d-lg-block">
 						<li class="has-children">대회
 							<ul class="dropdown arrow-top">
@@ -141,7 +140,7 @@
 					</ul>
 				</nav>
 				<div class="contact-form">
-				  <input type="text" class="form-control" id="keyword" placeholder="대회명 입력" style="width: 50%; height: 40px;" name="keyword" onkeypress="if(event.keyCode==13){searchKeyword();}"> 
+				  <input type="text" class="form-control" id="keyword" placeholder="대회명 입력" style="width: 65%;height: 40px;display: inline-block;" name="keyword" onkeypress="if(event.keyCode==13){searchKeyword();}"> 
 				  <button type="button" onclick="searchKeyword()" class="btn btn-dark">검색</button>
 				</div>
 			</div>
