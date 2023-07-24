@@ -277,7 +277,7 @@ ALTER TABLE feed_comment
         
 ALTER TABLE feed_picture
     ADD CONSTRAINT feed_picture_personal_feed_fk FOREIGN KEY ( feed_id )
-        REFERENCES personal_feed ( feed_id );
+        REFERENCES personal_feed ( feed_id )
                 ON DELETE CASCADE;
 
 ALTER TABLE feed_like
