@@ -35,7 +35,7 @@
 		<div class="row no-gutters site-subbar align-items-center py-3">
 			<div style="margin: auto; width: 60%;">
 				<nav class="site-navigation text-left text-md-left"
-					 style="float: left;position: relative;width: 60%;right: 68px;">
+					 style="float: left;position: relative;width: 60%;right: 24px;">
 
 					<ul class="site-menu js-clone-nav d-none d-lg-block">
 						<li class="has-children">대회

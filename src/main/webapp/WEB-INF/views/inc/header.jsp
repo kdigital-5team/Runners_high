@@ -32,7 +32,7 @@
 									<li class="active"><a role="button" onclick="location.href='/main'">MAIN</a></li>
 									<li><a role="button" onclick="location.href='/events'">대회일정</a></li>
 									<li><a role="button" onclick="location.href='/challenge'">챌린지</a></li>
-									<li><a role="button" onclick="location.href='/mypage/feed'">마이 페이지</a></li>
+									<li><a role="button" onclick="loginCheck();">마이 페이지</a></li>
 									<c:if test="${empty userId}">
 									 	<li><a role="button"
 											class="change-button"
@@ -59,3 +59,13 @@
 		</div>
 </div>
 </header>
+
+<script type="text/javascript">
+	function loginCheck(){
+		var userId = '<%=(String)session.getAttribute("userId")%>';
+		if (userId == "null"){
+			alert("로그인이 필요한 서비스 입니다.");
+			location.href = "/login";
+		}
+	}
+</script>
