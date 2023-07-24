@@ -441,12 +441,6 @@ INSERT INTO race
     VALUES
         (race_seq.NEXTVAL, 20, '한국생명의전화', '생명사랑밤길걷기', '2023.09.09', '2023.07.19', '2023.08.27', 'https://walkingovernight.com/', '걷기', '7.1km, 36.6km', 
         'https://search.pstatic.net/common?type=ofullfill&size=174x250&quality=85&direct=true&src=https%3A%2F%2Fcsearch-phinf.pstatic.net%2F20230718_173%2F1689659003445snsGY_PNG%2F1689567254.png');
-        
-INSERT INTO race
-        (race_id, region_id, race_org, race_name, race_date, race_apply, race_deadline, race_url, race_category, race_dist, race_pic)
-    VALUES
-        (race_seq.NEXTVAL, 20, '한국생명의전화', 'JUST WALK 2023', '2023.09.09', '2023.07.19', '2023.08.27', 'https://walkingovernight.com/', '걷기', '7.1km, 36.6km', 
-        'https://search.pstatic.net/common?type=ofullfill&size=174x250&quality=85&direct=true&src=https%3A%2F%2Fcsearch-phinf.pstatic.net%2F20230718_173%2F1689659003445snsGY_PNG%2F1689567254.png');
 
 INSERT INTO race
         (race_id, region_id, race_org, race_name, race_date, race_apply, race_deadline, race_url, race_category, race_dist, race_pic)
