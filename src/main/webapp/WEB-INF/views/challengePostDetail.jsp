@@ -48,20 +48,17 @@
 							<input type="hidden" id="chall_id" name="chall_id" value="${post.chall_id}"  readonly>
 					</div>	
 					
-					<span>
-					<a href="/modifyPost/${auth_id}">
-					<button type="button" class="btn btn-primary">
-					수정하기
-					</button>
-					</a>
-					</span>
 					
-					<span>
-					<button type="button" class="btn btn-primary" onclick="deletePost('${auth_id}')">
+					<div style="text-align:center">
+					<button type="button" class="btn btn-danger"   onclick="deletePost('${auth_id}')">
 					삭제하기
 					</button>
+
+					</div>
+
 					</span>
 					</form>
+
 			</div>
 						
 			
