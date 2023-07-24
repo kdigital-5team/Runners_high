@@ -149,21 +149,32 @@ a:hover {
 }
 
 .contact-form {
-    width: 40%;
+	width: 300px;
     margin-top: 25px;
     display: flex;
     align-items: center;
-    left: 176px;
+    left: 292px;
     position: relative;
 }
 
 .contact-form2 {
-    width: 100%;
-    margin-top: 69px;
-    display: flex;
-    align-items: center;
-    left: 368px;
-    position: relative;
+	width: 300px;
+	display: flex;
+	align-items: center;
+	left: 368px;
+	justify-content: center;
+	bottom: 4px;
+	left: 1037px;
+	position: absolute;
+}
+
+#chall-nav {
+	float: left;
+	justify-content: center;
+	align-items: center;
+	display: flex;
+	position: relative;
+	right: 349px;
 }
 /* Ã§¸°Áö ¸ñ·Ï 0722 */
 .list-map {
