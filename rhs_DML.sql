@@ -423,6 +423,36 @@ INSERT INTO race
     VALUES
         (race_seq.NEXTVAL, 24, '(주)스포테인', '	가든파이브 라이프 나이트레이스', '2023.09.09', '2023.07.10', '2023.08.25', 'http://irunman.kr/sub1_1.php?uid=81', '마라톤', '하프, 10km, 5km', 
         'http://irunman.kr/admin/data/main/main_294');
+
+INSERT INTO race
+        (race_id, region_id, race_org, race_name, race_date, race_apply, race_deadline, race_url, race_category, race_dist, race_pic)
+    VALUES
+        (race_seq.NEXTVAL, 20, '어반스포츠', '2023 한강나이트워크42K', '2023.08.05', '2023.06.12', '2023.08.02', 'https://urbansports.kr/hangangnightwalk42k', '걷기', '15km, 22km, 42km', 
+        'https://cdn.imweb.me/thumbnail/20230720/a87b87c0d5cdd.png');
+
+INSERT INTO race
+        (race_id, region_id, race_org, race_name, race_date, race_apply, race_deadline, race_url, race_category, race_dist, race_pic)
+    VALUES
+        (race_seq.NEXTVAL, 35, '어반스포츠', '2023 부산나이트워크42K', '2023.08.12', '2023.06.19', '2023.08.08', 'https://urbansports.kr/busannightwalk42K', '걷기', '16km, 22km, 42km', 
+        'https://cdn.imweb.me/thumbnail/20230628/95b0fb3bc99a3.jpg');
+
+INSERT INTO race
+        (race_id, region_id, race_org, race_name, race_date, race_apply, race_deadline, race_url, race_category, race_dist, race_pic)
+    VALUES
+        (race_seq.NEXTVAL, 20, '한국생명의전화', '생명사랑밤길걷기', '2023.09.09', '2023.07.19', '2023.08.27', 'https://walkingovernight.com/', '걷기', '7.1km, 36.6km', 
+        'https://search.pstatic.net/common?type=ofullfill&size=174x250&quality=85&direct=true&src=https%3A%2F%2Fcsearch-phinf.pstatic.net%2F20230718_173%2F1689659003445snsGY_PNG%2F1689567254.png');
+        
+INSERT INTO race
+        (race_id, region_id, race_org, race_name, race_date, race_apply, race_deadline, race_url, race_category, race_dist, race_pic)
+    VALUES
+        (race_seq.NEXTVAL, 20, '한국생명의전화', 'JUST WALK 2023', '2023.09.09', '2023.07.19', '2023.08.27', 'https://walkingovernight.com/', '걷기', '7.1km, 36.6km', 
+        'https://search.pstatic.net/common?type=ofullfill&size=174x250&quality=85&direct=true&src=https%3A%2F%2Fcsearch-phinf.pstatic.net%2F20230718_173%2F1689659003445snsGY_PNG%2F1689567254.png');
+
+INSERT INTO race
+        (race_id, region_id, race_org, race_name, race_date, race_apply, race_deadline, race_url, race_category, race_dist, race_pic)
+    VALUES
+        (race_seq.NEXTVAL, 6, '대한치과의사협회', '스마일런페스티벌', '2023.09.03', '2023.06.01', '2023.08.21', 'https://www.smilerun.co.kr/main/main.php', '걷기', '10km', 
+        'https://search.pstatic.net/common?type=ofullfill&size=174x250&quality=85&direct=true&src=https%3A%2F%2Fcsearch-phinf.pstatic.net%2F20230602_40%2F1685674442736Yxusi_JPEG%2F110_manual_image_url_1685674442694.jpg');    
         
 INSERT INTO challenge
     (chall_id, chall_reg_id, region_id, race_id, chall_name, chall_intro, chall_start_date, chall_end_date, chall_all_auth, chall_week_auth, chall_category, chall_sit, chall_online, chall_size)
