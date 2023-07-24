@@ -216,7 +216,7 @@
 										</c:if>
 										<h3 class="challenge-name"><a class="challenge-name-t" href="challenge/${chall.chall_id}">${chall.chall_name}</a></h3>
 										<c:if test="${chall.chall_category eq '대회용'}">
-											<div class="space">${raceName}</div>
+											<div class="race-space">${chall.race_name}</div>
 										</c:if>
 										<c:if test="${chall.chall_category eq '일상용'}">
 											<div class="space"></div>

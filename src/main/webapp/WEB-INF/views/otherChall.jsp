@@ -79,65 +79,51 @@
 				<div class="row mb-5" id="list">
 					<c:forEach items="${myChallList}" var="chall" varStatus="status">
 					<c:set var="ListEnd" value="${status.count}" />
-						<div style="width: 45%; 
-									float:left; 
-									height:200px; 
-									background-color:#F0F0F0; 
-									margin:2%; margin-bottom:20px; 
-									border-radius: 5px;">
+						<div class="challenge-block">
 						<div>
-									<div id="map${status.count}" style="float: left; width: 35%; padding-top:35%; height:0;margin: 2%; border-radius: 5px;
-										background-position:center;
-										background-size:cover;">
+									<div id="map${status.count}" class="list-map">
 										</div>
-									<div style="float: left; width: 59%; margin-left:2px;" >
+									<div  class="inline-block">
 										<c:choose>
 										
 											<c:when test="${myUCList[status.index].user_chall_status eq 'Y' }">
-												<div style="float: left; 
-															background-color:#FFCECE; 
-															width: 30%; 
-															text-align: center;
-															 margin-top: 4%; 
-															 margin-bottom: 4%; 
-															 border-radius: 5px;"><b>완료</b>
-												</div>
+												<div class="tag-default tag-stat1"><span class="tag-text">완료</span></div>
 											</c:when>
 											<c:when test="${myUCList[status.index].chall_reg_status eq 'Y' }">
-												<div style="float: left; 
-															background-color:#FFCECE; 
-															width: 30%; 
-															text-align: center;
-															 margin-top: 4%; 
-															 margin-bottom: 4%; 
-															 border-radius: 5px;"><b>참가중</b>
-												</div>
+												<div class="tag-default tag-stat1"><span class="tag-text">참가중</span></div>
 											</c:when>
 											<c:otherwise>
-												<div style="float: left; 
-															background-color:#FFCECE; 
-															width: 30%; 
-															text-align: center;
-															 margin-top: 4%; 
-															 margin-bottom: 4%; 
-															 border-radius: 5px;"><b>대기중</b>
-												</div>
+												<div class="tag-default"><span class="tag-text">대기중</span></div>
 											</c:otherwise>
 										</c:choose>
-										<div style="float:left; width: 30%; margin-right: 40%; text-align: center; margin-top: 4%; border-radius: 5px; background-color: #FFCC99" ><b>${chall.chall_category}</b></div>
-										<h3 style="overflow:hidden; text-overflow: ellipsis; white-space: nowrap; width: 100%; margin-right: 5%;">${chall.chall_name}</h3>
 										<c:if test="${chall.chall_category eq '대회용'}">
-											<div style="font-size: 15px">${chall.race_name }</div>
+											<div class="tag-default tag-cat2"><span class="tag-text">${chall.chall_category}</span></div>
 										</c:if>
-										<c:if test="${chall.region_state eq chall.region_city}">
-										<div style="font-size: 15px">${chall.region_state} ${chall.region_district}</div>
+										<c:if test="${chall.chall_category ne '대회용'}">
+											<div class="tag-default"><span class="tag-text">${chall.chall_category}</span></div>
 										</c:if>
-										<c:if test="${chall.region_state ne chall.region_city}">
-										<div style="font-size: 15px">${chall.region_state} ${chall.region_city}</div>
-										</c:if>
-										<div>${race.region_state} ${race.region_city}</div>
-										<div class="caption" style="font-size: 15px"><fmt:formatDate pattern="yyyy-MM-dd" value="${chall.chall_start_date}"/> ~ <fmt:formatDate pattern="yyyy-MM-dd" value="${chall.chall_end_date}"/></div>
-										<div>인증 주 ${chall.chall_week_auth}회 / 최대 ${chall.chall_size}명</div>
+										<h3 class="challenge-name">${chall.chall_name}</h3>
+											<c:if test="${chall.chall_category eq '대회용'}">
+												<div class="race-space">${chall.race_name}</div>
+											</c:if>
+											<c:if test="${chall.chall_category eq '일상용'}">
+												<div class="space"></div>
+											</c:if>
+										<div class="caption">
+											<c:if test="${chall.region_state eq chall.region_city}">
+												<div class="caption">${chall.region_state} ${chall.region_district}</div>
+											</c:if>
+											<c:if test="${chall.region_state ne chall.region_city}">
+												<div class="caption">${chall.region_state} ${chall.region_city}</div>
+											</c:if>
+											<div>${race.region_state} ${race.region_city}</div>
+												<span>
+													<fmt:formatDate pattern="yyyy-MM-dd" value="${chall.chall_start_date}"/> ~ <fmt:formatDate pattern="yyyy-MM-dd" value="${chall.chall_end_date}"/>
+												</span><br>
+												<span class="caption"> 주 ${chall.chall_week_auth}회    |   
+													<img class="caption-img" alt="인원 이미지" src="../static/images/join.png">
+												  ${chall.chall_size}</span>
+										</div>
 										<div style="display: none;" id="${status.count}">${chall.chall_id}</div>
 									</div>
 								</div>
@@ -205,7 +191,7 @@
    		        		var polyline = new kakao.maps.Polyline({
    		        		    path: linePath, // 선을 구성하는 좌표배열 입니다
    		        		    strokeWeight: 5, // 선의 두께 입니다
-   		        		    strokeColor: '#ff0000', // 선의 색깔입니다
+   		        		    strokeColor: 'rgb(61 141 255)', // 선의 색깔입니다
    		        		    strokeOpacity: 0.7, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
    		        		    strokeStyle: 'solid' // 선의 스타일입니다
    		        		});

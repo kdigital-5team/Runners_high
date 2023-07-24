@@ -217,6 +217,7 @@ public class ChallengeController {
 	@GetMapping("/challenge")
 	public String getAllChall(Model model) {
 		List<ChallengeRegion> challList = challService.getAllChallR();
+		System.out.println(challList);
 		model.addAttribute("challList", challList);
 		return "challenge";
 	}
@@ -660,7 +661,7 @@ public class ChallengeController {
 					}
 				 }
 		
-		@Scheduled(cron = "0 * * * * *")
+		@Scheduled(cron = "0 0 * * * *")
 		public String updateChallSit() {
 			boolean updateChallSit = challService.updateChallSit();
 			System.out.println("챌린지 상태 업데이트");

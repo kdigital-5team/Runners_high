@@ -50,7 +50,7 @@
 							</div>
 						</form>	
 						<div onclick="location.href='/mypage/edit'" style="border:none; float:right; margin-top:12%; border-radius:10%">
-							<button>프로필 수정</button>
+							<button class="btn btn-dark">프로필 수정</button>
 						</div>
 					</div>
 				</div>
@@ -102,13 +102,15 @@
 												<div class="tag-default"><span class="tag-text">대기중</span></div>
 											</c:otherwise>
 										</c:choose>
-										<div class="tag-default"><span class="tag-text">${chall.chall_category}</span></div>
-											<c:if test="${chall.chall_category eq '대회용'}">
-												<div class="tag-default tag-cat2"><span class="tag-text">${chall.chall_category}</span></div>
-											</c:if>
+										<c:if test="${chall.chall_category eq '대회용'}">
+											<div class="tag-default tag-cat2"><span class="tag-text">${chall.chall_category}</span></div>
+										</c:if>
+										<c:if test="${chall.chall_category ne '대회용'}">
+											<div class="tag-default"><span class="tag-text">${chall.chall_category}</span></div>
+										</c:if>
 										<h3 class="challenge-name">${chall.chall_name}</h3>
 											<c:if test="${chall.chall_category eq '대회용'}">
-												<div class="space">${chall.race_name}</div>
+												<div class="race-space">${chall.race_name}</div>
 											</c:if>
 											<c:if test="${chall.chall_category eq '일상용'}">
 												<div class="space"></div>
