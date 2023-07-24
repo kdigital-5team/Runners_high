@@ -424,6 +424,52 @@ INSERT INTO race
         (race_seq.NEXTVAL, 24, '(주)스포테인', '	가든파이브 라이프 나이트레이스', '2023.09.09', '2023.07.10', '2023.08.25', 'http://irunman.kr/sub1_1.php?uid=81', '마라톤', '하프, 10km, 5km', 
         'http://irunman.kr/admin/data/main/main_294');
         
+INSERT INTO challenge
+    (chall_id, chall_reg_id, region_id, race_id, chall_name, chall_intro, chall_start_date, chall_end_date, chall_all_auth, chall_week_auth, chall_category, chall_sit, chall_online, chall_size)
+    values
+        (challenge_req.NEXTVAL, 'test04@gmail.com', 1, null, '직장인 건강 관리', 
+        '직장에 다니시면서 걷기로 건강 관리할 직장인분들을 모집합니다. 
+
+건강 관리 차원에서 매일 30분씩 걷기 운동
+에 참여하시면 됩니다.
+
+많이 바쁘시다면 일주일에 한번 정도만 인증
+글 남기셔도 됩니다. 
+
+같이 건강 챙겨보아요 ^^',
+'2023.08.01',
+'2023.09.29',
+40,
+1,
+'일상용',
+'모집중',
+'온라인',
+6);
+
+INSERT INTO challenge
+    (chall_id, chall_reg_id, region_id, race_id, chall_name, chall_intro, chall_start_date, chall_end_date, chall_all_auth, chall_week_auth, chall_category, chall_sit, chall_online, chall_size)
+    values
+        (challenge_req.NEXTVAL, 'test01@gmail.com', 5, 1, '서울오프런 대회 준비하기', '8월 26일에 열리는 
+서울 오픈런 대회를 
+같이 준비 할 사람
+들을 모집합니다. 
+
+매주 토요일마다 모
+여서 실제 대회의 
+하프 코스로 달릴 
+계획입니다. ',
+'2023.08.01',
+'2023.08.20',
+50,
+1,
+'대회용',
+'모집중',
+'오프라인',
+'10');
+
+
+
+        
     UPDATE RACE SET race_con =
                     case
                         when SYSDATE<race_apply THEN '접수예정'
@@ -432,3 +478,10 @@ INSERT INTO race
                         END;   
 
 commit;
+
+delete from challenge where chall_id =8;
+delete from user_chall where chall_id = 8;
+
+delete from chall_route where chall_id=8;
+
+select * from challenge;
