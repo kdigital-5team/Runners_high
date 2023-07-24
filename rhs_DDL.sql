@@ -66,7 +66,7 @@ ALTER TABLE user_title ADD CONSTRAINT user_title_pk PRIMARY KEY ( title_acq );
 CREATE TABLE personal_feed (
     feed_id           NUMBER(20) NOT NULL,
     user_id           VARCHAR2(30 BYTE) NOT NULL,
-    feed_title        VARCHAR2(20 BYTE) NOT NULL,
+    feed_title        VARCHAR2(100 BYTE) NOT NULL,
     feed_cont         VARCHAR2(500 BYTE),
     feed_writing_date DATE
 );
@@ -278,10 +278,11 @@ ALTER TABLE feed_comment
 ALTER TABLE feed_picture
     ADD CONSTRAINT feed_picture_personal_feed_fk FOREIGN KEY ( feed_id )
         REFERENCES personal_feed ( feed_id );
+                ON DELETE CASCADE;
 
 ALTER TABLE feed_like
     ADD CONSTRAINT feed_like_personal_feed_fk FOREIGN KEY ( feed_id )
-        REFERENCES personal_feed ( feed_id );
+        REFERENCES personal_feed ( feed_id )
 
 ALTER TABLE feed_like
     ADD CONSTRAINT feed_like_rh_user_fk FOREIGN KEY ( user_id )

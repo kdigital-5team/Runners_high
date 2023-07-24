@@ -48,7 +48,7 @@
 						<form action="/mypage/feed" enctype="multipart/form-data" method="POST">					
 							<div class="post" style="border:none; float:middle; margin-top:15%; width:200px">
 								<div class="username">${user.nickname}</div>
-								<div class="userIntro">${user.intro}</div>
+								<pre><div class="userIntro">${user.intro}</div></pre>
 							</div>
 						</form>	
 						<div onclick="location.href='/mypage/edit'" style="border:none; float:right; margin-top:12%;">
@@ -94,56 +94,58 @@
 									</c:if>
 				      			</c:forEach>
 							</div>
-						</c:if>							 
- 						<div class="modal fade" id="myModal${vs.index}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-						  <div class="modal-dialog modal-lg">
-						    <div class="modal-content">
-						      <div class="modal-header">
-						        <div class="post-header">
-									<img src="/images/${user.user_pic}" alt="Profile Picture">		
-									<div style="width:200px">	
-										<div class="username">${user.nickname}</div>
-										<div class="userIntro">${user.intro}</div>
-									</div>
-									<div class="feedDate" style="margin-left:300px">${feed.feed_writing_date}</div>									
-								</div>						        						        
-						      </div>
-						      <div class="modal-body">
-					      		<c:forEach items="${picList}" var="pic">
-					      			<c:if test="${feed.feed_id eq pic.feed_id}">
-					      				<div class="display-flex">
-											<img class="post-image" src="/images/${pic.feed_pic_title}" alt="Post Image">	
+						</c:if>
+						
+	 						<div class="modal fade" id="myModal${vs.index}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+							  <div class="modal-dialog modal-lg">
+							    <div class="modal-content">
+							      <div class="modal-header">
+							        <div class="post-header">
+										<img src="/images/${user.user_pic}" alt="Profile Picture">		
+										<div style="width:200px">	
+											<div class="username">${user.nickname}</div>
+											<div class="userIntro">${user.intro}</div>
 										</div>
-					      			</c:if>
-					      		</c:forEach>							        
-						        <hr>
-								<div class="display-flex">
-									<div class="left-likes">
-										<button>Like</button>
+										<div class="feedDate" style="margin-left:300px">${feed.feed_writing_date}</div>									
+									</div>						        						        
+							      </div>
+							      <div class="modal-body">
+						      		<c:forEach items="${picList}" var="pic">
+						      			<c:if test="${feed.feed_id eq pic.feed_id}">
+						      				<div class="display-flex">
+												<img class="post-image" src="/images/${pic.feed_pic_title}" alt="Post Image">	
+											</div>
+						      			</c:if>
+						      		</c:forEach>							        
+							        <hr>
+									<div class="display-flex">
+										<div class="left-likes">
+											<button>Like</button>
+										</div>
+										<div class="left-likes-num">42</div>
+										<div class="right-edit">
+											<button class="btn btn-dark">수정</button>
+										</div>
+										<div class="right-delete">
+											<button type="button" class="btn btn-dark" onclick="deleteFeed('${feed.feed_id}')" >삭제</button>
+										</div>
 									</div>
-									<div class="left-likes-num">42</div>
-									<div class="right-edit">
-										<button class="btn btn-dark">수정</button>
+									<br>
+							        <!-- 피드 제목 -->
+									<div class="post-description" style="font-size:20px;">
+										${feed.feed_title}
 									</div>
-									<div class="right-delete">
-										<button class="btn btn-dark">삭제</button>
+									
+									<!-- 피드 내용 -->
+									<div class="post-description">
+										${feed.feed_cont}
 									</div>
-								</div>
-								<br>
-						        <!-- 피드 제목 -->
-								<div class="post-description" style="font-size:20px;">
-									${feed.feed_title}
-								</div>
+							        
+							      </div>				      
+							    </div>
+							  </div>
+							</div>
 								
-								<!-- 피드 내용 -->
-								<div class="post-description">
-									${feed.feed_cont}
-								</div>
-						        
-						      </div>				      
-						    </div>
-						  </div>
-						</div>						
 					</c:forEach>
 				</div>
 				
@@ -167,4 +169,19 @@
 	<script src="/js/main.js"></script>
 
 </body>
+
+<script>
+		function deleteFeed(feed_id){
+			if(confirm("피드를 삭제하시겠습니까?")){
+				var new_form = document.createElement('form');
+				
+				new_form.name="feed_delete";
+				new_form.method='DELETE';
+				new_form.action='/mypage/delete/'+ feed_id;
+				
+				document.body.appendChild(new_form);
+				new_form.submit();
+			}
+		}
+	</script>
 </html>
