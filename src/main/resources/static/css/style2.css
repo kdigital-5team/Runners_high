@@ -207,6 +207,12 @@ td {
 	height: 30px;
 }
 
+.race-space {
+	over-flow:hidden;
+	text-overflow: ellipsis;
+    height: 30px;
+}
+
 .inline-block {
 	float: left;
 	width: 59%;

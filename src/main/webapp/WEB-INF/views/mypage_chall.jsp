@@ -50,7 +50,7 @@
 							</div>
 						</form>	
 						<div onclick="location.href='/mypage/edit'" style="border:none; float:right; margin-top:12%; border-radius:10%">
-							<button>프로필 수정</button>
+							<button class="btn btn-dark">프로필 수정</button>
 						</div>
 					</div>
 				</div>

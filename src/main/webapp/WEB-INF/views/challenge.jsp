@@ -211,7 +211,7 @@
 											<div class="tag-default tag-cat2"><span class="tag-text">대회용</span></div>
 										</c:if>
 										<h3 class="challenge-name"><a class="challenge-name-t" href="challenge/${chall.chall_id}">${chall.chall_name}</a></h3>
-										<c:if test="${chall.chall_category eq '대회용'}">
+										<c:if test="${chall.chall_category eq '대회용'}"
 											<div class="challenge-name-s">${chall.race_name}</div>
 										</c:if>
 										<c:if test="${chall.chall_category eq '일상용'}">

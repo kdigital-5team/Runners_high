@@ -141,7 +141,7 @@ public class RaceController {
 		
 	}
 	
-	@Scheduled(cron = "50 * * * * *")
+	@Scheduled(cron = "50 0 * * * *")
 	public String updateRaceCon() {
 		boolean updateRaceCon = service.updateRaceCon();
 		System.out.println("대회 일정 업데이트");

@@ -217,6 +217,7 @@ public class ChallengeController {
 	@GetMapping("/challenge")
 	public String getAllChall(Model model) {
 		List<ChallengeRegion> challList = challService.getAllChallR();
+		System.out.println(challList);
 		model.addAttribute("challList", challList);
 		return "challenge";
 	}
@@ -617,6 +618,8 @@ public class ChallengeController {
 		@RequestMapping(value = "/feed/{otherId}", method = RequestMethod.GET)
 		public String getAllFeeds(@PathVariable String otherId, Model model, HttpSession session) throws Exception {
 			String userId =(String) session.getAttribute("userId");
+			if(userId==null)
+				userId="";
 			
 			User user = userService.getUserByUserId(otherId);
 			
@@ -642,6 +645,8 @@ public class ChallengeController {
 				@RequestMapping(value = "/otherChall/{otherId}", method = RequestMethod.GET)
 				public String getOtherChall(@PathVariable String otherId, Model model, HttpSession session) throws Exception {
 					String userId =(String) session.getAttribute("userId");
+					if(userId==null)
+						userId="";
 					
 					User user = userService.getUserByUserId(otherId);
 					List<ChallengeRegion> myChallList = challService.getChallByUserId(otherId);
@@ -659,7 +664,7 @@ public class ChallengeController {
 					}
 				 }
 		
-		@Scheduled(cron = "0 * * * * *")
+		@Scheduled(cron = "0 0 * * * *")
 		public String updateChallSit() {
 			boolean updateChallSit = challService.updateChallSit();
 			System.out.println("챌린지 상태 업데이트");
