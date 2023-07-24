@@ -12,9 +12,10 @@ import com.spring.dto.FeedPicture;
 public interface FeedPictureMapper {
 	
 	FeedPicture getFeedPictureByFileName(int filename) throws SQLException;
+	
+	FeedPicture getFeedPictureByFeedId(int feed_id) throws SQLException;
 
 	int insertFeedPicture(FeedPicture feedpicture) throws SQLException; // int 인 이유는 갯수로 넘어오기 때문?
 
 	public List<FeedPicture> getAllFeedPicture();
-	
 }

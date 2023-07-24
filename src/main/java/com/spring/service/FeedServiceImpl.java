@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.spring.dto.FeedPicture;
 import com.spring.dto.PersonalFeed;
 import com.spring.mapper.FeedMapper;
 
@@ -42,4 +43,18 @@ public class FeedServiceImpl implements FeedService{
 		return result;
 	}
 
+	@Override
+	public boolean deleteFeedByFeedId(int feed_id) throws SQLException, Exception {
+		boolean result = false;
+		
+		int res = mapper.deleteFeedByFeedId(feed_id);
+		
+		if(res != 0) {
+			result = true;
+		} else {
+			throw new Exception("피드 삭제 실패");
+		}
+		
+		return result;
+	}
 }

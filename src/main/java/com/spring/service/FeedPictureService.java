@@ -35,6 +35,15 @@ public class FeedPictureService {
 		return feedpicture;
 	}
 	
+	public FeedPicture getFeedPictureByFeedId(int feed_id) throws Exception {
+		FeedPicture feedpicture = feedpicturemapper.getFeedPictureByFeedId(feed_id);
+		
+		if(feedpicture == null) {
+			throw new Exception("존재하지 않는 파일");
+		}
+		return feedpicture;
+	}
+	
 	public boolean insertFeedPicture(MultipartFile file, int feed_id) throws Exception {
 		boolean result = false;
 		
@@ -71,6 +80,6 @@ public class FeedPictureService {
 	public List<FeedPicture> getAllFeedPicture() {
 		
 		return feedpicturemapper.getAllFeedPicture();
-	}	
+	}
 	
 }
