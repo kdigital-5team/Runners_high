@@ -391,7 +391,7 @@ public class ChallengeController {
 		}
 
 		@RequestMapping(value = "/challenge/challPostDetail{auth_id}", method = RequestMethod.GET)
-		public String getPostByAuthId(@PathVariable int auth_id, Model model) {
+		public String getPostByAuthId(@PathVariable int auth_id,  Model model) {
 			ChallengePost post = challService.getPostByAuthId(auth_id);
 			
 			
@@ -438,21 +438,24 @@ public class ChallengeController {
 		}
 		
 		//삭제
-		@RequestMapping(value = "/challenge/deletepost/{auth_id}", method = RequestMethod.GET)
-		public String deletePostByAuthId(@PathVariable int auth_id) {
-			
+		@RequestMapping(value = "/challenge/deletepost/{auth_id}", method = RequestMethod.POST)
+		public String deletePostByAuthId(@PathVariable int auth_id, @RequestParam String chall_id) {
 			
 			boolean deletePost = false;
-			
-			challService.deletePostByAuthId(auth_id);
-			deletePost = challService.deletePostByAuthId(auth_id);
-			
+
+			try {
+				deletePost = challService.deletePostByAuthId(auth_id);
 				if(deletePost) {
 					
-					return "redirect:/challenge";
+					System.out.println(auth_id);
+					return "redirect:/challenge/"+chall_id+"challengePost";
 				}
 				
-			
+			} catch (Exception e) {
+				
+				e.printStackTrace();
+				return "index";
+			}
 			return "index";
 		}
 
