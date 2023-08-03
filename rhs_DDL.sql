@@ -21,7 +21,9 @@ DROP SEQUENCE personal_feed_seq;
 DROP SEQUENCE feed_picture_seq;
 DROP SEQUENCE region_seq;
 DROP SEQUENCE race_seq;
-DROP SEQUENCE challenge_req;
+DROP SEQUENCE challenge_seq;
+DROP SEQUENCE post_seq;
+
 
 -- 유저 테이블
 CREATE TABLE rh_user (
@@ -131,7 +133,7 @@ CREATE TABLE challenge (
     chall_pic        VARCHAR2(300 BYTE)
 );
 
-CREATE SEQUENCE challenge_req
+CREATE SEQUENCE challenge_seq
        INCREMENT BY 1
        START WITH 1
        MINVALUE 1;

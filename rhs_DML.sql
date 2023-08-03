@@ -87,6 +87,7 @@ INSERT INTO title
 
 -- region
 INSERT INTO region values(region_seq.NEXTVAL,'지역무관', '지역무관', '지역무관');
+INSERT INTO region values(region_seq.NEXTVAL,'서울특별시', '', '');
 INSERT INTO region values(region_seq.NEXTVAL,'서울특별시', '서울특별시', '종로구');
 INSERT INTO region values(region_seq.NEXTVAL,'서울특별시', '서울특별시', '중구');
 INSERT INTO region values(region_seq.NEXTVAL,'서울특별시', '서울특별시', '용산구');
@@ -113,6 +114,7 @@ INSERT INTO region values(region_seq.NEXTVAL,'서울특별시', '서울특별시
 INSERT INTO region values(region_seq.NEXTVAL,'서울특별시', '서울특별시', '송파구');
 INSERT INTO region values(region_seq.NEXTVAL,'서울특별시', '서울특별시', '강동구');
 
+INSERT INTO region values(region_seq.NEXTVAL,'부산광역시', '', '');
 INSERT INTO region values(region_seq.NEXTVAL,'부산광역시', '부산광역시', '중구');
 INSERT INTO region values(region_seq.NEXTVAL,'부산광역시', '부산광역시', '서구');
 INSERT INTO region values(region_seq.NEXTVAL,'부산광역시', '부산광역시', '동구');
@@ -130,6 +132,7 @@ INSERT INTO region values(region_seq.NEXTVAL,'부산광역시', '부산광역시
 INSERT INTO region values(region_seq.NEXTVAL,'부산광역시', '부산광역시', '사상구');
 INSERT INTO region values(region_seq.NEXTVAL,'부산광역시', '부산광역시', '기장군');
 
+INSERT INTO region values(region_seq.NEXTVAL,'대구광역시', '', '');
 INSERT INTO region values(region_seq.NEXTVAL,'대구광역시', '대구광역시', '중구');
 INSERT INTO region values(region_seq.NEXTVAL,'대구광역시', '대구광역시', '동구');
 INSERT INTO region values(region_seq.NEXTVAL,'대구광역시', '대구광역시', '서구');
@@ -140,6 +143,7 @@ INSERT INTO region values(region_seq.NEXTVAL,'대구광역시', '대구광역시
 INSERT INTO region values(region_seq.NEXTVAL,'대구광역시', '대구광역시', '달성군');
 
 
+INSERT INTO region values(region_seq.NEXTVAL,'인천광역시', '', '');
 INSERT INTO region values(region_seq.NEXTVAL,'인천광역시', '인천광역시', '중구');
 INSERT INTO region values(region_seq.NEXTVAL,'인천광역시', '인천광역시', '동구');
 INSERT INTO region values(region_seq.NEXTVAL,'인천광역시', '인천광역시', '연수구');
@@ -151,24 +155,28 @@ INSERT INTO region values(region_seq.NEXTVAL,'인천광역시', '인천광역시
 INSERT INTO region values(region_seq.NEXTVAL,'인천광역시', '인천광역시', '강화군');
 INSERT INTO region values(region_seq.NEXTVAL,'인천광역시', '인천광역시', '옹진군');
 
+INSERT INTO region values(region_seq.NEXTVAL,'광주광역시', '', '');
 INSERT INTO region values(region_seq.NEXTVAL,'광주광역시', '광주광역시', '동구');
 INSERT INTO region values(region_seq.NEXTVAL,'광주광역시', '광주광역시', '서구');
 INSERT INTO region values(region_seq.NEXTVAL,'광주광역시', '광주광역시', '남구');
 INSERT INTO region values(region_seq.NEXTVAL,'광주광역시', '광주광역시', '북구');
 INSERT INTO region values(region_seq.NEXTVAL,'광주광역시', '광주광역시', '광산구');
 
-
+INSERT INTO region values(region_seq.NEXTVAL,'대전광역시',  '', '');
 INSERT INTO region values(region_seq.NEXTVAL,'대전광역시',  '대전광역시', '유성구');
 INSERT INTO region values(region_seq.NEXTVAL,'대전광역시',  '대전광역시', '대덕구');
 
+INSERT INTO region values(region_seq.NEXTVAL,'울산광역시',  '', '');
 INSERT INTO region values(region_seq.NEXTVAL,'울산광역시',  '울산광역시', '중구');
 INSERT INTO region values(region_seq.NEXTVAL,'울산광역시',  '울산광역시', '남구');
 INSERT INTO region values(region_seq.NEXTVAL,'울산광역시',  '울산광역시', '동구');
 INSERT INTO region values(region_seq.NEXTVAL,'울산광역시',  '울산광역시', '북구');
 INSERT INTO region values(region_seq.NEXTVAL,'울산광역시',  '울산광역시', '울주군');
 
+INSERT INTO region values(region_seq.NEXTVAL,'세종특별자치시', '', '');
 INSERT INTO region values(region_seq.NEXTVAL,'세종특별자치시', '세종시', '세종시');
 
+INSERT INTO region values(region_seq.NEXTVAL,'경기도', '', '');
 INSERT INTO region values(region_seq.NEXTVAL,'경기도', '수원시', '장안구');
 INSERT INTO region values(region_seq.NEXTVAL,'경기도', '수원시', '권서구');
 INSERT INTO region values(region_seq.NEXTVAL,'경기도', '수원시', '팔달구');
@@ -211,6 +219,8 @@ INSERT INTO region values(region_seq.NEXTVAL,'경기도', '여주시', '여주')
 INSERT INTO region values(region_seq.NEXTVAL,'경기도', '연천군', '연천');
 INSERT INTO region values(region_seq.NEXTVAL,'경기도', '가평군', '가평');
 INSERT INTO region values(region_seq.NEXTVAL,'경기도', '양평군', '양평');
+
+INSERT INTO region values(region_seq.NEXTVAL,'강원도', '', '');
 INSERT INTO region values(region_seq.NEXTVAL,'강원도', '춘천시', '춘천');
 INSERT INTO region values(region_seq.NEXTVAL,'강원도', '원주시', '원주');
 INSERT INTO region values(region_seq.NEXTVAL,'강원도', '강릉시', '강릉');
@@ -229,6 +239,7 @@ INSERT INTO region values(region_seq.NEXTVAL,'강원도', '인제군', '인제')
 INSERT INTO region values(region_seq.NEXTVAL,'강원도', '고성군', '고성');
 INSERT INTO region values(region_seq.NEXTVAL,'강원도', '양양군', '양양');
 
+INSERT INTO region values(region_seq.NEXTVAL,'충청북도', '', '');
 INSERT INTO region values(region_seq.NEXTVAL,'충청북도', '충주시', '충주');
 INSERT INTO region values(region_seq.NEXTVAL,'충청북도', '제천시', '제천');
 INSERT INTO region values(region_seq.NEXTVAL,'충청북도', '청주시', '상당구');
@@ -244,6 +255,7 @@ INSERT INTO region values(region_seq.NEXTVAL,'충청북도', '음성군', '음�
 INSERT INTO region values(region_seq.NEXTVAL,'충청북도', '단양군', '단양');
 INSERT INTO region values(region_seq.NEXTVAL,'충청북도', '증평군', '증평');
 
+INSERT INTO region values(region_seq.NEXTVAL,'충청남도', '', '');
 INSERT INTO region values(region_seq.NEXTVAL,'충청남도', '천안시', '동남구');
 INSERT INTO region values(region_seq.NEXTVAL,'충청남도', '천안시', '서북구');
 INSERT INTO region values(region_seq.NEXTVAL,'충청남도', '공주시', '공주');
@@ -260,7 +272,7 @@ INSERT INTO region values(region_seq.NEXTVAL,'충청남도', '청양군', '청�
 INSERT INTO region values(region_seq.NEXTVAL,'충청남도', '예산군', '예산');
 INSERT INTO region values(region_seq.NEXTVAL,'충청남도', '태안군', '태안');
 
-
+INSERT INTO region values(region_seq.NEXTVAL,'전라북도', '', '');
 INSERT INTO region values(region_seq.NEXTVAL,'전라북도', '전주시', '완산구');
 INSERT INTO region values(region_seq.NEXTVAL,'전라북도', '전주시', '덕진구');
 INSERT INTO region values(region_seq.NEXTVAL,'전라북도', '군산시', '군산');
@@ -277,7 +289,7 @@ INSERT INTO region values(region_seq.NEXTVAL,'전라북도', '순창군', '순�
 INSERT INTO region values(region_seq.NEXTVAL,'전라북도', '고창군', '고창');
 INSERT INTO region values(region_seq.NEXTVAL,'전라북도', '부안군', '부안');
 
-
+INSERT INTO region values(region_seq.NEXTVAL,'전라남도', '', '');
 INSERT INTO region values(region_seq.NEXTVAL,'전라남도', '목포시', '목포');
 INSERT INTO region values(region_seq.NEXTVAL,'전라남도', '여주시', '여주');
 INSERT INTO region values(region_seq.NEXTVAL,'전라남도', '순천시', '순천');
@@ -302,6 +314,7 @@ INSERT INTO region values(region_seq.NEXTVAL,'전라남도', '진도군', '진�
 INSERT INTO region values(region_seq.NEXTVAL,'전라남도', '신안군', '신안');
 
 
+INSERT INTO region values(region_seq.NEXTVAL,'경상북도', '', '');
 INSERT INTO region values(region_seq.NEXTVAL,'경상북도', '포항시', '남구');
 INSERT INTO region values(region_seq.NEXTVAL,'경상북도', '포항시', '북구');
 INSERT INTO region values(region_seq.NEXTVAL,'경상북도', '경주시', '경주');
@@ -326,6 +339,7 @@ INSERT INTO region values(region_seq.NEXTVAL,'경상북도', '봉화군', '봉�
 INSERT INTO region values(region_seq.NEXTVAL,'경상북도', '울진군', '울진');
 INSERT INTO region values(region_seq.NEXTVAL,'경상북도', '울릉군', '울릉');
 
+INSERT INTO region values(region_seq.NEXTVAL,'경상남도', '', '');
 INSERT INTO region values(region_seq.NEXTVAL,'경상남도', '진주시', '진주');
 INSERT INTO region values(region_seq.NEXTVAL,'경상남도', '통영시', '통영');
 INSERT INTO region values(region_seq.NEXTVAL,'경상남도', '사천시', '사천');
@@ -347,111 +361,256 @@ INSERT INTO region values(region_seq.NEXTVAL,'경상남도', '산천군', '산�
 INSERT INTO region values(region_seq.NEXTVAL,'경상남도', '함양군', '함양');
 INSERT INTO region values(region_seq.NEXTVAL,'경상남도', '거창군', '거창');
 INSERT INTO region values(region_seq.NEXTVAL,'경상남도', '합천군', '합천');
+
+INSERT INTO region values(region_seq.NEXTVAL,'제주도', '', '');
 INSERT INTO region values(region_seq.NEXTVAL,'제주도', '제주시', '제주');
 INSERT INTO region values(region_seq.NEXTVAL,'제주도', '서귀포시', '서귀포');
 
+
 set define off;
+
 -- race
 INSERT INTO race
         (race_id, region_id, race_org, race_name, race_date, race_apply, race_deadline, race_url, race_category, race_dist, race_pic)
     VALUES
-        (race_seq.NEXTVAL, 5, '(주) 스포테인', '서울오픈 런', '2023.08.26', '2023.06.19', '2023.07.31', 'http://irunman.kr/sub1_1.php?uid=79', '마라톤', '하프코스, 10km, 5km', 
+        (race_seq.NEXTVAL, 7, '(주) 스포테인', '서울오픈 런', '2023.08.26', '2023.06.19', '2023.07.31', 'http://irunman.kr/sub1_1.php?uid=79', '마라톤', '하프코스, 10km, 5km', 
         'http://www.irunman.kr/admin/data/webedit/20220701132808_qxtfxhcd.jpg');
 
 INSERT INTO race
         (race_id, region_id, race_org, race_name, race_date, race_apply, race_deadline, race_url, race_category, race_dist, race_pic)
     VALUES
-        (race_seq.NEXTVAL, 70, '명품트레일런', '울산염포대왕트레일', '2023.07.23', '2023.05.31', '2023.07.21', 'http://www.mtrailrun.kr/run/1000.asp?T=3&wgu=1&wma=238', '마라톤', '14.8km', 
+        (race_seq.NEXTVAL, 77, '명품트레일런', '울산염포대왕트레일', '2023.07.23', '2023.05.31', '2023.07.21', 'http://www.mtrailrun.kr/run/1000.asp?T=3&wgu=1&wma=238', '마라톤', '14.8km', 
         'http://www.mtrailrun.kr/images/top.png');
 
 INSERT INTO race
         (race_id, region_id, race_org, race_name, race_date, race_apply, race_deadline, race_url, race_category, race_dist, race_pic)
     VALUES
-        (race_seq.NEXTVAL, 255, '명품트레일런', '밀양아리랑 트레일런', '2023.08.06', '2023.05.31', '2023.07.31', 'http://www.mtrailrun.kr/run/1000.asp?T=3&wgu=1&wma=239', '마라톤', '15km', 
+        (race_seq.NEXTVAL, 242, '명품트레일런', '밀양아리랑 트레일런', '2023.08.06', '2023.05.31', '2023.07.31', 'http://www.mtrailrun.kr/run/1000.asp?T=3&wgu=1&wma=239', '마라톤', '15km', 
         'http://www.mtrailrun.kr/images/top.png');
         
 INSERT INTO race
         (race_id, region_id, race_org, race_name, race_date, race_apply, race_deadline, race_url, race_category, race_dist, race_pic)
     VALUES
-        (race_seq.NEXTVAL, 71, '부울경트레일런', '영얄8봉종주60k', '2023.08.12', '2023.04.24', '2023.07.05', 'https://cafe.naver.com/buktr/148', '마라톤', '산악60km', 
+        (race_seq.NEXTVAL, 79, '부울경트레일런', '영얄8봉종주60k', '2023.08.12', '2023.04.24', '2023.07.05', 'https://cafe.naver.com/buktr/148', '마라톤', '산악60km', 
         'https://cafeskthumb-phinf.pstatic.net/MjAyMzA3MDNfMTM3/MDAxNjg4MzUxMjk0MDg3.qEe49YzDkg5VG0hkxRbkVJkVeq4ypSUXki9AGxb_NWQg.jmPoilLJAufqCIl-usLjEm2pPag6v1Jz9eV33YPXQ10g.JPEG/KakaoTalk_20230627_104101334.jpg?type=w1080');
 
 INSERT INTO race
         (race_id, region_id, race_org, race_name, race_date, race_apply, race_deadline, race_url, race_category, race_dist, race_pic)
     VALUES
-        (race_seq.NEXTVAL, 99, '매일경제TV', '한 여름밤의 쿨 2023 썸머나이트 런', '2023.08.12', '2023.04.27', '2023.07.28', 'http://night.run1080.com/', '마라톤', '10km, 5km', 
+        (race_seq.NEXTVAL, 109, '매일경제TV', '한 여름밤의 쿨 2023 썸머나이트 런', '2023.08.12', '2023.04.27', '2023.07.28', 'http://night.run1080.com/', '마라톤', '10km, 5km', 
         'http://night.run1080.com/images/main/main_bann.jpg');
 
 INSERT INTO race
         (race_id, region_id, race_org, race_name, race_date, race_apply, race_deadline, race_url, race_category, race_dist, race_pic)
     VALUES
-        (race_seq.NEXTVAL, 183, '(사)한국산악마라톤연맹', '제32회 광복78주년화대종주CLIMBATHON', '2023.08.13', '2023.01.19', '2023.07.31', 'http://koreatrail.net/', '마라톤', '48km, 40km', 
+        (race_seq.NEXTVAL, 2, '(사)한국산악마라톤연맹', '제32회 광복78주년화대종주CLIMBATHON', '2023.08.13', '2023.01.19', '2023.07.31', 'http://koreatrail.net/', '마라톤', '48km, 40km', 
         'http://koreatrail.net/home/tBoard_PHOTO/img/a20230606105241.jpg');
 
 INSERT INTO race
         (race_id, region_id, race_org, race_name, race_date, race_apply, race_deadline, race_url, race_category, race_dist, race_pic)
     VALUES
-        (race_seq.NEXTVAL, 186, '광주일보, 마라톤세상', '제8회 너릿재 혹서기 마라톤대회', '2023.08.13', '2023.06.12', '2023.08.03', 'http://marathonworld.kr/', '마라톤', '8.5km, 17km', 
+        (race_seq.NEXTVAL, 201, '광주일보, 마라톤세상', '제8회 너릿재 혹서기 마라톤대회', '2023.08.13', '2023.06.12', '2023.08.03', 'http://marathonworld.kr/', '마라톤', '8.5km, 17km', 
         'http://marathonworld.kr/images/2023.png');
         
 INSERT INTO race
         (race_id, region_id, race_org, race_name, race_date, race_apply, race_deadline, race_url, race_category, race_dist, race_pic)
     VALUES
-        (race_seq.NEXTVAL, 34, '네버스탑협동조합', '제19회부산썸머비치울트라마라톤대회', '2023.08.19', '2023.05.01', '2023.07.21', 'http://bbu100.com/', '마라톤', '100km, 50km', 
+        (race_seq.NEXTVAL, 37, '네버스탑협동조합', '제19회부산썸머비치울트라마라톤대회', '2023.08.19', '2023.05.01', '2023.07.21', 'http://bbu100.com/', '마라톤', '100km, 50km', 
         'http://bbu100.com/images/main/main_visual_01.jpg');
 
 INSERT INTO race
         (race_id, region_id, race_org, race_name, race_date, race_apply, race_deadline, race_url, race_category, race_dist, race_pic)
     VALUES
-        (race_seq.NEXTVAL, 198, '명품트레일', '포항호미반도트레일', '2023.08.20', '2023.06.10', '2023.08.18', 'http://mtrailrun.kr/run/1000.asp?T=3&wgu=1&wma=240', '마라톤', '27km', 
+        (race_seq.NEXTVAL, 214, '명품트레일', '포항호미반도트레일', '2023.08.20', '2023.06.10', '2023.08.18', 'http://mtrailrun.kr/run/1000.asp?T=3&wgu=1&wma=240', '마라톤', '27km', 
         'http://www.mtrailrun.kr/images/top.png');
         
 INSERT INTO race
         (race_id, region_id, race_org, race_name, race_date, race_apply, race_deadline, race_url, race_category, race_dist, race_pic)
     VALUES
-        (race_seq.NEXTVAL, 156, '전국마라톤협회', '제12회 부여 굿뜨래 마라톤대회', '2023.08.27', '2023.04.03', '2023.08.16', 'http://www.run1080.com/new/mini/index.php?code=1372', '마라톤', '풀코스, 하프코스, 10km, 5km', 
+        (race_seq.NEXTVAL, 158, '전국마라톤협회', '제12회 부여 굿뜨래 마라톤대회', '2023.08.27', '2023.04.03', '2023.08.16', 'http://www.run1080.com/new/mini/index.php?code=1372', '마라톤', '풀코스, 하프코스, 10km, 5km', 
         'http://www.run1080.com/uploadFolder/img_games/title_img_1372.jpg');
 
 INSERT INTO race
         (race_id, region_id, race_org, race_name, race_date, race_apply, race_deadline, race_url, race_category, race_dist, race_pic)
     VALUES
-        (race_seq.NEXTVAL, 178, '순천만울트라조직위', '제15회순천만울트라마라톤대회', '2023.09.02', '2023.07.01', '2023.08.18', 'http://www.scultra100.net/pages/about2.php', '마라톤', '100km', 
+        (race_seq.NEXTVAL, 193, '순천만울트라조직위', '제15회순천만울트라마라톤대회', '2023.09.02', '2023.07.01', '2023.08.18', 'http://www.scultra100.net/pages/about2.php', '마라톤', '100km', 
         'http://www.scultra100.net/theme/scultra/img/main_info.jpg');
         
 INSERT INTO race
         (race_id, region_id, race_org, race_name, race_date, race_apply, race_deadline, race_url, race_category, race_dist, race_pic)
     VALUES
-        (race_seq.NEXTVAL, 24, '(주)스포테인', '	가든파이브 라이프 나이트레이스', '2023.09.09', '2023.07.10', '2023.08.25', 'http://irunman.kr/sub1_1.php?uid=81', '마라톤', '하프, 10km, 5km', 
+        (race_seq.NEXTVAL, 2, '(주)스포테인', '	가든파이브 라이프 나이트레이스', '2023.09.09', '2023.07.10', '2023.08.25', 'http://irunman.kr/sub1_1.php?uid=81', '마라톤', '하프, 10km, 5km', 
         'http://irunman.kr/admin/data/main/main_294');
 
 INSERT INTO race
         (race_id, region_id, race_org, race_name, race_date, race_apply, race_deadline, race_url, race_category, race_dist, race_pic)
     VALUES
-        (race_seq.NEXTVAL, 20, '어반스포츠', '2023 한강나이트워크42K', '2023.08.05', '2023.06.12', '2023.08.02', 'https://urbansports.kr/hangangnightwalk42k', '걷기', '15km, 22km, 42km', 
+        (race_seq.NEXTVAL, 21, '어반스포츠', '2023 한강나이트워크42K', '2023.08.05', '2023.06.12', '2023.08.02', 'https://urbansports.kr/hangangnightwalk42k', '걷기', '15km, 22km, 42km', 
         'https://cdn.imweb.me/thumbnail/20230720/a87b87c0d5cdd.png');
 
 INSERT INTO race
         (race_id, region_id, race_org, race_name, race_date, race_apply, race_deadline, race_url, race_category, race_dist, race_pic)
     VALUES
-        (race_seq.NEXTVAL, 35, '어반스포츠', '2023 부산나이트워크42K', '2023.08.12', '2023.06.19', '2023.08.08', 'https://urbansports.kr/busannightwalk42K', '걷기', '16km, 22km, 42km', 
+        (race_seq.NEXTVAL, 37, '어반스포츠', '2023 부산나이트워크42K', '2023.08.12', '2023.06.19', '2023.08.08', 'https://urbansports.kr/busannightwalk42K', '걷기', '16km, 22km, 42km', 
         'https://cdn.imweb.me/thumbnail/20230628/95b0fb3bc99a3.jpg');
 
 INSERT INTO race
         (race_id, region_id, race_org, race_name, race_date, race_apply, race_deadline, race_url, race_category, race_dist, race_pic)
     VALUES
-        (race_seq.NEXTVAL, 20, '한국생명의전화', '생명사랑밤길걷기', '2023.09.09', '2023.07.19', '2023.08.27', 'https://walkingovernight.com/', '걷기', '7.1km, 36.6km', 
+        (race_seq.NEXTVAL, 21, '한국생명의전화', '생명사랑밤길걷기', '2023.09.09', '2023.07.19', '2023.08.27', 'https://walkingovernight.com/', '걷기', '7.1km, 36.6km', 
         'https://search.pstatic.net/common?type=ofullfill&size=174x250&quality=85&direct=true&src=https%3A%2F%2Fcsearch-phinf.pstatic.net%2F20230718_173%2F1689659003445snsGY_PNG%2F1689567254.png');
 
 INSERT INTO race
         (race_id, region_id, race_org, race_name, race_date, race_apply, race_deadline, race_url, race_category, race_dist, race_pic)
     VALUES
-        (race_seq.NEXTVAL, 6, '대한치과의사협회', '스마일런페스티벌', '2023.09.03', '2023.06.01', '2023.08.21', 'https://www.smilerun.co.kr/main/main.php', '걷기', '10km', 
+        (race_seq.NEXTVAL, 7, '대한치과의사협회', '스마일런페스티벌', '2023.09.03', '2023.06.01', '2023.08.21', 'https://www.smilerun.co.kr/main/main.php', '걷기', '10km', 
         'https://search.pstatic.net/common?type=ofullfill&size=174x250&quality=85&direct=true&src=https%3A%2F%2Fcsearch-phinf.pstatic.net%2F20230602_40%2F1685674442736Yxusi_JPEG%2F110_manual_image_url_1685674442694.jpg');    
-        
+
+-- race2
+INSERT INTO race
+        (race_id, region_id, race_org, race_name, race_date, race_apply, race_deadline, race_url, race_category, race_dist, race_pic)
+    VALUES
+        (race_seq.NEXTVAL, 47, '영남일보', '팔공산 달빛 걷기대회', '2023.08.19', '2023.07.01', '2023.08.11', 'http://www.yn803.com/bbs/content.php?co_id=introduce', '걷기', '10km, 20km, 30km', 
+        'http://www.yn803.com/data/file/gallery/c5055fcc04403fcc3e20781af214fc16_ZeCLjKI9_bf4e9090ce3da9df56d1b484f46956552f540c2f.jpg');    
+
+INSERT INTO race
+        (race_id, region_id, race_org, race_name, race_date, race_apply, race_deadline, race_url, race_category, race_dist, race_pic)
+    VALUES
+        (race_seq.NEXTVAL, 45, '대구광역시 수성구', '수성 별빛 걷기대회', '2023.10.14', '2023.08.21', '2023.10.06', 'http://xn--bm3b42ag3dn0a.com/contents/01_intro/sub01.html', '걷기', '5km, 10km', 
+        'http://수성별빛.com/images/main/img_course01.jpg');    
+
+INSERT INTO race
+        (race_id, region_id, race_org, race_name, race_date, race_apply, race_deadline, race_url, race_category, race_dist, race_pic)
+    VALUES
+        (race_seq.NEXTVAL, 3, '한국체육진흥회', '제21회 서울 국제 걷기대회', '2023.05.13', '2023.04.17', '2023.05.13', 'http://www.walking.or.kr/event/walkEvent02.html', '걷기', '9km', 
+        'http://www.walking.or.kr/images/event/walkEvent02_01.png');  
+
+INSERT INTO race
+        (race_id, region_id, race_org, race_name, race_date, race_apply, race_deadline, race_url, race_category, race_dist, race_pic)
+    VALUES
+        (race_seq.NEXTVAL, 4, '한국체육진흥회', '제21회 서울 국제 걷기대회', '2023.05.14', '2023.04.17', '2023.05.14', 'http://www.walking.or.kr/event/walkEvent02.html', '걷기', '5km, 10km, 25km', 
+        'http://www.walking.or.kr/images/event/walkEvent02_01.png');  
+
+INSERT INTO race
+        (race_id, region_id, race_org, race_name, race_date, race_apply, race_deadline, race_url, race_category, race_dist, race_pic)
+    VALUES
+        (race_seq.NEXTVAL, 4, 'YTN', '남산 가족 걷기대회', '2023.04.08', '2023.04.08', '2023.04.08', 'https://ytnwalking.kr/about', '걷기', '6km', 
+        'https://ytnwalking.kr/wp-content/uploads/2023/03/main_title-2.png');  
+
+INSERT INTO race
+        (race_id, region_id, race_org, race_name, race_date, race_apply, race_deadline, race_url, race_category, race_dist, race_pic)
+    VALUES
+        (race_seq.NEXTVAL, 71, '대덕연구개발특구기관장협의회', '2023 과학어울림마당 걷기대회', '2023.04.29', '2023.04.03', '2023.04.29', 'http://swalking.co.kr/', '걷기', '5km', 
+        'http://swalking.co.kr/data/member/design/design_2_16805058588388.png');
+
+INSERT INTO race
+        (race_id, region_id, race_org, race_name, race_date, race_apply, race_deadline, race_url, race_category, race_dist, race_pic)
+    VALUES
+        (race_seq.NEXTVAL, 20, '금천구청', 'Happy Walking 금천한가족 건강걷기', '2023.03.11', '2023.03.11', '2023.12.09', 'https://www.geumcheon.go.kr/portal/contents.do?key=976', '걷기', '5km', 
+        'https://www.geumcheon.go.kr/site/portal/images/contents/cts976_img.jpg');
+
+INSERT INTO race
+        (race_id, region_id, race_org, race_name, race_date, race_apply, race_deadline, race_url, race_category, race_dist, race_pic)
+    VALUES
+        (race_seq.NEXTVAL, 95, '평택시체육회', '평택시민 2023 건강걷기대회', '2023.05.20', '2023.04.17', '2023.05.11', 'http://www.ptwk.co.kr/info_1.php', '걷기', '4.3km', 
+        'http://www.ptwk.co.kr/images/main1.jpg');
+
+INSERT INTO race
+        (race_id, region_id, race_org, race_name, race_date, race_apply, race_deadline, race_url, race_category, race_dist, race_pic)
+    VALUES
+        (race_seq.NEXTVAL, 163, '(재)아산문화재단', '아산 백의종군길 전국 걷기대회', '2023.04.29', '2023.03.17', '2023.04.14', 'https://culture.asan.go.kr/_esunshin/n23/node/040202.asp', '걷기', '22.9km, 13km, 15km', 
+        'https://culture.asan.go.kr/_esunshin/n23/design/img/main/poster.jpg');
+
+INSERT INTO race
+        (race_id, region_id, race_org, race_name, race_date, race_apply, race_deadline, race_url, race_category, race_dist, race_pic)
+    VALUES
+        (race_seq.NEXTVAL, 246, '경남도민일보', '제13회 진해만 생태숲 걷기대회', '2023.05.14', '2023.05.14', '2023.05.14', 'http://www.supwalk.co.kr/kr/', '걷기', '7km', 
+        'http://www.supwalk.co.kr/kr/images/sub/sub0104_img01.jpg');
+
+INSERT INTO race
+        (race_id, region_id, race_org, race_name, race_date, race_apply, race_deadline, race_url, race_category, race_dist, race_pic)
+    VALUES
+        (race_seq.NEXTVAL, 127, '(재)대한걷기연맹', '제29회 원주 국제 걷기대회', '2023.10.28', '2023.09.13', '2023.10.25', 'http://www.koreawalk.kr/', '걷기', '5km, 10km, 20km, 30km', 
+        'http://www.koreawalk.kr/mboard/upload_files/photo/m_13[10].jpg');
+
+INSERT INTO race
+        (race_id, region_id, race_org, race_name, race_date, race_apply, race_deadline, race_url, race_category, race_dist, race_pic)
+    VALUES
+        (race_seq.NEXTVAL, 127, '(재)대한걷기연맹', '제29회 원주 국제 걷기대회', '2023.10.29', '2023.09.13', '2023.10.25', 'http://www.koreawalk.kr/', '걷기', '5km, 10km, 20km, 30km', 
+        'http://www.koreawalk.kr/mboard/upload_files/photo/m_13[10].jpg');
+
+INSERT INTO race
+        (race_id, region_id, race_org, race_name, race_date, race_apply, race_deadline, race_url, race_category, race_dist, race_pic)
+    VALUES
+        (race_seq.NEXTVAL, 261, '한국체육진흥회', '제26회 서귀포 유채꽃국제걷기대회', '2024.03.23', '2023.03.16', '2023.03.16', 'http://www.walking.or.kr/event/walkEvent01.html', '걷기', '5km, 12km, 22km', 
+        'http://www.walking.or.kr/images/event/walkEvent01_01.png');
+
+INSERT INTO race
+        (race_id, region_id, race_org, race_name, race_date, race_apply, race_deadline, race_url, race_category, race_dist, race_pic)
+    VALUES
+        (race_seq.NEXTVAL, 261, '한국체육진흥회', '제26회 서귀포 유채꽃국제걷기대회', '2024.03.23', '2023.03.16', '2023.03.16', 'http://www.walking.or.kr/event/walkEvent01.html', '걷기', '5km, 12km, 22km', 
+        'http://www.walking.or.kr/images/event/walkEvent01_01.png');
+
+INSERT INTO race
+        (race_id, region_id, race_org, race_name, race_date, race_apply, race_deadline, race_url, race_category, race_dist, race_pic)
+    VALUES
+        (race_seq.NEXTVAL, 131, '한국체육진흥회', '제20회 설악국제트레킹대회', '2024.06.08', '2023.06.01', '2024.06.01', 'http://www.walking.or.kr/event/walkEvent03.html', '걷기', '5km, 10km, 20km', 
+        'http://www.walking.or.kr/images/event/walkEvent03_01.png');
+
+INSERT INTO race
+        (race_id, region_id, race_org, race_name, race_date, race_apply, race_deadline, race_url, race_category, race_dist, race_pic)
+    VALUES
+        (race_seq.NEXTVAL, 131, '한국체육진흥회', '제20회 설악국제트레킹대회', '2024.06.09', '2023.06.01', '2024.06.01', 'http://www.walking.or.kr/event/walkEvent03.html', '걷기', '5km, 10km, 20km', 
+        'http://www.walking.or.kr/images/event/walkEvent03_01.png');
+
+INSERT INTO race
+        (race_id, region_id, race_org, race_name, race_date, race_apply, race_deadline, race_url, race_category, race_dist, race_pic)
+    VALUES
+        (race_seq.NEXTVAL, 26, '한국체육진흥회', '제29회 한국국제걷기대회', '2023.10.28', '2023.01.01', '2023.10.28', 'http://www.walking.or.kr/event/walkEvent04.html', '걷기', '5km, 10km, 25km, 42km', 
+        'http://www.walking.or.kr/images/event/walkEvent04_01_01.png');
+
+INSERT INTO race
+        (race_id, region_id, race_org, race_name, race_date, race_apply, race_deadline, race_url, race_category, race_dist, race_pic)
+    VALUES
+        (race_seq.NEXTVAL, 26, '한국체육진흥회', '제29회 한국국제걷기대회', '2023.10.29', '2023.01.01', '2023.10.29', 'http://www.walking.or.kr/event/walkEvent04.html', '걷기', '5km, 10km, 25km, 42km', 
+        'http://www.walking.or.kr/images/event/walkEvent04_01_01.png');
+
+INSERT INTO race
+        (race_id, region_id, race_org, race_name, race_date, race_apply, race_deadline, race_url, race_category, race_dist, race_pic)
+    VALUES
+        (race_seq.NEXTVAL, 3, '한국체육진흥회', '3.1절 105주년 기념 무박만세걷기', '2024.02.24', '2023.02.24', '2024.02.24', 'http://www.walking.or.kr/event/walkEvent05.html', '걷기', '10km, 30km, 60km, 120km', 
+        'http://www.walking.or.kr/images/event/walkEvent05_01.png');
+
+INSERT INTO race
+        (race_id, region_id, race_org, race_name, race_date, race_apply, race_deadline, race_url, race_category, race_dist, race_pic)
+    VALUES
+        (race_seq.NEXTVAL, 3, '한국체육진흥회', '제9차 21세기 한. 일우정걷기', '2023.04.01', '2023.04.01', '2023.04.01', 'http://www.walking.or.kr/event/walkEvent06.html', '걷기', '1158km', 
+        'http://www.walking.or.kr/images/event/walkEvent06_01.png');
+
+INSERT INTO race
+        (race_id, region_id, race_org, race_name, race_date, race_apply, race_deadline, race_url, race_category, race_dist, race_pic)
+    VALUES
+        (race_seq.NEXTVAL, 193, '한국체육진흥회', '제13회 순천만ECO국제걷기대회', '2023.09.01', '2023.08.01', '2023.09.01', 'http://www.walking.or.kr/event/walkEvent08.html', '걷기', '5km, 10km, 25km', 
+        'http://www.walking.or.kr/images/event/walkEvent08_01.png');
+
+INSERT INTO race
+        (race_id, region_id, race_org, race_name, race_date, race_apply, race_deadline, race_url, race_category, race_dist, race_pic)
+    VALUES
+        (race_seq.NEXTVAL, 55, '한국체육진흥회', '제11회 수복길따라걷기', '2023.09.23', '2023.01.01', '2023.09.23', 'http://www.walking.or.kr/event/walkEvent09.html', '걷기', '5km, 20km, 66km', 
+        'http://www.walking.or.kr/images/event/walkEvent09_01.png');
+
+INSERT INTO race
+        (race_id, region_id, race_org, race_name, race_date, race_apply, race_deadline, race_url, race_category, race_dist, race_pic)
+    VALUES
+        (race_seq.NEXTVAL, 55, '한국체육진흥회', '제11회 수복길따라걷기', '2023.09.24', '2023.01.01', '2023.09.23', 'http://www.walking.or.kr/event/walkEvent09.html', '걷기', '5km, 20km, 66km', 
+        'http://www.walking.or.kr/images/event/walkEvent09_01.png');
+
+
+-- challenge
 INSERT INTO challenge
     (chall_id, chall_reg_id, region_id, race_id, chall_name, chall_intro, chall_start_date, chall_end_date, chall_all_auth, chall_week_auth, chall_category, chall_sit, chall_online, chall_size)
     values
-        (challenge_req.NEXTVAL, 'test04@gmail.com', 1, null, '직장인 건강 관리', 
+        (challenge_seq.NEXTVAL, 'test04@gmail.com', 1, null, '직장인 건강 관리', 
         '직장에 다니시면서 걷기로 건강 관리할 직장인분들을 모집합니다. 
 
 건강 관리 차원에서 매일 30분씩 걷기 운동
@@ -473,7 +632,7 @@ INSERT INTO challenge
 INSERT INTO challenge
     (chall_id, chall_reg_id, region_id, race_id, chall_name, chall_intro, chall_start_date, chall_end_date, chall_all_auth, chall_week_auth, chall_category, chall_sit, chall_online, chall_size)
     values
-        (challenge_req.NEXTVAL, 'test01@gmail.com', 5, 1, '서울오프런 대회 준비하기', '8월 26일에 열리는 
+        (challenge_seq.NEXTVAL, 'test01@gmail.com', 7, 1, '서울오픈런 대회 준비하기', '8월 26일에 열리는 
 서울 오픈런 대회를 
 같이 준비 할 사람
 들을 모집합니다. 
