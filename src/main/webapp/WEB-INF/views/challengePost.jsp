@@ -3,6 +3,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<c:set var="now" value="<%=new java.util.Date() %>" />
+<c:set var="sysDay"><fmt:formatDate value="${now}" pattern="yyyy-MM-dd"/></c:set>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -110,10 +113,17 @@
 						<c:forEach items="${postList}" var="post">
 					<tbody>
 							<tr>
-								
+								<c:set var="postDay"><fmt:formatDate value="${post.auth_date}" pattern="yyy-MM-dd"/></c:set>
 								<td>${post.auth_id}</td>
 								<td><a href="/challenge/challPostDetail${post.auth_id}">${post.auth_title}</a></td>
-								<td><fmt:formatDate value="${post.auth_date}" pattern="yyyy-MM-dd"/></td>
+								<c:choose>
+									<c:when test="${postDay==sysDay}">
+										<td><fmt:formatDate value="${post.auth_date}" pattern="HH:mm"/></td>
+									</c:when>
+									<c:otherwise>
+										<td><fmt:formatDate value="${post.auth_date}" pattern="yyyy-MM-dd"/></td>
+									</c:otherwise>
+								</c:choose>
 							</tr>
 					</tbody>
 					</c:forEach>
@@ -216,6 +226,9 @@ $(document).ready(function (){
 	var cantPost='${cantPost}';
 	if(cantPost=='불가')
 		alert("챌린지 참가자가 아니거나, 인증 가능한 상태가 아닙니다");
+	
+	console.log(sysDay);
+	console.log(postDay);
 
   </script>
 </html>

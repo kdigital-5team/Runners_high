@@ -240,7 +240,7 @@
  			 										#{region_id},
  			 											#{chall_sit},
  			 												#{chall_online},
- 			 													#{chall_all_auth},
+ 			 													(#{chall_end_date}-#{chall_start_date})/7*#{chall_week_auth},
  			 														#{chall_week_auth},
  			 															#{race_id})
 			<selectKey keyProperty="chall_id" resultType="int">
@@ -274,10 +274,11 @@
 		SELECT chall_id, auth_id, auth_title, auth_date
 		FROM auth_post
 		WHERE chall_id=#{chall_id}
+		ORDER BY auth_date DESC
 	</select>
 	
 	<select id="getPostByAuthId" resultType="com.spring.dto.ChallengePost">
-		SELECT auth_title, auth_cont, chall_id
+		SELECT auth_title, auth_cont, chall_id, comment_id, auth_id
 		FROM auth_post
 		WHERE auth_id=#{auth_id}
 	</select>
@@ -307,14 +308,14 @@
 	
 	<delete id="deletePostByAuthId" parameterType="com.spring.dto.ChallengePost">
 	DELETE auth_post
-	WHERE auth_id=#{auth_id}
+	WHERE auth_id=#{auth_id} and comment_id = #{userId}
 	</delete>
 	
-	<update id="updateChallPost" parameterType="com.spring.dto.ChallengePost">
+	<update id="updatePost" parameterType="com.spring.dto.ChallengePost">
 	UPDATE auth_post
-	SET auth_title=#{auth_title, jdbcType=VARCHAR},
-		auth_cont=#{auth_cont, jdbcType=VARCHAR}
-	WHERE auth_id=#{auth_id}
+	SET auth_title=#{challpost.auth_title, jdbcType=VARCHAR},
+		auth_cont=#{challpost.auth_cont, jdbcType=VARCHAR}
+	WHERE auth_id=#{authId}
 	</update>
 
  	<update id="updateChallenge" 
@@ -389,6 +390,12 @@
 	<update id="updateAuthNum" parameterType="com.spring.dto.UserChallenge">
 	UPDATE user_chall
 	SET chall_auth_num=chall_auth_num+1
+	WHERE user_id = #{userId} and chall_id = #{chall_id}
+	</update>
+	
+	<update id="deleteAuthNum" parameterType="com.spring.dto.UserChallenge">
+	UPDATE user_chall
+	SET chall_auth_num=chall_auth_num-1
 	WHERE user_id = #{userId} and chall_id = #{chall_id}
 	</update>
 

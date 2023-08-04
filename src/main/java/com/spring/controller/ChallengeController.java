@@ -401,7 +401,7 @@ public class ChallengeController {
 			return "challengePostDetail";
 		}
 		
-		@RequestMapping(value = "/modifyPost/{auth_id}", method = RequestMethod.GET)
+		@RequestMapping(value = "/modifyPost/{auth_id}")
 		public String updateChallPostForm(@PathVariable int auth_id,
 									Model model) {
 			ChallengePost post = challService.getPostByAuthId(auth_id);
@@ -411,44 +411,27 @@ public class ChallengeController {
 			return "updateChallPost";
 		}
 		//수정
-		@RequestMapping(value = "/updatePost/{auth_id}", method = RequestMethod.POST)
-		public String updateChallPost(@PathVariable int auth_id, 
-								@RequestParam("auth_title") String auth_title,
-								@RequestParam("auth_cont") String auth_cont) {
+		@RequestMapping(value = "/updatePost/{authId}", method = RequestMethod.POST)
+		public String updateChallPost(@PathVariable int authId, 
+									@ModelAttribute ChallengePost challpost) {
 			
-			
-			boolean result = false;
-			
-			ChallengePost post = challService.getPostByAuthId(auth_id);
-			post.setAuth_title(auth_title);
-			post.setAuth_cont(auth_cont);
-			
-			try {
-				 result = challService.updateChallPost(post);
-				 
-				 if(result) {
-//					 
-					 return "redirect:/challenge/challengePost"+auth_id;
-				 }
-			} catch (Exception e) {
-				e.printStackTrace();
-				return "index";
-			}
+			boolean updateCheck = challService.updatePost(challpost, authId);
+			if(updateCheck)
+				return "redirect:/challenge";
 			
 			return "index";
 		}
 		
 		//삭제
 		@RequestMapping(value = "/challenge/deletepost/{auth_id}", method = RequestMethod.POST)
-		public String deletePostByAuthId(@PathVariable int auth_id, @RequestParam String chall_id) {
-			
+		public String deletePostByAuthId(@PathVariable int auth_id, @RequestParam String chall_id, HttpSession session) {
+			String userId = (String)session.getAttribute("userId");
 			boolean deletePost = false;
 
 			try {
-				deletePost = challService.deletePostByAuthId(auth_id);
+				deletePost = challService.deletePostByAuthId(auth_id, userId);
 				if(deletePost) {
-					
-					System.out.println(auth_id);
+					challService.deleteAuthNum(userId, Integer.parseInt(chall_id));
 					return "redirect:/challenge/"+chall_id+"challengePost";
 				}
 				
@@ -663,8 +646,13 @@ public class ChallengeController {
 						return "otherChall";
 					}
 				 }
+				
+		@RequestMapping(value="/challenge/insertComment")
+		public String insertComment() {
+			return null;
+		}
 		
-		@Scheduled(cron = "0 0 * * * *")
+		@Scheduled(cron = "0 0 0 * * *")
 		public String updateChallSit() {
 			boolean updateChallSit = challService.updateChallSit();
 			System.out.println("챌린지 상태 업데이트");

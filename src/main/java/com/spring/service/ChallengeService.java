@@ -192,9 +192,9 @@ boolean result = false;
 		return mapper.getUserChallbyUserId(userId);
 	}
 
-	public boolean deletePostByAuthId(int auth_id) {
+	public boolean deletePostByAuthId(int auth_id, String userId) {
 		
-		return mapper.deletePostByAuthId(auth_id);
+		return mapper.deletePostByAuthId(auth_id, userId);
 	}
 
 	public boolean updateAuthNum(String userId, int chall_id) {
@@ -207,5 +207,14 @@ boolean result = false;
 
 	public String getUserByChallIdAndUserId(String userId, int chall_id) {
 		return mapper.getUserByChallIdAndUserId(userId, chall_id);
+	}
+
+	public void deleteAuthNum(String userId, int chall_id) {
+		mapper.deleteAuthNum(userId, chall_id);
+		
+	}
+
+	public boolean updatePost(ChallengePost challpost, int authId) {
+		return mapper.updatePost(challpost, authId);
 	}
 }

@@ -82,12 +82,16 @@ public interface ChallengeMapper {
 
 	public List<UserChallenge> getUserChallbyUserId(String userId);
 
-	public boolean deletePostByAuthId(int auth_id);
+	public boolean deletePostByAuthId(int auth_id, String userId);
 
 	public boolean updateAuthNum(String userId, int chall_id);
 
 	public List<ChallengePost> getPostByUserandChall(String userId, int challId);
 
 	public String getUserByChallIdAndUserId(String userId, int chall_id);
+
+	public void deleteAuthNum(String userId, int chall_id);
+
+	public boolean updatePost(ChallengePost challpost, int authId);
 
 }

@@ -15,8 +15,9 @@
 	href="https://fonts.googleapis.com/css?family=Nunito+Sans:200,300,400,700,900|Oswald:400,700">
 <link rel="stylesheet" href="../fonts/icomoon/style.css">
 <link rel="stylesheet" href="../static/css/bootstrap.min.css">
-<link rel="stylesheet" href="../static/css/jquery.fancybox.min.css">
-<link rel="stylesheet" href="../static/css/jquery-ui.css">
+<script src="../static/js/jquery.min.js"></script>
+<script src="../static/js/jquery-migrate-3.0.1.min.js"></script>
+<script src="../static/js/jquery-ui.js"></script>
 <link rel="stylesheet" href="../static/css/owl.carousel.min.css">
 <link rel="stylesheet" href="../static/css/owl.theme.default.min.css">
 <link rel="stylesheet" href="../static/css/animate.css">
@@ -26,6 +27,8 @@
 <link rel="stylesheet" href="../static/fonts/flaticon/font/flaticon.css">
 <link rel="stylesheet" href="../static/css/aos.css">
 <link rel="stylesheet" href="../static/css/style2.css">
+<script src="../static/js/jquery.stellar.min.js"></script>
+<script src="../static/js/jquery.fancybox.min.js"></script>
 
 </head>
 <style>
@@ -48,14 +51,27 @@
 							<input type="hidden" id="chall_id" name="chall_id" value="${post.chall_id}"  readonly>
 					</div>	
 					
-					
 					<div style="text-align:center">
-					<button type="button" class="btn btn-danger"   onclick="deletePost('${auth_id}')">
-					삭제하기
-					</button>
+					<c:if test="${post.comment_id eq userId }">
+						<button type="button" class="btn btn-danger"   onclick="updatePost('${auth_id}','${userId}')">
+						수정하기
+						</button>
+						<button type="button" class="btn btn-danger"   onclick="deletePost('${auth_id}')">
+						삭제하기 
+						</button>
+					</c:if>
 
 					</div>
 					</form>
+					
+					<div>
+						<textarea id="comment" rows="2" cols="80"></textarea>
+						<button type="button" onclick="registComment()">댓글등록</button>
+					</div>
+					
+					<div id="comment_box">
+					
+					</div>
 
 			</div>
 						
@@ -78,13 +94,44 @@
 
 </body>
 <script type="text/javascript">
-
-	function apply(){
-
-	}
-	
 	function deletePost(auth_id){
 		 document.forms.delete_form.submit();
+		
+	}
+	
+	function updatePost(auth_id, user_id){
+		var new_form = document.createElement('form');
+		
+		new_form.name="update_post";
+		new_form.method='PUT';
+		new_form.action='/modifyPost/'+auth_id;
+		
+		var post_input = document.createElement('input');
+		post_input.setAttribute("type","hidden");
+		post_input.setAttribute("name","userId");
+		post_input.setAttribute("value", user_id);
+		
+		new_form.appendChild(post_input);
+		
+		document.body.appendChild(new_form);
+		new_form.submit();
+	}
+	
+	function registComment(){
+		var comment = document.getElementById('comment').value;
+		
+		if(comment==""){
+			alert("내용을 입력해 주세요");
+		}
+		var objParams={"comment" : comment};
+		$.ajax({
+			type:'post',
+			url:"/challenge/insertComment",
+			data:objParams
+			})
+			.success(function(result){
+				console.log('성공');
+			})
 		
 	}
   </script>
