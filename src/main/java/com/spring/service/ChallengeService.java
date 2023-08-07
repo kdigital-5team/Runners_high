@@ -7,6 +7,7 @@ import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.spring.dto.AuthComment;
 import com.spring.dto.Challenge;
 
 import com.spring.dto.ChallengePost;
@@ -216,5 +217,17 @@ boolean result = false;
 
 	public boolean updatePost(ChallengePost challpost, int authId) {
 		return mapper.updatePost(challpost, authId);
+	}
+
+	public boolean insertComment(AuthComment authComment) {
+		return mapper.insertComment(authComment);
+	}
+
+	public List<AuthComment> getAllComment(int auth_id) {
+		return mapper.getAllComment(auth_id);
+	}
+
+	public User getUserbyAuthId(int auth_id) {
+		return mapper.getUserbyAuthId(auth_id);
 	}
 }

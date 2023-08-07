@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.spring.dto.AuthComment;
 import com.spring.dto.Challenge;
 import com.spring.dto.ChallengePost;
 import com.spring.dto.ChallengeRegion;
@@ -394,9 +395,13 @@ public class ChallengeController {
 		@RequestMapping(value = "/challenge/challPostDetail{auth_id}", method = RequestMethod.GET)
 		public String getPostByAuthId(@PathVariable int auth_id,  Model model) {
 			ChallengePost post = challService.getPostByAuthId(auth_id);
+			User authUser = challService.getUserbyAuthId(auth_id);
+			List<AuthComment> commentList = challService.getAllComment(auth_id);
 			
 			
 			model.addAttribute("post", post);
+			model.addAttribute("authUser",authUser);
+			model.addAttribute("commentList", commentList);
 			
 			return "challengePostDetail";
 		}
@@ -648,8 +653,14 @@ public class ChallengeController {
 				 }
 				
 		@RequestMapping(value="/challenge/insertComment")
-		public String insertComment() {
-			return null;
+		public String insertComment(@RequestParam(value="comment") String comment, @RequestParam(value="authId") String authId, HttpSession session) {
+			AuthComment authComment = new AuthComment();
+			authComment.setAuth_comment_cont(comment);
+			System.out.println(authComment.getAuth_comment_cont());
+			authComment.setAuth_id(Integer.parseInt(authId));
+			authComment.setUser_id((String)session.getAttribute("userId"));
+			boolean isInsert = challService.insertComment(authComment);
+			return "/challenge";
 		}
 		
 		@Scheduled(cron = "0 0 0 * * *")

@@ -278,9 +278,17 @@
 	</select>
 	
 	<select id="getPostByAuthId" resultType="com.spring.dto.ChallengePost">
-		SELECT auth_title, auth_cont, chall_id, comment_id, auth_id
+		SELECT auth_title, auth_cont, chall_id, comment_id, auth_id, auth_date
 		FROM auth_post
 		WHERE auth_id=#{auth_id}
+	</select>
+	
+	<select id="getUserbyAuthId" resultType="com.spring.dto.User">
+		SELECT nickname, user_pic
+		FROM rh_user
+		WHERE user_id=(select comment_id
+						from auth_post
+						where auth_id=#{auth_id})
 	</select>
 	
 	<select id="getPostByUserandChall" resultType="com.spring.dto.ChallengePost" >
@@ -335,6 +343,18 @@
 				
 			WHERE chall_id=#{chall_id}
 	</update>
+	
+	<insert id="insertComment" parameterType="com.spring.dto.AuthComment">
+	INSERT INTO auth_comment (auth_comment_id, auth_id, user_id, auth_comment_date, auth_comment_cont)
+	VALUES (POST_SEQ.nextval, #{auth_id}, #{user_id}, SYSDATE, #{auth_comment_cont})
+	</insert>
+	
+	<select id="getAllComment" resultType="com.spring.dto.AuthComment" >
+		SELECT auth_comment_id, auth_id, auth_comment.user_id, auth_comment_date, auth_comment_cont, user_pic, nickname
+		FROM auth_comment, rh_user
+		WHERE auth_id = #{auth_id} and auth_comment.user_id = rh_user.user_id
+		ORDER BY auth_comment_date DESC
+	</select>
 	
 	<update id="updateChallSit">
 		update challenge

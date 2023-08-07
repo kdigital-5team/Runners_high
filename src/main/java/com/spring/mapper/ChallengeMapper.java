@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.scheduling.annotation.Scheduled;
 
+import com.spring.dto.AuthComment;
 import com.spring.dto.Challenge;
 
 import com.spring.dto.ChallengePost;
@@ -93,5 +94,11 @@ public interface ChallengeMapper {
 	public void deleteAuthNum(String userId, int chall_id);
 
 	public boolean updatePost(ChallengePost challpost, int authId);
+
+	public boolean insertComment(AuthComment authComment);
+
+	public List<AuthComment> getAllComment(int auth_id);
+
+	public User getUserbyAuthId(int auth_id);
 
 }
