@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.spring.dto.User;
+import com.spring.dto.UserTitle;
 import com.spring.mapper.UserMapper;
 
 @Service
@@ -99,7 +100,7 @@ public class UserService {
 		
 		return result;
 	}
-	
+
 /* 0706 카카오 로그인 API
  * 9.0.1 문법 적용 : nullpointerException
  * Token으로 유저 정보 가지고 오기 : java.lang.IllegalArgumentException: invalid start or end

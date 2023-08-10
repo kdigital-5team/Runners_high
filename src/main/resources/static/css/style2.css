@@ -131,6 +131,25 @@ a:hover {
 	color: #000;
 }
 
+/* 칭호 스크롤바 0810 */
+.title-scroll {
+	overflow: scroll;
+	width: 300px;
+	height: 150px;
+	margin: auto;
+	
+	-ms-overflow-style: none;
+}
+/* 기본 브라우저 스크롤바 양식 지우기
+.title-scroll::-webkit-scrollbar {
+	display: none;
+}
+*/
+.container {
+	text-align: center;
+}
+
+
 /* 참여 챌린지 캘린더 0724 */
 td {
 	width: 50px;

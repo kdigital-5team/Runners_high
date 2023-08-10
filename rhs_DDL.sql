@@ -23,6 +23,7 @@ DROP SEQUENCE region_seq;
 DROP SEQUENCE race_seq;
 DROP SEQUENCE challenge_seq;
 DROP SEQUENCE post_seq;
+DROP SEQUENCE user_title_seq;
 
 
 -- 유저 테이블
@@ -61,6 +62,11 @@ CREATE TABLE user_title (
     user_id   VARCHAR2(30 BYTE) NOT NULL,
     title_id  NUMBER(10) NOT NULL
 );
+
+CREATE SEQUENCE user_title_seq
+        INCREMENT BY 1
+        START WITH 1
+        MINVALUE 1;
 
 ALTER TABLE user_title ADD CONSTRAINT user_title_pk PRIMARY KEY ( title_acq );
 
@@ -201,8 +207,8 @@ CREATE TABLE user_chall (
 CREATE TABLE race (
     race_id       NUMBER(5) NOT NULL,
     region_id     NUMBER(5) NOT NULL,
-    race_org      VARCHAR2(50 BYTE),
-    race_name     VARCHAR2(50 BYTE) NOT NULL,
+    race_org      VARCHAR2(80 BYTE),
+    race_name     VARCHAR2(100 BYTE) NOT NULL,
     race_date     DATE NOT NULL,
     race_apply    DATE NOT NULL,
     race_deadline DATE NOT NULL,

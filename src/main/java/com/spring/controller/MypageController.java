@@ -29,9 +29,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.spring.dto.Challenge;
 import com.spring.dto.ChallengeRegion;
+import com.spring.dto.Title;
 import com.spring.dto.User;
 import com.spring.dto.UserChallenge;
+import com.spring.dto.UserTitle;
 import com.spring.service.ChallengeService;
+import com.spring.service.TitleService;
 import com.spring.service.UserService;
 
 @Controller
@@ -42,10 +45,13 @@ public class MypageController {
 	
 	@Autowired
 	ChallengeService challService;
-
 	
+	@Autowired
+	TitleService titleService;
+
+	// 참여 챌린지
 	@RequestMapping(value = "/mypage/chall", method = RequestMethod.GET)
-	public String mypage_chall(HttpSession session, Model model) throws Exception {
+	public String mypageChall(HttpSession session, Model model) throws Exception {
 		String userId =(String)session.getAttribute("userId");
 		if(userId == null || userId=="")
 			return "login";
@@ -58,10 +64,28 @@ public class MypageController {
 		model.addAttribute("myChallList", myChallList);
 		return "mypage_chall";
 	}
-
+	
+	// 칭호탭
 	@RequestMapping(value = "/mypage/title", method = RequestMethod.GET)
-	public String events() {
+	public String mypageTitle(HttpSession session, Model model) throws Exception {
 		System.out.println("title");
+		
+		String userId = (String) session.getAttribute("userId");
+		if(userId == null || userId=="") {
+			return "login";
+		}
+		
+		List<Title> titleList = titleService.getAllTitles();
+		System.out.println(titleList);
+		model.addAttribute("titleList", titleList);
+		
+		User user = service.getUserByUserId(userId);
+		model.addAttribute("user", user);
+		
+		UserTitle userTitle = titleService.getTitleByUserId(userId);
+		List<Title> userTitleList = titleService.getTitlesByTitleId(userTitle.getTitle_id());
+		
+		
 		return "mypage_title";
 	}
 
