@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.springframework.scheduling.annotation.Scheduled;
 
 import com.spring.dto.AuthComment;
+import com.spring.dto.AuthLike;
 import com.spring.dto.Challenge;
 
 import com.spring.dto.ChallengePost;
@@ -100,5 +101,13 @@ public interface ChallengeMapper {
 	public List<AuthComment> getAllComment(int auth_id);
 
 	public User getUserbyAuthId(int auth_id);
+
+	public boolean insertPostLike(String authId, String userId);
+
+	public List<AuthLike> getAllLike(int auth_id);
+
+	public boolean deletePostLike(String authId, String userId);
+
+	public boolean deleteComment(int commentId);
 
 }

@@ -346,14 +346,35 @@
 	
 	<insert id="insertComment" parameterType="com.spring.dto.AuthComment">
 	INSERT INTO auth_comment (auth_comment_id, auth_id, user_id, auth_comment_date, auth_comment_cont)
-	VALUES (POST_SEQ.nextval, #{auth_id}, #{user_id}, SYSDATE, #{auth_comment_cont})
+	VALUES (auth_comment_seq.nextval, #{auth_id}, #{user_id}, SYSDATE, #{auth_comment_cont})
 	</insert>
+	
+	<delete id="deleteComment" parameterType="com.spring.dto.AuthComment">
+		DELETE FROM auth_comment
+		WHERE auth_comment_id=#{commentId}
+	</delete>
 	
 	<select id="getAllComment" resultType="com.spring.dto.AuthComment" >
 		SELECT auth_comment_id, auth_id, auth_comment.user_id, auth_comment_date, auth_comment_cont, user_pic, nickname
 		FROM auth_comment, rh_user
 		WHERE auth_id = #{auth_id} and auth_comment.user_id = rh_user.user_id
 		ORDER BY auth_comment_date DESC
+	</select>
+	
+	<insert id="insertPostLike" parameterType="com.spring.dto.AuthLike">
+		INSERT INTO auth_like (auth_id, user_id)
+		VALUES (#{authId}, #{userId})
+	</insert>
+	
+	<delete id="deletePostLike" parameterType="com.spring.dto.AuthLike">
+		DELETE FROM auth_like
+		WHERE auth_id=#{authId} and user_id=#{userId}
+	</delete>
+	
+	<select id="getAllLike" resultType="com.spring.dto.AuthLike" >
+		SELECT auth_id, user_id
+		FROM auth_like
+		WHERE auth_id = #{auth_id}
 	</select>
 	
 	<update id="updateChallSit">

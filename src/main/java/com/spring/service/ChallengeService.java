@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.spring.dto.AuthComment;
+import com.spring.dto.AuthLike;
 import com.spring.dto.Challenge;
 
 import com.spring.dto.ChallengePost;
@@ -229,5 +230,21 @@ boolean result = false;
 
 	public User getUserbyAuthId(int auth_id) {
 		return mapper.getUserbyAuthId(auth_id);
+	}
+
+	public boolean insertPostLike(String authId, String userId) {
+		return mapper.insertPostLike(authId, userId);
+	}
+
+	public List<AuthLike> getAllLike(int auth_id) {
+		return mapper.getAllLike(auth_id);
+	}
+
+	public boolean deletePostLike(String authId, String userId) {
+		return mapper.deletePostLike(authId, userId);
+	}
+
+	public boolean deleteComment(int commentId) {
+		return mapper.deleteComment(commentId);
 	}
 }

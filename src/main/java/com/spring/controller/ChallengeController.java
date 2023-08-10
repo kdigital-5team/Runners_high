@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.spring.dto.AuthComment;
+import com.spring.dto.AuthLike;
 import com.spring.dto.Challenge;
 import com.spring.dto.ChallengePost;
 import com.spring.dto.ChallengeRegion;
@@ -393,15 +394,23 @@ public class ChallengeController {
 		}
 
 		@RequestMapping(value = "/challenge/challPostDetail{auth_id}", method = RequestMethod.GET)
-		public String getPostByAuthId(@PathVariable int auth_id,  Model model) {
+		public String getPostByAuthId(@PathVariable int auth_id,  Model model, HttpSession session) {
+			String userId=(String)session.getAttribute("userId");
 			ChallengePost post = challService.getPostByAuthId(auth_id);
 			User authUser = challService.getUserbyAuthId(auth_id);
 			List<AuthComment> commentList = challService.getAllComment(auth_id);
+			List<AuthLike> likeList = challService.getAllLike(auth_id);
+			for(AuthLike aLike:likeList) {
+				if(aLike.getUser_id().equals(userId)) {
+					model.addAttribute("alreadyLike","like");
+				}
+			}
 			
 			
 			model.addAttribute("post", post);
 			model.addAttribute("authUser",authUser);
 			model.addAttribute("commentList", commentList);
+			model.addAttribute("likeNum", likeList.size());
 			
 			return "challengePostDetail";
 		}
@@ -661,6 +670,38 @@ public class ChallengeController {
 			authComment.setUser_id((String)session.getAttribute("userId"));
 			boolean isInsert = challService.insertComment(authComment);
 			return "/challenge";
+		}
+		
+		@RequestMapping(value="/challenge/deleteComment")
+		public String deleteComment(@RequestParam(value="comment_id") String commentId) {
+			boolean isDelete = challService.deleteComment(Integer.parseInt(commentId));
+			return "/challenge";
+		}
+		
+		@RequestMapping(value="/challenge/{authId}like")
+		public String insertPostLike(@PathVariable String authId, HttpSession session) {
+			String userId = (String) session.getAttribute("userId");
+			boolean isLike = challService.insertPostLike(authId, userId);
+			
+			if(isLike) {
+				return "/challenge";
+			}
+			else
+				return "/index";
+			
+		}
+		
+		@RequestMapping(value="/challenge/{authId}dislike")
+		public String deletePostLike(@PathVariable String authId, HttpSession session) {
+			String userId = (String) session.getAttribute("userId");
+			boolean isDislike = challService.deletePostLike(authId, userId);
+			
+			if(isDislike) {
+				return "/challenge";
+			}
+			else
+				return "/index";
+			
 		}
 		
 		@Scheduled(cron = "0 0 0 * * *")
