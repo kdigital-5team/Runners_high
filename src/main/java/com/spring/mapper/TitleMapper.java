@@ -17,4 +17,7 @@ public interface TitleMapper {
 	// 유저 칭호
 	public UserTitle getTitleByUserId(String userId) throws SQLException;
 
+	// 유저 획득 칭호 정보
+	public List<Title> getTitlesByTitleId(int titleId) throws SQLException;
+
 }

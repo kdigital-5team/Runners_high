@@ -8,45 +8,50 @@
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-<link rel="stylesheet"
-	href="https://fonts.googleapis.com/css?family=Nunito+Sans:200,300,400,700,900|Oswald:400,700">
 	
-<link rel="stylesheet" href="../static/css/style2.css">
-<link rel="stylesheet" href="../fonts/icomoon/style.css">
-<link rel="stylesheet" href="../static/css/bootstrap.min.css">
-<link rel="stylesheet" href="../static/css/jquery.fancybox.min.css">
-<link rel="stylesheet" href="../static/css/jquery-ui.css">
-<link rel="stylesheet" href="../static/css/owl.carousel.min.css">
-<link rel="stylesheet" href="../static/css/owl.theme.default.min.css">
-<link rel="stylesheet" href="../static/css/animate.css">
-<link rel="stylesheet" href="../static/css/image_crop.css">
-<link rel="stylesheet" href="../static/css/popup.css">
-<link rel="stylesheet" href="../static/css/feed.css">
-<link rel="stylesheet" href="../static/fonts/flaticon/font/flaticon.css">
-<link rel="stylesheet" href="../static/css/aos.css">
+	<link rel="stylesheet"
+		href="https://fonts.googleapis.com/css?family=Nunito+Sans:200,300,400,700,900|Oswald:400,700">
+		
+	<link rel="stylesheet" href="../static/css/style2.css">
+	<link rel="stylesheet" href="../static/css/jquery.fullPage.css">
+	
+	<link rel="stylesheet" href="../fonts/icomoon/style.css">
+	<link rel="stylesheet" href="../static/css/bootstrap.min.css">
+	<link rel="stylesheet" href="../static/css/jquery.fancybox.min.css">
+	<link rel="stylesheet" href="../static/css/jquery-ui.css">
+	<link rel="stylesheet" href="../static/css/owl.carousel.min.css">
+	<link rel="stylesheet" href="../static/css/owl.theme.default.min.css">
+	<link rel="stylesheet" href="../static/css/animate.css">
+	<link rel="stylesheet" href="../static/css/image_crop.css">
+	<link rel="stylesheet" href="../static/css/popup.css">
+	<link rel="stylesheet" href="../static/css/feed.css">
+	<link rel="stylesheet" href="../static/fonts/flaticon/font/flaticon.css">
+	<link rel="stylesheet" href="../static/css/aos.css">
+
+	<script src="https://code.jquery.com/jquery-3.4.1.js" ></script>
+	<script src="../static/js/jquery.fullPage.js"></script>
+	<script src="../static/js/main.js"></script>
+	
+	<script src="../static/js/jquery.min.js"></script>
+	<script src="../static/js/jquery-migrate-3.0.1.min.js"></script>
+	<script src="../static/js/jquery-ui.js"></script>
+	<script src="../static/js/popper.min.js"></script>
+	<script src="../static/js/bootstrap.min.js"></script>
+	<script src="../static/js/owl.carousel.min.js"></script>
+	<script src="../static/js/jquery.stellar.min.js"></script>
+	<script src="../static/js/jquery.magnific-popup.min.js"></script>
+	<script src="../static/js/aos.js"></script>
 </head>
 <style>
 </style>
 <body>
 
-	<script src="js/jquery.min.js"></script>
-	<script src="js/jquery-migrate-3.0.1.min.js"></script>
-	<script src="js/jquery-ui.js"></script>
-	<script src="js/popper.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<script src="js/owl.carousel.min.js"></script>
-	<script src="js/jquery.stellar.min.js"></script>
-	<script src="js/jquery.magnific-popup.min.js"></script>
-	<script src="js/aos.js"></script>
-	<script src="js/main.js"></script>
-
-
 	<!-- header -->
 	<%@ include file="./inc/header.jsp"%>
 	
-	<div class="site-wrap">
 	
+	
+	<div class="site-wrap">
 	<!-- 유저 정보 -->
 	<div class="container">
 				<div class="row">
@@ -88,17 +93,19 @@
 		</div>
 
 		<!-- 칭호 목록-->
-		<div class="site-section">
-			<div class="container">
-						<div class="title-scroll">
-							<c:forEach var="title" items="${titleList}">
-								<span>${title.title_name}</span><br>
-							</c:forEach>
-						</div>
-					</div>
+		<div id="fullpage">
+			<c:forEach var="title" items="${titleList}">
+				<section class="section">
+					<span>${title.title_name}</span><br>
+				</section>
+			</c:forEach>
 		</div>
 		
+		
+		
 	</div>
+
+
 
 	<!-- footer -->
 	<%@ include file="./inc/footer.jsp"%>

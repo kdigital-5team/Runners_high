@@ -132,6 +132,7 @@ a:hover {
 }
 
 /* 칭호 스크롤바 0810 */
+/*
 .title-scroll {
 	overflow: scroll;
 	width: 300px;
@@ -140,11 +141,17 @@ a:hover {
 	
 	-ms-overflow-style: none;
 }
-/* 기본 브라우저 스크롤바 양식 지우기
+
+기본 브라우저 스크롤바 양식 지우기
 .title-scroll::-webkit-scrollbar {
 	display: none;
 }
 */
+
+#fullpage {
+	width: 300px;
+	height: 150px;
+}
 .container {
 	text-align: center;
 }

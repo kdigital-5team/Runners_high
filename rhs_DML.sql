@@ -89,7 +89,7 @@ INSERT INTO title
 INSERT INTO user_title
             (title_acq, user_id, title_id)
         VALUES
-            (user_title_seq.NEXTVAL, 'test01', 1);
+            (user_title_seq.NEXTVAL, 'test01@gmail.com', 1);
 
 -- region
 INSERT INTO region values(region_seq.NEXTVAL,'지역무관', '지역무관', '지역무관');

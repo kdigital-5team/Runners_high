@@ -16,9 +16,16 @@
 	 
 	 <select id="getTitleByUserId" resultType="com.spring.dto.UserTitle">
 	 	SELECT user_id,
-	 		   title_id,
+	 		   title_id
 	 		FROM user_title
 	 			WHERE user_id = #{userId}
+	 </select>
+	 
+	 <select id="getTitlesByTitleId" parameterType="int" resultType="com.spring.dto.Title">
+	 	SELECT title_name,
+	 		   title_id
+	 		FROM title
+	 			WHERE title_id = #{titleId}
 	 </select>
 	 
 </mapper>

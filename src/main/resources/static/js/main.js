@@ -1,3 +1,16 @@
+$(function(){
+
+	$('#fullpage').fullpage({
+		//options here
+		
+		autoScrolling:true,
+		scrollHorizontally: true,
+		navigation:true,
+		navigationPosition: 'right'
+	});
+
+});
+ 
  AOS.init({
  	duration: 800,
  	easing: 'slide',

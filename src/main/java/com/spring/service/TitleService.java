@@ -24,4 +24,7 @@ public class TitleService {
 		return titleMapper.getTitleByUserId(userId);
 	}
 
+	public List<Title> getTitlesByTitleId(int titleId) throws SQLException {
+		return titleMapper.getTitlesByTitleId(titleId);
+	}
 }

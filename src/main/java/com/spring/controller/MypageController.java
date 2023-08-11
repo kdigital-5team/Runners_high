@@ -75,6 +75,7 @@ public class MypageController {
 			return "login";
 		}
 		
+		// 전체 칭호 조회
 		List<Title> titleList = titleService.getAllTitles();
 		System.out.println(titleList);
 		model.addAttribute("titleList", titleList);
@@ -82,9 +83,14 @@ public class MypageController {
 		User user = service.getUserByUserId(userId);
 		model.addAttribute("user", user);
 		
+		// 유저 타이틀 조회
 		UserTitle userTitle = titleService.getTitleByUserId(userId);
-		List<Title> userTitleList = titleService.getTitlesByTitleId(userTitle.getTitle_id());
+		System.out.println("유저가 가진 타이틀 : " + userTitle);
 		
+		// 유저 타이틀의 해당 타이틀 정보 출력
+		List<Title> userTitleList = titleService.getTitlesByTitleId(userTitle.getTitle_id());
+		System.out.println("해당 유저가 획득한 타이틀 정보 : " + userTitleList);
+		model.addAttribute("userTitleList", userTitleList);
 		
 		return "mypage_title";
 	}
