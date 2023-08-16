@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.spring.dto.AuthComment;
 import com.spring.dto.AuthLike;
+import com.spring.dto.AuthPicture;
 import com.spring.dto.Challenge;
 
 import com.spring.dto.ChallengePost;
@@ -246,5 +247,13 @@ boolean result = false;
 
 	public boolean deleteComment(int commentId) {
 		return mapper.deleteComment(commentId);
+	}
+
+	public boolean insertAuthPicture(AuthPicture authPicture) {
+		return mapper.insertAuthPicture(authPicture);
+	}
+
+	public String getImgbyAuthId(int auth_id) {
+		return mapper.getImgbyAuthId(auth_id);
 	}
 }

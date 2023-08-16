@@ -291,6 +291,12 @@
 						where auth_id=#{auth_id})
 	</select>
 	
+	<select id="getImgbyAuthId" resultType="string">
+		SELECT auth_pic_uuid
+		FROM auth_picture
+		WHERE auth_id=#{auth_id}
+	</select>
+	
 	<select id="getPostByUserandChall" resultType="com.spring.dto.ChallengePost" >
 		SELECT chall_id, auth_id, auth_title, auth_date
 		FROM auth_post
@@ -310,8 +316,16 @@
 	
 	
 	<insert id="insertChallPost" parameterType="com.spring.dto.ChallengePost">
-	INSERT INTO auth_post (auth_id, chall_id, comment_id, auth_title, auth_cont, auth_date)
-	VALUES (POST_SEQ.nextval, #{chall_id}, #{comment_id, jdbcType=VARCHAR}, #{auth_title}, #{auth_cont}, SYSDATE)
+		INSERT INTO auth_post (auth_id, chall_id, comment_id, auth_title, auth_cont, auth_date)
+		VALUES (POST_SEQ.nextval, #{chall_id}, #{comment_id, jdbcType=VARCHAR}, #{auth_title}, #{auth_cont}, SYSDATE)
+		<selectKey resultType="int" keyProperty="auth_id">
+			SELECT POST_SEQ.CURRVAL AS auth_id FROM DUAL
+		</selectKey>
+	</insert>
+	
+	<insert id="insertAuthPicture" parameterType="com.spring.dto.AuthPicture">
+	INSERT INTO auth_picture (auth_pic_id, auth_id, auth_pic_uuid, auth_pic_date, auth_pic_title, auth_pic_path)
+	VALUES (auth_picture_seq.nextval, #{auth_id}, #{auth_pic_uuid, jdbcType=VARCHAR}, SYSDATE, #{auth_pic_title}, #{auth_pic_path})
 	</insert>
 	
 	<delete id="deletePostByAuthId" parameterType="com.spring.dto.ChallengePost">

@@ -19,6 +19,7 @@ DROP TABLE chall_route cascade constraint;
 DROP SEQUENCE title_seq;
 DROP SEQUENCE personal_feed_seq;
 DROP SEQUENCE feed_picture_seq;
+DROP SEQUENCE auth_picture_seq
 DROP SEQUENCE region_seq;
 DROP SEQUENCE race_seq;
 DROP SEQUENCE challenge_seq;
@@ -167,6 +168,11 @@ CREATE TABLE auth_comment (
     auth_comment_cont VARCHAR2(500 BYTE) NOT NULL
 );
 
+CREATE SEQUENCE auth_comment_seq
+    INCREMENT BY 1
+    START WITH 1
+    MINVALUE 1;
+
 ALTER TABLE auth_comment ADD CONSTRAINT auth_comment_pk PRIMARY KEY ( auth_comment_id );
 
 -- 인증 사진 테이블
@@ -179,6 +185,12 @@ CREATE TABLE auth_picture (
     auth_pic_path  VARCHAR2(300 BYTE) NOT NULL
 );
 
+CREATE SEQUENCE auth_picture_seq
+    INCREMENT BY 1
+    START WITH 1
+    MINVALUE 1;
+
+-- 인증 좋아요 테이블
 CREATE TABLE auth_like(
     auth_id        NUMBER(20) NOT NULL,
     user_id        VARCHAR2(30 BYTE) NOT NULL
@@ -201,8 +213,8 @@ CREATE TABLE user_chall (
 CREATE TABLE race (
     race_id       NUMBER(5) NOT NULL,
     region_id     NUMBER(5) NOT NULL,
-    race_org      VARCHAR2(50 BYTE),
-    race_name     VARCHAR2(50 BYTE) NOT NULL,
+    race_org      VARCHAR2(80 BYTE),
+    race_name     VARCHAR2(100 BYTE) NOT NULL,
     race_date     DATE NOT NULL,
     race_apply    DATE NOT NULL,
     race_deadline DATE NOT NULL,

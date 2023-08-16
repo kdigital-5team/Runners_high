@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>피드 작성</title>
+<title>인증글 작성</title>
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -13,8 +13,6 @@
 	href="https://fonts.googleapis.com/css?family=Nunito+Sans:200,300,400,700,900|Oswald:400,700">
 <link rel="stylesheet" href="../fonts/icomoon/style.css">
 
-
-<link rel="stylesheet" href="../static/css/form.css">
 <link rel="stylesheet" href="../static/css/bootstrap.min.css">
 <link rel="stylesheet" href="../static/css/jquery.fancybox.min.css">
 <link rel="stylesheet" href="../static/css/jquery-ui.css">
@@ -39,75 +37,41 @@
 </style>
 
 <body>
-
-		
-	<script type="text/javascript"
-		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a9fd4644a9a496749d0625dffe4286f8&libraries=services,clusterer,drawing"></script>
-	<script src="../static/js/jquery.min.js"></script>
-	<script src="../static/js/jquery-migrate-3.0.1.min.js"></script>
-	<script src="../static/js/jquery-ui.js"></script>
-	<script src="../static/js/popper.min.js"></script>
-	<script src="../static/js/bootstrap.min.js"></script>
-	<script src="../static/js/owl.carousel.min.js"></script>
-	<script src="../static/js/jquery.stellar.min.js"></script>
-	<script src="../static/js/jquery.fancybox.min.js"></script>
-	<script src="../static/js/aos.js"></script>
-	<script src="../static/js/main.js"></script>
-	<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-
 	<!-- header -->
 	<%@ include file="./inc/header.jsp"%>
-<div class="site-wrap-width">
-		<!-- 피드 / 챌린지 / 칭호 탭 -->
-		<%-- <div class="container">
-			<div class="row">
-				<div class="col-lg-12">
-					<div class="hero-wrap text-center" style=""
-						data-stellar-background-ratio="0.5">
-						<div class="hero-contents">
-							<p>
-								<a href="/mypage/feed"><strong>피드</strong></a> <span class="mx-2">|</span>
-								<a href="${chall_id}challengePost">인증게시판</a> <span class="mx-2">|</span> <a
-									href="/mypage/title">칭호</a> <span class="mx-2"></span>
-							</p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div> --%>
-		
-		
-		<!-- 피드 글 작성 -->
-		<div class="site-section"></div>
-		<div class="container" style="width:60%" >
+	<div class="site-wrap">		
+		<div class="container">
 			<div  class="container" style="text-align:center"><h2 class="form-h2">인증하기</h2></div>
-		        <form action='<c:url value='/challenge/${chall_id}/insertChallPost'/>'name= "regist_form" id="regist_form" method="post" enctype="multipart/form-data">					
-					<div class="form-group">	
-						<label for="auth_title">제목</label>					
-						<!-- <div style="display:table-cell; margin:auto; margin-top:5px;"> -->		                	
-		                	<input class="form-control" type="text" name="auth_title" id="auth_title" ><!-- style="width:600px; display:block;" -->
-	                	<!-- </div> -->
-	                	
+			<div class="post">	        
+		        <form action='<c:url value='/challenge/${chall_id}/insertChallPost'/>' name= "regist_form" id="regist_form" method="POST" enctype="multipart/form-data">					
+					<div class="form-group row">	
+						<label style="margin-left:20px; margin-top:15px; margin-right:19%;">제목</label>					
+						<div style="display:table-cell; margin:auto; margin-top:5px;">		                	
+		                	<input class="form-control" type="text" name="auth_title" id="auth_title" style="width:600px; display:block;">
+	                	</div>
+	                	<div class="form-group">
+							<label><input type="hidden" class="form-control" id="chall_id" name="chall_id" value=${chall_id}  readonly></label>
+						</div>
+	                	<button type="button" class="btn btn-dark" onclick="submit2();"  style="border; margin-left:205px; margin-right:20px; margin-top:5px;">
+	                		등록
+	                	</button>
+					</div>
+					<hr>
+					<div class="form-group">
+						<div style="vertical-align: middle; margin-left:41%">	
+				            <input type="file" name="auth_image" id="auth_image" onchange="setThumbnail(event);"/>
+						</div><br>
+						<div id="image_container"></div>
 					</div>
 					<div class="form-group">
-					<label><input type="hidden" class="form-control" id="chall_id" name="chall_id" value=${chall_id}  readonly></label>
-					
-					</div>
-					 
-					<div class="form-group">
-					<label for="auth_cont">내용</label>	
-						<!-- <div style="display:table-cell; width:50%; vertical-align: middle; margin-right:10px;"> -->
-							<textarea class="form-control" type="text" name="auth_cont" id="auth_cont" style="height:600px"]></textarea>
-							<!-- rows="5" style="width:600px; display:block; margin: 0 auto;" -->
-						<!-- </div> -->
+						<div style="display:table-cell; width:50%; vertical-align: middle; margin-right:10px;">
+							<textarea class="form-control" name="auth_cont" id="auth_cont" rows="5" style="width:600px; display:block; margin: 0 auto;"></textarea>
+						</div>
 					</div>	
-					<div style="text-align:center; background-color:white;">		
-      					 <button type="button" class="btn btn-primary" onclick="submit2();" style="background-color:#FFDC3D; border:none;">등록하기</button>
-    				</div>
 				</form>
 			</div>
 		</div>
-		
+	</div>
 	<script type="text/javascript">
 	
 	var chall_id = null;
@@ -119,7 +83,7 @@
 	function submit2(){
 		Form=document.regist_form;
 		if(Form.auth_cont.value =="" || Form.chall_id.value==""  || Form.auth_title.value==""){
-		        alert("필수 입력란이 비었거나 입력 조건에 부합하지않습니다. 다시 확인해 주세요.");
+		    alert("필수 입력란이 비었거나 입력 조건에 부합하지않습니다. 다시 확인해 주세요.");
 		        
 		        
 		} else {
@@ -127,24 +91,21 @@
 
 		    }
 		};
+	
+	function setThumbnail(event){
+		var reader = new FileReader();
+		reader.onload = function(event){
+			var img = document.createElement("img");
+			img.setAttribute("src", event.target.result);
+			img.setAttribute("class", "col-lg-6");
+			document.querySelector("div#image_container").appendChild(img);
+		};
 		
-		
-	   function readURL(input) {
-	      var file = input.files[0] 
-	      console.log(file)
-	      if (file != '') {
-	         var reader = new FileReader();
-	         reader.readAsDataURL(file);
-	         reader.onload = function (e) { 
-		     console.log(e.target)
-			console.log(e.target.result)
-	           $('#preview').attr('src', e.target.result);
-	          }
-	      }
-	  }  
+		reader.readAsDataURL(event.target.files[0]);
+	}
+	   
 	</script>
 <!-- footer -->
 <%@ include file="./inc/footer.jsp"%>
-</body>
 </body>
 </html>

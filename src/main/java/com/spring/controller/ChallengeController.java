@@ -1,8 +1,10 @@
 package com.spring.controller;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
 
@@ -20,10 +22,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.spring.dto.AuthComment;
 import com.spring.dto.AuthLike;
+import com.spring.dto.AuthPicture;
 import com.spring.dto.Challenge;
 import com.spring.dto.ChallengePost;
 import com.spring.dto.ChallengeRegion;
@@ -398,6 +402,12 @@ public class ChallengeController {
 			String userId=(String)session.getAttribute("userId");
 			ChallengePost post = challService.getPostByAuthId(auth_id);
 			User authUser = challService.getUserbyAuthId(auth_id);
+			String imgURL = challService.getImgbyAuthId(auth_id);
+			
+			if(imgURL!=null || imgURL!="") {
+				model.addAttribute("imgURL", imgURL);
+			}
+			
 			List<AuthComment> commentList = challService.getAllComment(auth_id);
 			List<AuthLike> likeList = challService.getAllLike(auth_id);
 			for(AuthLike aLike:likeList) {
@@ -471,16 +481,35 @@ public class ChallengeController {
 	    }
 		
 		@RequestMapping(value="/challenge/{chall_id}/insertChallPost", method = RequestMethod.POST)
-		public String insertChallPost(@PathVariable int chall_id, @ModelAttribute ChallengePost challpost, Model model, HttpSession session) throws Exception {
+		public String insertChallPost(@PathVariable int chall_id, @ModelAttribute ChallengePost challpost, @RequestParam("auth_image") MultipartFile file, Model model, HttpSession session) throws Exception {
 			String userId = (String)session.getAttribute("userId");
 			boolean challPostResult = false;
 			boolean authNum = false;
-			System.out.println(challpost);
+			
+			// 파일 저장 위치 설정
+			String savePath = "C:\\images\\auth";
+			// UUID
+			String fileName = UUID.randomUUID().toString()+"_"+file.getOriginalFilename();
+			
+			if(!new File(savePath).exists()) {
+				new File(savePath).mkdir();
+			}
 		
 			try {
 				System.out.println(challpost);
 				challpost.setComment_id(userId);
 				challPostResult = challService.insertChallPost(challpost);
+				
+				file.transferTo(new File(savePath+"\\"+fileName));
+				System.out.println("인증글 id : " + challpost.getAuth_id());
+				
+				AuthPicture authPicture = new AuthPicture();
+				authPicture.setAuth_id(challpost.getAuth_id());
+				authPicture.setAuth_pic_path(savePath+"\\"+fileName);
+				authPicture.setAuth_pic_title(file.getOriginalFilename());
+				authPicture.setAuth_pic_uuid(fileName);
+				
+				boolean insertPicture = challService.insertAuthPicture(authPicture);
 				
 				if(challPostResult) {
 					System.out.println("등록완료");

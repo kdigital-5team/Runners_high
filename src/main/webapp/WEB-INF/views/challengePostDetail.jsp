@@ -61,38 +61,36 @@
 										
 									</div>
 									<hr>
-									
+									<c:if test="${imgURL ne null }">
+										<div class="post-description" style="min-height: 100px;">
+											<img alt="" src="/images/auth/${imgURL}">
+										</div>
+										<hr>
+									</c:if>
 									<!-- 피드 내용 -->
-									<div class="post-description">
+									<div class="post-description" style="min-height: 100px;">
 										${post.auth_cont}
 									</div>
 									<hr>
-									<div class="display-flex" id="like-post">
-										<div class="left-likes">
+									<div class="display-flex">
+										<div class="left-likes" id="like-post">
 											<c:choose>
 												<c:when test="${alreadyLike eq 'like' }">
-													<button type="button" onclick="dislike('${userId}','${auth_id}')">dislike</button>
+													<img alt="" src="../static/images/like.png" onclick="dislike('${userId}','${auth_id}')" style="width: 30px; cursor: pointer;">
 												</c:when>
 												<c:otherwise>
-													<button type="button" onclick="like('${userId}','${auth_id}')">Like</button>
+													<img alt="" src="../static/images/dislike.png" onclick="like('${userId}','${auth_id}')" style="width: 30px; cursor: pointer;">
 												</c:otherwise>
 											</c:choose>
 										</div>
-										<div class="left-likes-num">${likeNum}</div>
-										<div class="right-edit">
-											<button></button>
-										</div>
-										<div class="post-header">
+										<div class="left-likes-num" id="like-num">${likeNum}</div>
+										<div class="post-header" style="margin-left: auto;">
 											<img  src="/images/${authUser.user_pic}" alt="Profile Picture">
 											<span class="username">${authUser.nickname} | <fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${post.auth_date}"/></span>
 										</div>
 									</div>
 							        
 							      </div>	
-					
-					<div style="text-align:center">
-
-					</div>
 					</form>
 					<hr>
 					<div class="context-form">
@@ -199,6 +197,7 @@
 			})
 			.success(function(result){
 				$('#like-post').load(location.href+' #like-post');
+				$('#like-num').load(location.href+' #like-num');
 			})
 		}
 	}
@@ -210,6 +209,7 @@
 			})
 			.success(function(result){
 				$('#like-post').load(location.href+' #like-post');
+				$('#like-num').load(location.href+' #like-num');
 			})
 	}
 	

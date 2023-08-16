@@ -8,6 +8,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 
 import com.spring.dto.AuthComment;
 import com.spring.dto.AuthLike;
+import com.spring.dto.AuthPicture;
 import com.spring.dto.Challenge;
 
 import com.spring.dto.ChallengePost;
@@ -109,5 +110,9 @@ public interface ChallengeMapper {
 	public boolean deletePostLike(String authId, String userId);
 
 	public boolean deleteComment(int commentId);
+
+	public boolean insertAuthPicture(AuthPicture authPicture);
+
+	public String getImgbyAuthId(int auth_id);
 
 }
