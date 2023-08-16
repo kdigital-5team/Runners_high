@@ -13,7 +13,6 @@
 		href="https://fonts.googleapis.com/css?family=Nunito+Sans:200,300,400,700,900|Oswald:400,700">
 		
 	<link rel="stylesheet" href="../static/css/style2.css">
-	<link rel="stylesheet" href="../static/css/jquery.fullPage.css">
 	
 	<link rel="stylesheet" href="../fonts/icomoon/style.css">
 	<link rel="stylesheet" href="../static/css/bootstrap.min.css">
@@ -28,8 +27,6 @@
 	<link rel="stylesheet" href="../static/fonts/flaticon/font/flaticon.css">
 	<link rel="stylesheet" href="../static/css/aos.css">
 
-	<script src="https://code.jquery.com/jquery-3.4.1.js" ></script>
-	<script src="../static/js/jquery.fullPage.js"></script>
 	<script src="../static/js/main.js"></script>
 	
 	<script src="../static/js/jquery.min.js"></script>
@@ -93,16 +90,56 @@
 		</div>
 
 		<!-- 칭호 목록-->
-		<div id="fullpage">
-			<c:forEach var="title" items="${titleList}">
-				<section class="section">
-					<span>${title.title_name}</span><br>
-				</section>
-			</c:forEach>
+		<div class="title-scroll">
+		    <c:forEach var="title" items="${titleList}">
+		        <section class="section">
+		            <c:choose>
+		                <c:when test="${userTitleList.contains(title)}">
+							<div class="userTitleWrapper">
+			                    <span class="userTitle">${title.title_name}</span><br>
+								<div class="titleCondition">
+									<c:choose>
+										<c:when test="${title.title_complt != 0}">
+											완료 챌린지 ${title.title_complt}번
+										</c:when>
+										<c:when test="${title.title_reg != 0}">
+											챌린지 등록 ${title.title_reg}번
+										</c:when>
+										<c:when test="${title.title_likes != 0}">
+											좋아요 ${title.title_likes}개
+										</c:when>
+										<c:otherwise>
+											러너스 하이 가입
+										</c:otherwise>
+									</c:choose>
+								</div>							
+							</div>		                
+		                </c:when>
+		                <c:otherwise>
+			                <div class="titleWrapper">
+				                    <span class="title">${title.title_name}</span><br>
+									<div class="titleCondition">
+										<c:choose>
+											<c:when test="${title.title_complt != 0}">
+												완료 챌린지 ${title.title_complt}번
+											</c:when>
+											<c:when test="${title.title_reg != 0}">
+												챌린지 등록 ${title.title_reg}번
+											</c:when>
+											<c:when test="${title.title_likes != 0}">
+												좋아요 ${title.title_likes}개
+											</c:when>
+											<c:otherwise>
+												러너스 하이 가입
+											</c:otherwise>
+										</c:choose>
+									</div>							
+								</div>		   				
+		                </c:otherwise>
+		            </c:choose>
+		        </section>
+		    </c:forEach>
 		</div>
-		
-		
-		
 	</div>
 
 
