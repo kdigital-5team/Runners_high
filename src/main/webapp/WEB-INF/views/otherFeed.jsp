@@ -65,7 +65,7 @@
 							<p>
 								<a href="#"><strong>피드</strong></a> <span class="mx-2">|</span>
 								<a href="/otherChall/${user.user_id}">참여 챌린지</a> <span class="mx-2">|</span> 
-								<a href="/mypage/title">칭호</a> <span class="mx-2"></span>
+								<a href="/otherTitle/${user.user_id}">칭호</a> <span class="mx-2"></span>
 							</p>
 						</div>
 					</div>

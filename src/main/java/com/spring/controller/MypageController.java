@@ -7,6 +7,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -87,8 +88,11 @@ public class MypageController {
 		UserTitle userTitle = titleService.getTitleByUserId(userId);
 		System.out.println("유저가 가진 타이틀 : " + userTitle);
 		
-		// 유저 타이틀의 해당 타이틀 정보 출력
-		List<Title> userTitleList = titleService.getTitlesByTitleId(userTitle.getTitle_id());
+		// 유저 타이틀 정보 조회
+		List<Title> userTitleList = new ArrayList<Title>();
+		if(userTitleList != null) {
+			userTitleList = titleService.getTitlesByTitleId(userTitle.getTitle_id());
+		}
 		System.out.println("해당 유저가 획득한 타이틀 정보 : " + userTitleList);
 		model.addAttribute("userTitleList", userTitleList);
 		
