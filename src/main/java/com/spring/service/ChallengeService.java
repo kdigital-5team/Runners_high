@@ -7,6 +7,9 @@ import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.spring.dto.AuthComment;
+import com.spring.dto.AuthLike;
+import com.spring.dto.AuthPicture;
 import com.spring.dto.Challenge;
 
 import com.spring.dto.ChallengePost;
@@ -192,9 +195,9 @@ boolean result = false;
 		return mapper.getUserChallbyUserId(userId);
 	}
 
-	public boolean deletePostByAuthId(int auth_id) {
+	public boolean deletePostByAuthId(int auth_id, String userId) {
 		
-		return mapper.deletePostByAuthId(auth_id);
+		return mapper.deletePostByAuthId(auth_id, userId);
 	}
 
 	public boolean updateAuthNum(String userId, int chall_id) {
@@ -207,5 +210,62 @@ boolean result = false;
 
 	public String getUserByChallIdAndUserId(String userId, int chall_id) {
 		return mapper.getUserByChallIdAndUserId(userId, chall_id);
+	}
+
+	public void deleteAuthNum(String userId, int chall_id) {
+		mapper.deleteAuthNum(userId, chall_id);
+		
+	}
+
+	public boolean updatePost(ChallengePost challpost, int authId) {
+		return mapper.updatePost(challpost, authId);
+	}
+
+	public boolean insertComment(AuthComment authComment) {
+		return mapper.insertComment(authComment);
+	}
+
+	public List<AuthComment> getAllComment(int auth_id) {
+		return mapper.getAllComment(auth_id);
+	}
+
+	public User getUserbyAuthId(int auth_id) {
+		return mapper.getUserbyAuthId(auth_id);
+	}
+
+	public boolean insertPostLike(String authId, String userId) {
+		return mapper.insertPostLike(authId, userId);
+	}
+
+	public List<AuthLike> getAllLike(int auth_id) {
+		return mapper.getAllLike(auth_id);
+	}
+
+	public boolean deletePostLike(String authId, String userId) {
+		return mapper.deletePostLike(authId, userId);
+	}
+
+	public boolean deleteComment(int commentId) {
+		return mapper.deleteComment(commentId);
+	}
+
+	public boolean insertAuthPicture(AuthPicture authPicture) {
+		return mapper.insertAuthPicture(authPicture);
+	}
+
+	public AuthPicture getImgbyAuthId(int auth_id) {
+		return mapper.getImgbyAuthId(auth_id);
+	}
+
+	public boolean deletePicbyAuthId(int authId) {
+		return mapper.deletePicbyAuthId(authId);
+	}
+
+	public void deleteAuthComment(int authId) {
+		mapper.deleteAuthComment(authId);
+	}
+
+	public void deleteAuthLike(int authId) {
+		mapper.deleteAuthLike(authId);
 	}
 }

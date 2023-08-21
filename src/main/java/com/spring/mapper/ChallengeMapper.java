@@ -6,6 +6,9 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.scheduling.annotation.Scheduled;
 
+import com.spring.dto.AuthComment;
+import com.spring.dto.AuthLike;
+import com.spring.dto.AuthPicture;
 import com.spring.dto.Challenge;
 
 import com.spring.dto.ChallengePost;
@@ -82,12 +85,40 @@ public interface ChallengeMapper {
 
 	public List<UserChallenge> getUserChallbyUserId(String userId);
 
-	public boolean deletePostByAuthId(int auth_id);
+	public boolean deletePostByAuthId(int auth_id, String userId);
 
 	public boolean updateAuthNum(String userId, int chall_id);
 
 	public List<ChallengePost> getPostByUserandChall(String userId, int challId);
 
 	public String getUserByChallIdAndUserId(String userId, int chall_id);
+
+	public void deleteAuthNum(String userId, int chall_id);
+
+	public boolean updatePost(ChallengePost challpost, int authId);
+
+	public boolean insertComment(AuthComment authComment);
+
+	public List<AuthComment> getAllComment(int auth_id);
+
+	public User getUserbyAuthId(int auth_id);
+
+	public boolean insertPostLike(String authId, String userId);
+
+	public List<AuthLike> getAllLike(int auth_id);
+
+	public boolean deletePostLike(String authId, String userId);
+
+	public boolean deleteComment(int commentId);
+
+	public boolean insertAuthPicture(AuthPicture authPicture);
+
+	public AuthPicture getImgbyAuthId(int auth_id);
+
+	public boolean deletePicbyAuthId(int authId);
+
+	public void deleteAuthComment(int authId);
+
+	public void deleteAuthLike(int authId);
 
 }

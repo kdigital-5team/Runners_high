@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ page trimDirectiveWhitespaces="true" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -101,7 +102,7 @@
 		</div>
 
 		<div style="margin: auto; width: 80%;">챌린지 소개</div>
-		<div style="margin: auto; width: 80%; height: 300px; background-color: #F0F0F0; padding:15px" >
+		<div style="margin: auto; width: 80%; height: auto; background-color: #F0F0F0; padding:15px; white-space: pre;" >
 			<span style="margin: 2%; font-size: 15px"><b>${challenge.chall_intro }</b></span>
 		</div>
 

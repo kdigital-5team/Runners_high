@@ -240,7 +240,7 @@
  			 										#{region_id},
  			 											#{chall_sit},
  			 												#{chall_online},
- 			 													#{chall_all_auth},
+ 			 													(#{chall_end_date}-#{chall_start_date})/7*#{chall_week_auth},
  			 														#{chall_week_auth},
  			 															#{race_id})
 			<selectKey keyProperty="chall_id" resultType="int">
@@ -274,11 +274,26 @@
 		SELECT chall_id, auth_id, auth_title, auth_date
 		FROM auth_post
 		WHERE chall_id=#{chall_id}
+		ORDER BY auth_date DESC
 	</select>
 	
 	<select id="getPostByAuthId" resultType="com.spring.dto.ChallengePost">
-		SELECT auth_title, auth_cont, chall_id
+		SELECT auth_title, auth_cont, chall_id, comment_id, auth_id, auth_date
 		FROM auth_post
+		WHERE auth_id=#{auth_id}
+	</select>
+	
+	<select id="getUserbyAuthId" resultType="com.spring.dto.User">
+		SELECT nickname, user_pic
+		FROM rh_user
+		WHERE user_id=(select comment_id
+						from auth_post
+						where auth_id=#{auth_id})
+	</select>
+	
+	<select id="getImgbyAuthId" resultType="com.spring.dto.AuthPicture">
+		SELECT auth_pic_uuid, auth_pic_title
+		FROM auth_picture
 		WHERE auth_id=#{auth_id}
 	</select>
 	
@@ -301,20 +316,45 @@
 	
 	
 	<insert id="insertChallPost" parameterType="com.spring.dto.ChallengePost">
-	INSERT INTO auth_post (auth_id, chall_id, comment_id, auth_title, auth_cont, auth_date)
-	VALUES (POST_SEQ.nextval, #{chall_id}, #{comment_id, jdbcType=VARCHAR}, #{auth_title}, #{auth_cont}, SYSDATE)
+		INSERT INTO auth_post (auth_id, chall_id, comment_id, auth_title, auth_cont, auth_date)
+		VALUES (POST_SEQ.nextval, #{chall_id}, #{comment_id, jdbcType=VARCHAR}, #{auth_title}, #{auth_cont}, SYSDATE)
+		<selectKey resultType="int" keyProperty="auth_id">
+			SELECT POST_SEQ.CURRVAL AS auth_id FROM DUAL
+		</selectKey>
 	</insert>
+	
+	<insert id="insertAuthPicture" parameterType="com.spring.dto.AuthPicture">
+	INSERT INTO auth_picture (auth_pic_id, auth_id, auth_pic_uuid, auth_pic_date, auth_pic_title, auth_pic_path)
+	VALUES (auth_picture_seq.nextval, #{auth_id}, #{auth_pic_uuid, jdbcType=VARCHAR}, SYSDATE, #{auth_pic_title}, #{auth_pic_path})
+	</insert>
+	
+	<delete id="deleteAuthComment" parameterType="com.spring.dto.AuthComment">
+		DELETE auth_comment
+		WHERE auth_id=#{authId}
+	</delete>
+	
+	<delete id="deleteAuthLike" parameterType="com.spring.dto.AuthLike">
+		DELETE auth_like
+		WHERE auth_id=#{authId}
+	</delete>
+	
+	<delete id="deletePicbyAuthId" parameterType="com.spring.dto.AuthPicture">
+		DELETE auth_picture
+		WHERE auth_id=#{authId}
+	</delete>
 	
 	<delete id="deletePostByAuthId" parameterType="com.spring.dto.ChallengePost">
 	DELETE auth_post
-	WHERE auth_id=#{auth_id}
+	WHERE auth_id=#{auth_id} and comment_id = #{userId}
 	</delete>
 	
-	<update id="updateChallPost" parameterType="com.spring.dto.ChallengePost">
+	
+	
+	<update id="updatePost" parameterType="com.spring.dto.ChallengePost">
 	UPDATE auth_post
-	SET auth_title=#{auth_title, jdbcType=VARCHAR},
-		auth_cont=#{auth_cont, jdbcType=VARCHAR}
-	WHERE auth_id=#{auth_id}
+	SET auth_title=#{challpost.auth_title, jdbcType=VARCHAR},
+		auth_cont=#{challpost.auth_cont, jdbcType=VARCHAR}
+	WHERE auth_id=#{authId}
 	</update>
 
  	<update id="updateChallenge" 
@@ -334,6 +374,39 @@
 				
 			WHERE chall_id=#{chall_id}
 	</update>
+	
+	<insert id="insertComment" parameterType="com.spring.dto.AuthComment">
+	INSERT INTO auth_comment (auth_comment_id, auth_id, user_id, auth_comment_date, auth_comment_cont)
+	VALUES (auth_comment_seq.nextval, #{auth_id}, #{user_id}, SYSDATE, #{auth_comment_cont})
+	</insert>
+	
+	<delete id="deleteComment" parameterType="com.spring.dto.AuthComment">
+		DELETE FROM auth_comment
+		WHERE auth_comment_id=#{commentId}
+	</delete>
+	
+	<select id="getAllComment" resultType="com.spring.dto.AuthComment" >
+		SELECT auth_comment_id, auth_id, auth_comment.user_id, auth_comment_date, auth_comment_cont, user_pic, nickname
+		FROM auth_comment, rh_user
+		WHERE auth_id = #{auth_id} and auth_comment.user_id = rh_user.user_id
+		ORDER BY auth_comment_date DESC
+	</select>
+	
+	<insert id="insertPostLike" parameterType="com.spring.dto.AuthLike">
+		INSERT INTO auth_like (auth_id, user_id)
+		VALUES (#{authId}, #{userId})
+	</insert>
+	
+	<delete id="deletePostLike" parameterType="com.spring.dto.AuthLike">
+		DELETE FROM auth_like
+		WHERE auth_id=#{authId} and user_id=#{userId}
+	</delete>
+	
+	<select id="getAllLike" resultType="com.spring.dto.AuthLike" >
+		SELECT auth_id, user_id
+		FROM auth_like
+		WHERE auth_id = #{auth_id}
+	</select>
 	
 	<update id="updateChallSit">
 		update challenge
@@ -389,6 +462,12 @@
 	<update id="updateAuthNum" parameterType="com.spring.dto.UserChallenge">
 	UPDATE user_chall
 	SET chall_auth_num=chall_auth_num+1
+	WHERE user_id = #{userId} and chall_id = #{chall_id}
+	</update>
+	
+	<update id="deleteAuthNum" parameterType="com.spring.dto.UserChallenge">
+	UPDATE user_chall
+	SET chall_auth_num=chall_auth_num-1
 	WHERE user_id = #{userId} and chall_id = #{chall_id}
 	</update>
 
