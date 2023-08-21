@@ -1,0 +1,165 @@
+	<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>피드 작성</title>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css?family=Nunito+Sans:200,300,400,700,900|Oswald:400,700">
+<link rel="stylesheet" href="/static/fonts/icomoon/style.css">
+
+<link rel="stylesheet" href="/static/css/bootstrap.min.css">
+<link rel="stylesheet" href="/static/css/jquery.fancybox.min.css">
+<link rel="stylesheet" href="/static/css/jquery-ui.css">
+<link rel="stylesheet" href="/static/css/owl.carousel.min.css">
+<link rel="stylesheet" href="/static/css/owl.theme.default.min.css">
+<link rel="stylesheet" href="/static/css/animate.css">
+<link rel="stylesheet" href="/static/css/image_crop.css">
+<link rel="stylesheet" href="/static/css/popup.css">
+<link rel="stylesheet" href="/static/css/feed.css">
+<link rel="stylesheet" href="/static/fonts/flaticon/font/flaticon.css">
+<link rel="stylesheet" href="/static/css/aos.css">
+<link rel="stylesheet" href="/static/css/style2.css">
+</head>
+
+<!-- 글쓰기 박스 css -->
+<style>
+	div#editor {
+    	padding: 4px 6px;
+        border: 1px solid #D6D6D6;
+        border-radius: 4px;
+    }
+</style>
+
+<body>
+	<div class="site-wrap">
+
+		<!-- header -->
+		<%@ include file="./inc/header.jsp"%>
+		
+		<div class="container">
+				<div class="row">
+					<div class="display-flex" style=" text-align: center; margin-left:30%">
+						<div class="post" style="border:none; float:left;">
+							<div class="post-header2">
+								<img src="/static/images/${user.user_pic}" alt="Profile Picture">									
+							</div>
+						</div>
+						<form action="/mypage/feed" enctype="multipart/form-data" method="POST">					
+							<div class="post" style="border:none; float:middle; margin-top:15%; width:200px">
+								<div class="username">${user.nickname}</div>
+								<div class="userIntro">${user.intro}</div>
+							</div>
+						</form>	
+						<div onclick="location.href='/mypage/edit'" style="border:none; float:right; margin-top:12%;">
+							<button class="btn btn-dark">프로필 수정</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		
+		<!-- 피드 / 챌린지 / 칭호 탭 -->
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="hero-wrap text-center" style=""
+						data-stellar-background-ratio="0.5">
+						<div class="hero-contents">
+							<p>
+								<a href="/mypage/feed"><strong>피드</strong></a> <span class="mx-2">|</span>
+								<a href="/mypage/chall">참여 챌린지</a> <span class="mx-2">|</span> <a
+									href="/mypage/title">칭호</a> <span class="mx-2"></span>
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<!-- 피드 글 작성 -->
+		<div class="container">
+			<div class="post">	        
+		        <form action='<c:url value='/mypage/feed/${feed.feed_id}/modify'/>' method="POST" enctype="multipart/form-data">					
+					<div class="form-group row">	
+						<label style="margin-left:20px; margin-top:15px; margin-right:19%;">제목</label>					
+						<div style="display:table-cell; margin:auto; margin-top:5px;">		                	
+		                	<input class="form-control" type="text" name="feed_title" style="width:600px; display:block;" value= "${feed.feed_title}">
+	                	</div>
+	                	<button type="submit" class="btn btn-dark" name ="user_id" value= ${user.user_id}  style="border; margin-left:205px; margin-right:20px; margin-top:5px;">
+	                		등록</button>
+					</div>
+					<hr>
+					<div class="form-group">
+						<div style="height: 150px; width: 200px; vertical-align: middle;  margin-bottom:10%; margin-left:41%">	
+							
+				            <input type="file" name="file" onchange="readURL(this);"/>
+					    <c:if test="${feed.feed_id eq picture.feed_id}">
+					    	<a>${picture.feed_pic_title}</a><img id="preview" src="/images/${picture.feed_pic_title}" width=250 height=150 alt="${picture.feed_pic_title}" style="align-content: flex-end; " onchange="setDetailImage(event);">
+						</c:if>
+						</div>
+					</div>
+					<div class="form-group">
+						<div style="display:table-cell; width:50%; vertical-align: middle; margin-right:10px;">
+							<textarea class="form-control" name="feed_cont" rows="5" style="width:600px; display:block; margin: 0 auto;">${feed.feed_cont}</textarea>
+						</div>
+					</div>	
+				</form>
+			</div>
+		</div>
+	
+	
+	<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+	<script type="text/javascript">
+
+	<!-- 사진 첨부용 자바 스크립트 -->
+	   function readURL(input) {
+	      var file = input.files[0] 
+	      console.log(file)
+	      if (file != '') {
+	         var reader = new FileReader();
+	         reader.readAsDataURL(file);
+	         reader.onload = function (e) { 
+		     console.log(e.target)
+			console.log(e.target.result)
+	           $('#preview').attr('src', e.target.result);
+	          }
+	      }
+	  }  
+	
+	<!-- 이미지 미리보기 -->
+	
+	function setThumbnail(event){
+		var reader = new FileReader();
+		
+		reader.onload = function(event){
+			var img = document.createElement("img");
+			img.setAttribute("src", evenwwwwwwwwwwwwwwwwt.target.result);
+			img.setAttribute("class", "col-lg-6");
+			document.querySelector("div#image_container").appendChild(img);
+		};
+		
+		reader.readAsDataURL(event.target.files[0]);
+	}
+	</script>
+	<!-- footer -->
+	<%@ include file="./inc/footer.jsp"%>
+
+	<script src="/js/jquery.min.js"></script>
+	<script src="/js/jquery-migrate-3.0.1.min.js"></script>
+	<script src="/js/jquery-ui.js"></script>
+	<script src="/js/popper.min.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+	<script src="/js/owl.carousel.min.js"></script>
+	<script src="/js/jquery.stellar.min.js"></script>
+	<script src="/js/jquery.magnific-popup.min.js"></script>
+	<script src="/js/aos.js"></script>
+
+	<script src="/js/main.js"></script>
+
+</body>
+</html>

@@ -17,4 +17,8 @@ public interface FeedMapper {
 
 	public int deleteFeedByFeedId(int feed_id) throws SQLException;
 
+	public PersonalFeed getFeedByFeedId(int feed_id) throws SQLException;
+
+	public int updateFeed(PersonalFeed pf) throws SQLException;
+
 }

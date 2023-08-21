@@ -556,7 +556,7 @@ public class ChallengeController {
 			return "index";
 		}
 		
-		@RequestMapping(value = "/challenge/delete/{chall_id}", method = RequestMethod.GET)
+		@RequestMapping(value = "/challenge/delete/{chall_id}", method = RequestMethod.POST)
 		String deleteChallbyChallId(@PathVariable int chall_id, HttpSession session) {
 			String userId = (String) session.getAttribute("userId");
 			User host = challService.getHostByChallId(chall_id);
@@ -675,6 +675,16 @@ public class ChallengeController {
 			
 			else
 				return "redirect:/challenge";
+		}
+		@RequestMapping(value = "/challenge/edit/{chall_id}", method = RequestMethod.GET)
+		public String editChall(Model model, HttpSession session, RedirectAttributes rttr) throws Exception {
+			List<String> stateList = service.getAllState();
+			String userId = (String) session.getAttribute("userId");
+			List<ChallengeRegion> userChall = challService.getChallByUserId(userId);
+			System.out.println(userChall);
+			model.addAttribute("stateList",stateList);
+			model.addAttribute("userChall", userChall);
+			return "editChall";
 		}
 
 }

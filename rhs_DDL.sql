@@ -1,4 +1,3 @@
--- 테이블 초기화
 DROP TABLE rh_user cascade constraint;
 DROP TABLE title cascade constraint;
 DROP TABLE user_title cascade constraint;
@@ -201,8 +200,8 @@ CREATE TABLE user_chall (
 CREATE TABLE race (
     race_id       NUMBER(5) NOT NULL,
     region_id     NUMBER(5) NOT NULL,
-    race_org      VARCHAR2(50 BYTE),
-    race_name     VARCHAR2(50 BYTE) NOT NULL,
+    race_org      VARCHAR2(80 BYTE),
+    race_name     VARCHAR2(100 BYTE) NOT NULL,
     race_date     DATE NOT NULL,
     race_apply    DATE NOT NULL,
     race_deadline DATE NOT NULL,

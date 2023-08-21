@@ -50,5 +50,10 @@
  				feed_pic_uuid	
  		FROM feed_picture  		
  	</select>	
+ 	
+ 	<delete id="deleteFeedPicture">
+ 		DELETE FROM feed_picture
+ 		WHERE feed_id = #{feed_id}
+ 	</delete>
 
  </mapper>

@@ -12,5 +12,10 @@ public interface FeedService {
 	
 	public boolean insertFeed(PersonalFeed pf) throws SQLException, Exception;
 
-	public boolean deleteFeedByFeedId(int feed_id) throws SQLException, Exception;
+	public PersonalFeed getFeedByFeedId(int feed_id) throws SQLException, Exception;
+
+	public boolean updateFeed(PersonalFeed pf) throws SQLException, Exception;
+
+	boolean deleteFeedByFeedId(int feed_id) throws SQLException, Exception;
+
 }

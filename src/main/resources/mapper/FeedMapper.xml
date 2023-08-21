@@ -16,6 +16,16 @@
  		ORDER BY feed_id DESC
  	</select>
  	
+ 	 <select id="getFeedByFeedId" resultType="com.spring.dto.PersonalFeed">
+ 		SELECT 	feed_id,
+				user_id,
+				feed_title,
+				feed_cont,	
+				feed_writing_date		
+ 		FROM personal_feed
+ 		WHERE feed_id = #{feed_id}
+ 	</select>
+ 	
  	<!-- 작성 -->
 	<insert id="insertFeed" parameterType="com.spring.dto.PersonalFeed">
 	  	INSERT INTO personal_feed(feed_id,
@@ -49,4 +59,14 @@
  		DELETE FROM personal_feed
  		WHERE feed_id = #{feed_id}
  	</delete>
+ 	
+ 	<update id="updateFeed" parameterType="com.spring.dto.PersonalFeed">
+	  	UPDATE personal_feed
+	  	SET
+	  		user_id = #{user_id},
+	  			feed_title = #{feed_title},
+	  				feed_cont = #{feed_cont},	
+	  					feed_writing_date = SYSDATE
+		WHERE feed_id = #{feed_id}
+	</update>
  </mapper>
