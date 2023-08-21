@@ -7,6 +7,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -29,9 +30,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.spring.dto.Challenge;
 import com.spring.dto.ChallengeRegion;
+import com.spring.dto.Title;
 import com.spring.dto.User;
 import com.spring.dto.UserChallenge;
+import com.spring.dto.UserTitle;
 import com.spring.service.ChallengeService;
+import com.spring.service.TitleService;
 import com.spring.service.UserService;
 
 @Controller
@@ -42,10 +46,13 @@ public class MypageController {
 	
 	@Autowired
 	ChallengeService challService;
-
 	
+	@Autowired
+	TitleService titleService;
+
+	// 참여 챌린지
 	@RequestMapping(value = "/mypage/chall", method = RequestMethod.GET)
-	public String mypage_chall(HttpSession session, Model model) throws Exception {
+	public String mypageChall(HttpSession session, Model model) throws Exception {
 		String userId =(String)session.getAttribute("userId");
 		if(userId == null || userId=="")
 			return "login";
@@ -58,10 +65,37 @@ public class MypageController {
 		model.addAttribute("myChallList", myChallList);
 		return "mypage_chall";
 	}
-
+	
+	// 칭호탭
 	@RequestMapping(value = "/mypage/title", method = RequestMethod.GET)
-	public String events() {
+	public String mypageTitle(HttpSession session, Model model) throws Exception {
 		System.out.println("title");
+		
+		String userId = (String) session.getAttribute("userId");
+		if(userId == null || userId=="") {
+			return "login";
+		}
+		
+		// 전체 칭호 조회
+		List<Title> titleList = titleService.getAllTitles();
+		System.out.println(titleList);
+		model.addAttribute("titleList", titleList);
+		
+		User user = service.getUserByUserId(userId);
+		model.addAttribute("user", user);
+		
+		// 유저 타이틀 조회
+		UserTitle userTitle = titleService.getTitleByUserId(userId);
+		System.out.println("유저가 가진 타이틀 : " + userTitle);
+		
+		// 유저 타이틀 정보 조회
+		List<Title> userTitleList = new ArrayList<Title>();
+		if(userTitleList != null) {
+			userTitleList = titleService.getTitlesByTitleId(userTitle.getTitle_id());
+		}
+		System.out.println("해당 유저가 획득한 타이틀 정보 : " + userTitleList);
+		model.addAttribute("userTitleList", userTitleList);
+		
 		return "mypage_title";
 	}
 

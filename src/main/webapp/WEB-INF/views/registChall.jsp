@@ -656,8 +656,7 @@ function submit2() {
         Form.chall_sit.value = chall_sit;
         Form.chall_online.value = chall_online;
         
-        alert (chall_category + "\n" + chall_sit + "\n" + chall_online
-        		);
+        // alert (chall_category + "\n" + chall_sit + "\n" + chall_online);
         
         document.regist_form.submit();
         return;

@@ -23,6 +23,7 @@ DROP SEQUENCE region_seq;
 DROP SEQUENCE race_seq;
 DROP SEQUENCE challenge_seq;
 DROP SEQUENCE post_seq;
+DROP SEQUENCE user_title_seq;
 
 
 -- 유저 테이블
@@ -61,6 +62,11 @@ CREATE TABLE user_title (
     user_id   VARCHAR2(30 BYTE) NOT NULL,
     title_id  NUMBER(10) NOT NULL
 );
+
+CREATE SEQUENCE user_title_seq
+        INCREMENT BY 1
+        START WITH 1
+        MINVALUE 1;
 
 ALTER TABLE user_title ADD CONSTRAINT user_title_pk PRIMARY KEY ( title_acq );
 

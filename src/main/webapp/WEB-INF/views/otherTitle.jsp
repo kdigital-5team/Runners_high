@@ -106,7 +106,7 @@
 											챌린지 등록 ${title.title_reg}번
 										</c:when>
 										<c:when test="${title.title_likes != 0}">
-											좋아요 ${title.title_likes}개
+											좋아요 ${title.title_likes}개 획득
 										</c:when>
 										<c:otherwise>
 											러너스 하이 가입
@@ -127,7 +127,7 @@
 												챌린지 등록 ${title.title_reg}번
 											</c:when>
 											<c:when test="${title.title_likes != 0}">
-												피드 좋아요 ${title.title_likes}개 획득
+												좋아요 ${title.title_likes}개
 											</c:when>
 											<c:otherwise>
 												러너스 하이 가입
