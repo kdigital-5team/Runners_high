@@ -109,7 +109,7 @@
 			<span>나의 인증률</span>
 			<div>
 				<div style="text-align: center; width: 100%; height: 150px;">
-					${myUC.chall_auth_num/chall.chall_all_auth*100}%
+					<fmt:formatNumber value = "${myUC.chall_auth_num/chall.chall_all_auth*100}" pattern=".00"/>%
 					<div style="width: 75%; background-color: #BDFFAD; height: 25px; position: relative; margin: auto;">
 						<div style="width: ${myUC.chall_auth_num/chall.chall_all_auth*100}%; background-color: #32FF00; height: 25px; position: relative;">
 					</div>
@@ -121,7 +121,7 @@
 			<span>전체 인증률</span>
 			<div>
 				<div style="text-align: center; width: 100%; height: 150px;">
-					${avgAuth/chall.chall_all_auth*100}%
+					<fmt:formatNumber value = "${avgAuth/chall.chall_all_auth*100}" pattern=".00"/>%
 					<div style="width: 75%; background-color: #BDFFAD; height: 25px; position: relative; margin: auto;">
 						<div style="width: ${avgAuth/chall.chall_all_auth*100}%; background-color: #32FF00; height: 25px; position: relative;">
 					</div>

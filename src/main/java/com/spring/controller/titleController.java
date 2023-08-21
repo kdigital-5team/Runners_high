@@ -13,7 +13,7 @@ public class titleController {
 	TitleService service;
 
 	// 칭호 자동 부여
-	public String updateUserTitle()  {
+//	public String updateUserTitle()  {
 		// 회원가입 칭호
 		
 		// 챌린지 등록 수
@@ -23,7 +23,7 @@ public class titleController {
 		// 완료 챌린지 수
 		
 		
-	}
+//	}
 	
 	// 주기 설정
 	/*
