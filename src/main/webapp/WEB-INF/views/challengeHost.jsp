@@ -147,7 +147,7 @@
 					</div>
 				</div>
 				<div style="text-align: center; width: 70%; float: right; height: 150px;">
-					${par.chall_auth_num/challenge.chall_all_auth*100}%
+					<fmt:formatNumber value = "${par.chall_auth_num/challenge.chall_all_auth*100}" pattern=".00"/>%
 					<div style="width: 75%; background-color: #BDFFAD; height: 25px; position: relative; margin: auto;">
 						<div style="width: ${par.chall_auth_num/challenge.chall_all_auth*100}%; background-color: #32FF00; height: 25px; position: relative;">
 					</div>
