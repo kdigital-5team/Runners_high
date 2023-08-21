@@ -1,6 +1,7 @@
 package com.spring.controller;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -397,15 +398,16 @@ public class ChallengeController {
 			return "challengePost";
 		}
 
+		// 인증글 상세 보기
 		@RequestMapping(value = "/challenge/challPostDetail{auth_id}", method = RequestMethod.GET)
 		public String getPostByAuthId(@PathVariable int auth_id,  Model model, HttpSession session) {
 			String userId=(String)session.getAttribute("userId");
 			ChallengePost post = challService.getPostByAuthId(auth_id);
 			User authUser = challService.getUserbyAuthId(auth_id);
-			String imgURL = challService.getImgbyAuthId(auth_id);
+			AuthPicture pic = challService.getImgbyAuthId(auth_id);
 			
-			if(imgURL!=null || imgURL!="") {
-				model.addAttribute("imgURL", imgURL);
+			if(pic!=null) {
+				model.addAttribute("pic", pic);
 			}
 			
 			List<AuthComment> commentList = challService.getAllComment(auth_id);
@@ -425,10 +427,15 @@ public class ChallengeController {
 			return "challengePostDetail";
 		}
 		
+		//인증글 수정폼
 		@RequestMapping(value = "/modifyPost/{auth_id}")
 		public String updateChallPostForm(@PathVariable int auth_id,
 									Model model) {
 			ChallengePost post = challService.getPostByAuthId(auth_id);
+			AuthPicture pic = challService.getImgbyAuthId(auth_id);
+			
+			if(pic!=null)
+				model.addAttribute("pic", pic);
 			
 			model.addAttribute("post", post);
 			
@@ -437,8 +444,61 @@ public class ChallengeController {
 		//수정
 		@RequestMapping(value = "/updatePost/{authId}", method = RequestMethod.POST)
 		public String updateChallPost(@PathVariable int authId, 
-									@ModelAttribute ChallengePost challpost) {
-			
+									@ModelAttribute ChallengePost challpost,
+									@RequestParam("auth_image") MultipartFile file
+									) {
+			// 첨부파일이 수정될 경우 기존 파일 삭제
+			AuthPicture pic = new AuthPicture();
+			String fileName = null;
+			if(!file.isEmpty()) {
+				pic = challService.getImgbyAuthId(authId);
+				if(pic==null) {
+					fileName = UUID.randomUUID().toString()+"_"+file.getOriginalFilename();
+					try {
+						file.transferTo(new File("C:\\images\\auth\\"+fileName));
+					} catch (IllegalStateException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					AuthPicture authPicture = new AuthPicture();
+					authPicture.setAuth_id(authId);
+					authPicture.setAuth_pic_path("C:\\images\\auth\\"+fileName);
+					authPicture.setAuth_pic_title(file.getOriginalFilename());
+					authPicture.setAuth_pic_uuid(fileName);
+					boolean insertPicture = challService.insertAuthPicture(authPicture);
+				}
+				else{
+					// 로컬 경로에서 파일 삭제
+					File delFile = new File("C:\\images\\auth\\"+pic.getAuth_pic_uuid());
+					boolean isDeleteFile = delFile.delete();
+					
+					// db에서 파일 데이터 삭제
+					boolean isDeleteDB = challService.deletePicbyAuthId(authId);
+					
+					if(isDeleteFile && isDeleteDB) {
+						fileName = UUID.randomUUID().toString()+"_"+file.getOriginalFilename();
+						try {
+							file.transferTo(new File("C:\\images\\auth\\"+fileName));
+						} catch (IllegalStateException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						AuthPicture authPicture = new AuthPicture();
+						authPicture.setAuth_id(authId);
+						authPicture.setAuth_pic_path("C:\\images\\auth\\"+fileName);
+						authPicture.setAuth_pic_title(file.getOriginalFilename());
+						authPicture.setAuth_pic_uuid(fileName);
+						boolean insertPicture = challService.insertAuthPicture(authPicture);
+					}
+						
+				}
+			}
 			boolean updateCheck = challService.updatePost(challpost, authId);
 			if(updateCheck)
 				return "redirect:/challenge";
@@ -447,16 +507,30 @@ public class ChallengeController {
 		}
 		
 		//삭제
-		@RequestMapping(value = "/challenge/deletepost/{auth_id}", method = RequestMethod.POST)
-		public String deletePostByAuthId(@PathVariable int auth_id, @RequestParam String chall_id, HttpSession session) {
+		@RequestMapping(value = "/challenge/deletepost/{authId}", method = RequestMethod.POST)
+		public String deletePostByAuthId(@PathVariable int authId, @RequestParam("chall_id") String challId, HttpSession session) {
 			String userId = (String)session.getAttribute("userId");
 			boolean deletePost = false;
-
+			AuthPicture pic = challService.getImgbyAuthId(authId);
 			try {
-				deletePost = challService.deletePostByAuthId(auth_id, userId);
+				// 사진이 존재하면 사진 삭제
+				if(pic!=null) {
+					File delFile = new File("C:\\images\\auth\\"+pic.getAuth_pic_uuid());
+					boolean isDeleteFile = delFile.delete();
+					boolean isDeleteDB = challService.deletePicbyAuthId(authId);
+				}
+				
+				// 댓글 삭제
+				challService.deleteAuthComment(authId);
+				
+				// 좋아요 삭제
+				challService.deleteAuthLike(authId);
+				
+				// 인증글 삭제
+				deletePost = challService.deletePostByAuthId(authId, userId);
 				if(deletePost) {
-					challService.deleteAuthNum(userId, Integer.parseInt(chall_id));
-					return "redirect:/challenge/"+chall_id+"challengePost";
+					challService.deleteAuthNum(userId, Integer.parseInt(challId));
+					return "redirect:/challenge/"+challId+"challengePost";
 				}
 				
 			} catch (Exception e) {
@@ -467,8 +541,8 @@ public class ChallengeController {
 			return "index";
 		}
 
-		
-		@RequestMapping(value="/challenge/{chall_id}insertChallPost", method = RequestMethod.GET)		//게시글 작성 화면 호출
+		//인증글 작성 화면 호출
+		@RequestMapping(value="/challenge/{chall_id}insertChallPost", method = RequestMethod.GET)		
 	    public String insertChallPostForm(@PathVariable int chall_id, Model model, HttpSession session, RedirectAttributes rttr) throws Exception{
 			String userId = challService.getUserByChallIdAndUserId(((String)session.getAttribute("userId")), chall_id);
 			if(userId==null||userId=="") {
@@ -481,35 +555,43 @@ public class ChallengeController {
 	    }
 		
 		@RequestMapping(value="/challenge/{chall_id}/insertChallPost", method = RequestMethod.POST)
-		public String insertChallPost(@PathVariable int chall_id, @ModelAttribute ChallengePost challpost, @RequestParam("auth_image") MultipartFile file, Model model, HttpSession session) throws Exception {
+		public String insertChallPost(@PathVariable int chall_id, 
+									  @ModelAttribute ChallengePost challpost, 
+									  @RequestParam("auth_image") MultipartFile file,
+									  Model model, 
+									  HttpSession session) throws Exception {
 			String userId = (String)session.getAttribute("userId");
 			boolean challPostResult = false;
 			boolean authNum = false;
+			String savePath = null;
+			String fileName = null;
 			
-			// 파일 저장 위치 설정
-			String savePath = "C:\\images\\auth";
-			// UUID
-			String fileName = UUID.randomUUID().toString()+"_"+file.getOriginalFilename();
-			
-			if(!new File(savePath).exists()) {
-				new File(savePath).mkdir();
+			if(!file.isEmpty()) {
+				// 파일 저장 위치 설정
+				savePath = "C:\\images\\auth";
+				// UUID
+				fileName = UUID.randomUUID().toString()+"_"+file.getOriginalFilename();
+				
+				if(!new File(savePath).exists()) {
+					new File(savePath).mkdir();
+				}
 			}
+			
 		
 			try {
 				System.out.println(challpost);
 				challpost.setComment_id(userId);
 				challPostResult = challService.insertChallPost(challpost);
-				
-				file.transferTo(new File(savePath+"\\"+fileName));
-				System.out.println("인증글 id : " + challpost.getAuth_id());
-				
-				AuthPicture authPicture = new AuthPicture();
-				authPicture.setAuth_id(challpost.getAuth_id());
-				authPicture.setAuth_pic_path(savePath+"\\"+fileName);
-				authPicture.setAuth_pic_title(file.getOriginalFilename());
-				authPicture.setAuth_pic_uuid(fileName);
-				
-				boolean insertPicture = challService.insertAuthPicture(authPicture);
+			
+				if(!file.isEmpty()) {
+					file.transferTo(new File(savePath+"\\"+fileName));
+					AuthPicture authPicture = new AuthPicture();
+					authPicture.setAuth_id(challpost.getAuth_id());
+					authPicture.setAuth_pic_path(savePath+"\\"+fileName);
+					authPicture.setAuth_pic_title(file.getOriginalFilename());
+					authPicture.setAuth_pic_uuid(fileName);
+					boolean insertPicture = challService.insertAuthPicture(authPicture);
+				}
 				
 				if(challPostResult) {
 					System.out.println("등록완료");
@@ -731,6 +813,11 @@ public class ChallengeController {
 			else
 				return "/index";
 			
+		}
+		
+		@RequestMapping(value="/running")
+		public String running() {
+			return "runningRoute";
 		}
 		
 		@Scheduled(cron = "0 0 0 * * *")

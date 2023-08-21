@@ -49,6 +49,7 @@
 											${post.auth_title}
 										</div>
 										<div class="post-action-right" style="margin-left: auto">
+											<input type="hidden" name="chall_id" value="${post.chall_id}">
 											<c:if test="${post.comment_id eq userId }">
 												<button type="button" class="btn btn-dark"   onclick="updatePost('${auth_id}','${userId}')">
 												수정
@@ -61,9 +62,9 @@
 										
 									</div>
 									<hr>
-									<c:if test="${imgURL ne null }">
+									<c:if test="${pic ne null }">
 										<div class="post-description" style="min-height: 100px;">
-											<img alt="" src="/images/auth/${imgURL}">
+											<img alt="${pic.auth_pic_title }" src="/images/auth/${pic.auth_pic_uuid}">
 										</div>
 										<hr>
 									</c:if>
@@ -90,7 +91,8 @@
 										</div>
 									</div>
 							        
-							      </div>	
+							      </div>
+						</div>	
 					</form>
 					<hr>
 					<div class="context-form">
@@ -126,20 +128,6 @@
 						
 	<!-- footer -->
 	<%@ include file="./inc/footer.jsp"%>
-
-	<script src="js/jquery.min.js"></script>
-	<script src="js/jquery-migrate-3.0.1.min.js"></script>
-	<script src="js/jquery-ui.js"></script>
-	<script src="js/popper.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<script src="js/owl.carousel.min.js"></script>
-	<script src="js/jquery.stellar.min.js"></script>
-	<script src="js/jquery.magnific-popup.min.js"></script>
-	<script src="js/aos.js"></script>
-
-	<script src="js/main.js"></script>
-	
-	
 
 </body>
 <script type="text/javascript">

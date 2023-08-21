@@ -113,6 +113,12 @@ public interface ChallengeMapper {
 
 	public boolean insertAuthPicture(AuthPicture authPicture);
 
-	public String getImgbyAuthId(int auth_id);
+	public AuthPicture getImgbyAuthId(int auth_id);
+
+	public boolean deletePicbyAuthId(int authId);
+
+	public void deleteAuthComment(int authId);
+
+	public void deleteAuthLike(int authId);
 
 }

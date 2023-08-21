@@ -253,7 +253,19 @@ boolean result = false;
 		return mapper.insertAuthPicture(authPicture);
 	}
 
-	public String getImgbyAuthId(int auth_id) {
+	public AuthPicture getImgbyAuthId(int auth_id) {
 		return mapper.getImgbyAuthId(auth_id);
+	}
+
+	public boolean deletePicbyAuthId(int authId) {
+		return mapper.deletePicbyAuthId(authId);
+	}
+
+	public void deleteAuthComment(int authId) {
+		mapper.deleteAuthComment(authId);
+	}
+
+	public void deleteAuthLike(int authId) {
+		mapper.deleteAuthLike(authId);
 	}
 }

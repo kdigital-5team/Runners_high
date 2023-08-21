@@ -291,8 +291,8 @@
 						where auth_id=#{auth_id})
 	</select>
 	
-	<select id="getImgbyAuthId" resultType="string">
-		SELECT auth_pic_uuid
+	<select id="getImgbyAuthId" resultType="com.spring.dto.AuthPicture">
+		SELECT auth_pic_uuid, auth_pic_title
 		FROM auth_picture
 		WHERE auth_id=#{auth_id}
 	</select>
@@ -328,10 +328,27 @@
 	VALUES (auth_picture_seq.nextval, #{auth_id}, #{auth_pic_uuid, jdbcType=VARCHAR}, SYSDATE, #{auth_pic_title}, #{auth_pic_path})
 	</insert>
 	
+	<delete id="deleteAuthComment" parameterType="com.spring.dto.AuthComment">
+		DELETE auth_comment
+		WHERE auth_id=#{authId}
+	</delete>
+	
+	<delete id="deleteAuthLike" parameterType="com.spring.dto.AuthLike">
+		DELETE auth_like
+		WHERE auth_id=#{authId}
+	</delete>
+	
+	<delete id="deletePicbyAuthId" parameterType="com.spring.dto.AuthPicture">
+		DELETE auth_picture
+		WHERE auth_id=#{authId}
+	</delete>
+	
 	<delete id="deletePostByAuthId" parameterType="com.spring.dto.ChallengePost">
 	DELETE auth_post
 	WHERE auth_id=#{auth_id} and comment_id = #{userId}
 	</delete>
+	
+	
 	
 	<update id="updatePost" parameterType="com.spring.dto.ChallengePost">
 	UPDATE auth_post
