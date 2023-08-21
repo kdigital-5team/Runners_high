@@ -48,7 +48,7 @@
 						<form action="/mypage/feed" enctype="multipart/form-data" method="POST">					
 							<div class="post" style="border:none; float:middle; margin-top:15%; width:200px">
 								<div class="username">${user.nickname}</div>
-								<pre><div class="userIntro">${user.intro}</div></pre>
+								<div class="userIntro">${user.intro}</div>
 							</div>
 						</form>	
 						<div onclick="location.href='/mypage/edit'" style="border:none; float:right; margin-top:12%;">

@@ -722,56 +722,6 @@ public class ChallengeController {
 			return "challengeCalendar";
 		}
 		
-		// 다른 사람 피드로 이동
-		@RequestMapping(value = "/feed/{otherId}", method = RequestMethod.GET)
-		public String getAllFeeds(@PathVariable String otherId, Model model, HttpSession session) throws Exception {
-			String userId =(String) session.getAttribute("userId");
-			if(userId==null)
-				userId="";
-			
-			User user = userService.getUserByUserId(otherId);
-			
-			model.addAttribute("user", user);
-			
-			List<PersonalFeed> feedList = feedService.getAllFeeds();
-			model.addAttribute("feedList", feedList);
-			
-			List<FeedPicture> picList = pictureservice.getAllFeedPicture();
-			model.addAttribute("picList", picList);
-			
-			if(userId.equals(otherId)) {
-				return "/mypage_feed";
-			}
-			
-			else {
-				model.addAttribute("other", otherId);
-				return "otherFeed";
-			}
-		 }
-		
-		// 다른 사람 챌린지로 이동
-				@RequestMapping(value = "/otherChall/{otherId}", method = RequestMethod.GET)
-				public String getOtherChall(@PathVariable String otherId, Model model, HttpSession session) throws Exception {
-					String userId =(String) session.getAttribute("userId");
-					if(userId==null)
-						userId="";
-					
-					User user = userService.getUserByUserId(otherId);
-					List<ChallengeRegion> myChallList = challService.getChallByUserId(otherId);
-					List<UserChallenge> myUCList = challService.getUserChallbyUserId(otherId);
-					model.addAttribute("user", user);
-					model.addAttribute("myUCList", myUCList);
-					model.addAttribute("myChallList", myChallList);
-					
-					if(userId.equals(otherId)) {
-						return "/mypage_feed";
-					}
-					
-					else {
-						return "otherChall";
-					}
-				 }
-				
 		@RequestMapping(value="/challenge/insertComment")
 		public String insertComment(@RequestParam(value="comment") String comment, @RequestParam(value="authId") String authId, HttpSession session) {
 			AuthComment authComment = new AuthComment();
