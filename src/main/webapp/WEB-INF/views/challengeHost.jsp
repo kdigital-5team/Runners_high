@@ -67,6 +67,12 @@
 						<input type="submit" class="btn btn-danger" value="탈퇴">
 					</form>
 				</c:if>
+				<c:if test="${userId eq challenge.chall_reg_id}">
+					<form action="/challenge/edit/${challenge.chall_id}" method="get">
+						<input type="hidden" name="applyId" value="${userId}">
+						<input type="submit" class="btn btn-danger" value="수정">
+					</form>
+				</c:if>
 			</div>
 			<div style="float: left; width: 34%;">
 				<div onclick="location.href='/feed/${host.user_id}'" 

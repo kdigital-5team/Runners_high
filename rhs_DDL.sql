@@ -1,4 +1,3 @@
--- 테이블 초기화
 DROP TABLE rh_user cascade constraint;
 DROP TABLE title cascade constraint;
 DROP TABLE user_title cascade constraint;

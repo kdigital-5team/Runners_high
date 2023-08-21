@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <head>
-<link rel="stylesheet" href="../static/css/headerFooter.css">
+<link rel="stylesheet" href="/static/css/headerFooter.css">
 </head>
 
 <header>

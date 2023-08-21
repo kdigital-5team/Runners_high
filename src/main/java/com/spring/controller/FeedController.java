@@ -154,4 +154,76 @@ public class FeedController {
 		 
 		return view;		 
 	 }
-}
+	 
+		// 피드 수정 get
+	 @RequestMapping(value = "/mypage/feed/{feed_id}/modify", method = RequestMethod.GET)
+	 public String getModify(HttpServletRequest request, Model model, @PathVariable int feed_id) throws Exception {
+		 HttpSession session = request.getSession(false);
+		 User user = service.getUserByUserId(session.getAttribute("userId").toString());
+		 PersonalFeed userfeed = feedservice.getFeedByFeedId(feed_id);
+		 FeedPicture picture = pictureservice.getFeedPictureByFeedId(feed_id);
+		 
+		 System.out.println(userfeed);
+		 model.addAttribute("feed", userfeed);
+		 model.addAttribute("user", user);
+		 model.addAttribute("picture", picture);
+		 
+		 logger.info("get feed modify");
+		 return "mypage_feed_modify";
+	 }
+	 
+	 @RequestMapping(value = "/mypage/feed/{feed_id}/modify", method = RequestMethod.POST)
+	 public String modifyFeed(@ModelAttribute PersonalFeed pf,
+				@RequestParam("file") MultipartFile file,
+				Model model, HttpSession session) throws Exception {
+		 User user = service.getUserByUserId(session.getAttribute("userId").toString());
+		 logger.info("post feed modify");
+		 String view = "error";
+
+		 boolean feedResult = false;
+		 boolean fileResult = false;
+
+		 try {
+		 feedResult = feedservice.updateFeed(pf);
+
+		 int pfeed = pf.getFeed_id();
+		 deletePreviousUserPicFile(pfeed);
+		 fileResult = pictureservice.insertFeedPicture(file, pfeed);
+		 if(feedResult && fileResult) {
+		 //if(feedResult) {
+		 model.addAttribute("user", user);
+		 session.setAttribute("pfeed", pfeed);
+		 view = "redirect:/mypage/feed";
+		 return view;
+		 }
+		 } catch (Exception e) {
+		 e.printStackTrace();
+		 return view;
+		 }	  
+
+		 return view;
+		 } 
+	 
+	 private void deletePreviousUserPicFile(int pfeed) throws Exception {
+
+			System.out.println("deletePreviousUserPicFile 실행");
+			FeedPicture userPicture = pictureservice.getFeedPictureByFeedId(pfeed);
+			if (userPicture != null) {
+
+				String filePath = userPicture.getFeed_pic_path() + userPicture.getFeed_pic_title();
+
+				File previousePic = new File(filePath);
+				System.out.println("삭제 대상 : " + previousePic);
+
+				if (previousePic.exists()) {
+					System.out.println("이전 사진 파일 존재");
+					previousePic.delete();
+					pictureservice.deleteFeedPicture(pfeed);
+				} else {
+					System.out.println("이전  사진 부재!");
+				}
+			}
+		}
+	 }
+	 
+	 

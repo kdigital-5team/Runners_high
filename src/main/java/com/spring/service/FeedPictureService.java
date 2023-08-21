@@ -81,5 +81,23 @@ public class FeedPictureService {
 		
 		return feedpicturemapper.getAllFeedPicture();
 	}
+
+	public boolean deleteFeedPicture(int pfeed) throws SQLException {
+		boolean result = false;
+		
+		int res = feedpicturemapper.deleteFeedPicture(pfeed);
+		
+		try {
+			if(res != 0) {
+				result = true;
+			} else {
+				throw new Exception("부서 생성 실패");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}	
 	
 }
