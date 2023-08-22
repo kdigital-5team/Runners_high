@@ -85,12 +85,6 @@ INSERT INTO title
     VALUES 
         (title_seq.NEXTVAL, '인플루언서', 30);
 
--- usertitle
-INSERT INTO user_title
-            (title_acq, user_id, title_id)
-        VALUES
-            (user_title_seq.NEXTVAL, 'test01@gmail.com', 1);
-
 -- region
 INSERT INTO region values(region_seq.NEXTVAL,'지역무관', '지역무관', '지역무관');
 INSERT INTO region values(region_seq.NEXTVAL,'서울특별시', '', '');

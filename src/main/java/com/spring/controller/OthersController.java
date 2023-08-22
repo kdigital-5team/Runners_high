@@ -2,6 +2,7 @@ package com.spring.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpSession;
 
@@ -107,11 +108,17 @@ public class OthersController {
 				
 				User user = userService.getUserByUserId(otherId);
 				List<Title> titleList = titleService.getAllTitles();
-				UserTitle userTitle = titleService.getTitleByUserId(otherId);
+				List<UserTitle> userTitle = titleService.getTitleByUserId(otherId);
+				
+				List<Integer> userTitleIds = userTitle.stream()
+                        							   .mapToInt(UserTitle::getTitle_id)
+                        							   .boxed()
+                        							   .collect(Collectors.toList());
+				
 				List<Title> userTitleList = new ArrayList<Title>();
 				
 				if (userTitle != null) {
-					userTitleList = titleService.getTitlesByTitleId(userTitle.getTitle_id());
+					userTitleList = titleService.getTitlesByTitleId(userTitleIds);
 				}
 				
 				model.addAttribute("user", user);

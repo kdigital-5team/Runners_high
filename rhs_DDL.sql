@@ -18,7 +18,7 @@ DROP TABLE chall_route cascade constraint;
 DROP SEQUENCE title_seq;
 DROP SEQUENCE personal_feed_seq;
 DROP SEQUENCE feed_picture_seq;
-DROP SEQUENCE auth_picture_seq
+DROP SEQUENCE auth_picture_seq;
 DROP SEQUENCE region_seq;
 DROP SEQUENCE race_seq;
 DROP SEQUENCE challenge_seq;
