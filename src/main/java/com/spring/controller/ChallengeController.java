@@ -765,11 +765,6 @@ public class ChallengeController {
 			
 		}
 		
-		@RequestMapping(value="/running")
-		public String running() {
-			return "runningRoute";
-		}
-		
 		@Scheduled(cron = "0 0 0 * * *")
 		public String updateChallSit() {
 			boolean updateChallSit = challService.updateChallSit();
