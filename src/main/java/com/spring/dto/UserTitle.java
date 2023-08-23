@@ -28,4 +28,5 @@ public class UserTitle {
 	public static Title getTitleDto() {
 		return titleDto;
 	}
+
 }

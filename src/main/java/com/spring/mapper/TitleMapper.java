@@ -15,9 +15,13 @@ public interface TitleMapper {
 	public List<Title> getAllTitles() throws SQLException;
 
 	// 유저 칭호
-	public UserTitle getTitleByUserId(String userId) throws SQLException;
+	public List<UserTitle> getTitleByUserId(String userId) throws SQLException;
 
 	// 유저 획득 칭호 정보
-	public List<Title> getTitlesByTitleId(int titleId) throws SQLException;
+	public List<Title> getTitlesByTitleId(List<Integer> titleId) throws SQLException;
+
+	// 회원가입 칭호 부여
+	public int insertTitle1(String userId) throws SQLException;
+
 
 }
