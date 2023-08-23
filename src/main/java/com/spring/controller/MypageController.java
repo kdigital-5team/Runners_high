@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -84,14 +85,17 @@ public class MypageController {
 		User user = service.getUserByUserId(userId);
 		model.addAttribute("user", user);
 		
-		// 유저 타이틀 조회
-		UserTitle userTitle = titleService.getTitleByUserId(userId);
-		System.out.println("유저가 가진 타이틀 : " + userTitle);
+		List<UserTitle> userTitle = titleService.getTitleByUserId(userId);
 		
-		// 유저 타이틀 정보 조회
+		List<Integer> userTitleIds = userTitle.stream()
+                							   .mapToInt(UserTitle::getTitle_id)
+                							   .boxed()
+                							   .collect(Collectors.toList());
+		
 		List<Title> userTitleList = new ArrayList<Title>();
-		if(userTitleList != null) {
-			userTitleList = titleService.getTitlesByTitleId(userTitle.getTitle_id());
+		
+		if (userTitle != null) {
+			userTitleList = titleService.getTitlesByTitleId(userTitleIds);
 		}
 		System.out.println("해당 유저가 획득한 타이틀 정보 : " + userTitleList);
 		model.addAttribute("userTitleList", userTitleList);
