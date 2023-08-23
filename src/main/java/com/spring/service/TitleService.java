@@ -57,6 +57,20 @@ public class TitleService {
 		return false;
 	}
 
+	// 챌린지 등록 5회 이상 칭호
+	public boolean insertTitle3(String hostId) throws SQLException {
+
+		int titleId = 2;
+		if (checkDuplicateUserTitle(hostId, titleId)) {
+			int result = titleMapper.insertTitle3(hostId);
+			
+			if(result == 1) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 
 
 

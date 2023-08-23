@@ -121,4 +121,7 @@ public interface ChallengeMapper {
 
 	public void deleteAuthLike(int authId);
 
+	// 챌린지 등록자 세기
+	public int countChallReg(String hostId);
+
 }

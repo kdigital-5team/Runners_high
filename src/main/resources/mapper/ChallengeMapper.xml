@@ -438,13 +438,13 @@
 				region.region_city, 
 				region.region_district, 
 				(select race.race_name from race where race.race_id = challenge.race_id) as race_name
-		FROM challenge, region
-		WHERE challenge.region_id = region.region_id 
-				and challenge.chall_id in 
-				(select chall_id 
-				from user_chall
-				where user_id =#{userId} and user_reg_status != 'N')
-		ORDER BY chall_id DESC
+			FROM challenge, region
+				WHERE challenge.region_id = region.region_id 
+					and challenge.chall_id in 
+						(select chall_id 
+							from user_chall
+								where user_id =#{userId} and user_reg_status != 'N')
+					ORDER BY chall_id DESC
 	</select>
 	
 	<select id="getUserChallbyUserId" resultType="com.spring.dto.UserChallenge">
@@ -454,21 +454,28 @@
 				chall_reg_status,
 				user_chall_status,
 				user_reg_status
-		from user_chall
-		where user_id = #{userId} and user_reg_status != 'N'
-		ORDER BY chall_id DESC
+			from user_chall
+				where user_id = #{userId} and user_reg_status != 'N'
+					ORDER BY chall_id DESC
 	</select>
 	
 	<update id="updateAuthNum" parameterType="com.spring.dto.UserChallenge">
-	UPDATE user_chall
-	SET chall_auth_num=chall_auth_num+1
-	WHERE user_id = #{userId} and chall_id = #{chall_id}
+		UPDATE user_chall
+			SET chall_auth_num=chall_auth_num+1
+				WHERE user_id = #{userId} and chall_id = #{chall_id}
 	</update>
 	
 	<update id="deleteAuthNum" parameterType="com.spring.dto.UserChallenge">
-	UPDATE user_chall
-	SET chall_auth_num=chall_auth_num-1
-	WHERE user_id = #{userId} and chall_id = #{chall_id}
+		UPDATE user_chall
+			SET chall_auth_num=chall_auth_num-1
+				WHERE user_id = #{userId} and chall_id = #{chall_id}
 	</update>
+	
+	<select id="countChallReg" parameterType="string">
+		SELECT count(chall_reg_id)
+			FROM challenge
+				WHERE chall_reg_id = #{hostId}
+					GROUP BY chall_reg_id
+	</select>
 
 </mapper>

@@ -31,13 +31,25 @@
 	 <insert id="insertTitle1">
 	 	INSERT INTO user_title 
 	 		(title_acq,
-	 		user_id,
-	 		title_id)
+	 		 user_id,
+	 		 title_id)
 		 		VALUES (
 		 			user_title_seq.NEXTVAL,
 		 			#{userId},
 		 			1
 		 		) 
+	 </insert>
+	 
+	 <insert id="insertTitle3">
+	 	INSERT INTO user_title
+	 		(title_acq,
+	 		 user_id,
+	 		 title_id)
+	 		 	VALUES (
+	 		 		user_title_seq.NEXTVAL,
+	 		 		#{hostId},
+	 		 		3
+	 		 	)
 	 </insert>
 	 
 </mapper>

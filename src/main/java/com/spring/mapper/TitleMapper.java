@@ -23,5 +23,8 @@ public interface TitleMapper {
 	// 회원가입 칭호 부여
 	public int insertTitle1(String userId) throws SQLException;
 
+	// 챌린지 등록 5회 이상 칭호 부여
+	public int insertTitle3(String hostId) throws SQLException;
+
 
 }

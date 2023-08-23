@@ -268,4 +268,9 @@ boolean result = false;
 	public void deleteAuthLike(int authId) {
 		mapper.deleteAuthLike(authId);
 	}
+
+	// 챌린지 등록자 count
+	public int countChallReg(String hostId) {
+		return mapper.countChallReg(hostId);
+	}
 }
