@@ -240,7 +240,7 @@
  			 										#{region_id},
  			 											#{chall_sit},
  			 												#{chall_online},
- 			 													(#{chall_end_date}-#{chall_start_date})/7*#{chall_week_auth},
+ 			 													#{chall_all_auth},
  			 														#{chall_week_auth},
  			 															#{race_id})
 			<selectKey keyProperty="chall_id" resultType="int">

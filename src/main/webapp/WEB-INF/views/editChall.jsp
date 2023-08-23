@@ -52,24 +52,24 @@
 		<div class="site-section"></div>
 		<div class="site-section">
 			<div class="container">
-				<form name= "regist_form" id="regist_form" method="post" action="/registChall">
+				<form name= "regist_form" id="regist_form" method="post" action="/challenge/edit/${userChall.chall_id}">
 	        <div class="context-form">
 	        <h2 class="form-h2">챌린지 등록</h2>
 	            <label for="inputChall">챌린지명</label><br>
-	            <input type="text" id="chall_name" name="chall_name" placeholder="챌린지명"><br>
+	            <input type="text" id="chall_name" name="chall_name" placeholder="챌린지명" value="${userChall.chall_name}"><br>
 	            <label class="notice-label" for="challName_check"></label>
 	        </div>
 	        <div class="context-form">
 	            <label for="inputIntro">설명</label><br>
 	            	<textarea id="textArea" name="chall_intro" rows="1" maxlength="300"
 							  placeholder="챌린지 설명글" wrap="hard"
-							  onkeyup="fn_checkByte(this)"></textarea><br>
+							  onkeyup="fn_checkByte(this)">${userChall.chall_intro}</textarea><br>
 							 <sup><span id="currByte">0</span>/500bytes</sup><br>
 	        </div>
 	        <div class="context-form">
 	            <label for="inputDate">기간</label><br>
-	            	<input type="text" id="chall_start_date" name="chall_start_date" placeholder="챌린지 시작일" readonly>
-	            	<input type="text" id="chall_end_date" name="chall_end_date" placeholder="챌린지 종료일" readonly><br>
+	            	<input type="text" id="chall_start_date" name="chall_start_date" placeholder="챌린지 시작일" value="${userChall.chall_start_date}" readonly>
+	            	<input type="text" id="chall_end_date" name="chall_end_date" placeholder="챌린지 종료일" value="${userChall.chall_end_date}" readonly><br>
 	        	
 	        	<table class="Calendar">
 		        	<thead>
@@ -97,22 +97,22 @@
 			</div>
 	        <div class="context-form">
 	            <label for="input_chall_week_auth">주간 인증 횟수</label><br>
-					<input type="range" class="form-range" min="1" max="7" value="1" id="chall_week_auth" name="chall_week_auth"><br>
+					<input type="range" class="form-range" min="1" max="7" value="1" id="chall_week_auth" name="chall_week_auth" value="${userChall.chall_week_auth}"><br>
 	       				<output id="chall_week_auth_value">주 1회</output><br>
 	        </div>
 	        <div class="context-form">
 	        	<label for="chall_size">인원</label><br>
 	        	<label class="notice-label">*모집할 최대 인원 수(최소 3명 ~ 최대 100명)</label><br>
-	       		<input type="text" id="chall_size" name="chall_size" placeholder="입력 예시 : 3, 10, 100"><br>
+	       		<input type="text" id="chall_size" name="chall_size" placeholder="입력 예시 : 3, 10, 100" value="${userChall.chall_size}"><br>
 	       		<label class="notice-label" for="size_check"></label>
 			</div>
 	        <div class="context-form">
 	        	<label for="chall_category">챌린지 목적</label><br>
 					<input type="button" class="customBtn" value ="일상용" onclick="selectedBtn(this, 'chall_category');">
 					<input type="button" class="customBtn" value ="대회용" onclick="selectedBtn(this, 'chall_category'); challRacePopup();">
-					<input type="hidden" id="race_id" name="race_id" value=""  readonly>
-					<input type="hidden" id="region_id" name="region_id" value=""  readonly>
-					<input type="hidden" name="chall_category" id="chall_category" value="">
+					<input type="hidden" id="race_id" name="race_id" value="${userChall.race_id}"  readonly>
+					<input type="hidden" id="region_id" name="region_id" value="${userChall.region_id}"  readonly>
+					<input type="hidden" name="chall_category" id="chall_category" value="${userChall.chall_category}">
 			</div>
 				<div class="context-form">
 		        	<label for="region">지역</label><br>
@@ -121,14 +121,16 @@
 		        	<select class="region-select" id="region_state" name="region_state" onchange="chageState();">
 		        		<option selected hidden=""></option>
 		        	    <c:forEach var="state" items="${stateList}">
-		          		<option>${state}</option>
+		          		<option value="${state}" <c:if test="${region.region_state eq state}">selected="selected"</c:if>>${state}</option>
 		          		</c:forEach>
 					</select>
 					<label class="simple-label" for="region_city">시</label>
 		        	<select class="region-select" id="region_city" name="region_city" onchange="chageCity();">
+		        		<option value="${region.region_city}">${region.region_city}</option>
 					</select>
 					<label class="simple-label" for="region_district">군/구</label>
 		        	<select class="region-select" id="region_district" name="region_district" onchange="chageDistrict();">
+		        		<option value="${region.region_district}">${region.region_district}</option>
 					</select>
 				</div>
 			<div class="context-form">
@@ -136,7 +138,7 @@
 					<input type="button" class="customBtn" onclick="selectedBtn(this , 'chall_sit');" value ="모집중">
 					<input type="button" class="customBtn" onclick="selectedBtn(this, 'chall_sit');" value ="모집종료">
 					<input type="button" class="customBtn" onclick="selectedBtn(this, 'chall_sit');" value ="모집예정">
-					<input type="hidden" name="chall_sit" id="chall_sit" value="">
+					<input type="hidden" name="chall_sit" id="chall_sit" value="${userChall.chall_sit}">
 			</div>
 			<div class="context-form">
 	        	<label for="chall_online">온라인/오프라인</label><br>
@@ -144,12 +146,12 @@
 					<input type="button" class="customBtn" onclick="selectedBtn(this, 'chall_online');" value ="온라인">
 					<input type="button" class="customBtn" onclick="selectedBtn(this, 'chall_online');" value ="오프라인">
 					<input type="button" class="customBtn" onclick="selectedBtn(this, 'chall_online');" value ="모두"><br>
-					<input type="hidden" name="chall_online" id="chall_online" value="">
+					<input type="hidden" name="chall_online" id="chall_online" value="${userChall.chall_online}">
 			</div>
 			<div class="context-form">
 	        	<label for="chall_all_auth">챌린지 최소 인증률</label><br>
 	        	<label class="notice-label">*챌린지 완수 기준(최소 40% ~ 최대 100%)</label><br>
-	       		<input type="text" id="chall_all_auth" name="chall_all_auth" placeholder="입력 예시 : 40, 90"><br>
+	       		<input type="text" id="chall_all_auth" name="chall_all_auth" placeholder="입력 예시 : 40, 90" value="${userChall.chall_all_auth}"><br>
 	       		<label class="notice-label" for="all_auth_check"></label>
 			</div>
 			<input type="button" onclick="submit2();" value="다음" class="next-btn"/>
@@ -186,8 +188,7 @@ window.onload = function() {
     textarea.addEventListener("input", resize);
     
     // window.onload 시 캘린더 실행
-    buildCalendar(); 
-    
+    buildCalendar();
 }
 
 <!-- 동적으로 챌린지 설명 체크 -->
@@ -643,21 +644,21 @@ function submit2() {
     console.log(Form);
 
     if (Form.chall_start_date.value === "" || Form.chall_end_date.value === "" || Form.chall_all_auth.value === "" || !all_auth_chk || !size_chk) {
+    	
         if (Form.chall_category.value === "대회용" && Form.region_district.value === "") {
-            alert("필수 입력란이 비었거나 입력 조건에 부합하지 않습니다. 다시 확인해 주세요.");
             return;
         } else if (Form.chall_category.value === "일상용" && Form.region_district.value === "") {
             Form.region_state.value = null;
             Form.region_city.value = null;
             Form.region_district.value = null;
         }
+        alert("필수 입력란이 비었거나 입력 조건에 부합하지 않습니다. 다시 확인해 주세요.");
     } else {
         Form.chall_category.value = chall_category;
         Form.chall_sit.value = chall_sit;
         Form.chall_online.value = chall_online;
         
-        alert (chall_category + "\n" + chall_sit + "\n" + chall_online
-        		);
+        alert ("등록이 완료되었습니다.");
         
         document.regist_form.submit();
         return;
