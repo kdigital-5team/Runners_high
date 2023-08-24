@@ -32,8 +32,6 @@ import com.spring.dto.AuthPicture;
 import com.spring.dto.Challenge;
 import com.spring.dto.ChallengePost;
 import com.spring.dto.ChallengeRegion;
-import com.spring.dto.FeedPicture;
-import com.spring.dto.PersonalFeed;
 import com.spring.dto.RaceAndRegion;
 import com.spring.dto.User;
 import com.spring.dto.UserChallenge;

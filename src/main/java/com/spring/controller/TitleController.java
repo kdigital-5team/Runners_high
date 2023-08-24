@@ -3,7 +3,10 @@ package com.spring.controller;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -13,13 +16,14 @@ import org.springframework.stereotype.Controller;
 
 import com.spring.dto.Challenge;
 import com.spring.dto.User;
+import com.spring.dto.UserChallenge;
 import com.spring.dto.UserTitle;
 import com.spring.service.ChallengeService;
 import com.spring.service.TitleService;
 import com.spring.service.UserService;
 
 @Controller
-public class titleController {
+public class TitleController {
 	
 	@Autowired
 	TitleService service;
@@ -56,26 +60,48 @@ public class titleController {
 	}
 	
 	// 완료 챌린지 수
-	/* user_chall 테이블의 user_chall_status 'Y' 개수 */
+	/* user_chall 테이블의 user_chall_status 'Y' 개수
+	 * 데이터 가지고 오는 것까지 됐으니 count 3 이상 되는 것들은 insert 진행해주는 코드 추가해주면 됨!  */
 	public boolean insertTitle2()  {
+		
+		List<UserChallenge> users = challService.getAllUserChall();
+		
+		if (users != null) {
+			
+			List<Map<String, Object>> userStatusCount = challService.getUserByChallStatus();
+			System.out.println("userStatusCount : " + userStatusCount);
+			
+			
+			for(Map<String, Object> userData : userStatusCount) {
+				String userId = (String) userData.get("USER_ID");
+				int userCount = ((Number) userData.get("COUNT")).intValue();
+				
+				System.out.println("user Id : " + userId + " userCount : " + userCount);
+			}
+			
+			return true;
+		}
 		
 		return false;
 	}
 	
 
 	// 챌린지 등록 수
-	/* challenge 테이블의 chall_reg_id 개수
-	 * host id만 저장하는 리스트 생성 -> 아이디별 count?? 
-	 * 
-	 * */
+	/* challenge 테이블의 chall_reg_id 개수 */
 	public boolean insertTitle3()  {
-		
+		List<String> challengeIds = new ArrayList<String>();
 		List<Challenge> challenges = challService.getAllChall();
+		
 		if (challenges != null) {
 			
-			for(int i = 0; i < challenges.size(); i++) {
-				String hostId = challenges.get(i).getChall_reg_id();
-				
+			for(Challenge challenge : challenges) {
+				String regId = challenge.getChall_reg_id();
+				if (!challengeIds.contains(regId)) {
+					challengeIds.add(regId);
+				}
+			}
+			
+			for(String hostId : challengeIds) {
 				int count = challService.countChallReg(hostId);
 				
 				if (count >= 5) {
@@ -85,8 +111,8 @@ public class titleController {
 						e.printStackTrace();
 					}
 				}
+				
 			}
-			
 			return true;
 		}
 		return false;

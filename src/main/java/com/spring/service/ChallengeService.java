@@ -2,6 +2,7 @@ package com.spring.service;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -272,5 +273,15 @@ boolean result = false;
 	// 챌린지 등록자 count
 	public int countChallReg(String hostId) {
 		return mapper.countChallReg(hostId);
+	}
+
+	// 완료 챌린지 리스트
+	public List<Map<String, Object>> getUserByChallStatus() {
+		return mapper.getUserByChallStatus();
+	}
+
+	// 전체 userChall
+	public List<UserChallenge> getAllUserChall() {
+		return mapper.getAllUserChall();
 	}
 }
