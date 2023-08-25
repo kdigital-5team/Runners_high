@@ -43,12 +43,11 @@ public class TitleService {
 		return true;
 	}
 	
-	// 회원가입 칭호
-	public boolean insertTitle1(String userId) throws SQLException {
+	// 칭호 부여
+	public boolean insertUserTitle(String userId, int titleId) throws SQLException {
 		
-		int titleId = 1;
 		if (checkDuplicateUserTitle(userId, titleId)) {
-			int result = titleMapper.insertTitle1(userId);
+			int result = titleMapper.insertUserTitle(userId, titleId);
 			
 			if(result == 1) {
 				return true;
@@ -56,22 +55,6 @@ public class TitleService {
 		}
 		return false;
 	}
-
-	// 챌린지 등록 5회 이상 칭호
-	public boolean insertTitle3(String hostId) throws SQLException {
-
-		int titleId = 3;
-		if (checkDuplicateUserTitle(hostId, titleId)) {
-			int result = titleMapper.insertTitle3(hostId);
-			
-			if(result == 1) {
-				return true;
-			}
-		}
-		return false;
-	}
-
-
 
 
 }

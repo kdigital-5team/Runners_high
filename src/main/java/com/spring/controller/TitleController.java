@@ -46,7 +46,8 @@ public class TitleController {
 				String userId = users.get(i).getUser_id();
 				
 				try {
-					service.insertTitle1(userId);
+					int titleId = 1;
+					service.insertUserTitle(userId, titleId);
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}
@@ -60,8 +61,7 @@ public class TitleController {
 	}
 	
 	// 완료 챌린지 수
-	/* user_chall 테이블의 user_chall_status 'Y' 개수
-	 * 데이터 가지고 오는 것까지 됐으니 count 3 이상 되는 것들은 insert 진행해주는 코드 추가해주면 됨!  */
+	/* user_chall 테이블의 user_chall_status 'Y' 개수 */
 	public boolean insertTitle2()  {
 		
 		List<UserChallenge> users = challService.getAllUserChall();
@@ -69,17 +69,21 @@ public class TitleController {
 		if (users != null) {
 			
 			List<Map<String, Object>> userStatusCount = challService.getUserByChallStatus();
-			System.out.println("userStatusCount : " + userStatusCount);
-			
 			
 			for(Map<String, Object> userData : userStatusCount) {
 				String userId = (String) userData.get("USER_ID");
 				int userCount = ((Number) userData.get("COUNT")).intValue();
 				
-				System.out.println("user Id : " + userId + " userCount : " + userCount);
+				if(userCount >= 3) {
+					try {
+						int titleId = 2;
+						service.insertUserTitle(userId, titleId);
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+					return true;
+				}
 			}
-			
-			return true;
 		}
 		
 		return false;
@@ -101,12 +105,13 @@ public class TitleController {
 				}
 			}
 			
-			for(String hostId : challengeIds) {
-				int count = challService.countChallReg(hostId);
+			for(String userId : challengeIds) {
+				int count = challService.countChallReg(userId);
 				
 				if (count >= 5) {
 					try {
-						service.insertTitle3(hostId);
+						int titleId = 3;
+						service.insertUserTitle(userId, titleId);
 					} catch (SQLException e) {
 						e.printStackTrace();
 					}
@@ -119,8 +124,16 @@ public class TitleController {
 	}
 	
 	// 좋아요 수
-	/* feed_like 테이블에서 feed_id의 전체 user_id 개수 합산 */
+	/* feed_like 테이블에서 feed_id의 전체 user_id 개수 합산
+	 * 전체 피드게시글 좋아요 수로 해야함.
+	 * 1. 피드 게시글 작성
+	 * 2. 대상 유저의  피드 게시글 id 전부 가지고 오기
+	 * 3. 30개 이상 좋아요 찍기
+	 * 4. feed_like에서 게시글당 좋아요 수 가지고 온 뒤 합산
+	 * 5. 30개 이상이면 칭호 부여  */
 	public boolean insertTitle4()  {
+		
+		
 		return false;
 	}
 	
@@ -138,7 +151,7 @@ public class TitleController {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 		String formattedDateTime = now.format(formatter);
 		
-		System.out.println("유저 칭호 업데이트" + formattedDateTime);
+		System.out.println("유저 칭호 업데이트 [" + formattedDateTime + "]");
 		
 	}
 }

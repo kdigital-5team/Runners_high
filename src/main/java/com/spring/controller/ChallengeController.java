@@ -416,7 +416,6 @@ public class ChallengeController {
 				}
 			}
 			
-			
 			model.addAttribute("post", post);
 			model.addAttribute("authUser",authUser);
 			model.addAttribute("commentList", commentList);
