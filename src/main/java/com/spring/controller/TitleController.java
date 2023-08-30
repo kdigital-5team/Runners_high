@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -15,10 +16,12 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 
 import com.spring.dto.Challenge;
+import com.spring.dto.PersonalFeed;
 import com.spring.dto.User;
 import com.spring.dto.UserChallenge;
 import com.spring.dto.UserTitle;
 import com.spring.service.ChallengeService;
+import com.spring.service.FeedService;
 import com.spring.service.TitleService;
 import com.spring.service.UserService;
 
@@ -33,6 +36,9 @@ public class TitleController {
 	
 	@Autowired
 	ChallengeService challService;
+	
+	@Autowired
+	FeedService feedService;
 
 	// 칭호 자동 부여
 	
@@ -127,11 +133,33 @@ public class TitleController {
 	/* feed_like 테이블에서 feed_id의 전체 user_id 개수 합산
 	 * 전체 피드게시글 좋아요 수로 해야함.
 	 * 1. 피드 게시글 작성
-	 * 2. 대상 유저의  피드 게시글 id 전부 가지고 오기
 	 * 3. 30개 이상 좋아요 찍기
+	 * 2. 전체 유저의  피드 게시글 id 전부 가지고 오기
+	 * 
 	 * 4. feed_like에서 게시글당 좋아요 수 가지고 온 뒤 합산
 	 * 5. 30개 이상이면 칭호 부여  */
 	public boolean insertTitle4()  {
+		
+		List<PersonalFeed> feedList = feedService.getAllFeeds();
+		Map<String, List<Integer>> userFeedMap = new HashMap<String, List<Integer>>();
+		
+		if(feedList != null) {
+			
+			for(int i = 0; i < feedList.size(); i++) {
+				String feedWriter = feedList.get(i).getUser_id();
+				int feedId = feedList.get(i).getFeed_id();
+				
+				List<Integer> feedIds = userFeedMap.getOrDefault(feedWriter, new ArrayList<Integer>());
+				feedIds.add(feedId);
+				
+				userFeedMap.put(feedWriter, feedIds);
+				
+			}
+			
+			
+			
+			return true;
+		}
 		
 		
 		return false;
