@@ -18,4 +18,6 @@ public interface FeedService {
 
 	boolean deleteFeedByFeedId(int feed_id) throws SQLException, Exception;
 
+	public int getLikesByFeedId(int feedId) throws SQLException, Exception;
+
 }

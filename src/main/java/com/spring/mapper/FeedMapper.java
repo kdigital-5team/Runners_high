@@ -21,4 +21,6 @@ public interface FeedMapper {
 
 	public int updateFeed(PersonalFeed pf) throws SQLException;
 
+	public int getLikesByFeedId(int feedId) throws SQLException;
+
 }

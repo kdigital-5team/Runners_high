@@ -2,6 +2,7 @@ package com.spring.controller;
 
 import java.io.File;
 import java.net.URLDecoder;
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -203,6 +204,19 @@ public class FeedController {
 
 		 return view;
 		 } 
+	 
+	// 좋아요 수
+	public int getLikesByFeedId(int feedId) {
+			int numberOfLikes = 0;
+			
+			try {
+				numberOfLikes = feedservice.getLikesByFeedId(feedId);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			return numberOfLikes;
+		}
 	 
 	 private void deletePreviousUserPicFile(int pfeed) throws Exception {
 

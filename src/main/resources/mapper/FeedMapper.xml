@@ -69,4 +69,10 @@
 	  					feed_writing_date = SYSDATE
 		WHERE feed_id = #{feed_id}
 	</update>
+	
+	<select id="getLikesByFeedId">
+		SELECT COUNT(user_id) as COUNT
+			FROM feed_like
+				WHERE feed_id = #{feedId} 
+	</select>
  </mapper>

@@ -130,37 +130,58 @@ public class TitleController {
 	}
 	
 	// 좋아요 수
-	/* feed_like 테이블에서 feed_id의 전체 user_id 개수 합산
-	 * 전체 피드게시글 좋아요 수로 해야함.
-	 * 1. 피드 게시글 작성
-	 * 3. 30개 이상 좋아요 찍기
-	 * 2. 전체 유저의  피드 게시글 id 전부 가지고 오기
-	 * 
-	 * 4. feed_like에서 게시글당 좋아요 수 가지고 온 뒤 합산
-	 * 5. 30개 이상이면 칭호 부여  */
+	/* feed_like 테이블에서 feed_id의 전체 user_id 개수 합산 */
 	public boolean insertTitle4()  {
 		
 		List<PersonalFeed> feedList = feedService.getAllFeeds();
 		Map<String, List<Integer>> userFeedMap = new HashMap<String, List<Integer>>();
+		String feedWriter = "";
+		int feedIdList = 0;
+		Map<String, Integer> toTalLike = new HashMap<String, Integer>();
 		
 		if(feedList != null) {
 			
 			for(int i = 0; i < feedList.size(); i++) {
-				String feedWriter = feedList.get(i).getUser_id();
-				int feedId = feedList.get(i).getFeed_id();
+				feedWriter = feedList.get(i).getUser_id();
+				feedIdList = feedList.get(i).getFeed_id();
 				
 				List<Integer> feedIds = userFeedMap.getOrDefault(feedWriter, new ArrayList<Integer>());
-				feedIds.add(feedId);
+				feedIds.add(feedIdList);
 				
 				userFeedMap.put(feedWriter, feedIds);
-				
 			}
 			
-			
+			for(Map.Entry<String, List<Integer>> entry : userFeedMap.entrySet()) {
+				feedWriter = entry.getKey();
+				List<Integer> feedIds = entry.getValue();
+				
+				int likesCount = 0;
+				for(int feedId : feedIds) {
+					try {
+						int likesByFeedId = feedService.getLikesByFeedId(feedId);
+						
+						likesCount += likesByFeedId;
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+				
+				toTalLike.put(feedWriter, likesCount);
+				
+				if (likesCount >= 30) {
+					
+					String userId = feedWriter;
+					int titleId = 4;
+					try {
+						service.insertUserTitle(userId, titleId);
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				}
+			}
 			
 			return true;
 		}
-		
 		
 		return false;
 	}
