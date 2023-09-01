@@ -21,7 +21,7 @@
 	 			WHERE user_id = #{userId}
 	 </select>
 	 
-	 <select id="getTitlesByTitleId" parameterType="int" resultType="com.spring.dto.Title">
+	 <select id="getTitlesByTitleId" parameterType="_int" resultType="com.spring.dto.Title">
 	 	SELECT title_name,
 	 		   title_id
 	 		FROM title

@@ -79,23 +79,26 @@ public class MypageController {
 		
 		// 전체 칭호 조회
 		List<Title> titleList = titleService.getAllTitles();
-		System.out.println(titleList);
+		System.out.println("전체 칭호 목록 : " + titleList);
 		model.addAttribute("titleList", titleList);
 		
 		User user = service.getUserByUserId(userId);
 		model.addAttribute("user", user);
 		
 		List<UserTitle> userTitle = titleService.getTitleByUserId(userId);
+		List<Integer> userTitleIds = new ArrayList<Integer>();
 		
-		List<Integer> userTitleIds = userTitle.stream()
-                							   .mapToInt(UserTitle::getTitle_id)
-                							   .boxed()
-                							   .collect(Collectors.toList());
+		for(int i = 0; i < userTitle.size(); i++) {
+			userTitleIds.add(userTitle.get(i).getTitle_id());
+			System.out.println("userTitleIds : " + userTitleIds);
+		}
 		
 		List<Title> userTitleList = new ArrayList<Title>();
 		
 		if (userTitle != null) {
-			userTitleList = titleService.getTitlesByTitleId(userTitleIds);
+			for(int userTitleId : userTitleIds) {
+				userTitleList.addAll(titleService.getTitlesByTitleId(userTitleId));
+			}
 		}
 		System.out.println("해당 유저가 획득한 타이틀 정보 : " + userTitleList);
 		model.addAttribute("userTitleList", userTitleList);

@@ -26,8 +26,8 @@ public class TitleService {
 		return titleMapper.getTitleByUserId(userId);
 	}
 
-	public List<Title> getTitlesByTitleId(List<Integer> titleId) throws SQLException {
-		return titleMapper.getTitlesByTitleId(titleId);
+	public List<Title> getTitlesByTitleId(int userTitleId) throws SQLException {
+		return titleMapper.getTitlesByTitleId(userTitleId);
 	}
 
 	// 칭호 중복 검수
