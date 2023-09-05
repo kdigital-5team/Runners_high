@@ -719,6 +719,7 @@ public class ChallengeController {
 			return "challengeCalendar";
 		}
 		
+		// 댓글, 좋아요
 		@RequestMapping(value="/challenge/insertComment")
 		public String insertComment(@RequestParam(value="comment") String comment, @RequestParam(value="authId") String authId, HttpSession session) {
 			AuthComment authComment = new AuthComment();
@@ -767,7 +768,7 @@ public class ChallengeController {
 			return "runningRoute";
 		}
 		
-		@Scheduled(cron = "0 0 0 * * *")
+		@Scheduled(cron = "0 * * * * *")
 		public String updateChallSit() {
 			boolean updateChallSit = challService.updateChallSit();
 			System.out.println("챌린지 상태 업데이트");
