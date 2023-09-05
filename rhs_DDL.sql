@@ -15,6 +15,7 @@ DROP TABLE race cascade constraint;
 DROP TABLE region cascade constraint;
 DROP TABLE race_route cascade constraint;
 DROP TABLE chall_route cascade constraint;
+DROP TABLE auth_route cascade constraint;
 DROP SEQUENCE title_seq;
 DROP SEQUENCE personal_feed_seq;
 DROP SEQUENCE feed_picture_seq;
@@ -155,7 +156,6 @@ CREATE TABLE auth_post (
     auth_cont  VARCHAR2(500 BYTE),
     auth_date  DATE
 );
-
 --시퀀스 추가
 CREATE SEQUENCE post_seq 
     INCREMENT by 1
@@ -268,6 +268,12 @@ CREATE TABLE chall_route (
     route_marker_desc VARCHAR2(500 BYTE)
 );
 
+CREATE TABLE auth_route(
+    auth_id           NUMBER(20) NOT NULL,
+    route_lat         NUMBER(*, 7) NOT NULL,
+    route_long        NUMBER(*, 7) NOT NULL,
+    user_id           VARCHAR2(30 BYTE) NOT NULL
+);
 
 -- 외래키
 ALTER TABLE rh_user
@@ -366,3 +372,11 @@ ALTER TABLE race_route
 ALTER TABLE chall_route
     ADD CONSTRAINT chall_route_challenge_fk FOREIGN KEY ( chall_id )
         REFERENCES challenge ( chall_id );
+
+ALTER TABLE auth_route
+    ADD CONSTRAINT auth_route_auth_post_fk FOREIGN KEY ( auth_id )
+        REFERENCES auth_post ( auth_id );
+
+ALTER TABLE auth_route
+    ADD CONSTRAINT auth_route_user_fk FOREIGN KEY ( user_id )
+        REFERENCES rh_user ( user_id );

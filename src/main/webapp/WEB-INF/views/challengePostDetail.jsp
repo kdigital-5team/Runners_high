@@ -15,9 +15,8 @@
 	href="https://fonts.googleapis.com/css?family=Nunito+Sans:200,300,400,700,900|Oswald:400,700">
 <link rel="stylesheet" href="../fonts/icomoon/style.css">
 <link rel="stylesheet" href="../static/css/bootstrap.min.css">
-<script src="../static/js/jquery.min.js"></script>
-<script src="../static/js/jquery-migrate-3.0.1.min.js"></script>
-<script src="../static/js/jquery-ui.js"></script>
+<link rel="stylesheet" href="../static/css/jquery.fancybox.min.css">
+<link rel="stylesheet" href="../static/css/jquery-ui.css">
 <link rel="stylesheet" href="../static/css/owl.carousel.min.css">
 <link rel="stylesheet" href="../static/css/owl.theme.default.min.css">
 <link rel="stylesheet" href="../static/css/animate.css">
@@ -27,6 +26,7 @@
 <link rel="stylesheet" href="../static/fonts/flaticon/font/flaticon.css">
 <link rel="stylesheet" href="../static/css/aos.css">
 <link rel="stylesheet" href="../static/css/style2.css">
+<link rel="stylesheet" href="../static/css/style4.css">
 <script src="../static/js/jquery.stellar.min.js"></script>
 <script src="../static/js/jquery.fancybox.min.js"></script>
 
@@ -68,6 +68,16 @@
 										</div>
 										<hr>
 									</c:if>
+									<c:if test="${run ne null }">
+										<div class="row">
+											<div class="col-lg-12">
+													<div id="map" style="width: 80%; padding-top:35%; height:0; border-radius: 5px; margin:auto; 
+																	background-position:center;
+																	background-size:cover;">
+													</div>
+											</div>
+										</div>
+									</c:if>
 									<!-- 피드 내용 -->
 									<div class="post-description" style="min-height: 100px;">
 										${post.auth_cont}
@@ -92,45 +102,119 @@
 									</div>
 							        
 							      </div>
+							      <hr>
+								<div class="context-form">
+									<textarea id="comment" rows="1" maxlength="300"></textarea>
+									<button type="button" onclick="registComment('${auth_id}')">댓글등록</button>
+								</div>
+								
+								<div id="comment_box">
+									<c:forEach items="${commentList}" var="comment">
+									<div class="display-flex">
+										<div class="post-header">
+											<img alt="Profile Picture" src="/images/${comment.user_pic}">
+											<span>${comment.nickname }</span>
+										</div>
+										<div style="margin: auto;">
+											${comment.auth_comment_cont }
+										</div>
+										<div style="margin-left: auto">
+											<div>
+											<c:choose>
+												<c:when test="${userId eq comment.user_id}">
+													<a href="#" onclick="deleteComment('${comment.auth_comment_id}')">삭제</a>
+												</c:when>
+											</c:choose>
+											</div>
+											<fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${comment.auth_comment_date}"/>
+										</div>
+									</div>
+									</c:forEach>
+								</div>
 						</div>	
 					</form>
-					<hr>
-					<div class="context-form">
-						<textarea id="comment" rows="1" maxlength="300"></textarea>
-						<button type="button" onclick="registComment('${auth_id}')">댓글등록</button>
-					</div>
-					
-					<div id="comment_box">
-						<c:forEach items="${commentList}" var="comment">
-						<div class="display-flex">
-							<div class="post-header">
-								<img alt="Profile Picture" src="/images/${comment.user_pic}">
-								<span>${comment.nickname }</span>
-							</div>
-							<div style="margin: auto;">
-								${comment.auth_comment_cont }
-							</div>
-							<div style="margin-left: auto">
-								<div>
-								<c:choose>
-									<c:when test="${userId eq comment.user_id}">
-										<a href="#" onclick="deleteComment('${comment.auth_comment_id}')">삭제</a>
-									</c:when>
-								</c:choose>
-								</div>
-								<fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${comment.auth_comment_date}"/>
-							</div>
-						</div>
-						</c:forEach>
-					</div>
-
 			</div>
 						
 	<!-- footer -->
 	<%@ include file="./inc/footer.jsp"%>
+		<script type="text/javascript"
+	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a9fd4644a9a496749d0625dffe4286f8&libraries=services,clusterer,drawing"></script>
+	<script src="../js/jquery.min.js"></script>
+	<script src="../js/jquery-migrate-3.0.1.min.js"></script>
+	<script src="../js/jquery-ui.js"></script>
+	<script src="../js/popper.min.js"></script>
+	<script src="../js/bootstrap.min.js"></script>
+	<script src="../js/owl.carousel.min.js"></script>
+	<script src="../js/jquery.stellar.min.js"></script>
+	<script src="../js/jquery.magnific-popup.min.js"></script>
+	<script src="../js/aos.js"></script>
+
+	<script src="../js/main.js"></script>
 
 </body>
 <script type="text/javascript">
+$(document).ready(function (){
+	navigator.geolocation.getCurrentPosition(success, fail);
+	
+	function success(pos) { // 위치 정보를 가져오는데 성공했을 때 호출되는 콜백 함수 (pos : 위치 정보 객체)
+   	    const lat = pos.coords.latitude;
+   		const lng = pos.coords.longitude;
+	 	var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
+
+	 	var auth_id = '${auth_id}';
+	 	console.log(auth_id);
+	   	$.ajax({
+	        async : true, 
+	        type : 'POST', 
+	        data: JSON.stringify({auth_id}),
+	        url: "/getRunRoute",
+	        dataType: "text",
+	        contentType: "application/json; charset=UTF-8",
+	        success: function(data) {  
+	        if(data){
+	        		var raceLat=JSON.parse(data).item[0].route_lat;
+	        		var raceLong=JSON.parse(data).item[0].route_long;
+	        		console.log(raceLat);
+	        		console.log(raceLong);
+      			 var options = { //지도를 생성할 때 필요한 기본 옵션
+         	   			center: new kakao.maps.LatLng(raceLat, raceLong), //지도의 중심좌표.
+         	   			level: 6 //지도의 레벨(확대, 축소 정도)
+         	   		};
+      				var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴	
+      				var linePath = [];
+	        
+	        	for (var itemLength=0; itemLength<JSON.parse(data).item.length; itemLength++){
+	        		linePath.push(new kakao.maps.LatLng(JSON.parse(data).item[itemLength].route_lat, JSON.parse(data).item[itemLength].route_long));
+	        	}
+	        		// 지도에 표시할 선을 생성합니다
+	        		var polyline = new kakao.maps.Polyline({
+	        		    path: linePath, // 선을 구성하는 좌표배열 입니다
+	        		    strokeWeight: 5, // 선의 두께 입니다
+	        		    strokeColor: 'rgb(61 141 255)', // 선의 색깔입니다
+	        		    strokeOpacity: 0.8, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
+	        		    strokeStyle: 'solid' // 선의 스타일입니다
+	        		});
+
+	        		// 지도에 선을 표시합니다 
+	        		polyline.setMap(map);  
+	 
+	        	
+	        	} else {
+	        		
+	        	}
+	      	},
+	      	error: function(error) {
+	      		
+	          } 
+	        })
+	        
+
+	}
+	function fail(err) { // 위치 정보를 가져오는데 실패했을 때 호출되는 콜백 함수
+	    alert('현위치를 찾을 수 없습니다.');
+	}
+});
+
 	function deletePost(auth_id){
 		 document.forms.delete_form.submit();
 		

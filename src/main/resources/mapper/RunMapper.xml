@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace="com.spring.mapper.RunMapper">
+ 	 	
+
+ 	
+ 	<insert id="insertRoute" parameterType="com.spring.dto.AuthRoute">
+ 		INSERT INTO auth_route 
+ 				(auth_id,
+ 				 route_lat, 
+ 				 route_long,
+ 				 user_id) 
+ 			 		VALUES (#{authId},
+ 			 				#{latitude},
+ 			 				#{longitude},
+ 			 				#{userId})
+ 	</insert>
+ 	
+ 	<insert id="insertRunPost" parameterType="com.spring.dto.ChallengePost">
+ 		INSERT INTO auth_post 
+ 				(auth_id,
+ 				 chall_id,
+ 				 comment_id, 
+ 				 auth_title,
+    			 auth_cont,
+    			 auth_date) 
+ 			 		VALUES (POST_SEQ.nextval,
+ 			 				(SELECT chall_id
+ 			 				 FROM user_chall
+ 			 				 WHERE user_id = #{comment_id} and chall_reg_status = 'Y'),
+ 			 				 #{comment_id},
+ 			 				#{auth_title},
+ 			 				#{auth_cont},
+ 			 				SYSDATE)
+ 		<selectKey resultType="int" keyProperty="auth_id">
+			SELECT POST_SEQ.CURRVAL AS auth_id FROM DUAL
+		</selectKey>
+ 	</insert>
+ 	
+ 	<select id="getRunRoute" resultType="com.spring.dto.AuthRoute">
+ 		SELECT auth_id,
+ 					route_lat, 
+ 			   			route_long
+ 			FROM auth_route
+ 				WHERE auth_id = #{authId}
+ 	</select>
+ 	
+ 	<select id="isExistRun" resultType="string">
+ 		select distinct auth_id 
+ 		from auth_route 
+ 		where auth_id=#{auth_id}
+ 	</select>
+ 	
+ </mapper>

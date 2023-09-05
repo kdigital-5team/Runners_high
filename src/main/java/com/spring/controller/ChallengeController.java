@@ -43,6 +43,7 @@ import com.spring.service.FeedService;
 import com.spring.service.RaceService;
 import com.spring.service.RegionService;
 import com.spring.service.RouteService;
+import com.spring.service.RunService;
 import com.spring.service.UserService;
 
 @Controller
@@ -68,6 +69,9 @@ public class ChallengeController {
 	
 	@Autowired
 	private FeedPictureService pictureservice;
+	
+	@Autowired
+	private RunService runService;
 	
 	@RequestMapping(value = "/registChall", method = RequestMethod.GET)
 	public String registChall(Model model, HttpSession session, RedirectAttributes rttr) throws Exception {
@@ -405,9 +409,14 @@ public class ChallengeController {
 			ChallengePost post = challService.getPostByAuthId(auth_id);
 			User authUser = challService.getUserbyAuthId(auth_id);
 			AuthPicture pic = challService.getImgbyAuthId(auth_id);
+			String isExistRun = runService.isExistRun(auth_id);
 			
 			if(pic!=null) {
 				model.addAttribute("pic", pic);
+			}
+			
+			if(isExistRun!=null) {
+				model.addAttribute("run", isExistRun);
 			}
 			
 			List<AuthComment> commentList = challService.getAllComment(auth_id);
