@@ -268,4 +268,9 @@ boolean result = false;
 	public void deleteAuthLike(int authId) {
 		mapper.deleteAuthLike(authId);
 	}
+
+	public void updateChallStatus() {
+		mapper.updateChallStatus();
+		
+	}
 }
