@@ -121,4 +121,6 @@ public interface ChallengeMapper {
 
 	public void deleteAuthLike(int authId);
 
+	public void updateChallStatus();
+
 }
