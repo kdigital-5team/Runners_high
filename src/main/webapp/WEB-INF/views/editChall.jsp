@@ -108,11 +108,11 @@
 			</div>
 	        <div class="context-form">
 	        	<label for="chall_category">챌린지 목적</label><br>
-					<input type="button" class="customBtn" value ="일상용" onclick="selectedBtn(this, 'chall_category');">
-					<input type="button" class="customBtn" value ="대회용" onclick="selectedBtn(this, 'chall_category'); challRacePopup();">
+					<input type="button" class="customBtn" value ="일상용" onclick="selectedBtn(this, 'chall_category');"<c:if test="${userChall.chall_category eq '일상용'}">style="background-color: #d0e3ff;"</c:if>>
+					<input type="button" class="customBtn" value ="대회용" onclick="selectedBtn(this, 'chall_category'); challRacePopup();"<c:if test="${userChall.chall_category eq '대회용'}">style="background-color: #d0e3ff;"</c:if>>
 					<input type="hidden" id="race_id" name="race_id" value="${userChall.race_id}"  readonly>
 					<input type="hidden" id="region_id" name="region_id" value="${userChall.region_id}"  readonly>
-					<input type="hidden" name="chall_category" id="chall_category" value="${userChall.chall_category}">
+					<input type="hidden" id="chall_category" name="chall_category" value="${userChall.chall_category}">
 			</div>
 				<div class="context-form">
 		        	<label for="region">지역</label><br>
@@ -135,18 +135,18 @@
 				</div>
 			<div class="context-form">
 	        	<label for="chall_sit">모집상태</label><br>
-					<input type="button" class="customBtn" onclick="selectedBtn(this , 'chall_sit');" value ="모집중">
-					<input type="button" class="customBtn" onclick="selectedBtn(this, 'chall_sit');" value ="모집종료">
-					<input type="button" class="customBtn" onclick="selectedBtn(this, 'chall_sit');" value ="모집예정">
-					<input type="hidden" name="chall_sit" id="chall_sit" value="${userChall.chall_sit}">
+					<input type="button" class="customBtn" onclick="selectedBtn(this , 'chall_sit');" value ="모집중"<c:if test="${userChall.chall_sit eq '모집중'}">style="background-color: #d0e3ff;"</c:if>>
+					<input type="button" class="customBtn" onclick="selectedBtn(this, 'chall_sit');" value ="모집종료"<c:if test="${userChall.chall_sit eq '모집종료'}">style="background-color: #d0e3ff;"</c:if>>
+					<input type="button" class="customBtn" onclick="selectedBtn(this, 'chall_sit');" value ="모집예정"<c:if test="${userChall.chall_sit eq '모집예정'}">style="background-color: #d0e3ff;"</c:if>>
+					<input type="hidden" id="chall_sit" name="chall_sit" value="${userChall.chall_sit}">
 			</div>
 			<div class="context-form">
 	        	<label for="chall_online">온라인/오프라인</label><br>
 				<label class="notice-label">*오프라인 모임 개최 여부</label><br>
-					<input type="button" class="customBtn" onclick="selectedBtn(this, 'chall_online');" value ="온라인">
-					<input type="button" class="customBtn" onclick="selectedBtn(this, 'chall_online');" value ="오프라인">
-					<input type="button" class="customBtn" onclick="selectedBtn(this, 'chall_online');" value ="모두"><br>
-					<input type="hidden" name="chall_online" id="chall_online" value="${userChall.chall_online}">
+					<input type="button" class="customBtn" onclick="selectedBtn(this, 'chall_online');" value ="온라인"<c:if test="${userChall.chall_online eq '온라인'}">style="background-color: #d0e3ff;"</c:if>>
+					<input type="button" class="customBtn" onclick="selectedBtn(this, 'chall_online');" value ="오프라인"<c:if test="${userChall.chall_online eq '오프라인'}">style="background-color: #d0e3ff;"</c:if>>
+					<input type="button" class="customBtn" onclick="selectedBtn(this, 'chall_online');" value ="모두"<c:if test="${userChall.chall_online eq '모두'}">style="background-color: #d0e3ff;"</c:if>><br>
+					<input type="hidden" id="chall_online" name="chall_online" value="${userChall.chall_online}"  readonly>
 			</div>
 			<div class="context-form">
 	        	<label for="chall_all_auth">챌린지 최소 인증률</label><br>
@@ -336,15 +336,19 @@ label.addEventListener('click', function(event){
 
  // 버튼 선택에 따른 값, css 변경
  function selectedBtn(button, type) {
+     var Form = document.regist_form;
      switch (type) {
          case 'chall_category':
              chall_category = button.value;
+             Form.chall_category.value = chall_category;
              break;
          case 'chall_sit':
              chall_sit = button.value;
+             Form.chall_sit.value = chall_sit;
              break;
          case 'chall_online':
              chall_online = button.value;
+             Form.chall_online.value = chall_online;
              break;
      }
 
@@ -355,8 +359,10 @@ label.addEventListener('click', function(event){
          if (selectedButtons[type]) {
              selectedButtons[type].style.backgroundColor = '';
          }
+         
          button.style.backgroundColor = '#d0e3ff';
          selectedButtons[type] = button;
+        
      }
  }
 
@@ -654,9 +660,6 @@ function submit2() {
         }
         alert("필수 입력란이 비었거나 입력 조건에 부합하지 않습니다. 다시 확인해 주세요.");
     } else {
-        Form.chall_category.value = chall_category;
-        Form.chall_sit.value = chall_sit;
-        Form.chall_online.value = chall_online;
         
         alert ("등록이 완료되었습니다.");
         

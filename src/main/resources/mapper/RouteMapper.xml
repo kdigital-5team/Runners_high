@@ -16,12 +16,22 @@
  			 					#{latitude},
  			 						#{longitude})
  	</insert>
- 		<select id="getlatLongById" resultType="com.spring.dto.Route">
+ 	
+ 	<select id="getlatLongById" resultType="com.spring.dto.Route">
  		SELECT chall_id,
  					route_lat, 
  			   			route_long
  			FROM chall_route
  				WHERE chall_id = #{challId}
  	</select>
+ 	
+ 		
+	<delete id="deleteRoute" 
+			parameterType="com.spring.dto.Route">
+			delete 
+				from chall_route 
+					where chall_id = #{chall_id}
+	
+	</delete>
  	
  </mapper>

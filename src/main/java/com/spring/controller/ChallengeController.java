@@ -47,7 +47,6 @@ import com.spring.service.RouteService;
 import com.spring.service.UserService;
 
 @Controller
-// http://localhost:8081/regist
 public class ChallengeController {
 	@Autowired
 	private RegionService service;
@@ -77,6 +76,7 @@ public class ChallengeController {
 		int isOtherApply=0;
 		isOtherApply = challService.checkOtherChall(userId);
 		if(isOtherApply>0) {
+			System.out.println(isOtherApply+"?");
 			rttr.addFlashAttribute("isTrue", "존재");
 			return "redirect:/challenge";
 		}
@@ -97,7 +97,6 @@ public class ChallengeController {
 									  HttpSession session) throws Exception {
 			
 			System.out.println("registChall controller 실행");
-			
 			String userId = (String) session.getAttribute("userId");
 			String raceId = newChallenge.getRace_id();
 			System.out.println("새로운 챌린지 정보1 : " + newChallenge);
@@ -137,11 +136,10 @@ public class ChallengeController {
 					
 					int challId = newChallenge.getChall_id();
 					System.out.println(challId);
-					session.setAttribute("challId", challId);
 					session.removeAttribute(raceId);
 					challService.insertHost(userId, challId);
 					
-					return "registChallRoute";
+					return "redirect:/registChallRoute/"+newChallenge.getChall_id();
 				}
 				
 			} catch (Exception e) {
@@ -721,10 +719,12 @@ public class ChallengeController {
 			return "runningRoute";
 		}
 		
-		@Scheduled(cron = "0 0 0 * * *")
+		@Scheduled(cron = "0/60 * * * * *")
 		public String updateChallSit() {
 			boolean updateChallSit = challService.updateChallSit();
+			challService.updateChallStatus();
 			System.out.println("챌린지 상태 업데이트");
+			System.out.println("유저별 챌린지 상태 업데이트");
 			
 			if(updateChallSit) {
 				return "redirect:/main";
@@ -733,6 +733,7 @@ public class ChallengeController {
 			else
 				return "redirect:/challenge";
 		}
+	
 		@RequestMapping(value = "/challenge/edit/{chall_id}", method = RequestMethod.GET)
 		public String editChallForm(Model model, HttpSession session, RedirectAttributes rttr, @PathVariable int chall_id) throws Exception {
 			List<String> stateList = service.getAllState();
@@ -752,6 +753,7 @@ public class ChallengeController {
 			@RequestParam String region_district,
 			@PathVariable int chall_id,
 			HttpSession session) throws Exception {
+					System.out.println(updateChallenge);
 					String userId = (String) session.getAttribute("userId");
 					boolean challResult = false;
 					try {
@@ -762,7 +764,8 @@ public class ChallengeController {
 						if(challResult) {
 							if(updateChallenge.getChall_sit().equals("모집종료"))
 								challService.deleteApplyUserbyChallId(chall_id);
-							return "redirect:/challenge/"+chall_id;
+							//return "redirect:/challenge/"+chall_id;
+							return "redirect:/editChallRoute/"+chall_id;
 						}
 
 					} catch (Exception e) {

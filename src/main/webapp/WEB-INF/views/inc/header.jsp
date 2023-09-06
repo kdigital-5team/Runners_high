@@ -33,6 +33,7 @@
 									<li><a role="button" onclick="location.href='/events'">대회일정</a></li>
 									<li><a role="button" onclick="location.href='/challenge'">챌린지</a></li>
 									<li><a role="button" onclick="loginCheck();">마이 페이지</a></li>
+									<li><a role="button"></a></li>
 									<c:if test="${empty userId}">
 									 	<li><a role="button"
 											class="change-button"

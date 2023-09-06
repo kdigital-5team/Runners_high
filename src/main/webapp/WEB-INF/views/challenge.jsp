@@ -419,6 +419,9 @@
 		} else {
 			location.href = "/registChall";
 		}
+		var isTrue='${isTrue}';
+		if(isTrue=='존재')
+			alert("이미 신청/참가한 챌린지가 있습니다.");
 	}
 	
 	function removeBtn(ths, button_id){
@@ -461,9 +464,7 @@
 		
 	}
 	
-	var isTrue='${isTrue}';
-	if(isTrue=='존재')
-		alert("이미 신청/참가한 챌린지가 있습니다.");
+
 
   </script>
 </html>

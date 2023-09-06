@@ -12,8 +12,8 @@
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css?family=Nunito+Sans:200,300,400,700,900|Oswald:400,700">
 
-<link rel="stylesheet" href="../static/css/form.css">
-<link rel="stylesheet" href="../static/css/bootstrap.min.css">
+<link rel="stylesheet" href="/static/css/form.css">
+<link rel="stylesheet" href="/static/css/bootstrap.min.css">
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
 	rel="stylesheet">
@@ -77,12 +77,11 @@
 var chall_id = parseInt(document.getElementById('chall_id').innerText);
 var chall_path;
 function submit2(){
-	
    	$.ajax({
 	        async : true, 
 	        type : 'POST', 
 	        data: JSON.stringify({chall_path}),
-	        url: "/getPath/"+chall_id,
+	        url: "/editPath/"+chall_id,
 	        dataType: "text",
 	        contentType: "application/json; charset=UTF-8",
 	        success: function(data) {  
@@ -228,6 +227,7 @@ function submit2(){
    	    	 // 마우스 클릭으로 그린 선의 좌표 배열을 얻어옵니다
    	      var path = clickLine.getPath();
    	    	 
+
    	 
               
    	         // 마우스무브로 그려진 선은 지도에서 제거합니다
