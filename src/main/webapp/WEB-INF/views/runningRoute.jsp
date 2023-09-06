@@ -67,12 +67,12 @@
 			</div>
 			<div class="post" id="post" style="display: none;">	        
 		        <form action='<c:url value='/insertRunPost'/>' name= "regist_form" id="regist_form" method="POST" enctype="multipart/form-data">					
-					<div class="form-group row">	
-						<label style="margin-left:20px; margin-top:15px; margin-right:19%;">제목</label>					
-						<div style="display:table-cell; margin:auto; margin-top:5px;">		                	
+					<div style="display: flex;">	
+						<label style="margin-top:15px; width: 100px; text-align: center;">제목</label>					
+						<div style="display:table-cell; margin:auto; margin-top:5px; justify-content: center;">		                	
 		                	<input class="form-control" type="text" name="auth_title" id="auth_title" style="width:600px; display:block;">
 	                	</div>
-	                	<button type="button" class="btn btn-dark" onclick="registPost();"  style="border; margin-left:205px; margin-right:20px; margin-top:5px;">
+	                	<button type="button" class="btn btn-dark" onclick="registPost();"  style="width: 100px; justify-content: center;">
 	                		등록
 	                	</button>
 					</div>
