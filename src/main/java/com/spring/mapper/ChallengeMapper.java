@@ -121,7 +121,6 @@ public interface ChallengeMapper {
 	public void deleteAuthComment(int authId);
 
 	public void deleteAuthLike(int authId);
-
 	
 	// 챌린지 등록자 세기
 	public int countChallReg(String hostId);
@@ -131,5 +130,8 @@ public interface ChallengeMapper {
 
 	// 전체 userChall
 	public List<UserChallenge> getAllUserChall();
+
+	public void updateChallStatus();
+
 
 }

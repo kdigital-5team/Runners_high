@@ -25,13 +25,27 @@ public class RouteService {
 		if(res != 0) {
 			result = true;
 		} else {
-			throw new Exception("챌린지 추가 실패 ");
+			throw new Exception("insert ");
 		}
 		
 		return result;
 	}
+	
 	public List<Route> getlatLongById(int challId) {
 		return mapper.getlatLongById(challId);
+	}
+	
+	public boolean deleteRoute(int chall_Id) throws SQLException, Exception{
+		boolean result = false;
+
+		int res = mapper.deleteRoute(chall_Id);
+		
+		
+		result = true;
+	
+		
+		return result;
+		
 	}
 }
 

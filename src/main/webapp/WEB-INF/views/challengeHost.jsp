@@ -311,7 +311,7 @@ $(document).ready(function (){
 			var new_form = document.createElement('form');
 			
 			new_form.name="chall_delete";
-			new_form.method='DELETE';
+			new_form.method='POST';
 			new_form.action='/challenge/delete/'+chall_id;
 			
 			document.body.appendChild(new_form);

@@ -17,4 +17,6 @@ public interface RouteMapper {
 
 	public List<Route> getlatLongById(int challId);
 
+	public int deleteRoute(int chall_Id)throws SQLException;
+
 }

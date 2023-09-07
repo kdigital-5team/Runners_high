@@ -30,10 +30,16 @@ public class RouteController {
 	private RouteService routeService;
 	
 	
-	@RequestMapping(value = "/registChallRoute", method = RequestMethod.GET)
-	public String registChall(Model model) throws Exception {
-
-		return "/registChall";	
+	@RequestMapping(value = "/registChallRoute/{chall_id}", method = RequestMethod.GET)
+	public String registChall(Model model, @PathVariable int chall_id) throws Exception {
+		model.addAttribute("chall_id",chall_id);
+		return "/registChallRoute";	
+	}
+	
+	@RequestMapping(value = "/editChallRoute/{chall_id}", method = RequestMethod.GET)
+	public String editChall(Model model,  @PathVariable int chall_id) throws Exception {
+		model.addAttribute("chall_id",chall_id);
+		return "/editChallRoute";	
 	}
 	
 	@ResponseBody
@@ -76,11 +82,10 @@ public class RouteController {
 	
 
 	@ResponseBody
-	@RequestMapping(value="/getPath", method=RequestMethod.POST)
-	String getPath(@RequestBody String chall_path, Model model, HttpSession session) throws Exception {
+	@RequestMapping(value="/getPath/{chall_id}", method=RequestMethod.POST)
+	String getPath(@RequestBody String chall_path,@PathVariable int chall_id, Model model, HttpSession session) throws Exception {
 		boolean routeResult = false;
-		int chall_Id = (int)session.getAttribute("challId");
-		System.out.println(chall_Id);
+		System.out.println(chall_id);
 		   try {
                JSONParser jsonParser = new JSONParser();
                JSONObject jsonObj = (JSONObject) jsonParser.parse(chall_path);
@@ -88,7 +93,33 @@ public class RouteController {
                
                for(int i=0 ; i<coordsArray.size() ; i++){
                        JSONObject tempObj = (JSONObject) coordsArray.get(i);
-                       routeResult = routeService.insertRoute(chall_Id, tempObj.get("Ma").toString(), tempObj.get("La").toString());
+                       routeResult = routeService.insertRoute(chall_id, tempObj.get("Ma").toString(), tempObj.get("La").toString());
+                      // 인설트-> DB -> 
+                       System.out.println(tempObj.get("La"));
+                       System.out.println(tempObj.get("Ma"));
+                       }
+               System.out.println(coordsArray);
+               return "main";
+
+               } catch (Exception e) {
+                       e.printStackTrace();
+                       return "index";
+               }
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/editPath/{chall_id}", method=RequestMethod.POST)
+	String editPath(@RequestBody String chall_path,@PathVariable int chall_id, Model model, HttpSession session) throws Exception {
+		boolean routeResult = false;
+		routeService.deleteRoute(chall_id);
+		System.out.println(chall_id);
+		   try {
+               JSONParser jsonParser = new JSONParser();
+               JSONObject jsonObj = (JSONObject) jsonParser.parse(chall_path);
+               JSONArray coordsArray = (JSONArray) jsonObj.get("chall_path");
+               for(int i=0 ; i<coordsArray.size() ; i++){
+                       JSONObject tempObj = (JSONObject) coordsArray.get(i);
+                       routeResult = routeService.insertRoute(chall_id, tempObj.get("Ma").toString(), tempObj.get("La").toString());
                       // 인설트-> DB -> 
                        System.out.println(tempObj.get("La"));
                        System.out.println(tempObj.get("Ma"));
@@ -104,3 +135,5 @@ public class RouteController {
 	
 	
 }
+
+

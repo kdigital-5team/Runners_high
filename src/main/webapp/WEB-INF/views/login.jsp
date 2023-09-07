@@ -61,7 +61,8 @@
 					</p>
 					<div id="sub-page">
 						<a href="/findPw" id="sub-page">비밀번호 찾기</a> <span>|</span> 
-						<a href="/regist"id="sub-page">회원가입</a>
+						<a href="/regist"id="sub-page">회원가입</a> <span>|</span> 
+						<a href="http://localhost:8081/auth/GOOGLE" id="sub-page">구글 아이디로 로그인</a>
 					</div>
 					<br><br>
 					<!-- 
