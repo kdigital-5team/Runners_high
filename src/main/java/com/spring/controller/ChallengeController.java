@@ -617,8 +617,6 @@ public class ChallengeController {
 		}
 		
 	
-
-		
 		@RequestMapping(value = "/challenge/delete/{chall_id}", method = RequestMethod.POST)
 		String deleteChallbyChallId(@PathVariable int chall_id, HttpSession session) {
 			String userId = (String) session.getAttribute("userId");
@@ -719,11 +717,6 @@ public class ChallengeController {
 			else
 				return "/index";
 			
-		}
-		
-		@RequestMapping(value="/running")
-		public String running() {
-			return "runningRoute";
 		}
 		
 		@Scheduled(cron = "0 * * * * *")
