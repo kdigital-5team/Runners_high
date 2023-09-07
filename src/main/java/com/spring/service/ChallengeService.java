@@ -283,6 +283,7 @@ boolean result = false;
 	// 전체 userChall
 	public List<UserChallenge> getAllUserChall() {
 		return mapper.getAllUserChall();
+	}
 
 	public void updateChallStatus() {
 		mapper.updateChallStatus();
