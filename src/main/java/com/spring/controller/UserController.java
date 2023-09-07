@@ -132,8 +132,6 @@ public class UserController {
     // 비밀번호 변경
     @RequestMapping(value="/findPw/updatePw", method=RequestMethod.POST)
     public String updatePw(HttpServletRequest request) throws Exception {
-    	System.out.println("update pw controller 실행");
-    	
     	HttpSession session = request.getSession(true);
     	String new_Pw = request.getParameter("new_Pw");
     	String userId = session.getAttribute("userId").toString();

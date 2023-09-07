@@ -81,4 +81,9 @@ public class FeedServiceImpl implements FeedService{
 		
 		return result;
 	}
+	
+	@Override
+	public int getLikesByFeedId(int feedId) throws Exception {
+		return mapper.getLikesByFeedId(feedId);
+	}
 }

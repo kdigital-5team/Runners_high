@@ -2,6 +2,7 @@ package com.spring.mapper;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -120,7 +121,17 @@ public interface ChallengeMapper {
 	public void deleteAuthComment(int authId);
 
 	public void deleteAuthLike(int authId);
+	
+	// 챌린지 등록자 세기
+	public int countChallReg(String hostId);
+
+	// 완료 챌린지 유저 리스트
+	public List<Map<String, Object>> getUserByChallStatus();
+
+	// 전체 userChall
+	public List<UserChallenge> getAllUserChall();
 
 	public void updateChallStatus();
+
 
 }

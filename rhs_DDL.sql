@@ -53,7 +53,8 @@ CREATE TABLE title (
 CREATE SEQUENCE title_seq
         INCREMENT BY 1
         START WITH 1
-        MINVALUE 1;
+        MINVALUE 1
+        NOCACHE;
 
 ALTER TABLE title ADD CONSTRAINT title_pk PRIMARY KEY ( title_id );
 
@@ -67,7 +68,8 @@ CREATE TABLE user_title (
 CREATE SEQUENCE user_title_seq
         INCREMENT BY 1
         START WITH 1
-        MINVALUE 1;
+        MINVALUE 1
+        NOCACHE;
 
 ALTER TABLE user_title ADD CONSTRAINT user_title_pk PRIMARY KEY ( title_acq );
 
@@ -83,7 +85,8 @@ CREATE TABLE personal_feed (
 CREATE SEQUENCE personal_feed_seq
         INCREMENT BY 1
         START WITH 1
-        MINVALUE 1;
+        MINVALUE 1
+        NOCACHE;
 
 ALTER TABLE personal_feed ADD CONSTRAINT personal_feed_pk PRIMARY KEY ( feed_id );
 
@@ -111,7 +114,8 @@ CREATE TABLE feed_picture (
 CREATE SEQUENCE feed_picture_seq
         INCREMENT BY 1
         START WITH 1
-        MINVALUE 1;
+        MINVALUE 1
+        NOCACHE;
 
 CREATE TABLE feed_like(
     feed_id        NUMBER(20) NOT NULL,
@@ -143,7 +147,8 @@ CREATE TABLE challenge (
 CREATE SEQUENCE challenge_seq
        INCREMENT BY 1
        START WITH 1
-       MINVALUE 1;
+       MINVALUE 1
+       NOCACHE;
 
 ALTER TABLE challenge ADD CONSTRAINT challenge_pk PRIMARY KEY ( chall_id );
 
@@ -160,7 +165,8 @@ CREATE TABLE auth_post (
 CREATE SEQUENCE post_seq 
     INCREMENT by 1
     START WITH 1
-    MINVALUE 1;
+    MINVALUE 1
+    NOCACHE;
 
 ALTER TABLE auth_post ADD CONSTRAINT auth_post_pk PRIMARY KEY ( auth_id );
 
@@ -176,7 +182,8 @@ CREATE TABLE auth_comment (
 CREATE SEQUENCE auth_comment_seq
     INCREMENT BY 1
     START WITH 1
-    MINVALUE 1;
+    MINVALUE 1
+    NOCACHE;
 
 ALTER TABLE auth_comment ADD CONSTRAINT auth_comment_pk PRIMARY KEY ( auth_comment_id );
 
@@ -193,7 +200,8 @@ CREATE TABLE auth_picture (
 CREATE SEQUENCE auth_picture_seq
     INCREMENT BY 1
     START WITH 1
-    MINVALUE 1;
+    MINVALUE 1
+    NOCACHE;
 
 -- 인증 좋아요 테이블
 CREATE TABLE auth_like(
@@ -233,7 +241,8 @@ CREATE TABLE race (
 CREATE SEQUENCE race_seq 
     INCREMENT by 1
     START WITH 1
-    MINVALUE 1; 
+    MINVALUE 1
+    NOCACHE;
 
 ALTER TABLE race ADD CONSTRAINT race_pk PRIMARY KEY ( race_id );
 
@@ -248,7 +257,8 @@ CREATE TABLE region (
 CREATE SEQUENCE region_seq 
     INCREMENT by 1
     START WITH 1
-    MINVALUE 1; 
+    MINVALUE 1
+    NOCACHE;
 
 ALTER TABLE region ADD CONSTRAINT region_pk PRIMARY KEY ( region_id );
 

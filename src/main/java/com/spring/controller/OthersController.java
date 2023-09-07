@@ -109,16 +109,19 @@ public class OthersController {
 				User user = userService.getUserByUserId(otherId);
 				List<Title> titleList = titleService.getAllTitles();
 				List<UserTitle> userTitle = titleService.getTitleByUserId(otherId);
+				List<Integer> userTitleIds = new ArrayList<Integer>();
 				
-				List<Integer> userTitleIds = userTitle.stream()
-                        							   .mapToInt(UserTitle::getTitle_id)
-                        							   .boxed()
-                        							   .collect(Collectors.toList());
+				for(int i = 0; i < userTitle.size(); i++) {
+					userTitleIds.add(userTitle.get(i).getTitle_id());
+					System.out.println("userTitleIds : " + userTitleIds);
+				}
 				
 				List<Title> userTitleList = new ArrayList<Title>();
 				
 				if (userTitle != null) {
-					userTitleList = titleService.getTitlesByTitleId(userTitleIds);
+					for(int userTitleId : userTitleIds) {
+						userTitleList.addAll(titleService.getTitlesByTitleId(userTitleId));
+					}
 				}
 				
 				model.addAttribute("user", user);

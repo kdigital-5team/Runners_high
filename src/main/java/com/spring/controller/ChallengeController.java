@@ -32,8 +32,6 @@ import com.spring.dto.AuthPicture;
 import com.spring.dto.Challenge;
 import com.spring.dto.ChallengePost;
 import com.spring.dto.ChallengeRegion;
-import com.spring.dto.FeedPicture;
-import com.spring.dto.PersonalFeed;
 import com.spring.dto.RaceAndRegion;
 import com.spring.dto.Region;
 import com.spring.dto.User;
@@ -426,7 +424,6 @@ public class ChallengeController {
 				}
 			}
 			
-			
 			model.addAttribute("post", post);
 			model.addAttribute("authUser",authUser);
 			model.addAttribute("commentList", commentList);
@@ -680,6 +677,7 @@ public class ChallengeController {
 			return "challengeCalendar";
 		}
 		
+		// 댓글, 좋아요
 		@RequestMapping(value="/challenge/insertComment")
 		public String insertComment(@RequestParam(value="comment") String comment, @RequestParam(value="authId") String authId, HttpSession session) {
 			AuthComment authComment = new AuthComment();
@@ -722,8 +720,13 @@ public class ChallengeController {
 				return "/index";
 			
 		}
-
-		@Scheduled(cron = "0/60 * * * * *")
+		
+		@RequestMapping(value="/running")
+		public String running() {
+			return "runningRoute";
+		}
+		
+		@Scheduled(cron = "0 * * * * *")
 		public String updateChallSit() {
 			boolean updateChallSit = challService.updateChallSit();
 			challService.updateChallStatus();
